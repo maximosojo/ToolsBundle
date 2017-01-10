@@ -1,0 +1,14 @@
+{
+  "name": "atechnologies/tools-bundle",
+  "type": "symfony-bundle",
+  "description": "Bundle Symfony3 con clases principales de uso diario",
+  "keywords": ["breadcrumb", "breadcrumb api", "bundle tools"],
+  "homepage": "https://atechnologies.com.ve",
+  "license": "MIT",
+  "require": {
+      "php": ">=5.3.2"      
+  },
+  "autoload": {
+      "psr-4": { "Atechnologies\\ToolsBundle\\": "" }
+  }
+}
