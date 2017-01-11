@@ -122,8 +122,8 @@ class CoreExtension extends \Twig_Extension {
      * @param type $type
      * @return type
      */
-    function generateLink($entity, $type = \Pequiven\SEIPBundle\Service\LinkGenerator::TYPE_LINK_DEFAULT, array $parameters = array()) {
-        return $this->container->get('seip.service.link_generator')->generate($entity, $type, $parameters);
+    function generateLink($entity, $type = \Atechnologies\ToolsBundle\Service\LinkGeneratorService::TYPE_LINK_DEFAULT, array $parameters = array()) {
+        return $this->container->get('atechnologies.service.link_generator')->generate($entity, $type, $parameters);
     }
 
     /**
@@ -133,8 +133,8 @@ class CoreExtension extends \Twig_Extension {
      * @param type $type
      * @return type
      */
-    function generateLinkUrlOnly($entity, $type = \Pequiven\SEIPBundle\Service\LinkGenerator::TYPE_LINK_DEFAULT, array $parameters = array()) {
-        return $this->container->get('seip.service.link_generator')->generateOnlyUrl($entity, $type, $parameters);
+    function generateLinkUrlOnly($entity, $type = \Atechnologies\ToolsBundle\Service\LinkGeneratorService::TYPE_LINK_DEFAULT, array $parameters = array()) {
+        return $this->container->get('atechnologies.service.link_generator')->generateOnlyUrl($entity, $type, $parameters);
     }
 
     /**

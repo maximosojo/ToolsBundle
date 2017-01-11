@@ -1,5 +1,3 @@
 services:
-  smsup.smsupapi.sender:
-      class: Humper\ToolsBundle\Clases\SmsupSender
   breadcrumb.tools.load:
-      class: Humper\ToolsBundle\Twig\Extension\CoreExtension
+      class: Atechnologies\ToolsBundle\Twig\Extension\CoreExtension
