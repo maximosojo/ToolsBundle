@@ -1,10 +1,17 @@
 {
   "name": "atechnologies/tools-bundle",
   "type": "symfony-bundle",
-  "description": "Bundle Symfony3 con clases principales de uso diario",
+  "description": "Bundle Symfony",
   "keywords": ["breadcrumb", "breadcrumb api", "bundle tools"],
   "homepage": "https://atechnologies.com.ve",
+  "type": "symfony-bundle",
   "license": "MIT",
+  "authors": [
+        {
+            "name": "Máximo Sojo",
+            "email": "maxsojo13@gmail.com"
+        }
+  ],
   "require": {
       "php": ">=5.3.2"      
   },
