@@ -1,14 +1,24 @@
 {% if breadcrumb is defined %}
 	<section class="content-header">
-	  	<h1>
-	  		{% for item in breadcrumb %}	    	
-		    	{% if loop.first %}
-		      		{{ item }} »
-			    {% elseif loop.last %}
-			       	<small> {{ item }} </small>
-			    {% else %}
-			      	<small> {{ item }} » </small>
-			    {% endif %}
+	  	<h1>	  		
+	  		{% if icon is defined %}<i class="{{ icon }}" style="font-size: 30px;"></i>{% endif %}
+	  		{% for item in breadcrumb %}
+	  			{% if item.link != null %}
+		            {% if loop.first == true %}
+		                <a href="{{ item.link }}">{{ item.label }}</a>
+		            {% else %}
+		                <a href="{{ item.link }}">{{ item.label }}</a>&nbsp;»
+		            {% endif %}		        
+		        {% else %}
+		            {% if loop.first == true %}
+		                {{ item.label }}&nbsp;
+		            {% else %}
+		                <small class="{% if loop.first == false %}thin{% endif %}">{{ item.label }}</small>
+		            {% endif %}
+		        {% endif %}
+		        {% if loop.last  == false %}
+	                »
+	            {% endif %}
 	    	{% endfor %}
 	  	</h1>	  	
 	</section>

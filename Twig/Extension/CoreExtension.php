@@ -66,9 +66,44 @@ class CoreExtension extends \Twig_Extension {
      *     @return      [type]                         [description]
      */
     function contentHeader($args = []) {
-        $route = realpath(__DIR__ . '/../../Resources/views/');
+        $parameters = array();
         $args = func_get_args();
-        return $this->container->get('templating')->render($route.'/breadcrumb/breadcrumb.html.twig', ['breadcrumb' => $args]);
+        $icon = null;
+        foreach ($args as $key => $arg) {
+            if (empty($arg)) {
+                continue;
+            }
+            $item = new \stdClass();
+            $item->link = null;
+            $item->label = null;
+            if (is_array($arg)) {
+                $count = count($arg);
+                if ($count > 1) {
+                    throw new \LogicException('The array elment must be one, count');
+                }
+                foreach ($arg as $key => $value) {
+                    if ($key == 'icon') {
+                        $icon = $value;
+                    }else{
+                        $item->link = $key;
+                        $item->label = $value;                        
+                    }
+                }
+            } else {
+                $item->label = $arg;
+            }
+            if ($item->link != null || $item->label != null ) {
+                $parameters[] = $item;                
+            }
+        }
+        
+        $data = [
+            'breadcrumb' => $parameters,
+            'icon'       => $icon
+        ];
+
+        $route = realpath(__DIR__ . '/../../Resources/views/');
+        return $this->container->get('templating')->render($route.'/breadcrumb/breadcrumb.html.twig', $data);
     }
     
     /**
