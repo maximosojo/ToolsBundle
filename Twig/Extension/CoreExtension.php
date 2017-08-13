@@ -21,11 +21,9 @@ class CoreExtension extends \Twig_Extension {
             new \Twig_SimpleFunction('form_top', null, array('node_class' => 'Symfony\Bridge\Twig\Node\SearchAndRenderBlockNode', 'is_safe' => array('html'))),
             new \Twig_SimpleFunction('print_error', array($this, 'printError'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('contentHeader', array($this, 'contentHeader'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('contentHeaderAllPeriods', array($this, 'contentHeaderAllPeriods'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('generateLink', array($this, 'generateLink'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('generateLinkUrlOnly', array($this, 'generateLinkUrlOnly'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('call_static_method', array($this, 'call_static_method')),
-            new \Twig_SimpleFunction('periodService', array($this, 'getPeriodService'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('get_next_item', array($this, 'getNextItem')),
             new \Twig_SimpleFunction('validPnr', array($this, 'validPnr')),
             new \Twig_SimpleFunction('buttonsSubmit', array($this, 'buttonsSubmit'), array('is_safe' => array('html'))),
@@ -157,7 +155,7 @@ class CoreExtension extends \Twig_Extension {
      * @param type $type
      * @return type
      */
-    function generateLink($entity, $type = \Atechnologies\ToolsBundle\Service\LinkGeneratorService::TYPE_LINK_DEFAULT, array $parameters = array()) {
+    function generateLink($entity, $type = \Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService::TYPE_LINK_DEFAULT, array $parameters = array()) {
         return $this->container->get('atechnologies.service.link_generator')->generate($entity, $type, $parameters);
     }
 
@@ -168,7 +166,7 @@ class CoreExtension extends \Twig_Extension {
      * @param type $type
      * @return type
      */
-    function generateLinkUrlOnly($entity, $type = \Atechnologies\ToolsBundle\Service\LinkGeneratorService::TYPE_LINK_DEFAULT, array $parameters = array()) {
+    function generateLinkUrlOnly($entity, $type = \Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService::TYPE_LINK_DEFAULT, array $parameters = array()) {
         return $this->container->get('atechnologies.service.link_generator')->generateOnlyUrl($entity, $type, $parameters);
     }
 

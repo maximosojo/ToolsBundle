@@ -1,3 +1,7 @@
 services:
   breadcrumb.tools.load:
       class: Atechnologies\ToolsBundle\Twig\Extension\CoreExtension
+  atechnologies.service.link_generator:
+      class: Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService
+      calls: 
+            - [setContainer, ['@service_container']]
