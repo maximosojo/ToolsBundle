@@ -1,13 +1,32 @@
 <?php
 
+/*
+ * This file is part of the Atechnologies package.
+ * 
+ * (c) www.atechnologies.com.ve
+ * 
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Atechnologies\ToolsBundle\Twig\Extension;
 
 /**
- *     
+ * Extension generic applications
+ * 
+ * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
  */
 class CoreExtension extends \Twig_Extension {
 
+    /**
+     * @var Loader
+     */
     protected $loader;
+    
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
 
     public function __construct(\Twig_LoaderInterface $loader) {
         $this->loader = $loader;
@@ -20,7 +39,7 @@ class CoreExtension extends \Twig_Extension {
         return array(
             new \Twig_SimpleFunction('form_top', null, array('node_class' => 'Symfony\Bridge\Twig\Node\SearchAndRenderBlockNode', 'is_safe' => array('html'))),
             new \Twig_SimpleFunction('print_error', array($this, 'printError'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('contentHeader', array($this, 'contentHeader'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('breadcrumb', array($this, 'breadcrumb'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('generateLink', array($this, 'generateLink'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('generateLinkUrlOnly', array($this, 'generateLinkUrlOnly'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('call_static_method', array($this, 'call_static_method')),
@@ -54,7 +73,7 @@ class CoreExtension extends \Twig_Extension {
     }
     
     /**
-     *     [contentHeader description]
+     *     [breadcrumb description]
      *     This is a cool function
      *     @author Máximo Sojo <maxsojo13@gmail.com>
      *     @version     [version]
@@ -63,7 +82,7 @@ class CoreExtension extends \Twig_Extension {
      *     @param       array                    $args [description]
      *     @return      [type]                         [description]
      */
-    function contentHeader($args = []) {
+    function breadcrumb($args = []) {
         $parameters = array();
         $args = func_get_args();
         $icon = null;
@@ -116,7 +135,7 @@ class CoreExtension extends \Twig_Extension {
      */
     function buttonsSubmit($args = []){
         $args = func_get_args();
-        return $this->container->get('templating')->render('template/layout/commom/buttons/submit.html.twig', ['buttons' => $args]);
+        return $this->container->get('templating')->render('template/commom/buttons/submit.html.twig', ['buttons' => $args]);
     }
 
     /**
@@ -178,33 +197,60 @@ class CoreExtension extends \Twig_Extension {
     public function renderYesNo($status) {
         $template = '<span class="tag %s">%s</span>';
         if ($status === true) {
-            $response = sprintf($template, "", $this->trans("pequiven.yes"));
+            $response = sprintf($template, "", $this->trans("app.question.yes"));
         } else {
-            $response = sprintf($template, "red-bg", $this->trans("pequiven.no"));
+            $response = sprintf($template, "red-bg", $this->trans("app.question.no"));
         }
         return $response;
     }
 
-    public function myFormatDateTime($myFormatDate) {
+    /**
+     * This is a cool function
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  [type]
+     * @return [type]
+     */
+    public function myFormatDateTime($myFormatDate, $format = "d-m-Y h:i a") {
         $dateFormated = "";
         if ($myFormatDate instanceof \DateTime) {
-            $dateFormated = $myFormatDate->format($this->getConfiguration()->getGeneralDateFormat());
+            $dateFormated = $myFormatDate->format($format);
         }
         return $dateFormated;
     }
 
-    public function myFormatDate($myFormatDate) {
+    /**
+     * This is a cool function
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  [type]
+     * @return [type]
+     */
+    public function myFormatDate($myFormatDate, $format = "d-m-Y") {
         $dateFormated = "";
         if ($myFormatDate instanceof \DateTime) {
-            $dateFormated = $myFormatDate->format("Y-m-d");
+            $dateFormated = $myFormatDate->format($format);
         }
         return $dateFormated;
     }
 
+    /**
+     * This is a cool function
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  [type]
+     * @param  [type]
+     * @param  array
+     * @return [type]
+     */
     public function call_static_method($object, $method, array $args) {
         return call_user_func_array(array($object, $method), $args);
     }
 
+    /**
+     * This is a cool function
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  [type]
+     * @param  [type]
+     * @return [type]
+     */
     public function getNextItem($loop, $items) {
         $nextItem = null;
         if ($loop['length'] > 1) {
@@ -229,16 +275,23 @@ class CoreExtension extends \Twig_Extension {
                         ->getUrl($path, $packageName);
     }
 
+    /**
+     * This is a cool function
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  \Symfony\Component\DependencyInjection\ContainerInterface|null
+     */
     public function setContainer(\Symfony\Component\DependencyInjection\ContainerInterface $container = null) {
         $this->container = $container;
     }
 
     /**
-     *
-     * @var ContainerInterface
+     * This is a cool function
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  [type]
+     * @param  array
+     * @param  string
+     * @return [type]
      */
-    private $container;
-
     protected function trans($id, array $parameters = array(), $domain = 'messages') {
         return $this->container->get('translator')->trans($id, $parameters, $domain);
     }
@@ -268,6 +321,21 @@ class CoreExtension extends \Twig_Extension {
         return $user;
     }
 
+    /**
+     * This is a cool function
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @return [type]
+     */
+    public function getConfiguration() {
+        return $this->container->get("atechnologies.service.configuration");
+    }
+
+    /**
+     * This is a cool function
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  [type]
+     * @return boolean
+     */
     private function isGranted($roles) {
         if (!$this->container->has('security.context')) {
             throw new \LogicException('The SecurityBundle is not registered in your application.');

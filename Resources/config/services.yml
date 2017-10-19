@@ -1,7 +1,30 @@
 services:
+  # Servicio tools para breadcrumb
   breadcrumb.tools.load:
       class: Atechnologies\ToolsBundle\Twig\Extension\CoreExtension
+  
+  # Base service
+  atechnologies.service.base:
+      class: Atechnologies\ToolsBundle\Service\BaseService
+      calls: 
+          - [setContainer, ['@service_container']]
+
+  # Configuraciones
+  atechnologies.service.configuration:
+      class: Atechnologies\ToolsBundle\Service\Configuration      
+      calls: 
+          - [setContainer, ['@service_container']]
+          
+  # Generador de secuencia
   atechnologies.service.link_generator:
       class: Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService
       calls: 
-            - [setContainer, ['@service_container']]
+          - [setContainer, ['@service_container']]
+  
+  # Extension Twig generador de link
+  atechnologies.twig.extension_link:
+      class: Atechnologies\ToolsBundle\Twig\Extension\LinkGeneratorExtension
+      tags:
+          - { name: twig.extension}
+      calls:
+          - [ setLinkGeneratorService, ['@atechnologies.service.link_generator']]

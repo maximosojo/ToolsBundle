@@ -9,16 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Service\LinkGenerator;
+namespace Atechnologies\ToolsBundle\Model\LinkGenerator;
+
+use Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService;
 
 /**
  * Interface de generador de link
  * 
- * @author Máximo Sojo maxsojo13@gmail.com <maxtoan in atechnologies>
+ * @author Carlos Mendoza<inhack20@gmail.com>
  */
-interface LinkGeneratorInterface
+interface LinkGeneratorItemInterface
 {
     public static function getConfigObjects();
     
     public function getIconsDefinition();
+    
+    public function setLinkGeneratorService(LinkGeneratorService $linkGeneratorService);
 }
