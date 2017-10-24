@@ -36,7 +36,7 @@ class BaseService implements ContainerAwareInterface {
 
     /**
      * Retorna el repositorio
-     * @return \Pandco\Bundle\AppBundle\Model\Base\EntityRepository
+     * @return \Atechnologies\ToolsBundle\Service\EntityRepository
      */
     protected function getRepository($class)
     {
@@ -149,7 +149,7 @@ class BaseService implements ContainerAwareInterface {
      * Disparar un evento
      * @param type $eventName
      * @param \Symfony\Component\EventDispatcher\Event $event
-     * @return \Pandco\Bundle\AppBundle\Event\GenericEvent
+     * @return \Atechnologies\ToolsBundle\Service\Event\GenericEvent
      */
     protected function dispatch($eventName, \Symfony\Component\EventDispatcher\Event $event = null)
     {

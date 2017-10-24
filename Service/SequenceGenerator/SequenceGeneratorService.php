@@ -18,11 +18,11 @@ use Doctrine\Bundle\DoctrineBundle\Registry;
  *
  * @author Carlos Mendoza <inhack20@tecnocreaciones.com>
  */
-class SequenceGeneratorService extends \AppBundle\Service\BaseService
+class SequenceGeneratorService extends \Atechnologies\ToolsBundle\Service\BaseService
 {
-	private $sequenceGenerator;
+    private $sequenceGenerator;
 
-	/**
+    /**
      * Mode generates the next sequence
      */
     const MODE_NEXT = 0;
@@ -75,9 +75,9 @@ class SequenceGeneratorService extends \AppBundle\Service\BaseService
         if ($invalid) {
             throw new \InvalidArgumentException(sprintf('The SequenceGenerator does not support the following options: "%s".', implode('", "', $invalid)));
         }
-    }	
+    }   
 
-	/**
+    /**
      * Generated based on the sequence parameters
      * 
      * @param \Doctrine\ORM\QueryBuilder $qb
@@ -205,7 +205,7 @@ class SequenceGeneratorService extends \AppBundle\Service\BaseService
         return $numFinal;
     }
 
-	/**
+    /**
      * Generates the next sequence according to the parameters
      * 
      * @param \Doctrine\ORM\QueryBuilder $qb
@@ -218,7 +218,7 @@ class SequenceGeneratorService extends \AppBundle\Service\BaseService
         return $this->generate($qb, $mask,$field,self::MODE_LAST,$parameters);
     }
 
-	/**
+    /**
      * Generates the next sequence according to the parameters
      * 
      * @param \Doctrine\ORM\QueryBuilder $qb
@@ -261,12 +261,12 @@ class SequenceGeneratorService extends \AppBundle\Service\BaseService
             return str_replace($forbidden_chars_to_replace,$newstr,str_replace($forbidden_chars_to_remove,"",$str));
     }
 
- 	public function getTemporaryMask()
+    public function getTemporaryMask()
     {
         return $this->options['temporary_mask'];
     }
 
-	/**
+    /**
      * Returns a doctrine query builder
      * @param type $alias
      * @return \Doctrine\ORM\QueryBuilder

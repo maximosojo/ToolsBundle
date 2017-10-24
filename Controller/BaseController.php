@@ -32,7 +32,7 @@ class BaseController extends FOSRestController{
     
 	/**
      * Retorna el repositorio principal
-     * @return \Pandco\Bundle\AppBundle\Model\Base\EntityRepository
+     * @return \Atechnologies\ToolsBundle\Model\Base\EntityRepository
      */
     protected function getRepository($repository = null)
     {
@@ -45,7 +45,7 @@ class BaseController extends FOSRestController{
     
     /**
      * Debe retornar la clase principal que se esta manejando
-     * @throws \Pandco\Bundle\AppBundle\Exception\NotImplementedException
+     * @throws \Atechnologies\ToolsBundle\Exception\NotImplementedException
      */
     protected function getClass()
     {        
@@ -109,7 +109,7 @@ class BaseController extends FOSRestController{
      * Disparar un evento
      * @param type $eventName
      * @param \Symfony\Component\EventDispatcher\Event $event
-     * @return \Pandco\Bundle\AppBundle\Event\GenericEvent
+     * @return \Atechnologies\ToolsBundle\Event\GenericEvent
      */
     protected function dispatch($eventName, \Symfony\Component\EventDispatcher\Event $event = null)
     {
