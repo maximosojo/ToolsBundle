@@ -53,6 +53,16 @@ class BaseController extends FOSRestController{
     }
 
     /**
+     * Crea una nueva instancia
+     * @throws type
+     */
+    protected function createNew()
+    {
+        $class = $this->getClass();
+        return new $class();
+    }
+    
+    /**
      * Busca un elemento o lanza una exepcion de 404
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return type
@@ -109,11 +119,13 @@ class BaseController extends FOSRestController{
      * Disparar un evento
      * @param type $eventName
      * @param \Symfony\Component\EventDispatcher\Event $event
-     * @return \Atechnologies\ToolsBundle\Event\GenericEvent
+     * @return \Pandco\Bundle\AppBundle\Event\GenericEvent
      */
-    protected function dispatch($eventName, \Symfony\Component\EventDispatcher\Event $event = null)
-    {
-        return $this->getEventDispatcher()->dispatch($eventName, $event);
+    protected function dispatch($eventName,$entity = null)
+    {   
+        //\Symfony\Component\EventDispatcher\Event 
+        $event = new \Symfony\Component\EventDispatcher\GenericEvent($entity);
+        return $this->getEventDispatcher()->dispatch($eventName,$event);
     }
     
     /**
