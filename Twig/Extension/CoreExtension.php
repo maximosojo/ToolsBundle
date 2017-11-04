@@ -16,21 +16,12 @@ namespace Atechnologies\ToolsBundle\Twig\Extension;
  * 
  * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
  */
-class CoreExtension extends \Twig_Extension {
-
-    /**
-     * @var Loader
-     */
-    protected $loader;
-    
+class CoreExtension extends \Twig_Extension 
+{    
     /**
      * @var ContainerInterface
      */
     private $container;
-
-    public function __construct(\Twig_LoaderInterface $loader) {
-        $this->loader = $loader;
-    }
 
     /**
      * {@inheritdoc}

@@ -22,14 +22,11 @@ use Symfony\Component\Config\FileLocator;
  * 
  * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
  */
-class AtechnologiestoolsExtension extends Extension
+class AtechnologiesToolsExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
     	$loaderYml = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loaderYml->load('services.yml');
-
-        $loaderXml = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loaderXml->load('services.xml');
     }
 }

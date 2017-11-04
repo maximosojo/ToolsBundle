@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  * 
  * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
  */
-class AtechnologiestoolsBundle extends Bundle
+class AtechnologiesToolsBundle extends Bundle
 {
 	public function build(\Symfony\Component\DependencyInjection\ContainerBuilder $container) 
     {
