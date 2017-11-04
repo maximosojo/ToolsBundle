@@ -45,9 +45,11 @@ public function registerBundles()
         new Atechnologies\ToolsBundle\AtechnologiesToolsBundle(),
     );
 }
+```
 
 ### Base app
 
 ```html
-{# Atechnologies #}
+<!-- Atechnologies -->
 <script src="{{ asset('bundles/atechnologiestools/js/app.js') }}"></script>
+```
