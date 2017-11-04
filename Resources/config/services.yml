@@ -22,7 +22,9 @@ services:
       class: Atechnologies\ToolsBundle\Twig\Extension\CoreExtension
       tags:
           - { name: twig.extension}      
-  
+      calls: 
+          - [setContainer, ['@service_container']]
+          
 # Extension twig tabs
   tabs.tools.load:
       class: Atechnologies\ToolsBundle\Twig\Extension\TabsExtension
