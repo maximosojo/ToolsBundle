@@ -26,7 +26,7 @@
         </li>
     </ul>
     <div class="tab-content tab-no-content">
-        <div loading-container="tabsCtrl.currentTab.loading">
+        <div ng-loading="tabsCtrl.currentTab.loading">
             <div ng-if="tabContent.options.add_content_div" class="tab-content">
                 <div ng-include="tabsCtrl.currentTab.options.url" onload="tabsCtrl.loaded(tabsCtrl.currentTab)"></div>
             </div>

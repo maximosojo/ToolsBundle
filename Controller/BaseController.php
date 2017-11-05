@@ -121,13 +121,11 @@ class BaseController extends FOSRestController{
      * @param \Symfony\Component\EventDispatcher\Event $event
      * @return \Pandco\Bundle\AppBundle\Event\GenericEvent
      */
-    protected function dispatch($eventName,$entity = null)
-    {   
-        //\Symfony\Component\EventDispatcher\Event 
-        $event = new \Symfony\Component\EventDispatcher\GenericEvent($entity);
-        return $this->getEventDispatcher()->dispatch($eventName,$event);
+    protected function dispatch($eventName, \Symfony\Component\EventDispatcher\Event $event = null)
+    {
+        return $this->getEventDispatcher()->dispatch($eventName, $event);
     }
-    
+
     /**
      * Retorna el disparador de eventos
      * @return \Symfony\Component\EventDispatcher\EventDispatcher
