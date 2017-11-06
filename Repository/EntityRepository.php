@@ -20,7 +20,17 @@ namespace Atechnologies\ToolsBundle\Repository;
  * repository methods below.
  */
 class EntityRepository extends \Doctrine\ORM\EntityRepository
-{
+{   
+    public function findByNot($field, $value)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->where($qb->expr()->not($qb->expr()->eq('a.'.$field, '?1')));
+        $qb->setParameter(1, $value);
+
+        return $qb->getQuery()
+            ->getResult();
+    }
+    
 	/**
      * Retorna un contructor de consultas con el alias de la clase
      * @return \Doctrine\ORM\QueryBuilder
