@@ -179,7 +179,7 @@ class LinkGeneratorService implements ContainerAwareInterface
             if($addTitle === true){
                 $extraParameters .= 'title = "'.$originalLabel.'"';
             }
-            $link = sprintf('<a href="%s" style="color:#000" %s>%s&nbsp;%s</a>',$href,$extraParameters,$icon,$label);
+            $link = sprintf('<a href="%s" style="color:#3cbc4b" %s>%s&nbsp;%s</a>',$href,$extraParameters,$icon,$label);
         }else{
             $link = sprintf('%s&nbsp;%s',$icon,$label);
         }
