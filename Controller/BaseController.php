@@ -103,6 +103,29 @@ class BaseController extends FOSRestController{
     }
 
     /**
+     * Json reponse
+     * @param type $data
+     * @param type $status
+     * @param type $headers
+     * @return \Atechnologies\ToolsBundle\Custom\HttpFoundation\MyJsonResponse
+     */
+    protected function myJsonResponse($data = null, $status = 200, $headers = array()) {
+        return new \Atechnologies\ToolsBundle\Custom\HttpFoundation\MyJsonResponse($data,$status,$headers);
+    }
+
+    /**
+     * Json redirect
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  [type]
+     * @return [type]
+     */
+    public function jsonRedirect($url){
+        $response = $this->myJsonResponse();
+        $response->setRedirect($url);
+        return $response;
+    }
+
+    /**
      * Traducción
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      * @param  [type]
@@ -119,7 +142,7 @@ class BaseController extends FOSRestController{
      * Disparar un evento
      * @param type $eventName
      * @param \Symfony\Component\EventDispatcher\Event $event
-     * @return \Pandco\Bundle\AppBundle\Event\GenericEvent
+     * @return \Atechnologies\ToolsBundle\Event\GenericEvent
      */
     protected function dispatch($eventName, \Symfony\Component\EventDispatcher\Event $event = null)
     {
@@ -243,7 +266,7 @@ class BaseController extends FOSRestController{
     
     /**
      * Construye el una variable para expandir campos dinamicamente al serializar
-     * @param \Pandco\Bundle\AppBundle\Controller\Request $request
+     * @param \Atechnologies\ToolsBundle\Controller\Request $request
      * @param array $defaults
      * @return type
      */
