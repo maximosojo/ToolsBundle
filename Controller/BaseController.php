@@ -261,7 +261,7 @@ class BaseController extends FOSRestController{
      */
     protected function addExpandFields(\FOS\RestBundle\View\View $view,\Symfony\Component\HttpFoundation\Request $request,array $defaults = array()) 
     {
-        $view->getSerializationContext()->setGroups($this->buildExpandFields($request,$defaults));
+        $view->getContext()->setGroups($this->buildExpandFields($request,$defaults));
     }
     
     /**
