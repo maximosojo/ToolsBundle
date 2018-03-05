@@ -56,9 +56,11 @@ class BaseController extends FOSRestController{
      * Crea una nueva instancia
      * @throws type
      */
-    protected function createNew()
+    protected function createNew($class = null)
     {
-        $class = $this->getClass();
+        if (!$class) {
+            $class = $this->getClass();
+        }
         return new $class();
     }
     
@@ -89,7 +91,8 @@ class BaseController extends FOSRestController{
      * @param  integer $code 
      * @return JsonResponse
      */
-    public function jsonResponse($message, $code = 200) {
+    public function jsonResponse($message, $code = 200) 
+    {
         if ($code == 200) {
             $result = [
                 'result' => $message
@@ -109,7 +112,8 @@ class BaseController extends FOSRestController{
      * @param type $headers
      * @return \Atechnologies\ToolsBundle\Custom\HttpFoundation\MyJsonResponse
      */
-    protected function myJsonResponse($data = null, $status = 200, $headers = array()) {
+    protected function myJsonResponse($data = null, $status = 200, $headers = array()) 
+    {
         return new \Atechnologies\ToolsBundle\Custom\HttpFoundation\MyJsonResponse($data,$status,$headers);
     }
 
@@ -119,7 +123,8 @@ class BaseController extends FOSRestController{
      * @param  [type]
      * @return [type]
      */
-    public function jsonRedirect($url){
+    public function jsonRedirect($url)
+    {
         $response = $this->myJsonResponse();
         $response->setRedirect($url);
         return $response;
@@ -225,7 +230,8 @@ class BaseController extends FOSRestController{
      * @param  boolean
      * @return [type]
      */
-    protected function remove($entity = null, $andFlush = true) {
+    protected function remove($entity = null, $andFlush = true) 
+    {
         $em = $this->getDoctrine()->getManager();
         try {
             if ($entity !== null) {
@@ -270,7 +276,8 @@ class BaseController extends FOSRestController{
      * @param array $defaults
      * @return type
      */
-    protected function buildExpandFields(\Symfony\Component\HttpFoundation\Request $request,$defaults = array()) {
+    protected function buildExpandFields(\Symfony\Component\HttpFoundation\Request $request,$defaults = array()) 
+    {
         $expandString = $request->get("expand",null);
         if(is_string($defaults) && !empty($defaults)){
             $expandString .= $defaults;
