@@ -27,21 +27,27 @@ class LinkGeneratorExtension extends Twig_Extension
      */
     private $linkGeneratorService;
     
-    public function getFunctions() {
+    /**
+     * getFunctions
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @return array
+     */
+    public function getFunctions() 
+    {
         return [
-            new \Twig_SimpleFunction('path_object', array($this, 'pathObject'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('path_object_url', array($this, 'pathObjectUrl'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('link_generator', array($this, 'linkGenerator'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('link_generator_url', array($this, 'linkGeneratorUrl'), array('is_safe' => array('html'))),
         ];
     }
     
     /**
      * Genera un link completo para mostrar el objeto
-     * 
-     * @param type $entity
-     * @param type $type
-     * @return type
+     * @param Entity $entity
+     * @param LinkGeneratorService $type
+     * @return LinkGeneratorService
      */
-    function pathObject($entity, $type = LinkGeneratorService::TYPE_LINK_DEFAULT, array $parameters = array()) {
+    function linkGenerator($entity, $type = LinkGeneratorService::TYPE_LINK_DEFAULT, array $parameters = array()) 
+    {
         if($entity === null){
             return "";
         }
@@ -50,24 +56,36 @@ class LinkGeneratorExtension extends Twig_Extension
 
     /**
      * Genera solo la url de el objeto
-     * 
      * @param type $entity
      * @param type $type
      * @return type
      */
-    function pathObjectUrl($entity, $type = LinkGeneratorService::TYPE_LINK_DEFAULT, array $parameters = array()) {
+    function linkGeneratorUrl($entity, $type = LinkGeneratorService::TYPE_LINK_DEFAULT, array $parameters = array()) 
+    {
         if($entity === null){
             return "";
         }
         return $this->linkGeneratorService->generateOnlyUrl($entity, $type, $parameters);
     }
-    
-    public function getName() {
-        return "link_generator_extension";
-    }
-    
-    public function setLinkGeneratorService(LinkGeneratorService $linkGeneratorService) {
+
+    /**
+     * set Link Generator
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  LinkGeneratorService
+     */
+    public function setLinkGeneratorService(LinkGeneratorService $linkGeneratorService) 
+    {
         $this->linkGeneratorService = $linkGeneratorService;
         return $this;
+    }
+
+    /**
+     * getName
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @return name
+     */
+    public function getName() 
+    {
+        return "link_generator_extension";
     }
 }

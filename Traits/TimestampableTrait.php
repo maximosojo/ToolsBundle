@@ -18,9 +18,9 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies> 
  */
-trait TimestampableTrait {
-    
-    /**
+trait TimestampableTrait 
+{
+   /**
      * Fecha de creación del objeto
      * @var \DateTime
      * @Gedmo\Timestampable(on="create")

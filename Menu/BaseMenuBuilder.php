@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 abstract class BaseMenuBuilder implements \Symfony\Component\DependencyInjection\ContainerAwareInterface
-{   
+{
     /**
      * Container instance.
      *

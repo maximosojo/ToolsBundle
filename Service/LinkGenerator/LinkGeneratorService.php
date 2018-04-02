@@ -56,7 +56,8 @@ class LinkGeneratorService implements ContainerAwareInterface
     
     private $iconsDefinition;
 
-    public function __construct() {
+    public function __construct() 
+    {
         $this->linkGeneratorItems = [];
         $this->iconsDefinition = [];
     }
@@ -65,19 +66,17 @@ class LinkGeneratorService implements ContainerAwareInterface
      * Genera la configuracion de los objetos agreagados
      * @throws LogicException
      */
-    private function boot (){
+    private function boot ()
+    {
         $this->init = true;
         $configsObjectsDeft = $iconsDefinition = [];
         $this->linkGeneratorItemsForClass = [];
         foreach ($this->linkGeneratorItems as $linkGeneratorItem) {
             $configObjects = $linkGeneratorItem->getConfigObjects();
             foreach ($configObjects as $key => $configObject) {
-//                $configObject["linkGeneratorItem"] =  $linkGeneratorItem;
                 $configObjects[$key]["linkGeneratorItem"] =  $linkGeneratorItem;
                 $this->linkGeneratorItemsForClass[$configObject["class"]] = $linkGeneratorItem;
             }
-//            var_dump($configObjects);
-//            die;
             
             $configsObjectsDeft = array_merge($configsObjectsDeft,$configObjects);
             $iconsDefinition = array_merge($iconsDefinition,$linkGeneratorItem->getIconsDefinition());
@@ -94,10 +93,8 @@ class LinkGeneratorService implements ContainerAwareInterface
             'linkGeneratorItem' => null,
         );
         $configsObjects = array();
-//        var_dump($configsObjectsDeft);
         foreach ($configsObjectsDeft as $key => $configObject)
         {
-//            var_dump($key);
             $config = array_merge($defaultConfig,$configObject);
             if(!isset($config['class'])){
                 throw new LogicException(sprintf('The class for item "%s" not defined',$key));
@@ -118,14 +115,12 @@ class LinkGeneratorService implements ContainerAwareInterface
             
             $configsObjects[$class]['type'][$type] = $config;
         }
-//        throw new \Exception();
         
         $this->configsObjects = $configsObjects;
     }
     
     /**
      * Metodo que renderiza el link por defecto
-     * 
      * @param type $entity
      * @param type $entityConfig
      * @param type $type
@@ -196,7 +191,8 @@ class LinkGeneratorService implements ContainerAwareInterface
      * @param type $entityConfig
      * @return type
      */
-    public function buildUrl($entity,$entityConfig) {
+    public function buildUrl($entity,$entityConfig) 
+    {
         $route = $entityConfig['route'];
         $routeParameters = $entityConfig['routeParameters'];
         $href = '';
@@ -292,7 +288,8 @@ class LinkGeneratorService implements ContainerAwareInterface
      * @param type $entity
      * @return type
      */
-    public function getConfigFromEntity($entity) {
+    public function getConfigFromEntity($entity) 
+    {
         $parameters = array();
         $parameters['_onlyConf'] = true;
         return $this->generate($entity,null,$parameters);
@@ -324,14 +321,20 @@ class LinkGeneratorService implements ContainerAwareInterface
      * @param \Atechnologies\ToolsBundle\Model\LinkGenerator\LinkGeneratorItemInterface $linkGeneratorItem
      * @return \Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService
      */
-    public function addLinkGeneratorItem(\Atechnologies\ToolsBundle\Model\LinkGenerator\LinkGeneratorItemInterface $linkGeneratorItem) {
+    public function addLinkGeneratorItem(\Atechnologies\ToolsBundle\Model\LinkGenerator\LinkGeneratorItemInterface $linkGeneratorItem) 
+    {
         $linkGeneratorItem->setLinkGeneratorService($this);
         $this->linkGeneratorItems[] = $linkGeneratorItem;
         return $this;
     }
 
-        
-    public function setContainer(ContainerInterface $container = null) {
+    /**
+     * setContainer
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  ContainerInterface|null
+     */
+    public function setContainer(ContainerInterface $container = null) 
+    {
         $this->container = $container;
     }
 }

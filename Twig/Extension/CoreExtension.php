@@ -26,30 +26,27 @@ class CoreExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFunctions() {
-        return array(
+    public function getFunctions() 
+    {
+       return array(
             new \Twig_SimpleFunction('form_top', null, array('node_class' => 'Symfony\Bridge\Twig\Node\SearchAndRenderBlockNode', 'is_safe' => array('html'))),
             new \Twig_SimpleFunction('print_error', array($this, 'printError'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('breadcrumb', array($this, 'breadcrumb'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('generateLink', array($this, 'generateLink'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('generateLinkUrlOnly', array($this, 'generateLinkUrlOnly'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('call_static_method', array($this, 'call_static_method')),
-            new \Twig_SimpleFunction('get_next_item', array($this, 'getNextItem')),
-            new \Twig_SimpleFunction('validPnr', array($this, 'validPnr')),
-            new \Twig_SimpleFunction('buttonsSubmit', array($this, 'buttonsSubmit'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('get_next_item', array($this, 'getNextItem'))
         );
     }
     
     /**
-     *     [getFilters description]
-     *     This is a cool function
+     *     getFilters
      *     @author Máximo Sojo <maxsojo13@gmail.com>
-     *     @version     [version]
      *     @date        2017-01-10
      *     @anotherdate 2017-01-10T13:35:06-0430
-     *     @return      [type]                   [description]
      */
-    public function getFilters() {
+    public function getFilters() 
+    {
         return array(
             new \Twig_SimpleFilter('str_pad', function($input, $padlength, $padstring = '', $padtype = STR_PAD_LEFT) {
                         return str_pad($input, $padlength, $padstring, $padtype);
@@ -58,22 +55,18 @@ class CoreExtension extends \Twig_Extension
             new \Twig_SimpleFilter('ucwords', array($this, 'ucwords')),
             new \Twig_SimpleFilter('is_string', array($this, 'is_string')),
             new \Twig_SimpleFilter('myFormatDateTime', array($this, 'myFormatDateTime')),
-            new \Twig_SimpleFilter('myFormatDate', array($this, 'myFormatDate')),
-            new \Twig_SimpleFilter('render_yes_no', array($this, 'renderYesNo'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFilter('myFormatDate', array($this, 'myFormatDate'))
         );
     }
     
     /**
-     *     [breadcrumb description]
-     *     This is a cool function
+     *     breadcrumb
      *     @author Máximo Sojo <maxsojo13@gmail.com>
-     *     @version     [version]
      *     @date        2017-01-10
      *     @anotherdate 2017-01-10T13:34:59-0430
-     *     @param       array                    $args [description]
-     *     @return      [type]                         [description]
      */
-    function breadcrumb($args = []) {
+    function breadcrumb($args = []) 
+    {
         $parameters = array();
         $args = func_get_args();
         $icon = null;
@@ -115,27 +108,13 @@ class CoreExtension extends \Twig_Extension
     }
     
     /**
-     *     [buttonsSubmit description]
-     *     This is a cool function
-     *     @author Máximo Sojo <maxsojo13@gmail.com>
-     *     @version     [version]
-     *     @date        2017-01-10
-     *     @anotherdate 2017-01-10T13:35:20-0430
-     *     @param       array                    $args [description]
-     *     @return      [type]                         [description]
-     */
-    function buttonsSubmit($args = []){
-        $args = func_get_args();
-        return $this->container->get('templating')->render('template/commom/buttons/submit.html.twig', ['buttons' => $args]);
-    }
-
-    /**
      * Filtro para formatear numero.
      * @param type $value
      * @param type $decimals
      * @return type
      */
-    function myNumberFormat($value, $decimals = 2) {
+    function myNumberFormat($value, $decimals = 2) 
+    {
         return number_format($value, $decimals, ',', '.');
     }
 
@@ -145,7 +124,8 @@ class CoreExtension extends \Twig_Extension
      * @param type $string
      * @return type
      */
-    function ucwords($value) {
+    function ucwords($value) 
+    {
         return ucwords(mb_strtolower($value, 'UTF-8'));
     }
 
@@ -154,7 +134,8 @@ class CoreExtension extends \Twig_Extension
      * @param type $value
      * @return type
      */
-    function is_string($value) {
+    function is_string($value) 
+    {
         return is_string($value);
     }
 
@@ -165,7 +146,8 @@ class CoreExtension extends \Twig_Extension
      * @param type $type
      * @return type
      */
-    function generateLink($entity, $type = \Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService::TYPE_LINK_DEFAULT, array $parameters = array()) {
+    function generateLink($entity, $type = \Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService::TYPE_LINK_DEFAULT, array $parameters = array()) 
+    {
         return $this->container->get('atechnologies.service.link_generator')->generate($entity, $type, $parameters);
     }
 
@@ -176,23 +158,9 @@ class CoreExtension extends \Twig_Extension
      * @param type $type
      * @return type
      */
-    function generateLinkUrlOnly($entity, $type = \Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService::TYPE_LINK_DEFAULT, array $parameters = array()) {
+    function generateLinkUrlOnly($entity, $type = \Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService::TYPE_LINK_DEFAULT, array $parameters = array()) 
+    {
         return $this->container->get('atechnologies.service.link_generator')->generateOnlyUrl($entity, $type, $parameters);
-    }
-
-    /**
-     * Renderiza un si y no con color de tag
-     * @param type $status
-     * @return type
-     */
-    public function renderYesNo($status) {
-        $template = '<span class="tag %s">%s</span>';
-        if ($status === true) {
-            $response = sprintf($template, "", $this->trans("app.question.yes"));
-        } else {
-            $response = sprintf($template, "red-bg", $this->trans("app.question.no"));
-        }
-        return $response;
     }
 
     /**
@@ -201,7 +169,8 @@ class CoreExtension extends \Twig_Extension
      * @param  [type]
      * @return [type]
      */
-    public function myFormatDateTime($myFormatDate, $format = "d-m-Y h:i a") {
+    public function myFormatDateTime($myFormatDate, $format = "d-m-Y h:i a") 
+    {
         $dateFormated = "";
         if ($myFormatDate instanceof \DateTime) {
             $dateFormated = $myFormatDate->format($format);
@@ -215,7 +184,8 @@ class CoreExtension extends \Twig_Extension
      * @param  [type]
      * @return [type]
      */
-    public function myFormatDate($myFormatDate, $format = "d-m-Y") {
+    public function myFormatDate($myFormatDate, $format = "d-m-Y") 
+    {
         $dateFormated = "";
         if ($myFormatDate instanceof \DateTime) {
             $dateFormated = $myFormatDate->format($format);
@@ -231,7 +201,8 @@ class CoreExtension extends \Twig_Extension
      * @param  array
      * @return [type]
      */
-    public function call_static_method($object, $method, array $args) {
+    public function call_static_method($object, $method, array $args) 
+    {
         return call_user_func_array(array($object, $method), $args);
     }
 
@@ -242,7 +213,8 @@ class CoreExtension extends \Twig_Extension
      * @param  [type]
      * @return [type]
      */
-    public function getNextItem($loop, $items) {
+    public function getNextItem($loop, $items) 
+    {
         $nextItem = null;
         if ($loop['length'] > 1) {
             if ($loop['last'] == false) {
@@ -257,11 +229,13 @@ class CoreExtension extends \Twig_Extension
      *
      * @return string The extension name
      */
-    public function getName() {
+    public function getName() 
+    {
         return 'humper_core_extension';
     }
 
-    function generateAsset($path, $packageName = null) {
+    function generateAsset($path, $packageName = null) 
+    {
         return $this->container->get('templating.helper.assets')
                         ->getUrl($path, $packageName);
     }
@@ -271,7 +245,8 @@ class CoreExtension extends \Twig_Extension
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      * @param  \Symfony\Component\DependencyInjection\ContainerInterface|null
      */
-    public function setContainer(\Symfony\Component\DependencyInjection\ContainerInterface $container = null) {
+    public function setContainer(\Symfony\Component\DependencyInjection\ContainerInterface $container = null) 
+    {
         $this->container = $container;
     }
 
@@ -283,7 +258,8 @@ class CoreExtension extends \Twig_Extension
      * @param  string
      * @return [type]
      */
-    protected function trans($id, array $parameters = array(), $domain = 'messages') {
+    protected function trans($id, array $parameters = array(), $domain = 'messages') 
+    {
         return $this->container->get('translator')->trans($id, $parameters, $domain);
     }
 
@@ -296,7 +272,8 @@ class CoreExtension extends \Twig_Extension
      *
      * @see TokenInterface::getUser()
      */
-    public function getUser() {
+    public function getUser() 
+    {
         if (!$this->container->has('security.context')) {
             throw new LogicException('The SecurityBundle is not registered in your application.');
         }
@@ -313,25 +290,12 @@ class CoreExtension extends \Twig_Extension
     }
 
     /**
-     * This is a cool function
+     * Configuration
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      * @return [type]
      */
-    public function getConfiguration() {
+    public function getConfiguration() 
+    {
         return $this->container->get("atechnologies.service.configuration");
-    }
-
-    /**
-     * This is a cool function
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  [type]
-     * @return boolean
-     */
-    private function isGranted($roles) {
-        if (!$this->container->has('security.context')) {
-            throw new \LogicException('The SecurityBundle is not registered in your application.');
-        }
-
-        return $this->container->get('security.context')->isGranted($roles);
     }
 }

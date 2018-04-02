@@ -26,9 +26,13 @@ abstract class LinkGeneratorItem implements LinkGeneratorItemInterface
      */
     protected $linkGeneratorService;
  
-    public function getIconsDefinition() {return [];}
+    public function getIconsDefinition() 
+    {
+        return [];
+    }
     
-    public function setLinkGeneratorService(LinkGeneratorService $linkGeneratorService) {
+    public function setLinkGeneratorService(LinkGeneratorService $linkGeneratorService) 
+    {
         $this->linkGeneratorService = $linkGeneratorService;
         return $this;
     }

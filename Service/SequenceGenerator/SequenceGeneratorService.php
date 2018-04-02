@@ -214,7 +214,8 @@ class SequenceGeneratorService extends \Atechnologies\ToolsBundle\Service\BaseSe
      * @param type $parameters Values of additional masks array('miMask' => 'Value')
      * @return type
      */
-    function generateLast(\Doctrine\ORM\QueryBuilder $qb,$mask,$field,$parameters = array()) {
+    function generateLast(\Doctrine\ORM\QueryBuilder $qb,$mask,$field,$parameters = array()) 
+    {
         return $this->generate($qb, $mask,$field,self::MODE_LAST,$parameters);
     }
 
@@ -236,7 +237,8 @@ class SequenceGeneratorService extends \Atechnologies\ToolsBundle\Service\BaseSe
      * Returns the masks defined by default
      * @return array
      */
-    private function getDefaultMasks() {
+    private function getDefaultMasks() 
+    {
         return array(
             'yyyy' => array('date_format' => 'Y'),
             'yy' => array('date_format' => 'y'),
@@ -249,7 +251,8 @@ class SequenceGeneratorService extends \Atechnologies\ToolsBundle\Service\BaseSe
      * Returns additional masks user added
      * @return array
      */
-    public final function getAdditionalMasks() {
+    public final function getAdditionalMasks() 
+    {
         return $this->options['additional_masks'];
     }
 
@@ -271,7 +274,8 @@ class SequenceGeneratorService extends \Atechnologies\ToolsBundle\Service\BaseSe
      * @param type $alias
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public final function createQueryBuilder($alias = 'q') {
+    public final function createQueryBuilder($alias = 'q') 
+    {
          return $this->getDoctrine()->getManager()->createQueryBuilder($alias);
     }
 }

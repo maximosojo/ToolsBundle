@@ -16,13 +16,11 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
 /**
  * Servicio base con implementación de funciones genericas compartidas
- * 
  * service (atechnologies.service.base)
- * 
  * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
  */
-class BaseService implements ContainerAwareInterface {
-    
+class BaseService implements ContainerAwareInterface 
+{
     private $container;
     
     /**
@@ -30,7 +28,8 @@ class BaseService implements ContainerAwareInterface {
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      * @return [type]
      */
-    public function getBaseUrl(){
+    public function getBaseUrl()
+    {
         return $this->getContainer()->getParameter('kernel.root_dir');
     }
 
@@ -53,7 +52,7 @@ class BaseService implements ContainerAwareInterface {
      * @param type $andFlush
      */
     protected function save($entity, $andFlush = true)
-    {   
+    {
         $em = $this->getDoctrine()->getManager();
         try {
             $em->persist($entity);
@@ -71,7 +70,8 @@ class BaseService implements ContainerAwareInterface {
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      * @return [type]
      */
-    protected function flush() {
+    protected function flush() 
+    {
         $em = $this->getDoctrine()->getManager();
         try {
             $em->flush();            
@@ -85,7 +85,8 @@ class BaseService implements ContainerAwareInterface {
      * @return Registry
      * @throws LogicException If DoctrineBundle is not available
      */
-    public function getDoctrine() {
+    public function getDoctrine() 
+    {
         if (!$this->container->has('doctrine')) {
             throw new LogicException('The DoctrineBundle is not registered in your application.');
         }
@@ -99,7 +100,8 @@ class BaseService implements ContainerAwareInterface {
      * @throws LogicException If SecurityBundle is not available
      * @see TokenInterface::getUser()
      */
-    public function getUser() {
+    public function getUser() 
+    {
         if (!$this->container->has('security.token_storage')) {
             throw new LogicException('The SecurityBundle is not registered in your application.');
         }
@@ -120,7 +122,8 @@ class BaseService implements ContainerAwareInterface {
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      * @param  ContainerInterface|null
      */
-    public function setContainer(ContainerInterface $container = null) {
+    public function setContainer(ContainerInterface $container = null) 
+    {
         $this->container = $container;
     }
     
@@ -129,7 +132,8 @@ class BaseService implements ContainerAwareInterface {
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      * @return [type]
      */
-    public function getContainer(){
+    public function getContainer()
+    {
         return $this->container;
     }
 
@@ -141,7 +145,8 @@ class BaseService implements ContainerAwareInterface {
      * @param  string
      * @return [type]
      */
-    protected function trans($id, array $parameters = array(), $domain = 'messages') {
+    protected function trans($id, array $parameters = array(), $domain = 'messages') 
+    {
         return $this->container->get('translator')->trans($id, $parameters, $domain);
     }
     

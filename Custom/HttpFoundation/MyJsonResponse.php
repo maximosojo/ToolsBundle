@@ -22,7 +22,8 @@ class MyJsonResponse extends JsonResponse
     protected $originalData;
     protected $extraData;
     
-    public function __construct($data = null, $status = 200, $headers = array()) {
+    public function __construct($data = null, $status = 200, $headers = array()) 
+    {
         $this->extraData = [];
         parent::__construct($data, $status, $headers);
     }
@@ -32,7 +33,8 @@ class MyJsonResponse extends JsonResponse
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      * @param  array
      */
-    public function setData($data = array()) {
+    public function setData($data = array()) 
+    {
         $this->originalData = $data;
         if(count($this->extraData) > 0){
             $data["_server"] = $this->extraData;
@@ -46,7 +48,8 @@ class MyJsonResponse extends JsonResponse
      * @param  [type]
      * @param  [type]
      */
-    public function setFlash($type, $message) {
+    public function setFlash($type, $message) 
+    {
         if(!isset($this->extraData["flashes"])){
             $this->extraData["flashes"] = [];
         }
@@ -62,7 +65,8 @@ class MyJsonResponse extends JsonResponse
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      * @param  [type]
      */
-    public function setRedirect($url) {
+    public function setRedirect($url) 
+    {
         $this->extraData["redirect"] = $url;
         $this->setData($this->originalData);
     }
@@ -71,7 +75,8 @@ class MyJsonResponse extends JsonResponse
      * Reload json
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      */
-    public function setForceReload() {
+    public function setForceReload() 
+    {
         $this->extraData["forceReload"] = true;
         $this->setData($this->originalData);
     }
@@ -82,7 +87,8 @@ class MyJsonResponse extends JsonResponse
      * @param  [type]
      * @param  array
      */
-    public function setOpenPopUp($url,array $parameters = []) {
+    public function setOpenPopUp($url,array $parameters = []) 
+    {
         $this->extraData["openPopUp"] = [
             "url" => $url,
             "parameters" => $parameters,

@@ -17,7 +17,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Tab
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class Tab {
+class Tab 
+{
 
     private $id;
     private $name;
@@ -29,10 +30,10 @@ class Tab {
      */
     private $tabsContent;
     
-    public function __construct(array $options = []) {
+    public function __construct(array $options = []) 
+    {
         $this->tabsContent = [];
         $this->id = md5(\Atechnologies\ToolsBundle\Service\Util\AppUtil::getId());
-        
         $this->setOptions($options);
     }
     
@@ -41,7 +42,8 @@ class Tab {
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      * @param  array
      */
-    public function setOptions(array $options = []) {
+    public function setOptions(array $options = []) 
+    {
         $resolver = new OptionsResolver();
         $resolver->setDefaults([
             "active_first" => true,
@@ -51,29 +53,65 @@ class Tab {
         return $this;
     }
     
-    public function getName() {
+    /**
+     * getName
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @return name
+     */
+    public function getName() 
+    {
         return $this->name;
     }
 
-    public function getIcon() {
+    /**
+     * getIcon
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @return icon
+     */
+    public function getIcon() 
+    {
         return $this->icon;
     }
 
-    public function getTabsContent() {
+    /**
+     * getTabsContent
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @return tabsContent
+     */
+    public function getTabsContent() 
+    {
         return $this->tabsContent;
     }
 
-    public function setName($name) {
+    /**
+     * setName
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  name
+     */
+    public function setName($name) 
+    {
         $this->name = $name;
         return $this;
     }
 
-    public function setIcon($icon) {
+    /**
+     * setIcon
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  icon
+     */
+    public function setIcon($icon) 
+    {
         $this->icon = $icon;
         return $this;
     }
     
-    public function getId() {
+    /**
+     * getId
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @return id
+     */
+    public function getId() 
+    {
         return $this->id;
     }
     
@@ -101,7 +139,8 @@ class Tab {
      * Convierte la tab a un array
      * @return type
      */
-    public function toArray() {
+    public function toArray() 
+    {
         $data = [
             "id" => $this->id,
             "name" => $this->name,

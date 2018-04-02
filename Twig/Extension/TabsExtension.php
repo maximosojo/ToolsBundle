@@ -21,12 +21,12 @@ class TabsExtension extends \Twig_Extension
 
 	private $container;
     
-    public function getName() 
-    {
-        return 'atechnologies_tabs_extension';
-    }
-
-	public function getFunctions() 
+    /**
+     * getFunctions
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @return array
+     */
+    public function getFunctions()
     {
         return [            
             new \Twig_SimpleFunction('render_tabs', array($this, 'renderTabs'),array('is_safe' => ['html'])),
@@ -40,7 +40,8 @@ class TabsExtension extends \Twig_Extension
      * @param  array
      * @return [type]
      */
-    public function renderTabs(\Atechnologies\ToolsBundle\Model\Core\Tab\Tab $tab,array $parameters = []) {
+    public function renderTabs(\Atechnologies\ToolsBundle\Model\Core\Tab\Tab $tab,array $parameters = []) 
+    {
         $parameters["tab"] = $tab;
         return $this->container->get('templating')->render("AtechnologiesToolsBundle:tab:tabs.html.twig", 
             $parameters
@@ -55,5 +56,15 @@ class TabsExtension extends \Twig_Extension
     public function setContainer(\Symfony\Component\DependencyInjection\ContainerInterface $container = null)
     {
         $this->container = $container;
+    }
+
+    /**
+     * getName
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @return name
+     */
+    public function getName()
+    {
+        return 'atechnologies_tabs_extension';
     }
 }

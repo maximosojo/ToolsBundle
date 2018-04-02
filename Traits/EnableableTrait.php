@@ -19,8 +19,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
  */
 
-trait EnableableTrait {
-    
+trait EnableableTrait 
+{   
     /**
      * ¿EL objeto está habilitado para consultas?
      * @var boolean

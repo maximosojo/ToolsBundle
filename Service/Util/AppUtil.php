@@ -15,14 +15,15 @@ namespace Atechnologies\ToolsBundle\Service\Util;
  * Funciones utiles
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class AppUtil {
-
+class AppUtil 
+{
     /**
      * Get id format
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @return [type]
+     * @return id
      */
-    static function getId() {
+    static function getId() 
+    {
         $length = 20;
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -36,9 +37,10 @@ class AppUtil {
     /**
      * Get id format letter
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @return [type]
+     * @return string id
      */
-    static function getLetterId() {
+    static function getLetterId() 
+    {
         $length = 20;
         $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -52,10 +54,11 @@ class AppUtil {
     /**
      * Format icon for extension
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  [type]
-     * @return [type]
+     * @param  extension
+     * @return icon
      */
-    public static function iconExtension($extension) {
+    public static function iconExtension($extension) 
+    {
         $faicon = 'unknown';
         $extensionsAvailables = [
             "zip" => "compressed",

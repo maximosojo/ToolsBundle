@@ -21,7 +21,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class LinkGeneratorPass implements CompilerPassInterface 
 {
-    public function process(ContainerBuilder $container) {
+    public function process(ContainerBuilder $container) 
+    {
         // if($container->getParameter('app.service.link_generator.enable') === false){
         //     return;
         // }

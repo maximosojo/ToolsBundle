@@ -17,8 +17,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Contenido de tab
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class TabContent {
-    
+class TabContent 
+{    
     private $id;
     private $url;
     private $name;
@@ -26,7 +26,8 @@ class TabContent {
     private $options;
     private $active = false;
     
-    public function __construct(array $options = []) {
+    public function __construct(array $options = []) 
+    {
         $this->setOptions($options);
     }
     
@@ -35,7 +36,8 @@ class TabContent {
      * @param array $options
      * @return \Atechnologies\ToolsBundle\Model\Core\Tab\TabContent
      */
-    public function setOptions(array $options = []) {
+    public function setOptions(array $options = []) 
+    {
         $resolver = new OptionsResolver();
         $resolver->setDefaults([
             "add_content_div" => true,
@@ -51,51 +53,112 @@ class TabContent {
      * @param type $name
      * @return type
      */
-    public function getOption($name) {
+    public function getOption($name) 
+    {
         return $this->options[$name];
     }
     
-    public function getUrl() {
+    /**
+     * getUrl
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @return url
+     */
+    public function getUrl() 
+    {
         return $this->url;
     }
 
-    public function getName() {
+    /**
+     * getName
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @return [type]
+     */
+    public function getName() 
+    {
         return $this->name;
     }
 
-    public function getOrder() {
+    /**
+     * getOrder
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @return order
+     */
+    public function getOrder()
+    {
         return $this->order;
     }
 
-    public function setUrl($url) {
+    /**
+     * setUrl
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  url
+     */
+    public function setUrl($url) 
+    {
         $this->url = $url;
         return $this;
     }
 
-    public function setName($name) {
+    /**
+     * setName
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  name
+     */
+    public function setName($name) 
+    {
         $this->name = $name;
         return $this;
     }
 
-    public function setOrder($order) {
+    /**
+     * setOrder
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  order
+     */
+    public function setOrder($order) 
+    {
         $this->order = $order;
         return $this;
     }
-    
-    public function getId() {
+
+    /**
+     * getId
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @return id
+     */
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function setId($id) {
+    /**
+     * setId
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  id
+     */
+    public function setId($id) 
+    {
         $this->id = $id;
         return $this;
     }
     
-    public function getActive() {
+    /**
+     * getActive
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @return active
+     */
+    public function getActive() 
+    {
         return $this->active;
     }
     
-    public function setActive($active) {
+    /**
+     * setActive
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  [type]
+     */
+    public function setActive($active) 
+    {
         $this->active = $active;
         return $this;
     }
@@ -104,7 +167,8 @@ class TabContent {
      * Representacion de la tab en arary
      * @return array
      */
-    public function toArray() {
+    public function toArray() 
+    {
         $data = [
             "id" => $this->id,
             "name" => $this->name,

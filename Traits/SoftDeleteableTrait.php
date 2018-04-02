@@ -18,8 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies> 
  */
-trait SoftDeleteableTrait {
-    
+trait SoftDeleteableTrait 
+{
     /**
      * Fecha de eliminación del objeto
      * @var \DateTime

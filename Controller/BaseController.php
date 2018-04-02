@@ -22,8 +22,8 @@ use FOS\RestBundle\Controller\FOSRestController;
  *
  * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
  */
-class BaseController extends FOSRestController{ 
-
+class BaseController extends FOSRestController
+{
     /**
      * Bandera para permitir una transaccion simultanea
      * @var type 
@@ -48,7 +48,7 @@ class BaseController extends FOSRestController{
      * @throws \Atechnologies\ToolsBundle\Exception\NotImplementedException
      */
     protected function getClass()
-    {        
+    {
         throw new \Exception("Error class not found", 1);
     }
 
@@ -250,7 +250,8 @@ class BaseController extends FOSRestController{
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      * @return [type]
      */
-    protected function flush() {
+    protected function flush() 
+    {
         $em = $this->getDoctrine()->getManager();
         try {
             $em->flush();            
