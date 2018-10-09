@@ -18,42 +18,8 @@ namespace Atechnologies\ToolsBundle\Service\Util;
 class AppUtil 
 {
     /**
-     * Get id format
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @return id
-     */
-    static function getId() 
-    {
-        $length = 20;
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return md5(time() . $randomString);
-    }
-    
-    /**
-     * Get id format letter
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @return string id
-     */
-    static function getLetterId() 
-    {
-        $length = 20;
-        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString.time();
-    }
-
-    /**
      * Format icon for extension
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Carlos Mendoza <inhack20@gmail.com>
      * @param  extension
      * @return icon
      */
