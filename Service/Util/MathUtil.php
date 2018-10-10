@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Máximo Sojo - [maxtoan] package.
+ * This file is part of the Máximo Sojo - maxtoan package.
  * 
  * (c) https://maxtoan.github.io/
  * 
@@ -64,5 +64,28 @@ class MathUtil
     public static function mul($a,$b) 
     {
         return bcmul($a, $b, self::SCALE_DECIMAL);
+    }
+
+    /**
+     * Aplica porcentaje 
+     * @param $a
+     * @param $b
+     * @return Number
+     */
+    public static function percent($a, $b) 
+    {
+        $result = bcmul($a, $b, self::SCALE_DECIMAL);
+        return bcdiv($result, 100, self::SCALE_DECIMAL);
+    }
+
+    /**
+     * Verifica si dos numeros son iguales
+     * @param $a
+     * @param $b
+     * @return Number
+     */
+    public static function isEquals($a, $b) 
+    {
+        return bccomp($a, $b, self::SCALE_DECIMAL) === 0;
     }
 }
