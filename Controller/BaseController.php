@@ -18,12 +18,37 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 
 /**
- * Controller's base app
+ * Controlador base
  *
  * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
  */
 class BaseController extends FOSRestController
 {
+    /**
+     * Tipo error
+     */
+    const TYPE_DANGER = "error";
+    
+    /**
+     * Tipo éxito
+     */
+    const TYPE_SUCCESS = "success";
+    
+    /**
+     * Tipo alerta
+     */
+    const TYPE_WARNING = "warning";
+    
+    /**
+     * Tipo información
+     */
+    const TYPE_INFO = "info";
+
+    /**
+     * Tipo depuración
+     */
+    const TYPE_DEBUG = "debug";
+
     /**
      * Bandera para permitir una transaccion simultanea
      * @var type 
@@ -90,6 +115,7 @@ class BaseController extends FOSRestController
      * @param  string  $message
      * @param  integer $code 
      * @return JsonResponse
+     * @deprecated
      */
     public function jsonResponse($message, $code = 200) 
     {
