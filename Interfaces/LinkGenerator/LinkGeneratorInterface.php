@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Model\LinkGenerator;
+namespace Atechnologies\ToolsBundle\Interfaces\LinkGenerator;
 
 use Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService;
 
@@ -18,7 +18,7 @@ use Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService;
  * 
  * @author Carlos Mendoza<inhack20@gmail.com>
  */
-interface LinkGeneratorItemInterface
+interface LinkGeneratorInterface
 {
     public static function getConfigObjects();
     

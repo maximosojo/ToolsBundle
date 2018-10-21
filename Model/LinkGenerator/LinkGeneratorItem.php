@@ -12,13 +12,14 @@
 namespace Atechnologies\ToolsBundle\Model\LinkGenerator;
 
 use Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService;
+use Atechnologies\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface;
 
 /**
  * Base de item de generador de link
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-abstract class LinkGeneratorItem implements LinkGeneratorItemInterface 
+abstract class LinkGeneratorItem implements LinkGeneratorInterface 
 {
     /**
      *

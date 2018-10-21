@@ -26,7 +26,7 @@ class LinkGeneratorService implements ContainerAwareInterface
 {
     /**
      * Definicion de iconos de objetos
-     * @var \Atechnologies\ToolsBundle\Model\LinkGenerator\LinkGeneratorItemInterface
+     * @var \Atechnologies\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface
      */
     private $linkGeneratorItems;
     private $linkGeneratorItemsForClass = [];
@@ -318,10 +318,10 @@ class LinkGeneratorService implements ContainerAwareInterface
     
     /**
      * Añade un item para generacion
-     * @param \Atechnologies\ToolsBundle\Model\LinkGenerator\LinkGeneratorItemInterface $linkGeneratorItem
+     * @param \Atechnologies\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface $linkGeneratorItem
      * @return \Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService
      */
-    public function addLinkGeneratorItem(\Atechnologies\ToolsBundle\Model\LinkGenerator\LinkGeneratorItemInterface $linkGeneratorItem) 
+    public function addLinkGeneratorItem(\Atechnologies\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface $linkGeneratorItem) 
     {
         $linkGeneratorItem->setLinkGeneratorService($this);
         $this->linkGeneratorItems[] = $linkGeneratorItem;
