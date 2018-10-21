@@ -40,3 +40,9 @@ services:
           - { name: twig.extension}
       calls:
           - [ setLinkGeneratorService, ['@atechnologies.service.link_generator']]
+
+# Secuence generator
+  atechnologies.sequence_generator:
+      class: Atechnologies\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService
+      calls: 
+          - [setContainer, ['@service_container']]
