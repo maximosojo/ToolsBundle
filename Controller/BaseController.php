@@ -170,6 +170,18 @@ class BaseController extends FOSRestController
     }
 
     /**
+     * GenericEvent
+     *  
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  Entity
+     * @return GenericEvent
+     */
+    public function newGenericEvent($entity)
+    {
+        return new \Atechnologies\ToolsBundle\Model\EventDispatcher\GenericEvent($entity);        
+    }
+
+    /**
      * Disparar un evento
      * @param type $eventName
      * @param \Symfony\Component\EventDispatcher\Event $event
