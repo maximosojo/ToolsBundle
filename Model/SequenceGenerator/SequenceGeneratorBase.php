@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Service\SequenceGenerator;
+namespace Atechnologies\ToolsBundle\Model\SequenceGenerator;
 
 use Doctrine\Common\Util\ClassUtils;
 use LogicException;
-use AppBundle\Service\SequenceGenerator\ItemReferenceInterface;
+use Atechnologies\ToolsBundle\Interfaces\SequenceGenerator\ItemReferenceInterface;
 
 /**
  * Base del generador de secuencias
