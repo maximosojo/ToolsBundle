@@ -61,7 +61,6 @@ class BaseService implements ContainerAwareInterface
             }
         } catch (Exception $e) {
             $em->rollBack();
-            $mensaje = "Transacción Fallida, Por Favor Reintente";
         }
     }
 
@@ -70,7 +69,7 @@ class BaseService implements ContainerAwareInterface
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      * @return [type]
      */
-    protected function flush() 
+    protected function flush()
     {
         $em = $this->getDoctrine()->getManager();
         try {
