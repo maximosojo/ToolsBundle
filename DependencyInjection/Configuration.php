@@ -32,12 +32,17 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('atechnologies_paginator', 'array');
+        $rootNode = $treeBuilder->root('atechnologies_tools', 'array');
 
         $rootNode
             ->children()
-                ->scalarNode('format_array')->defaultValue(Paginator::FORMAT_ARRAY_DEFAULT)->end()
-            ->end()
+                ->arrayNode('paginator')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('enable')->defaultFalse()->end()
+                        ->scalarNode('format_array')->defaultValue(Paginator::FORMAT_ARRAY_DEFAULT)->end()
+                    ->end()
+                ->end()
             ;
 
         return $treeBuilder;

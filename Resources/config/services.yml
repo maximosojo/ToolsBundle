@@ -46,3 +46,13 @@ services:
       class: Atechnologies\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService
       calls: 
           - [setContainer, ['@service_container']]
+          
+# Repository Factory
+  atechnologies.doctrine.repository.factory:
+        class: Atechnologies\ToolsBundle\Repository\Factory
+        arguments:
+            - []
+            - '@service_container'
+            - '@atechnologies.doctrine.repository.factory.default'
+  atechnologies.doctrine.repository.factory.default:
+      class: Doctrine\ORM\Repository\DefaultRepositoryFactory

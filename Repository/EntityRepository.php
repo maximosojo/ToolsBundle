@@ -13,7 +13,7 @@ namespace Atechnologies\ToolsBundle\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Atechnologies\PaginatorBundle\Model\Paginator;
+use Atechnologies\ToolsBundle\Model\Paginator\Paginator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -24,9 +24,9 @@ use Pagerfanta\Adapter\ArrayAdapter;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class EntityRepository extends \Doctrine\ORM\EntityRepository
+class EntityRepository extends \Doctrine\ORM\EntityRepository implements ContainerAwareInterface
 {   
-    protected $container;
+    private $container;
 
     /**
      * @param QueryBuilder $queryBuilder
@@ -46,7 +46,6 @@ class EntityRepository extends \Doctrine\ORM\EntityRepository
                         $field = sprintf("%s.%s",  $this->getAlies(),$data);
                         $orx->add($queryBuilder->expr()->like($field, $queryBuilder->expr()->literal("%".$value."%")));
                     }
-
                 }
                 if($orx->count() > 0){
                     $queryBuilder->andWhere($orx);
@@ -105,7 +104,7 @@ class EntityRepository extends \Doctrine\ORM\EntityRepository
      */
     public function getFormatPaginator()
     {
-        return $this->container->getParameter('format_array');
+        return $this->container->getParameter('paginator_format_array');
     }
     
     /**

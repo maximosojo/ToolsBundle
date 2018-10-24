@@ -22,23 +22,21 @@ use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * AtechnologiestoolsExtension
- * 
  * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
  */
 class AtechnologiesToolsExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {	
-    	$processor = new Processor();
+        $processor = new Processor();
         $configuration = new Configuration();
-
+        
         $config = $processor->processConfiguration($configuration, $configs);
-
-        if (isset($config['format_array'])) {
-        	$container->setParameter('format_array', $config['format_array']);
+        if (isset($config['paginator']['format_array'])) {
+            $container->setParameter('paginator_format_array', $config['paginator']['format_array']);
         }
         
-    	$loaderYml = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loaderYml = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loaderYml->load('services.yml');
     }
 }

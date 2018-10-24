@@ -250,7 +250,6 @@ class Paginator extends BasePagerfanta implements ContainerAwareInterface
             $maxPerPage = (int)$request->get("maxPerPage",10);//Elemento inicio
             $this->setCurrentPage($page);
             $this->setMaxPerPage($maxPerPage);
-        }
-        
+        }        
     }
 }
