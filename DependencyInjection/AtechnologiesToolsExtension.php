@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Definition\Processor;
 
 /**
  * AtechnologiestoolsExtension
@@ -25,7 +26,16 @@ use Symfony\Component\Config\FileLocator;
 class AtechnologiesToolsExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
-    {
+    {	
+    	$processor = new Processor();
+        $configuration = new Configuration();
+
+        $config = $processor->processConfiguration($configuration, $configs);
+
+        if (isset($config['format_array'])) {
+        	$container->setParameter('format_array', $config['format_array']);
+        }
+        
     	$loaderYml = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loaderYml->load('services.yml');
     }
