@@ -1,55 +1,22 @@
 AtechnologiesToolsBundle
 ========================
 
-## Requisitos Previos
+AtechnologiesToolsBundle desarrollado para Symfony 2.+, 3.+, proporciona un marco flexible de utilizades para la gestión de proyectos que apunta a manejar tareas comunes como repositorios, paginadores, utils en general.
 
-Esta versión del paquete requiere Symfony 2.1+.
+[![Total Downloads](https://img.shields.io/badge/Downloads-165-brightgreen.svg)](https://packagist.org/packages/atechnologies/tools-bundle) 
 
 ## Instalación
-
-La instalación es rápida y sencilla, a sólo 2 pasos:
-
-1. Descarga AtechnologiesToolsBundle via composer
-2. Habilitar el paquete
-
-### Paso 1: Descargar usando composer
-
-```js
-{
-    "require": {
-        "atechnologies/tools-bundle": "dev-master"
-    }
-}
-```
-
-Puede realizarlo directamente a travez del siguiente comando:
 
 ``` bash
 $ composer require atechnologies/tools-bundle
 ```
+Las instrucciones de instalación y confirguración se encuentran en la [Documentación](#documentation).
 
-Composer instalará el paquete en el directorio `vendor / atechnologies` de su proyecto.
+## Documentación
 
-### Paso 2: Habilitar bundle
+1. [Inslatación](Resources/doc/install.md)
 
-Habilitar bundle en el kernel:
+## Licencia
 
-``` php
-<?php
-// app/AppKernel.php
+Este paquete está bajo la licencia MIT. Ver la licencia completa. [LICENSE](LICENSE)
 
-public function registerBundles()
-{
-    $bundles = array(
-        // ...
-        new Atechnologies\ToolsBundle\AtechnologiesToolsBundle(),
-    );
-}
-```
-
-### Base app
-
-```html
-<!-- Atechnologies -->
-<script src="{{ asset('bundles/atechnologiestools/js/app.js') }}"></script>
-```
