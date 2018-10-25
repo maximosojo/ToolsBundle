@@ -15,6 +15,7 @@ Las instrucciones de instalación y confirguración se encuentran en la [Documen
 ## Documentación
 
 1. [Inslatación](Resources/doc/install.md)
+2. [Componente paginador](Resources/doc/paginator.md)
 
 ## Licencia
 
