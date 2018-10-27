@@ -50,16 +50,6 @@ class BaseController extends FOSRestController
     const TYPE_DEBUG = "debug";
 
     /**
-     * Registro de mensaje flash a usuario
-     * @param string $action TYPE_*
-     * @param string $value Mensaje
-     */
-    protected function setFlash($typeFlash, $value,$parameters = array())
-    {
-        $this->container->get('session')->getFlashBag()->add($typeFlash,$this->trans($value,$parameters));        
-    }
-
-    /**
      * Bandera para permitir una transaccion simultanea
      * @var type 
      */
@@ -72,9 +62,11 @@ class BaseController extends FOSRestController
     protected function getRepository($repository = null)
     {
         $em = $this->getDoctrine()->getManager();
+        
         if (!$repository) {
             $repository = $this->getClass();
         }
+
         return $em->getRepository($repository);
     }
     
@@ -96,6 +88,7 @@ class BaseController extends FOSRestController
         if (!$class) {
             $class = $this->getClass();
         }
+
         return new $class();
     }
     
@@ -111,6 +104,7 @@ class BaseController extends FOSRestController
         if(empty($id)){
             throw $this->createNotFoundException("The identifier can not be empty.");
         }
+
         $resource = $this->getRepository()->find($id);
         if(!$resource){
             throw $this->createNotFoundException();
@@ -138,6 +132,7 @@ class BaseController extends FOSRestController
                 'result' => $message
             ];
         }
+        
         return new JsonResponse($result, $code);
     }
 
