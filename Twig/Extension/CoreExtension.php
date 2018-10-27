@@ -11,6 +11,8 @@
 
 namespace Atechnologies\ToolsBundle\Twig\Extension;
 
+use Atechnologies\ToolsBundle\Service\Util\StringUtil;
+
 /**
  * Extension generic applications
  * 
@@ -104,7 +106,7 @@ class CoreExtension extends \Twig_Extension
      */
     function myNumberFormat($value, $decimals = 2) 
     {
-        return number_format($value, $decimals, ',', '.');
+        return StringUtil::numberFormat($value, $decimals, ',', '.');
     }
 
     /**
