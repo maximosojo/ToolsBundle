@@ -50,6 +50,16 @@ class BaseController extends FOSRestController
     const TYPE_DEBUG = "debug";
 
     /**
+     * Registro de mensaje flash a usuario
+     * @param string $action TYPE_*
+     * @param string $value Mensaje
+     */
+    protected function setFlash($typeFlash, $value,$parameters = array())
+    {
+        $this->container->get('session')->getFlashBag()->add($typeFlash,$this->trans($value,$parameters));        
+    }
+
+    /**
      * Bandera para permitir una transaccion simultanea
      * @var type 
      */
