@@ -16,9 +16,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * EnableableTrait
  *
+ * @author Matías Jiménez matei249@gmail.com <matjimdi at atechnologies>
  * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
  */
-
 trait EnableableTrait 
 {   
     /**
@@ -38,6 +38,16 @@ trait EnableableTrait
     }
     
     /**
+     * Get enabled
+     *
+     * @return boolean
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
      * Set Enabled
      * @param boolean $enabled
      * @return $this
@@ -48,15 +58,4 @@ trait EnableableTrait
         
         return $this;
     }
-
-
-    /**
-     * Get enabled
-     *
-     * @return boolean
-     */
-    public function getEnabled()
-    {
-        return $this->enabled;
-    }    
 }
