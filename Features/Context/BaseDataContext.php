@@ -13,6 +13,7 @@ namespace Atechnologies\ToolsBundle\Features\Context;
 
 use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\RawMinkContext;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Exception;
 
 /**
@@ -35,6 +36,29 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
     {
         $pass = substr(md5($username), 0, 8) . '.5$';
         return $pass;
+    }
+
+    /**
+     * Se dirige a la pagina de inicio de sesion
+     * @Given /^I am on login page$/
+     */
+    public function iAmOnLoginPage()
+    {
+        $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
+    }
+
+    /**
+     * Se dirige a una ruta de symfony
+     * Example: Given I am on "withdraw_config_smart" page
+     * @Given I am on ":route" page
+     */
+    public function iAmOnPage($route)
+    {
+        $parameters = [];
+        $this->getSession()->visit($this->generatePageUrl($route,$parameters));
+        if($this->isOpenBrowser()){
+            $this->getSession()->wait(2000);
+        }
     }
 
     /**
@@ -98,5 +122,54 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
         if ($flush) {
             $em->flush();
         }
+    }
+
+    /**
+     * Generate page url.
+     * This method uses simple convention where page argument is prefixed
+     * with "sylius_" and used as route name passed to router generate method.
+     *
+     * @param string $page
+     * @param array  $parameters
+     *
+     * @return string
+     */
+    protected function generatePageUrl($route, array $parameters = array())
+    {
+        $path = $this->generateUrl($route, $parameters);
+
+        if ('Selenium2Driver' === strstr(get_class($this->getSession()->getDriver()), 'Selenium2Driver')) {
+            return sprintf('%s%s', $this->getMinkParameter('base_url'), $path);
+        }
+        
+        return $path;
+    }
+
+    /**
+     * Generates a URL from the given parameters.
+     *
+     * @param string $route         The name of the route
+     * @param mixed  $parameters    An array of parameters
+     * @param int    $referenceType The type of reference (one of the constants in UrlGeneratorInterface)
+     *
+     * @return string The generated URL
+     *
+     * @see UrlGeneratorInterface
+     */
+    protected function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH) 
+    {
+        return $this->container->get('router')->generate($route, $parameters, $referenceType);
+    }
+    
+    /**
+     * Traduce un indice
+     * @param type $id
+     * @param array $parameters
+     * @param type $domain
+     * @return type
+     */
+    protected function trans($id,array $parameters = array(), $domain = '')
+    {
+        return $this->container->get('translator')->trans($id, $parameters, $domain);
     }
 }
