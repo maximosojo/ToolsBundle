@@ -13,6 +13,7 @@ namespace Atechnologies\ToolsBundle\Features\Context;
 
 use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\RawMinkContext;
+use Behat\Behat\Tester\Exception\PendingException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Exception;
 
@@ -49,12 +50,16 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
 
     /**
      * Se dirige a una ruta de symfony
-     * Example: Given I am on "withdraw_config_smart" page
-     * @Given I am on ":route" page
+     * Example: Given I am on "app_route_test" page
+     * @Given I am on :route page
+     * @Given I am on :route page with :parameters
      */
-    public function iAmOnPage($route)
+    public function iAmOnPage($route,$parameters = [])
     {
-        $parameters = [];
+        if ($parameters) {
+            $parameters = (array)json_decode($parameters);
+        }
+        
         $this->getSession()->visit($this->generatePageUrl($route,$parameters));
         if($this->isOpenBrowser()){
             $this->getSession()->wait(2000);
