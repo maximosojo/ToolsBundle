@@ -24,6 +24,8 @@ use FOS\RestBundle\Controller\FOSRestController;
  */
 class BaseController extends FOSRestController
 {
+    use ControllerTrait;
+
     /**
      * Tipo error
      */
@@ -48,7 +50,7 @@ class BaseController extends FOSRestController
      * Tipo depuración
      */
     const TYPE_DEBUG = "debug";
-
+    
     /**
      * Bandera para permitir una transaccion simultanea
      * @var type 
@@ -56,11 +58,6 @@ class BaseController extends FOSRestController
     private $isBeginTransaction = false;
 
     /**
-     * $jsonResponse
-     */
-    private $jsonResponse;
-
-	/**
      * Retorna el repositorio principal
      * @return \Atechnologies\ToolsBundle\Model\Base\EntityRepository
      */
@@ -133,19 +130,6 @@ class BaseController extends FOSRestController
         ];
         
         return new JsonResponse($result, $code);
-    }
-
-    /**
-     * Traducción
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  [type]
-     * @param  array
-     * @param  string
-     * @return [type]
-     */
-    protected function trans($id,array $parameters = array(), $domain = 'app')
-    {
-        return $this->container->get('translator')->trans($id, $parameters, $domain);
     }
 
     /**
@@ -327,45 +311,5 @@ class BaseController extends FOSRestController
         }
 
         return $toExpand;
-    }
-
-    /**
-     * Json reponse
-     * @param type $data
-     * @param type $status
-     * @param type $headers
-     * @return \Atechnologies\ToolsBundle\Custom\HttpFoundation\MyJsonResponse
-     */
-    protected function myJsonResponse($data = null, $status = 200, $headers = array()) 
-    {
-        if (!$this->jsonResponse) {
-            $this->jsonResponse = new \Atechnologies\ToolsBundle\Custom\HttpFoundation\MyJsonResponse($data,$status,$headers);
-        }
-
-        return $this->jsonResponse;
-    }
-
-    /**
-     * Set flash in json reponse
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     */
-    public function setFlashJson($typeFlash, $value, $parameters = array(), $status = 200)
-    {
-        $response = $this->myJsonResponse(null,$status);
-        $response->setFlash($typeFlash, $value, $parameters);
-        return $response;
-    }
-
-    /**
-     * Json redirect
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  [type]
-     * @return [type]
-     */
-    public function setJsonRedirect($url)
-    {
-        $response = $this->myJsonResponse();
-        $response->setRedirect($url);
-        return $response;
     }
 }
