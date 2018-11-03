@@ -18,7 +18,6 @@ namespace Atechnologies\ToolsBundle\Twig\Extension;
  */
 class TabsExtension extends \Twig_Extension 
 {
-
 	private $container;
     
     /**

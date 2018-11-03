@@ -60,25 +60,25 @@ class Paginator extends BasePagerfanta implements ContainerAwareInterface
     public function formatToArrayDefault($route = null,array $parameters = array()) 
     {
         $links = array(
-            'self'  => array('href' => ''),
+            'self' => array('href' => ''),
             'first' => array('href' => ''),
-            'last'  => array('href' => ''),
-            'next'  => array('href' => ''),
-            'previous'  => array('href' => ''),
+            'last' => array('href' => ''),
+            'next' => array('href' => ''),
+            'previous' => array('href' => ''),
         );
+
         $paginator = array(
-                        'getNbResults' => $this->getNbResults(),
-                        'getCurrentPage' => $this->getCurrentPage(),
-                        'getNbPages' => $this->getNbPages(),
-                        'getMaxPerPage' => $this->getMaxPerPage(),
-                    );
+            'getNbResults' => $this->getNbResults(),
+            'getCurrentPage' => $this->getCurrentPage(),
+            'getNbPages' => $this->getNbPages(),
+            'getMaxPerPage' => $this->getMaxPerPage(),
+        );
         
-        $pageResult = $this->getCurrentPageResults();
-        if(is_array($pageResult)){
-            $results = $pageResult;
-        }else{
+        $results = $this->getCurrentPageResults();
+        if(!is_array($results)){
             $results = $this->getCurrentPageResults()->getArrayCopy();
         }
+
         return array(
             '_links' => $this->getLinks($route,$parameters),
             '_embedded' => array(
@@ -97,25 +97,25 @@ class Paginator extends BasePagerfanta implements ContainerAwareInterface
     public function formatToArrayStandard($route = null,array $parameters = array())
     {
         $links = array(
-            'self'  => array('href' => ''),
+            'self' => array('href' => ''),
             'first' => array('href' => ''),
-            'last'  => array('href' => ''),
-            'next'  => array('href' => ''),
+            'last' => array('href' => ''),
+            'next' => array('href' => ''),
             'previous'  => array('href' => ''),
         );
+
         $paginator = array(
-                        'currentPage' => $this->getCurrentPage(),
-                        'maxPerPage' => $this->getMaxPerPage(),
-                        'totalPages' => $this->getNbPages(),
-                        'totalResults' => $this->getNbResults(),
-                    );
+            'currentPage' => $this->getCurrentPage(),
+            'maxPerPage' => $this->getMaxPerPage(),
+            'totalPages' => $this->getNbPages(),
+            'totalResults' => $this->getNbResults(),
+        );
         
-        $pageResult = $this->getCurrentPageResults();
-        if(is_array($pageResult)){
-            $results = $pageResult;
-        }else{
+        $results = $this->getCurrentPageResults();
+        if(!is_array($results)){
             $results = $this->getCurrentPageResults()->getArrayCopy();
         }
+
         return array(
             'links' => $this->getLinks($route,$parameters),
             'meta' => $paginator,
@@ -166,7 +166,7 @@ class Paginator extends BasePagerfanta implements ContainerAwareInterface
      * @param array $parameters
      * @return type
      */
-    protected function  generateUrl($route,array $parameters)
+    protected function generateUrl($route,array $parameters)
     {
         return $this->container->get('router')->generate($route, $parameters, Router::ABSOLUTE_URL);
     }

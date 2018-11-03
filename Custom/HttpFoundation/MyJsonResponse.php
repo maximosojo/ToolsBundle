@@ -15,11 +15,21 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * MyJsonResponse custom
+ * 
  * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
  */
 class MyJsonResponse extends JsonResponse 
-{
+{   
+    /**
+     * $originalData
+     * @var String
+     */
     protected $originalData;
+
+    /**
+     * $extraData
+     * @var String
+     */
     protected $extraData;
     
     public function __construct($data = null, $status = 200, $headers = array()) 
@@ -45,25 +55,27 @@ class MyJsonResponse extends JsonResponse
     /**
      * Mensaje flash
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  [type]
-     * @param  [type]
+     * @param  String
+     * @param  String
      */
     public function setFlash($type, $message) 
     {
         if(!isset($this->extraData["flashes"])){
             $this->extraData["flashes"] = [];
         }
+
         $this->extraData["flashes"][] = [
             "type" => $type,
             "message" => $message,
         ];
+
         $this->setData($this->originalData);
     }
     
     /**
      * Redirección
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  [type]
+     * @param  String
      */
     public function setRedirect($url) 
     {
@@ -84,7 +96,7 @@ class MyJsonResponse extends JsonResponse
     /**
      * Abrir popup
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  [type]
+     * @param  String
      * @param  array
      */
     public function setOpenPopUp($url,array $parameters = []) 

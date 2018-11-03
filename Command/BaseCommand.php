@@ -22,7 +22,7 @@ use Symfony\Component\Lock\Store\SemaphoreStore;
  * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
  */
 abstract class BaseCommand extends \Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand 
-{    
+{
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
      */
@@ -52,8 +52,9 @@ abstract class BaseCommand extends \Symfony\Bundle\FrameworkBundle\Command\Conta
     {
         $levelLogger = array(
             LogLevel::NOTICE => OutputInterface::VERBOSITY_NORMAL,
-            LogLevel::INFO => OutputInterface::VERBOSITY_NORMAL,
+            LogLevel::INFO => OutputInterface::VERBOSITY_NORMAL
         );
+        
         return new ConsoleLogger($this->io, $levelLogger);
     }
 

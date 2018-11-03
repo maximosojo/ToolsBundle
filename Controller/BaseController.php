@@ -128,15 +128,9 @@ class BaseController extends FOSRestController
      */
     public function jsonResponse($message, $code = 200) 
     {
-        if ($code == 200) {
-            $result = [
-                'result' => $message
-            ];
-        }else{
-            $result = [
-                'result' => $message
-            ];
-        }
+        $result = [
+            'result' => $message
+        ];
         
         return new JsonResponse($result, $code);
     }
@@ -194,20 +188,24 @@ class BaseController extends FOSRestController
         if($this->isBeginTransaction === true){
             throw new \LogicException("No puede iniciar la transaccion dos veces. Realize el commit de la anterior");
         }
+
         $this->getDoctrine()->getManager()->getConnection()->beginTransaction();
+
         $this->isBeginTransaction = true;
     }
 
     /**
      * Realiza el commit de una transaccion
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return Doctrine
      */
     protected function managerCommit()
     {
         if($this->isBeginTransaction === false){
             throw new \LogicException("No hay ninguna transaccion iniciada, primero debe iniciarla.");
         }
-        $em = $this->getDoctrine()->getManager();
-        
+
+        $em = $this->getDoctrine()->getManager();        
         $em->flush();
         $em->getConnection()->commit();
         
@@ -216,6 +214,8 @@ class BaseController extends FOSRestController
 
     /**
      * Roll back si falla la transaccion
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return Doctrine
      */
     protected function managerRollback()
     {
@@ -228,9 +228,11 @@ class BaseController extends FOSRestController
     }
     
     /**
-     * Save object
-     * @param type $entity
-     * @param type $andFlush
+     * Guarda entidad
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  Entity
+     * @param  boolean
+     * @return Entity
      */
     protected function save($entity, $andFlush = true)
     {
@@ -242,16 +244,15 @@ class BaseController extends FOSRestController
             }
         } catch (Exception $e) {
             $em->rollBack();
-            $mensaje = "Transacción fallida, por favor reintente";
         }
     }
 
     /**
      * Remove object
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  [type]
+     * @param  Entity
      * @param  boolean
-     * @return [type]
+     * @return Entity
      */
     protected function remove($entity = null, $andFlush = true) 
     {
