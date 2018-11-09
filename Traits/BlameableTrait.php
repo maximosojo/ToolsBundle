@@ -19,7 +19,7 @@ use AppBundle\Entity\User;
  * Add Blameable behavior to an entity.
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-trait UserEventTrait 
+trait BlameableTrait 
 {
     /**
      * @var User
