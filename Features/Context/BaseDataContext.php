@@ -67,6 +67,23 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
     }
 
     /**
+     * Esperar que un elemento desaparezca de la pagina
+     * Example: And I wait for "div.loading" element to disappear
+     * @Then I wait for :selector element to disappear
+     */
+    public function iWaitForElementToDisappear($selector)
+    {
+        $this->spin(function($context) use ($selector) {
+            try {
+                $context->findElement($selector);
+                return false;
+            } catch (Exception $ex) {
+                return true;
+            }
+       });
+    }
+
+    /**
      * Espera hasta que devuelva true la funcion pasada
      * Based on Behat's own example
      * @see http://docs.behat.org/en/v2.5/cookbook/using_spin_functions.html#adding-a-timeout
