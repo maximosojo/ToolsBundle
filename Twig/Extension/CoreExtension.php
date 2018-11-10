@@ -20,11 +20,8 @@ use Atechnologies\ToolsBundle\Service\Util\StringUtil;
  */
 class CoreExtension extends \Twig_Extension 
 {    
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
+    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    
     /**
      * {@inheritdoc}
      */
@@ -141,16 +138,6 @@ class CoreExtension extends \Twig_Extension
             $dateFormated = $myFormatDate->format($format);
         }
         return $dateFormated;
-    }
-
-    /**
-     * This is a cool function
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  \Symfony\Component\DependencyInjection\ContainerInterface|null
-     */
-    public function setContainer(\Symfony\Component\DependencyInjection\ContainerInterface $container = null) 
-    {
-        $this->container = $container;
     }
 
     /**

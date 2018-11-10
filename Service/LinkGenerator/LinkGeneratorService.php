@@ -24,18 +24,14 @@ use Exception;
  */
 class LinkGeneratorService implements ContainerAwareInterface
 {
+    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    
     /**
      * Definicion de iconos de objetos
      * @var \Atechnologies\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface
      */
     private $linkGeneratorItems;
     private $linkGeneratorItemsForClass = [];
-    
-    /**
-     * Contenedor de dependencias
-     * @var ContainerInterface
-     */
-    protected $container;
     
     /**
      * Tipo de link por defecto o categoria (Se usa para crear links diferentes del mismo objeto)
@@ -326,15 +322,5 @@ class LinkGeneratorService implements ContainerAwareInterface
         $linkGeneratorItem->setLinkGeneratorService($this);
         $this->linkGeneratorItems[] = $linkGeneratorItem;
         return $this;
-    }
-
-    /**
-     * setContainer
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  ContainerInterface|null
-     */
-    public function setContainer(ContainerInterface $container = null) 
-    {
-        $this->container = $container;
     }
 }

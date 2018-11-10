@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
  */
 class BaseService implements ContainerAwareInterface 
 {
-    private $container;
+    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
     
     /**
      * Base de archivos de comandos de impresoras
@@ -114,16 +114,6 @@ class BaseService implements ContainerAwareInterface
         }
 
         return $user;
-    }
-    
-    /**
-     * Carga de container
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  ContainerInterface|null
-     */
-    public function setContainer(ContainerInterface $container = null) 
-    {
-        $this->container = $container;
     }
     
     /**

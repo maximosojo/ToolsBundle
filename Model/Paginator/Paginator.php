@@ -21,9 +21,24 @@ use Symfony\Component\Routing\Router;
  */
 class Paginator extends BasePagerfanta implements ContainerAwareInterface
 {
+    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    
+    /**
+     * $route
+     * @var $route
+     */
     protected $route = null;
-    protected $container;
+    
+    /**
+     * $defaultFormat
+     * @var $defaultFormat
+     */
     protected $defaultFormat = self::FORMAT_ARRAY_DEFAULT;
+    
+    /**
+     * $draw
+     * @var integer
+     */
     protected $draw = 1;
 
     /**
@@ -169,15 +184,6 @@ class Paginator extends BasePagerfanta implements ContainerAwareInterface
     protected function generateUrl($route,array $parameters)
     {
         return $this->container->get('router')->generate($route, $parameters, Router::ABSOLUTE_URL);
-    }
-    
-    /**
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  ContainerInterface|null
-     */
-    public function setContainer(ContainerInterface $container = null) 
-    {
-        $this->container = $container;
     }
     
     /**

@@ -18,8 +18,8 @@ namespace Atechnologies\ToolsBundle\Twig\Extension;
  */
 class TabsExtension extends \Twig_Extension 
 {
-	private $container;
-    
+    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+	
     /**
      * getFunctions
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
@@ -45,16 +45,6 @@ class TabsExtension extends \Twig_Extension
         return $this->container->get('templating')->render("AtechnologiesToolsBundle:tab:tabs.html.twig", 
             $parameters
         );
-    }
-
-    /**
-     * Set container
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  \Symfony\Component\DependencyInjection\ContainerInterface|null
-     */
-    public function setContainer(\Symfony\Component\DependencyInjection\ContainerInterface $container = null)
-    {
-        $this->container = $container;
     }
 
     /**

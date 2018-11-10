@@ -26,8 +26,8 @@ use Pagerfanta\Adapter\ArrayAdapter;
  */
 class EntityRepository extends \Doctrine\ORM\EntityRepository implements ContainerAwareInterface
 {   
-    private $container;
-
+    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    
     /**
      * @param QueryBuilder $queryBuilder
      * @return Paginator
@@ -85,16 +85,6 @@ class EntityRepository extends \Doctrine\ORM\EntityRepository implements Contain
     public function findAllPaginated()
     {
         return $this->getPaginator($this->getQueryBuilder());
-    }
-
-    /**
-     * Set container
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  ContainerInterface|null
-     */
-    public function setContainer(ContainerInterface $container = null) 
-    {
-        $this->container = $container;
     }
     
     /**

@@ -26,7 +26,7 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
 {
     use \Behat\Symfony2Extension\Context\KernelDictionary;
 
-    use \Symfony\Component\DependencyInjection\ContainerAwareTrait;
+    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 
     /**
      * Genera un password estandar en base a un nombre de usuario

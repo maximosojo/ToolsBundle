@@ -22,18 +22,7 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 abstract class BaseConstraintValidator extends ConstraintValidator implements ContainerAwareInterface
 {
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
-    
-    /**
-     * @param ContainerInterface $container
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
+    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
     
     /**
      * Agrega un error
