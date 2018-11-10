@@ -1,0 +1,5 @@
+paginator:
+        meta:
+            currentPage: 'Страница'
+            totalPages: 'от'
+            totalResults: 'Общо резултати'

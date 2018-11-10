@@ -1,0 +1,5 @@
+paginator:
+        meta:
+            currentPage: 'Página'
+            totalPages: 'de'
+            totalResults: 'Resultados Totais'
