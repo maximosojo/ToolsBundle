@@ -146,4 +146,14 @@ class BaseController extends FOSRestController
 
         return $toExpand;
     }
+
+    /**
+     * Returns true if the request is a JsonHttpRequest.
+     * @return boolean
+     */
+    protected function isJsonHttpRequest()
+    {
+        $request = $this->container->get('request_stack')->getCurrentRequest();
+        return 'json' == $request->getRequestFormat();
+    }
 }
