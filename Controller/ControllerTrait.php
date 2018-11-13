@@ -33,7 +33,7 @@ trait ControllerTrait
     protected function myJsonResponse($data = null, $status = 200, $headers = array()) 
     {
         if (!$this->jsonResponse) {
-            $this->jsonResponse = new \Atechnologies\ToolsBundle\Custom\HttpFoundation\MyJsonResponse($data,$status,$headers);
+            $this->jsonResponse = new \Atechnologies\ToolsBundle\Custom\HttpFoundation\MyJsonResponse($data, $status, $headers);
         }
 
         return $this->jsonResponse;
@@ -46,7 +46,7 @@ trait ControllerTrait
     public function setFlashJson($typeFlash, $value, $parameters = array(), $status = 200)
     {
         $response = $this->myJsonResponse(null,$status);
-        $response->setFlash($typeFlash, $value, $parameters);
+        $response->setFlash($typeFlash, $this->trans($value, $parameters, "flashes"));
 
         return $response;
     }

@@ -49,6 +49,7 @@ class MyJsonResponse extends JsonResponse
         if(count($this->extraData) > 0){
             $data["_server"] = $this->extraData;
         }
+
         return parent::setData($data);
     }
     
@@ -105,6 +106,7 @@ class MyJsonResponse extends JsonResponse
             "url" => $url,
             "parameters" => $parameters,
         ];
+        
         $this->setData($this->originalData);
     }
 }
