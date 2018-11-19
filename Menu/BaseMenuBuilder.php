@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Abstract menu builder.
@@ -35,13 +36,6 @@ abstract class BaseMenuBuilder implements \Symfony\Component\DependencyInjection
     protected $factory;
 
     /**
-     * Request.
-     *
-     * @var Request
-     */
-    protected $request;
-
-    /**
      * Constructor.
      *
      * @param FactoryInterface         $factory
@@ -51,16 +45,6 @@ abstract class BaseMenuBuilder implements \Symfony\Component\DependencyInjection
     public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;        
-    }
-
-    /**
-     * Sets the request the service
-     *
-     * @param Request $request
-     */
-    public function setRequest(Request $request = null)
-    {
-        $this->request = $request;
     }
 
     /**
@@ -74,5 +58,44 @@ abstract class BaseMenuBuilder implements \Symfony\Component\DependencyInjection
     protected function trans($id,array $parameters = array(), $domain = 'messages')
     {
         return $this->container->get('translator')->trans($id, $parameters, $domain);
-    }    
+    }
+
+    /**
+     * Generates a URL from the given parameters.
+     *
+     * @param string $route         The name of the route
+     * @param array  $parameters    An array of parameters
+     * @param int    $referenceType The type of reference (one of the constants in UrlGeneratorInterface)
+     *
+     * @return string The generated URL
+     *
+     * @see UrlGeneratorInterface
+     *
+     * @final since version 3.4
+     */
+    protected function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
+    {
+        return $this->container->get('router')->generate($route, $parameters, $referenceType);
+    }
+
+    /**
+     * Checks if the attributes are granted against the current authentication token and optionally supplied subject.
+     *
+     * @param mixed $attributes The attributes
+     * @param mixed $subject    The subject
+     *
+     * @return bool
+     *
+     * @throws \LogicException
+     *
+     * @final since version 3.4
+     */
+    protected function isGranted($attributes, $subject = null) 
+    {
+        if (!$this->container->has('security.authorization_checker')) {
+            throw new \LogicException('The SecurityBundle is not registered in your application. Try running "composer require symfony/security-bundle".');
+        }
+
+        return $this->container->get('security.authorization_checker')->isGranted($attributes, $subject);
+    }
 }
