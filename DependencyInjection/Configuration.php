@@ -43,6 +43,17 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('format_array')->defaultValue(Paginator::FORMAT_ARRAY_DEFAULT)->end()
                     ->end()
                 ->end()
+                ->arrayNode('table_prefix')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('name_lowercase')->defaultFalse()->end()
+                        ->booleanNode('enable')->defaultFalse()->end()
+                        ->scalarNode('prefix')->defaultValue("prefix")->end()
+                        ->scalarNode('prefix_separator')->defaultValue('_')->cannotBeEmpty()->end()
+                        ->scalarNode('on_delete')->defaultNull()->end()
+                        ->scalarNode('listerner_class')->defaultValue('Atechnologies\ToolsBundle\EventListener\TablePrefixListerner')->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
             ;
 
         return $treeBuilder;

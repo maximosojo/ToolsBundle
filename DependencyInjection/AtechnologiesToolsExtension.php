@@ -38,5 +38,19 @@ class AtechnologiesToolsExtension extends Extension
         
         $loaderYml = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loaderYml->load('services.yml');
+
+        if($config['table_prefix']['enable'] === true )
+        {
+            $tablePrefix = $config['table_prefix']['prefix'].$config['table_prefix']['prefix_separator'];
+            $tableNameLowercase = $config['table_prefix']['name_lowercase'];
+            $tablePrefixListerner = new Definition($config['table_prefix']['listerner_class']);
+            $tablePrefixListerner
+                    ->addArgument($tablePrefix)
+                    ->addArgument($tableNameLowercase)
+                    ->addTag('doctrine.event_subscriber')
+                    ;
+            $tablePrefixListerner->addMethodCall("setConfig",array($config['table_prefix']));
+            $container->setDefinition('atechnologies_tools.table_prefix_subscriber', $tablePrefixListerner);
+        }
     }
 }
