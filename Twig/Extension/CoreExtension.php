@@ -28,7 +28,8 @@ class CoreExtension extends \Twig_Extension
     public function getFunctions() 
     {
        return array(
-            new \Twig_SimpleFunction('breadcrumb', array($this, 'breadcrumb'), array('is_safe' => array('html')))
+            new \Twig_SimpleFunction('breadcrumb', array($this, 'breadcrumb'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('str_padleft', array($this, 'strpadleft'))
         );
     }
     
@@ -45,6 +46,19 @@ class CoreExtension extends \Twig_Extension
             new \Twig_SimpleFilter('myFormatDateTime', array($this, 'myFormatDateTime')),
             new \Twig_SimpleFilter('myFormatDate', array($this, 'myFormatDate'))
         );
+    }
+
+    /**
+     * Add the str_pad left php function
+     *
+     * @param  string $string
+     * @param  int $pad_lenght
+     * @param  string $pad_string
+     * @return mixed
+     */
+    public function strpadleft($string, $pad_lenght, $pad_string = " ")
+    {
+        return str_pad($string, $pad_lenght, $pad_string, STR_PAD_LEFT);
     }
     
     /**
