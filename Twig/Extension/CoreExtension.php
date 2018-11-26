@@ -134,6 +134,7 @@ class CoreExtension extends \Twig_Extension
         if ($myFormatDate instanceof \DateTime) {
             $dateFormated = $myFormatDate->format($format);
         }
+
         return $dateFormated;
     }
 
@@ -151,6 +152,7 @@ class CoreExtension extends \Twig_Extension
         if ($myFormatDate instanceof \DateTime) {
             $dateFormated = $myFormatDate->format($format);
         }
+        
         return $dateFormated;
     }
 

@@ -71,6 +71,7 @@ class GenericEvent extends GenericEventBase
         if($this->hasArgument($key)){
             return $this->arguments[$key];
         }
+        
         return $default;
     }
 }

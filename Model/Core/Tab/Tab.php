@@ -19,7 +19,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class Tab 
 {
-
     private $id;
     private $name;
     private $icon;    
@@ -48,6 +47,7 @@ class Tab
         $resolver->setDefaults([
             "active_first" => true,
         ]);
+
         $this->options = $resolver->resolve($options);
         
         return $this;
@@ -91,6 +91,7 @@ class Tab
     public function setName($name) 
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -102,6 +103,7 @@ class Tab
     public function setIcon($icon) 
     {
         $this->icon = $icon;
+
         return $this;
     }
     
@@ -127,11 +129,14 @@ class Tab
         if(isset($this->tabsContent[$id])){
             throw new \RuntimeException(sprintf("The tab content name '%s' is already added.",$tabContent->getName()));
         }
+        
         if($this->options["active_first"] && count($this->tabsContent) == 0){
             $tabContent->setActive(true);
         }
+
         $this->tabsContent[$id] = $tabContent;
         $tabContent->setId($id);
+
         return $this;
     }
     
@@ -150,6 +155,7 @@ class Tab
         foreach ($this->tabsContent as $tabContent) {
             $data["tabsContent"][] = $tabContent->toArray();
         }
+        
         return $data;
     }
 }

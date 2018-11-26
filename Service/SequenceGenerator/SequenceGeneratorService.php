@@ -123,6 +123,7 @@ class SequenceGeneratorService extends \Atechnologies\ToolsBundle\Service\BaseSe
                 $maskOffSetSubtract = preg_replace('/^\-/', '', $reg[2]);
             }
         }
+        
         if (!empty($reg[3])){
             if (preg_match('/^\+/', $reg[3])){
                 $maskOffSetAdd = preg_replace('/^\+/', '', $reg[3]);
@@ -131,6 +132,7 @@ class SequenceGeneratorService extends \Atechnologies\ToolsBundle\Service\BaseSe
                 $maskOffSetSubtract = preg_replace('/^\-/', '', $reg[3]);
             }
         }
+
         //Se remplaza el valor de las mascaras adicionales para obtener la longitud correcta
         foreach ($this->getAdditionalMasks() as $key => $value) {
             if(isset($parameters[$value])){
@@ -142,10 +144,12 @@ class SequenceGeneratorService extends \Atechnologies\ToolsBundle\Service\BaseSe
         $sqlstring = 'SUBSTRING(' .$field . ', ' . ($posnumstart) . ', ' . strlen($maskcounter) . ')';
         $maskLike = trim($mask);
         $maskLike = str_replace("%", "_", $maskLike);
+        
         // Replace protected special codes with matching number of _ as wild card caracter
         foreach ($this->getDefaultMasks() as $key => $value) {
             $maskLike = preg_replace('/\{'.$key.'\}/i', str_pad('',strlen($key),'_'), $maskLike);
         }
+        
         foreach ($this->getAdditionalMasks() as $key => $value) {
             if(isset($parameters[$value])){
                 $maskLike = preg_replace('/\{'.$value.'\}/i',$parameters[$value], $maskLike);

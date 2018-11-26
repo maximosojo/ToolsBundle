@@ -16,7 +16,7 @@ namespace Atechnologies\ToolsBundle\Interfaces\Fixture;
  * @author Matías Jiménez matei249@gmail.com <matjimdi at atechnologies>
  */
 interface DataFixtureInterface 
-{    
+{
     /**
      * Traducción del fixture
      */
@@ -25,6 +25,5 @@ interface DataFixtureInterface
     /**
      * Nombre del fixture
      */
-    public function getAlies();
-    
+    public function getAlies();    
 }

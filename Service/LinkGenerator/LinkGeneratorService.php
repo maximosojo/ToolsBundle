@@ -178,6 +178,7 @@ class LinkGeneratorService implements ContainerAwareInterface
         if(isset($parameters['_onlyConf']) && $parameters['_onlyConf'] === true){
             return $entityConfig;
         }
+
         return $link;
     }
     
@@ -195,6 +196,7 @@ class LinkGeneratorService implements ContainerAwareInterface
         if($route != null){
             $href = $this->generateUrl($route,array_merge(array('id' => $entity->getId()),$routeParameters));
         }
+
         return $href;
     }
     
@@ -207,12 +209,15 @@ class LinkGeneratorService implements ContainerAwareInterface
     protected function getEntityConf($entity)
     {
         $entityClass = get_class($entity);
+
         if($this->init === false){
             $this->boot();
         }
+        
         if(preg_match('/'. \Doctrine\Common\Persistence\Proxy::MARKER .'/',$entityClass)){
             $entityClass = \Doctrine\Common\Util\ClassUtils::getRealClass($entityClass);
         }
+
         if(!isset($this->configsObjects[$entityClass])){
             $itemClassLoaded = [];
             foreach ($this->linkGeneratorItems as $linkGeneratorItem){
@@ -220,6 +225,7 @@ class LinkGeneratorService implements ContainerAwareInterface
             }
             throw new Exception(sprintf('The config for entity "%s", not defined. Please define in LinkGeneratorItem already load (%s)',$entityClass,  implode(",",$itemClassLoaded)));
         }
+
         return $this->configsObjects[$entityClass];
     }
     
@@ -254,10 +260,12 @@ class LinkGeneratorService implements ContainerAwareInterface
             $type = self::TYPE_LINK_DEFAULT;
         }
         $entityConfig = $this->getEntityConf($entity);
+        
         $link = '';
         if($entityConfig){
             $link = $this->generateFromConfig($entity,$entityConfig,$type,$parameters);
         }
+
         return $link;
     }
     
@@ -276,6 +284,7 @@ class LinkGeneratorService implements ContainerAwareInterface
             throw new \InvalidArgumentException('The icon definition "%s", not found!',$icon);
         }
         $unicode = $iconsDefinition[$icon]['unicode'];
+
         return $unicode;
     }
     
@@ -288,6 +297,7 @@ class LinkGeneratorService implements ContainerAwareInterface
     {
         $parameters = array();
         $parameters['_onlyConf'] = true;
+
         return $this->generate($entity,null,$parameters);
     }
     
@@ -320,7 +330,9 @@ class LinkGeneratorService implements ContainerAwareInterface
     public function addLinkGeneratorItem(\Atechnologies\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface $linkGeneratorItem) 
     {
         $linkGeneratorItem->setLinkGeneratorService($this);
+        
         $this->linkGeneratorItems[] = $linkGeneratorItem;
+
         return $this;
     }
 }

@@ -107,9 +107,11 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
 
            usleep(250000);
        }
+       
        if($errorCallback !== null){
            $errorCallback($this);
        }
+
        throw new \Exception("Spin function timed out after {$wait} seconds");
    }
 

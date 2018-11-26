@@ -35,6 +35,7 @@ abstract class LinkGeneratorItem implements LinkGeneratorInterface
     public function setLinkGeneratorService(LinkGeneratorService $linkGeneratorService) 
     {
         $this->linkGeneratorService = $linkGeneratorService;
+        
         return $this;
     }
     

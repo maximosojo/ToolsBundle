@@ -51,6 +51,7 @@ class LinkGeneratorExtension extends Twig_Extension
         if($entity === null){
             return "";
         }
+        
         return $this->linkGeneratorService->generate($entity, $type, $parameters);
     }
 
@@ -65,6 +66,7 @@ class LinkGeneratorExtension extends Twig_Extension
         if($entity === null){
             return "";
         }
+
         return $this->linkGeneratorService->generateOnlyUrl($entity, $type, $parameters);
     }
 
@@ -76,6 +78,7 @@ class LinkGeneratorExtension extends Twig_Extension
     public function setLinkGeneratorService(LinkGeneratorService $linkGeneratorService) 
     {
         $this->linkGeneratorService = $linkGeneratorService;
+
         return $this;
     }
 

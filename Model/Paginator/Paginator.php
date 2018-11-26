@@ -147,6 +147,7 @@ class Paginator extends BasePagerfanta implements ContainerAwareInterface
     public function formatToArrayDataTables($route = null,array $parameters = array()) 
     {
         $results = $this->getCurrentPageResults()->getArrayCopy();
+
         $data = array(
             'draw' => $this->draw,
             'recordsTotal' => $this->getNbResults(),
@@ -154,6 +155,7 @@ class Paginator extends BasePagerfanta implements ContainerAwareInterface
             'data' => $results,
             '_links' => $this->getLinks($route,$parameters),
         );
+
         return $data;
     }
     
@@ -169,6 +171,7 @@ class Paginator extends BasePagerfanta implements ContainerAwareInterface
         if($format === null){
             $format = $this->defaultFormat;
         }
+
         if(in_array($format, $this->formatArray)){
             $method = 'formatToArray'.ucfirst($format);
             return $this->$method($route,$parameters);
@@ -194,6 +197,7 @@ class Paginator extends BasePagerfanta implements ContainerAwareInterface
     public function setDefaultFormat($defaultFormat) 
     {
         $this->defaultFormat = $defaultFormat;
+        
         return $this;
     }
     
@@ -220,6 +224,7 @@ class Paginator extends BasePagerfanta implements ContainerAwareInterface
                 $links['next']['href'] = $this->generateUrl($route, array_merge($parameters, array('page' => $this->getNextPage())));
             }
         }
+        
         return $links;
     }
     

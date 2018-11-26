@@ -15,10 +15,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Contenido de tab
+ * 
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
 class TabContent 
-{    
+{
     private $id;
     private $url;
     private $name;
@@ -96,6 +97,7 @@ class TabContent
     public function setUrl($url) 
     {
         $this->url = $url;
+        
         return $this;
     }
 
@@ -107,6 +109,7 @@ class TabContent
     public function setName($name) 
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -118,6 +121,7 @@ class TabContent
     public function setOrder($order) 
     {
         $this->order = $order;
+
         return $this;
     }
 
@@ -139,6 +143,7 @@ class TabContent
     public function setId($id) 
     {
         $this->id = $id;
+
         return $this;
     }
     
@@ -160,6 +165,7 @@ class TabContent
     public function setActive($active) 
     {
         $this->active = $active;
+
         return $this;
     }
             
@@ -175,6 +181,7 @@ class TabContent
             "active" => $this->active,
             "options" => $this->options,
         ];
+
         return $data;
     }
 }
