@@ -35,16 +35,6 @@ class BaseService implements ContainerAwareInterface
     }
 
     /**
-     * Consulta de container
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @return ContainerInterface
-     */
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
-    /**
      * Get a user from the Security Context
      * @return mixed
      * @throws LogicException If SecurityBundle is not available
