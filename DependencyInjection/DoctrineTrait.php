@@ -25,6 +25,20 @@ trait DoctrineTrait
     private $isBeginTransaction = false;
 
     /**
+     * Shortcut to return the Doctrine Registry service.
+     * @return Registry
+     * @throws LogicException If DoctrineBundle is not available
+     */
+    public function getDoctrine() 
+    {
+        if (!$this->container->has('doctrine')) {
+            throw new LogicException('The DoctrineBundle is not registered in your application.');
+        }
+
+        return $this->container->get('doctrine');
+    }
+
+    /**
      * Retorna el repositorio principal
      * @return \Atechnologies\ToolsBundle\Model\Base\EntityRepository
      */
@@ -140,6 +154,7 @@ trait DoctrineTrait
     protected function save($entity, $andFlush = true)
     {
         $em = $this->getDoctrine()->getManager();
+        
         try {
             $em->persist($entity);
             if($andFlush === true){
@@ -160,6 +175,7 @@ trait DoctrineTrait
     protected function remove($entity = null, $andFlush = true) 
     {
         $em = $this->getDoctrine()->getManager();
+
         try {
             if ($entity !== null) {
                 $em->remove($entity);
@@ -180,6 +196,7 @@ trait DoctrineTrait
     protected function flush() 
     {
         $em = $this->getDoctrine()->getManager();
+
         try {
             $em->flush();            
         } catch (Exception $e) {

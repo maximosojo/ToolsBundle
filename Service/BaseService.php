@@ -17,16 +17,17 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 /**
  * Servicio base con implementación de funciones genericas compartidas
  * service (atechnologies.service.base)
- * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+ * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 class BaseService implements ContainerAwareInterface 
 {
     use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
-    
+    use \Atechnologies\ToolsBundle\DependencyInjection\DoctrineTrait;
+
     /**
      * Base de archivos de comandos de impresoras
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @return [type]
+     * @return Base url
      */
     public function getBaseUrl()
     {
@@ -34,63 +35,13 @@ class BaseService implements ContainerAwareInterface
     }
 
     /**
-     * Retorna el repositorio
-     * @return \Atechnologies\ToolsBundle\Service\EntityRepository
+     * Consulta de container
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return ContainerInterface
      */
-    protected function getRepository($class)
+    public function getContainer()
     {
-        if(!$class){
-            throw new \Exception("Error class not found", 1);            
-        }
-        $em = $this->getDoctrine()->getManager();
-        return $em->getRepository($class);
-    }
-
-    /**
-     * Guarda una entidad
-     * @param type $entity
-     * @param type $andFlush
-     */
-    protected function save($entity, $andFlush = true)
-    {
-        $em = $this->getDoctrine()->getManager();
-        try {
-            $em->persist($entity);
-            if($andFlush === true){
-                $em->flush();
-            }
-        } catch (Exception $e) {
-            $em->rollBack();
-        }
-    }
-
-    /**
-     * Flush  de objeto
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @return [type]
-     */
-    protected function flush()
-    {
-        $em = $this->getDoctrine()->getManager();
-        try {
-            $em->flush();            
-        } catch (Exception $e) {
-            $em->rollBack();
-        }
-    }
-    
-    /**
-     * Shortcut to return the Doctrine Registry service.
-     * @return Registry
-     * @throws LogicException If DoctrineBundle is not available
-     */
-    public function getDoctrine() 
-    {
-        if (!$this->container->has('doctrine')) {
-            throw new LogicException('The DoctrineBundle is not registered in your application.');
-        }
-
-        return $this->container->get('doctrine');
+        return $this->container;
     }
 
     /**
@@ -99,7 +50,7 @@ class BaseService implements ContainerAwareInterface
      * @throws LogicException If SecurityBundle is not available
      * @see TokenInterface::getUser()
      */
-    public function getUser() 
+    public function getUser()
     {
         if (!$this->container->has('security.token_storage')) {
             throw new LogicException('The SecurityBundle is not registered in your application.');
@@ -116,16 +67,6 @@ class BaseService implements ContainerAwareInterface
         return $user;
     }
     
-    /**
-     * Consulta de container
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @return [type]
-     */
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
     /**
      * Traducciones
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>

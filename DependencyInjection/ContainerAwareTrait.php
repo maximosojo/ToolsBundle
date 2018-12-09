@@ -25,8 +25,12 @@ trait ContainerAwareTrait
      */
     private $container;
 
+    /**
+     * Register container
+     * @param  ContainerInterface|null
+     */
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
-    }
+    }    
 }
