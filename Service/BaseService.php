@@ -42,11 +42,11 @@ class BaseService implements ContainerAwareInterface
      */
     public function getUser()
     {
-        if (!$this->container->has('security.token_storage')) {
+        if (!$this->getContainer()->has('security.token_storage')) {
             throw new LogicException('The SecurityBundle is not registered in your application.');
         }
 
-        if (null === $token = $this->container->get('security.token_storage')->getToken()) {
+        if (null === $token = $this->getContainer()->get('security.token_storage')->getToken()) {
             return;
         }
 
