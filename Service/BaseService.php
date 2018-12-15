@@ -25,6 +25,20 @@ class BaseService implements ContainerAwareInterface
     use \Atechnologies\ToolsBundle\DependencyInjection\DoctrineTrait;
 
     /**
+     * Shortcut to return the Doctrine Registry service.
+     * @return Registry
+     * @throws LogicException If DoctrineBundle is not available
+     */
+    public function getDoctrine() 
+    {
+        if (!$this->container->has('doctrine')) {
+            throw new LogicException('The DoctrineBundle is not registered in your application.');
+        }
+
+        return $this->container->get('doctrine');
+    }
+    
+    /**
      * Base de archivos de comandos de impresoras
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      * @return Base url
