@@ -22,6 +22,7 @@ class TabContent
 {
     private $id;
     private $url;
+    private $icon;
     private $name;
     private $order;
     private $options;
@@ -168,7 +169,29 @@ class TabContent
 
         return $this;
     }
-            
+    
+    /**
+     * geticon
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @return icon
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * seticon
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  icon
+     */
+    public function setIcon($icon) 
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
     /**
      * Representacion de la tab en arary
      * @return array
@@ -178,6 +201,7 @@ class TabContent
         $data = [
             "id" => $this->id,
             "name" => $this->name,
+            "icon" => $this->icon,
             "active" => $this->active,
             "options" => $this->options,
         ];

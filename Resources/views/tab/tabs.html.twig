@@ -19,6 +19,7 @@
             <ul class="nav nav-tabs">
                 <li ng-repeat="tabContent in tabsCtrl.tab.tabsContent" class="ng-class:tabsCtrl.getClsTab(tabContent)" ng-click="tabsCtrl.selectedTab(tabContent)">
                     <a data-toggle="tab" href="#{$ tabContent.id $}">
+                        <i class="{$ tabContent.icon $}" ng-if="tabContent.icon"></i>
                         {$ tabContent.name $}
                     </a>
                 </li>
