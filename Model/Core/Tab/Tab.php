@@ -18,10 +18,29 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
 class Tab 
-{
+{   
+    /**
+     * $id
+     * @var string
+     */
     private $id;
+
+    /**
+     * $name
+     * @var string
+     */
     private $name;
-    private $icon;    
+
+    /**
+     * $icon
+     * @var string
+     */
+    private $icon;
+
+    /**
+     * $options
+     * @var array
+     */
     private $options;
     
     /**
@@ -38,7 +57,7 @@ class Tab
     
     /**
      * Carga de opciones
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  array
      */
     public function setOptions(array $options = []) 
@@ -55,7 +74,7 @@ class Tab
     
     /**
      * getName
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return name
      */
     public function getName() 
@@ -65,7 +84,7 @@ class Tab
 
     /**
      * getIcon
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return icon
      */
     public function getIcon() 
@@ -75,7 +94,7 @@ class Tab
 
     /**
      * getTabsContent
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return tabsContent
      */
     public function getTabsContent() 
@@ -85,7 +104,7 @@ class Tab
 
     /**
      * setName
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  name
      */
     public function setName($name) 
@@ -97,7 +116,7 @@ class Tab
 
     /**
      * setIcon
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  icon
      */
     public function setIcon($icon) 
@@ -109,7 +128,7 @@ class Tab
     
     /**
      * getId
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return id
      */
     public function getId() 

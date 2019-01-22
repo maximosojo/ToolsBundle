@@ -20,12 +20,46 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class TabContent 
 {
+    /**
+     * $id
+     * @var string
+     */
     private $id;
+
+    /**
+     * $url
+     * @var string
+     */
     private $url;
+
+    /**
+     * $icon
+     * @var string
+     */
     private $icon;
+
+    /**
+     * $name
+     * @var string
+     */
     private $name;
+
+    /**
+     * $order
+     * @var string
+     */
     private $order;
+
+    /**
+     * $options
+     * @var array
+     */
     private $options;
+
+    /**
+     * $active
+     * @var boolean
+     */
     private $active = false;
     
     public function __construct(array $options = []) 
