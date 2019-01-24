@@ -93,20 +93,4 @@ class MyJsonResponse extends JsonResponse
         $this->extraData["forceReload"] = true;
         $this->setData($this->originalData);
     }
-    
-    /**
-     * Abrir popup
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  String
-     * @param  array
-     */
-    public function setOpenPopUp($url,array $parameters = []) 
-    {
-        $this->extraData["openPopUp"] = [
-            "url" => $url,
-            "parameters" => $parameters,
-        ];
-        
-        $this->setData($this->originalData);
-    }
 }
