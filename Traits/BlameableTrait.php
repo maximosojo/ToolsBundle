@@ -13,7 +13,7 @@ namespace Atechnologies\ToolsBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use AppBundle\Entity\User;
+use App\Entity\User;
 
 /**
  * Add Blameable behavior to an entity.
@@ -25,7 +25,7 @@ trait BlameableTrait
      * @var User
      *
      * @Gedmo\Blameable(on="create")
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(name="created_by", referencedColumnName="id")
      */
     protected $createdBy;
@@ -34,7 +34,7 @@ trait BlameableTrait
      * @var User
      *
      * @Gedmo\Blameable(on="update")
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
      */
     protected $updatedBy;
