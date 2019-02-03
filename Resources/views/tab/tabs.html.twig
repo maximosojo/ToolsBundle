@@ -2,9 +2,7 @@
     ng-controller="TabsController as tabsCtrl" 
     class="ng-cloak nav-tabs-custom" 
     ng-init="tabsCtrl.init({ tab: {{ tab.toArray()|json_encode }} })">
-
-    <ul id="tabs" class="nav nav-tabs pull-right">
-        
+    <ul id="tabs" class="nav nav-tabs pull-right">        
         <li class="pull-left header">
             {% if tab.icon %}
                 <i class="{{ tab.icon }}"></i>
@@ -14,7 +12,6 @@
             &nbsp;
             {{ tab.name|trans({},"titles") }}
         </li>
-
         <li class="pull-left">
             <ul class="nav nav-tabs">
                 <li ng-repeat="tabContent in tabsCtrl.tab.tabsContent" class="ng-class:tabsCtrl.getClsTab(tabContent)" ng-click="tabsCtrl.selectedTab(tabContent)">

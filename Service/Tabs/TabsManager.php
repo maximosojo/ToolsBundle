@@ -35,6 +35,7 @@ class TabsManager extends \Atechnologies\ToolsBundle\Service\BaseService
     public function createNew($class = null)
     {
         $this->tab = new Tab([]);
+        $this->tab->setId(get_class($class).$class->getId());
 
         return $this->tab;
     }
@@ -47,7 +48,10 @@ class TabsManager extends \Atechnologies\ToolsBundle\Service\BaseService
      */
     public function createNewContent(array $options = array())
     {
-        return new TabContent($options);
+        $tabContent = new TabContent($options);
+        $tabContent->setTab($this->tab);
+
+        return $tabContent;
     }
 
     /**

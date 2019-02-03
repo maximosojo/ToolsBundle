@@ -31,7 +31,7 @@ var app = angular.module('atechnologies', [])
             return;
         }
         tab.loading = true;
-         angular.forEach(self.tab.tabsContent,function(obj){
+        angular.forEach(self.tab.tabsContent,function(obj){
             obj.active = false;
         });
         tab.active = true;

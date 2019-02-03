@@ -12,6 +12,7 @@
 namespace Atechnologies\ToolsBundle\Model\Core\Tab;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Atechnologies\ToolsBundle\Model\Core\Tab\Tab;
 
 /**
  * Contenido de tab
@@ -55,6 +56,12 @@ class TabContent
      * @var array
      */
     private $options;
+
+    /**
+     * $tab
+     * @var object
+     */
+    private $tab;
 
     /**
      * $active
@@ -197,8 +204,14 @@ class TabContent
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      * @param  [type]
      */
-    public function setActive($active) 
+    public function setActive($active,$recursive = false) 
     {
+        if ($recursive) {
+            foreach ($this->tab->getTabsContent() as $tab) {
+                $tab->setActive(false);
+            }
+        }
+
         $this->active = $active;
 
         return $this;
@@ -222,6 +235,28 @@ class TabContent
     public function setIcon($icon) 
     {
         $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * getTab
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @return tab
+     */
+    public function getTab()
+    {
+        return $this->tab;
+    }
+
+    /**
+     * settab
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  tab
+     */
+    public function setTab(Tab $tab) 
+    {
+        $this->tab = $tab;
 
         return $this;
     }

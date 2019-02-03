@@ -135,6 +135,16 @@ class Tab
     {
         return $this->id;
     }
+
+    /**
+     * setId
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return id
+     */
+    public function setId($id)
+    {
+        $this->id = md5($id);
+    }
     
     /**
      * Añade una tab
@@ -155,7 +165,7 @@ class Tab
 
         $this->tabsContent[$id] = $tabContent;
         $tabContent->setId($id);
-
+        
         return $this;
     }
     
