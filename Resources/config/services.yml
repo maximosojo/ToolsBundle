@@ -54,5 +54,12 @@ services:
             - []
             - '@service_container'
             - '@atechnologies.doctrine.repository.factory.default'
+
   atechnologies.doctrine.repository.factory.default:
       class: Doctrine\ORM\Repository\DefaultRepositoryFactory
+
+  # Manejador de tabs
+  atechnologies.manager.tabs:
+      class: Atechnologies\ToolsBundle\Service\Tabs\TabsManager
+      calls: 
+          - [setContainer, ['@service_container']]
