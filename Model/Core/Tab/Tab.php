@@ -17,8 +17,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Tab
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class Tab 
-{   
+class Tab
+{
+    const ID_CURRENT_TAB = "_tabst82a";
+    const ID_CURRENT_CONTENT = "_contents471";
+
     /**
      * $id
      * @var string
@@ -164,7 +167,7 @@ class Tab
         }
 
         $this->tabsContent[$id] = $tabContent;
-        $tabContent->setId($id);
+        $tabContent->setId($id.$tabContent->getTab()->getId());
         
         return $this;
     }

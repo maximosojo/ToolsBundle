@@ -61,5 +61,6 @@ services:
   # Manejador de tabs
   atechnologies.manager.tabs:
       class: Atechnologies\ToolsBundle\Service\Tabs\TabsManager
+      arguments: ["@request_stack"]
       calls: 
           - [setContainer, ['@service_container']]

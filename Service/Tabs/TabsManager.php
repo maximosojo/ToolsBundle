@@ -11,6 +11,7 @@
 
 namespace Atechnologies\ToolsBundle\Service\Tabs;
 
+use Symfony\Component\HttpFoundation\RequestStack;
 use Atechnologies\ToolsBundle\Model\Core\Tab\Tab;
 use Atechnologies\ToolsBundle\Model\Core\Tab\TabContent;
 
@@ -27,6 +28,22 @@ class TabsManager extends \Atechnologies\ToolsBundle\Service\BaseService
     private $tab;
 
     /**
+     * @var RequestStack
+     */
+    private $requestStack;
+
+    /**
+     * @var Request
+     */
+    private $request;
+
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+        $this->request = $this->requestStack->getCurrentRequest();        
+    }
+
+    /**
      * Instancia nueva tabs
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  Class
@@ -36,6 +53,7 @@ class TabsManager extends \Atechnologies\ToolsBundle\Service\BaseService
     {
         $this->tab = new Tab([]);
         $this->tab->setId(get_class($class).$class->getId());
+        $this->request->getSession()->set(Tab::ID_CURRENT_TAB,$this->tab->getId());
 
         return $this->tab;
     }
@@ -62,5 +80,49 @@ class TabsManager extends \Atechnologies\ToolsBundle\Service\BaseService
     public function addTabContent(TabContent $tabContent)
     {
         $this->tab->addTabContent($tabContent);
+        $url = $tabContent->getOption("url")."&&content_id=".$tabContent->getId();
+        $tabContent->setUrl($url);
+        
+        $this->resolveCurrentTab($tabContent);
+    }
+
+    /**
+     * Registra tab selecionada
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  string $id
+     */
+    public function setCurrentTab($request)
+    {
+        $this->request->getSession()->set(Tab::ID_CURRENT_CONTENT,$request->get("content_id"));
+    }
+
+    /**
+     * Resolver tabs activa
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  $tabContent
+     * @return Tab
+     */
+    public function resolveCurrentTab($tabContent)
+    {
+        $request = $this->request;
+
+        $currentTab = null;
+        $tabId = $tabContent->getTab()->getId();
+        $contentId = $tabContent->getId();
+        $currentTab = $request->getSession()->get(Tab::ID_CURRENT_TAB);        
+        
+        $currentContent = null;
+        if($request->getSession()->has(Tab::ID_CURRENT_CONTENT)){
+            $currentContent = $request->getSession()->get(Tab::ID_CURRENT_CONTENT);
+        }
+
+        if (!$currentContent && $currentContent != $contentId) {
+            $currentContent = $contentId;
+            $request->getSession()->set(Tab::ID_CURRENT_CONTENT,$currentContent);
+        }
+        
+        if ($currentTab == $tabId && $currentContent == $contentId) {
+            $tabContent->setActive(true,true);
+        }
     }
 }

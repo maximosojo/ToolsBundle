@@ -26,9 +26,9 @@
     <div class="tab-content tab-no-content">
         <div ng-loading="tabsCtrl.currentTab.loading">
             <div ng-if="tabContent.options.add_content_div" class="tab-content">
-                <div ng-include="tabsCtrl.currentTab.options.url" onload="tabsCtrl.loaded(tabsCtrl.currentTab)"></div>
+                <div ng-include="tabsCtrl.currentTab.url" onload="tabsCtrl.loaded(tabsCtrl.currentTab)"></div>
             </div>
-            <div ng-if="!tabContent.options.add_content_div" ng-include="tabsCtrl.currentTab.options.url" onload="tabsCtrl.loaded(tabsCtrl.currentTab)"></div>
+            <div ng-if="!tabContent.options.add_content_div" ng-include="tabsCtrl.currentTab.url" onload="tabsCtrl.loaded(tabsCtrl.currentTab)"></div>
         </div>
     </div>
 </div>

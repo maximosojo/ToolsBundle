@@ -270,6 +270,7 @@ class TabContent
         $data = [
             "id" => $this->id,
             "name" => $this->name,
+            "url" => $this->url,
             "icon" => $this->icon,
             "active" => $this->active,
             "options" => $this->options,
