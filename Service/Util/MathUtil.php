@@ -13,6 +13,7 @@ namespace Atechnologies\ToolsBundle\Service\Util;
 
 /**
  * Util basico en base a libreria BCMath PHP http://php.net/manual/es/book.bc.php
+ * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 class MathUtil
@@ -24,6 +25,7 @@ class MathUtil
     
     /**
      * Suma dos numeros decimales
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param $a
      * @param $b
      * @return Number
@@ -35,6 +37,7 @@ class MathUtil
     
     /**
      * Resta dos numeros decimales
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param $a
      * @param $b
      * @return Number
@@ -46,6 +49,7 @@ class MathUtil
     
     /**
      * Divide dos numeros
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param $a
      * @param $b
      * @return Number
@@ -57,6 +61,7 @@ class MathUtil
     
     /**
      * Multiplica dos numero
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param $a
      * @param $b
      * @return Number
@@ -67,7 +72,8 @@ class MathUtil
     }
 
     /**
-     * Aplica porcentaje 
+     * Aplica porcentaje
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param $a
      * @param $b
      * @return Number
@@ -80,6 +86,7 @@ class MathUtil
 
     /**
      * Verifica si dos numeros son iguales
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param $a
      * @param $b
      * @return Number

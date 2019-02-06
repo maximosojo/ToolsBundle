@@ -12,11 +12,12 @@
 namespace Atechnologies\ToolsBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * TimestampableTrait
  *
- * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies> 
+ * @author Máximo Sojo <maxsojo13@gmail.com> 
  */
 trait TimestampableTrait 
 {

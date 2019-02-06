@@ -13,6 +13,7 @@ namespace Atechnologies\ToolsBundle\Service\Util;
 
 /**
  * Util basico en base a Strings de PHP http://php.net/manual/es/book.strings.php
+ * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 class StringUtil
@@ -24,7 +25,7 @@ class StringUtil
     
     /**
      * Formatear un número con los millares agrupados y valores por defecto
-     * 
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param $number
      * @param int $decimals [Número de puntos decimales.]
      * @param string $dec_point [Separador para los decimales.]
