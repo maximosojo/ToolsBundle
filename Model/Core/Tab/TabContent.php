@@ -202,7 +202,7 @@ class TabContent
     /**
      * setActive
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  [type]
+     * @param  boolean
      */
     public function setActive($active,$recursive = false) 
     {

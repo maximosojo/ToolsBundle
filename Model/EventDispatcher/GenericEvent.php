@@ -15,6 +15,7 @@ use Symfony\Component\EventDispatcher\GenericEvent as GenericEventBase;
 
 /**
  * Base generica de eventos
+ * 
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
 class GenericEvent extends GenericEventBase
@@ -65,7 +66,7 @@ class GenericEvent extends GenericEventBase
     {
         $this->message = $message;
     }
-
+    
     public function getParameter($key,$default = null) 
     {
         if($this->hasArgument($key)){

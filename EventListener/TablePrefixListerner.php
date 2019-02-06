@@ -10,9 +10,23 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
  * @author Carlos Mendoza <inhack20@tecnocreaciones.com>
  */
 class TablePrefixListerner implements \Doctrine\Common\EventSubscriber 
-{
+{   
+    /**
+     * $prefix Prefix BD name
+     * @var string
+     */
     protected $prefix = '';
+
+    /**
+     * $tableNameLowercase
+     * @var boolean
+     */
     protected $tableNameLowercase = false;
+
+    /**
+     * $config
+     * @var String
+     */
     private $config;
             
     function __construct($prefix, $tableNameLowercase) 
@@ -24,6 +38,7 @@ class TablePrefixListerner implements \Doctrine\Common\EventSubscriber
     public function setConfig(array $config) 
     {
         $this->config = $config;
+        
         return $this;
     }
         

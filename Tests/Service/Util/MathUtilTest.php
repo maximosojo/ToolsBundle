@@ -13,6 +13,10 @@ namespace Atechnologies\ToolsBundle\Tests\Service\Util;
 
 use Atechnologies\ToolsBundle\Service\Util\MathUtil;
 
+/**
+ * Math Test
+ * @author Máximo Sojo <maxsojo13@gmail.com>
+ */
 class MathUtilTest extends \PHPUnit_Framework_TestCase
 {
 	public function testSum()
