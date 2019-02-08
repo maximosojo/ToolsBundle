@@ -13,6 +13,7 @@ namespace Atechnologies\ToolsBundle\Service;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Servicio base con implementación de funciones genericas compartidas
@@ -102,5 +103,16 @@ class BaseService implements ContainerAwareInterface
     protected function getEventDispatcher()
     {
         return $this->getContainer()->get("event_dispatcher");
-    }    
+    }
+
+    /**
+     * Genera una url
+     * @param type $route
+     * @param array $parameters
+     * @return type
+     */
+    protected function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
+    {
+        return $this->container->get('router')->generate($route, $parameters, $referenceType);
+    }
 }

@@ -24,6 +24,7 @@ class Tab
      * Current for tabs session
      * @author Máximo Sojo <maxsojo13@gmail.com>
      */
+    const ID_CLASS = "_class658";
     const ID_CURRENT_TAB = "_tabst82a";
     const ID_CURRENT_CONTENT = "_contents471";
 
