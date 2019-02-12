@@ -31,16 +31,21 @@ class AtechnologiesToolsExtension extends Extension
         $processor = new Processor();
         $configuration = new Configuration();
         
-        $config = $processor->processConfiguration($configuration, $configs);
-        if (isset($config['paginator']['format_array'])) {
-            $container->setParameter('paginator_format_array', $config['paginator']['format_array']);
-        }
-        
         $loaderYml = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loaderYml->load('services.yml');
 
-        if($config['table_prefix']['enable'] === true )
-        {
+        $config = $processor->processConfiguration($configuration, $configs);
+        if ($config['paginator']['format_array']) {
+            $container->setParameter('paginator_format_array', $config['paginator']['format_array']);
+        }
+        
+
+        if($config['link_generator']['enable'] === true) {
+            $loaderYml->load('link_generator.yml');
+            $container->setParameter('atechnologies_tools.service.link_generator.color', $config['link_generator']['color']); 
+        }
+
+        if($config['table_prefix']['enable'] === true ) {
             $tablePrefix = $config['table_prefix']['prefix'].$config['table_prefix']['prefix_separator'];
             $tableNameLowercase = $config['table_prefix']['name_lowercase'];
             $tablePrefixListerner = new Definition($config['table_prefix']['listerner_class']);
