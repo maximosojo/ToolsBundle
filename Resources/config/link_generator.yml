@@ -1,0 +1,13 @@
+services:
+  # Generador de enlaces
+  atechnologies.service.link_generator:
+      class: Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService
+      calls: 
+          - [setContainer, ['@service_container']]
+  # Extension Twig generador de link
+  atechnologies.twig.extension_link:
+      class: Atechnologies\ToolsBundle\Twig\Extension\LinkGeneratorExtension
+      tags:
+          - { name: twig.extension}
+      calls:
+          - [ setLinkGeneratorService, ['@atechnologies.service.link_generator']]

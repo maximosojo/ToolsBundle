@@ -1,7 +1,6 @@
-<div
-    ng-controller="TabsController as tabsCtrl" 
-    class="ng-cloak nav-tabs-custom" 
-    ng-init="tabsCtrl.init({ tab: {{ tab.toArray()|json_encode }} })">
+{% include "AtechnologiesToolsBundle:util:loading.css.twig" %}
+
+<div ng-controller="TabsController as tabsCtrl" class="ng-cloak nav-tabs-custom" ng-init="tabsCtrl.init({ tab: {{ tab.toArray()|json_encode }} })">
     <ul id="tabs" class="nav nav-tabs pull-right">        
         <li class="pull-left header">
             {% if tab.icon %}

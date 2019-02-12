@@ -13,6 +13,8 @@ namespace Atechnologies\ToolsBundle\ORM\Query;
 
 /**
  * Query builder search
+ *
+ * @author Carlos Mendoza <inhack20@gmail.com>
  */
 class SearchQueryBuilder 
 {
@@ -20,19 +22,30 @@ class SearchQueryBuilder
      * @var \Doctrine\ORM\QueryBuilder
      */
     private $qb;
+
     /**
      *
      * @var \Doctrine\Common\Collections\ArrayCollection
      */
     private $criteria;
-    private $alias;
+
+    /**
+     * $alies
+     * @var String
+     */
+    private $alies;
+
+    /**
+     * $orderBy
+     * @var Array
+     */
     private $orderBy;
     
-    function __construct(\Doctrine\ORM\QueryBuilder $qb, \Doctrine\Common\Collections\ArrayCollection $criteria, $alias,$orderBy = null) 
+    function __construct(\Doctrine\ORM\QueryBuilder $qb, \Doctrine\Common\Collections\ArrayCollection $criteria, $alies,$orderBy = null) 
     {
         $this->qb = $qb;
         $this->criteria = $criteria;
-        $this->alias = $alias;
+        $this->alies = $alies;
         if(is_array($orderBy)){
             $orderBy = new \Doctrine\Common\Collections\ArrayCollection($orderBy);
         }
@@ -48,6 +61,7 @@ class SearchQueryBuilder
             $this->qb
                 ->andWhere($this->qb->expr()->like($this->getAlies().'.description', $this->qb->expr()->literal("%$description%")));
         }
+
         return $this;
     }
 
@@ -76,6 +90,7 @@ class SearchQueryBuilder
                 
             }
         }
+
         return $this;
     }
 
@@ -92,6 +107,7 @@ class SearchQueryBuilder
                 $this->qb->andWhere(sprintf("%s = %s",$normalizeField,$this->qb->expr()->literal($valueField)));
             }
         }
+
         return $this;
     }
 
@@ -116,9 +132,11 @@ class SearchQueryBuilder
                 $orX->add($this->qb->expr()->like($normalizeField,$this->qb->expr()->literal("%".$valueField."%")));
             }
         }
+        
         if($orX->count() > 0){
             $this->qb->andWhere($orX);
         }
+
         return $this;
     }
 
@@ -129,6 +147,7 @@ class SearchQueryBuilder
     public function addFieldTextAreaLike(array $fields,$defaultValueField = null)
     {
         $this->addFieldLike($fields,$defaultValueField);
+
         return $this;
     }
     
@@ -143,6 +162,7 @@ class SearchQueryBuilder
         if($valueField !== null){
             $this->addFieldLike($fields,$valueField);
         }
+
         return $this;
     }
 
@@ -171,6 +191,7 @@ class SearchQueryBuilder
                     ;
             }
         }
+
         return $this;
     }
 
@@ -257,6 +278,7 @@ class SearchQueryBuilder
                 }
             }
         }
+
         return $this;
     }
 
@@ -281,8 +303,7 @@ class SearchQueryBuilder
                 $fieldDateValue = sprintf("%s/%s/%s",$fieldDateDay,$fieldDateMonth,$fieldDateYear);
                 $dateTime = \DateTime::createFromFormat("d/m/Y", $fieldDateValue);
                 $this->qb->andWhere($this->qb->expr()->like($this->getAlies().".".$fieldDate,$this->qb->expr()->literal("%".$dateTime->format("Y-m-d")."%")));
-            }else{
-                
+            }else{                
                 if($fieldDateDay !== null){
                     $fieldDateDay = str_pad($fieldDateDay, 2,"0",STR_PAD_LEFT);
                     $this->qb
@@ -311,6 +332,7 @@ class SearchQueryBuilder
                 }
             }
         }
+
         return $this;
     }
 
@@ -320,10 +342,9 @@ class SearchQueryBuilder
     public function addFieldMaxResults() 
     {
         if(($maxResults = $this->criteria->remove('max_results')) != null && $maxResults > 0){
-            $this->qb
-                ->setMaxResults($maxResults)
-                ;
+            $this->qb->setMaxResults($maxResults);
         }
+
         return $this;
     }
     
@@ -339,6 +360,7 @@ class SearchQueryBuilder
         if($this->orderBy === null){
             return;
         }
+
         $orderByCount = $this->orderBy->count();
         foreach ($this->orderBy as $field => $value) {
             if(!in_array($field, $fields)){
@@ -354,6 +376,7 @@ class SearchQueryBuilder
             $fieldNormalize = $this->normalizeField($this->getAlies(), $field);
             $this->qb->addOrderBy($fieldNormalize, $valueFiled);
         }
+
         if($orderByCount == 0 && count($default) > 0){
             foreach ($default as $field => $order) {
                 $fieldNormalize = $this->normalizeField($this->getAlies(), $field);
@@ -369,15 +392,16 @@ class SearchQueryBuilder
      * @param  string
      * @return string response
      */
-    private function normalizeField($alias,$field) 
+    private function normalizeField($alies,$field) 
     {
         $fieldResponse = "";
         $fieldExplode = explode("__", $field);
         if(count($fieldExplode) == 2){
-            $fieldResponse = sprintf("%s_%s.%s",$alias,$fieldExplode[0],$fieldExplode[1]);
+            $fieldResponse = sprintf("%s_%s.%s",$alies,$fieldExplode[0],$fieldExplode[1]);
         }else{
-            $fieldResponse = sprintf("%s.".$fieldExplode[0],$alias);
+            $fieldResponse = sprintf("%s.".$fieldExplode[0],$alies);
         }
+        
         return $fieldResponse;
     }
 
@@ -388,6 +412,6 @@ class SearchQueryBuilder
      */
     private function getAlies()
     {
-        return $this->alias;
+        return $this->alies;
     }
 }

@@ -52,7 +52,8 @@ class TabsManager extends \Atechnologies\ToolsBundle\Service\BaseService
     public function createNew($class = null)
     {
         $this->tab = new Tab([]);
-        $this->tab->setId(get_class($class).$class->getId());
+        $this->setClass(get_class($class));
+        $this->tab->setId($this->getClass().$class->getId());
         $this->request->getSession()->set(Tab::ID_CURRENT_TAB,$this->tab->getId());
 
         return $this->tab;
@@ -124,5 +125,23 @@ class TabsManager extends \Atechnologies\ToolsBundle\Service\BaseService
         if ($currentTab == $tabId && $currentContent == $contentId) {
             $tabContent->setActive(true,true);
         }
+    }
+
+    /**
+     * Registro de clase
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     */
+    public function setClass($class = null)
+    {
+        $this->request->getSession()->set(Tab::ID_CLASS,$class);
+    }
+
+    /**
+     * Retorna clase maestra
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     */
+    public function getClass()
+    {
+        return $this->request->getSession()->get(Tab::ID_CLASS);
     }
 }
