@@ -59,5 +59,6 @@ class AtechnologiesToolsExtension extends Extension
         }
         
         $container->setParameter('atechnologies_tools.service.link_generator.enable', $config['link_generator']['enable']); 
+        $container->setParameter('atechnologies_tools.loading.color', $config['loading']['color']); 
     }
 }
