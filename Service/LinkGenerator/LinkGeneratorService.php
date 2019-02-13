@@ -132,9 +132,10 @@ class LinkGeneratorService implements ContainerAwareInterface
         $labelMethod = $entityConfig['labelMethod'];
         $color = $this->container->getParameter('atechnologies_tools.service.link_generator.color');
 
-        $label = (string)$entity;
         if($labelMethod !== null){
             $label = call_user_func_array([$entity, $labelMethod],array());
+        } else {
+            $label = (string)$entity;
         }
 
         if($entityConfig["translation_domain"] !== null){
