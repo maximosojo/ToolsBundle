@@ -57,5 +57,8 @@ class AtechnologiesToolsExtension extends Extension
             $tablePrefixListerner->addMethodCall("setConfig",array($config['table_prefix']));
             $container->setDefinition('atechnologies_tools.table_prefix_subscriber', $tablePrefixListerner);
         }
+        
+        $container->setParameter('atechnologies_tools.service.link_generator.enable', $config['link_generator']['enable']); 
+        $container->setParameter('atechnologies_tools.loading.color', $config['loading']['color']); 
     }
 }

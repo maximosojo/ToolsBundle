@@ -36,6 +36,12 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->arrayNode('loading')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('color')->defaultValue("#000")->end()
+                    ->end()
+                ->end()
                 ->arrayNode('paginator')
                     ->addDefaultsIfNotSet()
                     ->children()
