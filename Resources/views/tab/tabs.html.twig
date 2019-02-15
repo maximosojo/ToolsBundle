@@ -1,8 +1,25 @@
 {% include "AtechnologiesToolsBundle:util:loading.css.twig" %}
 
+<style type="text/css">
+    .nav-tabs-custom>.nav-tabs.pull-right>li:first-of-type {
+        margin-right: 0;
+    }
+    .nav-tabs-custom>.nav-tabs>li.tab-header {
+        line-height: 35px;
+        padding: 0 10px;
+        font-size: 20px;
+        color: #444;
+    }
+    li.pull-left.tab-header {
+        background: #3c3c3b!important;
+        color: #dedede!important;
+        height: 41px!important;
+        padding: 4px 10px!important;
+    }
+</style>
 <div ng-controller="TabsController as tabsCtrl" class="ng-cloak nav-tabs-custom" ng-init="tabsCtrl.init({ tab: {{ tab.toArray()|json_encode }} })">
     <ul id="tabs" class="nav nav-tabs pull-right">        
-        <li class="pull-left header">
+        <li class="pull-left tab-header">
             {% if tab.icon %}
                 <i class="{{ tab.icon }}"></i>
             {% else %}
@@ -11,7 +28,7 @@
             &nbsp;
             {{ tab.name|trans({},"titles") }}
         </li>
-        <li class="pull-left content">
+        <li class="pull-left tab-content">
             <ul class="nav nav-tabs">
                 <li ng-repeat="tabContent in tabsCtrl.tab.tabsContent" class="ng-class:tabsCtrl.getClsTab(tabContent)" ng-click="tabsCtrl.selectedTab(tabContent)">
                     <a data-toggle="tab" href="">
