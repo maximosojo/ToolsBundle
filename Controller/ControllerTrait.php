@@ -66,6 +66,20 @@ trait ControllerTrait
     }
 
     /**
+     * Json force redirect
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  [type]
+     * @return [type]
+     */
+    public function setForceRedirect($url)
+    {
+        $response = $this->myJsonResponse();
+        $response->setForceRedirect($url);
+
+        return $response;
+    }
+
+    /**
      * Json redirect
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      * @param  [type]
