@@ -36,7 +36,7 @@ class GenericEvent extends GenericEventBase
      */
     private $message = null;
              
-    function __construct($entity,array $arguments = array())
+    public function __construct($entity,array $arguments = array())
     {
         $this->entity = $entity;
         parent::__construct($entity, $arguments);
@@ -47,7 +47,7 @@ class GenericEvent extends GenericEventBase
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return Entity
      */
-    function getEntity() 
+    public function getEntity() 
     {
         return $this->entity;
     }
@@ -57,7 +57,7 @@ class GenericEvent extends GenericEventBase
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return Response
      */
-    function getResponse() 
+    public function getResponse() 
     {
         return $this->response;
     }
@@ -67,7 +67,7 @@ class GenericEvent extends GenericEventBase
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  \Symfony\Component\HttpFoundation\Response
      */
-    function setResponse(\Symfony\Component\HttpFoundation\Response $response) 
+    public function setResponse(\Symfony\Component\HttpFoundation\Response $response) 
     {
          $this->response = $response;
     }
@@ -77,7 +77,7 @@ class GenericEvent extends GenericEventBase
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return message
      */
-    function getMessage() 
+    public function getMessage() 
     {
         return $this->message;
     }
@@ -87,7 +87,7 @@ class GenericEvent extends GenericEventBase
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  [type]
      */
-    function setMessage($message) 
+    public function setMessage($message) 
     {
         $this->message = $message;
     }
