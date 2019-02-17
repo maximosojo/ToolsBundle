@@ -36,37 +36,68 @@ class GenericEvent extends GenericEventBase
      */
     private $message = null;
              
-    function __construct($entity,array $arguments = array())
+    public function __construct($entity,array $arguments = array())
     {
         $this->entity = $entity;
         parent::__construct($entity, $arguments);
     }
 
-    function getEntity() 
+    /**
+     * Obtener entidad relacionada
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return Entity
+     */
+    public function getEntity() 
     {
         return $this->entity;
     }
-     
-    function getResponse() 
+    
+    /**
+     * Obtener respuesta
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return Response
+     */
+    public function getResponse() 
     {
         return $this->response;
     }
 
-    function setResponse(\Symfony\Component\HttpFoundation\Response $response) 
+    /**
+     * Registro de respuesta
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  \Symfony\Component\HttpFoundation\Response
+     */
+    public function setResponse(\Symfony\Component\HttpFoundation\Response $response) 
     {
          $this->response = $response;
     }
 
-    function getMessage() 
+    /**
+     * Retorno de mensaje
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return message
+     */
+    public function getMessage() 
     {
         return $this->message;
     }
 
-    function setMessage($message) 
+    /**
+     * Registro de mensaje de respuesta
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  [type]
+     */
+    public function setMessage($message) 
     {
         $this->message = $message;
     }
     
+    /**
+     * Obtener parametros
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  String
+     * @return Parameters
+     */
     public function getParameter($key,$default = null) 
     {
         if($this->hasArgument($key)){
