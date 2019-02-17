@@ -42,31 +42,62 @@ class GenericEvent extends GenericEventBase
         parent::__construct($entity, $arguments);
     }
 
+    /**
+     * Obtener entidad relacionada
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return Entity
+     */
     function getEntity() 
     {
         return $this->entity;
     }
-     
+    
+    /**
+     * Obtener respuesta
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return Response
+     */
     function getResponse() 
     {
         return $this->response;
     }
 
+    /**
+     * Registro de respuesta
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  \Symfony\Component\HttpFoundation\Response
+     */
     function setResponse(\Symfony\Component\HttpFoundation\Response $response) 
     {
          $this->response = $response;
     }
 
+    /**
+     * Retorno de mensaje
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return message
+     */
     function getMessage() 
     {
         return $this->message;
     }
 
+    /**
+     * Registro de mensaje de respuesta
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  [type]
+     */
     function setMessage($message) 
     {
         $this->message = $message;
     }
     
+    /**
+     * Obtener parametros
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  String
+     * @return Parameters
+     */
     public function getParameter($key,$default = null) 
     {
         if($this->hasArgument($key)){
