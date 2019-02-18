@@ -23,9 +23,10 @@ class LinkGeneratorPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container) 
     {
-        // if($container->getParameter('app.service.link_generator.enable') === false){
-        //     return;
-        // }
+        if($container->getParameter('atechnologies_tools.service.link_generator.enable') === false){
+            return;
+        }
+        
         $definition = $container->getDefinition('atechnologies.service.link_generator');
         $tags = $container->findTaggedServiceIds('link_generator.item');
         

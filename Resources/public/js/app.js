@@ -12,6 +12,29 @@
 
 var app = angular.module('atechnologies', ['ngTable'])
 
+.directive('ngLoading', function() {
+    return {
+        restrict: "A",
+        scope: false,
+        link: function (scope, element, attrs) {
+            var loading = "<span class='ellipsis_animated-inner'>" +
+                    "<span>.</span>" +
+                    "<span>.</span>" +
+                    "<span>.</span>" +
+                    "</span>";
+            var loadingLayer = angular.element("<div class='loading'><p class='blocktext'>" + loading + "</p></div>");
+            element.addClass("ng-loading");
+            scope.$watch(attrs.ngLoading, function (value) {
+                if (value) {
+                    element.append(loadingLayer);
+                } else {
+                    loadingLayer.remove();
+                }
+            });
+        }
+    };
+})
+
 .directive('apiDataUrl',function ($rootScope){  
   return {
     link: function(scope, element, attrs){

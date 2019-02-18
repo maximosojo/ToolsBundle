@@ -29,7 +29,8 @@ class CoreExtension extends \Twig_Extension
     {
        return array(
             new \Twig_SimpleFunction('breadcrumb', array($this, 'breadcrumb'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('str_padleft', array($this, 'strpadleft'))
+            new \Twig_SimpleFunction('str_padleft', array($this, 'strpadleft')),
+            new \Twig_SimpleFunction('get_parameter', array($this, 'getParameter'))
         );
     }
     
@@ -61,6 +62,17 @@ class CoreExtension extends \Twig_Extension
         return str_pad($string, $pad_lenght, $pad_string, STR_PAD_LEFT);
     }
     
+    /**
+     * getParameter Obtener parametros de container
+     *  
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return Parameters
+     */
+    public function getParameter($parameter = null)
+    {
+        return $this->container->getParameter($parameter);
+    }
+
     /**
      *     breadcrumb
      *     @author Máximo Sojo <maxsojo13@gmail.com>

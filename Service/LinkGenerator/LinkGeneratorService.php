@@ -67,6 +67,7 @@ class LinkGeneratorService implements ContainerAwareInterface
         $this->init = true;
         $configsObjectsDeft = $iconsDefinition = [];
         $this->linkGeneratorItemsForClass = [];
+        
         foreach ($this->linkGeneratorItems as $linkGeneratorItem) {
             $configObjects = $linkGeneratorItem->getConfigObjects();
             foreach ($configObjects as $key => $configObject) {
@@ -77,6 +78,7 @@ class LinkGeneratorService implements ContainerAwareInterface
             $configsObjectsDeft = array_merge($configsObjectsDeft,$configObjects);
             $iconsDefinition = array_merge($iconsDefinition,$linkGeneratorItem->getIconsDefinition());
         }
+
         $this->iconsDefinition = $iconsDefinition;
         $defaultConfig = array(
             'type' => self::TYPE_LINK_DEFAULT,
@@ -88,6 +90,7 @@ class LinkGeneratorService implements ContainerAwareInterface
             'translation_domain' => null,
             'linkGeneratorItem' => null,
         );
+
         $configsObjects = array();
         foreach ($configsObjectsDeft as $key => $configObject)
         {
@@ -127,15 +130,18 @@ class LinkGeneratorService implements ContainerAwareInterface
         $route = $entityConfig['route'];
         $routeParameters = $entityConfig['routeParameters'];
         $labelMethod = $entityConfig['labelMethod'];
-        
+        $color = $this->container->getParameter('atechnologies_tools.service.link_generator.color');
+
         if($labelMethod !== null){
             $label = call_user_func_array([$entity, $labelMethod],array());
-        }else{
+        } else {
             $label = (string)$entity;
         }
+
         if($entityConfig["translation_domain"] !== null){
             $label = $this->trans($label,array(),$entityConfig["translation_domain"]);
         }
+
         $originalLabel = $label;
         $truncate = 0;
         $addTitle = false;
@@ -155,24 +161,26 @@ class LinkGeneratorService implements ContainerAwareInterface
         if($entityConfig['icon'] !== null){
             $icon = sprintf('<i class="%s"></i>',$entityConfig['icon']);
         }
+
         $buildUrl = $entityConfig["buildUrl"];
         if($buildUrl === null){
             $href = $this->buildUrl($entity, $entityConfig);
         }else{
             $href = $entityConfig["linkGeneratorItem"]->$buildUrl($entity, $entityConfig);
         }
+
         $entityConfig['url'] = $href;
         if(isset($parameters['_onlyUrl']) && $parameters['_onlyUrl'] === true){
             return $href;
         }
+
+        $link = sprintf('%s&nbsp;%s',$icon,$label);
         if($href != ''){
             $extraParameters = '';
             if($addTitle === true){
                 $extraParameters .= 'title = "'.$originalLabel.'"';
             }
-            $link = sprintf('<a href="%s" style="color:#3cbc4b" %s>%s&nbsp;%s</a>',$href,$extraParameters,$icon,$label);
-        }else{
-            $link = sprintf('%s&nbsp;%s',$icon,$label);
+            $link = sprintf('<a href="%s" style="color:%s" %s>%s&nbsp;%s</a>',$href,$color,$extraParameters,$icon,$label);
         }
         
         if(isset($parameters['_onlyConf']) && $parameters['_onlyConf'] === true){

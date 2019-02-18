@@ -98,4 +98,14 @@ abstract class BaseMenuBuilder implements \Symfony\Component\DependencyInjection
 
         return $this->container->get('security.authorization_checker')->isGranted($attributes, $subject);
     }
+
+    /**
+     * Consulta de container
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return ContainerInterface
+     */
+    public function getContainer()
+    {
+        return $this->container;
+    }
 }

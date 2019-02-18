@@ -85,6 +85,17 @@ class MyJsonResponse extends JsonResponse
     }
 
     /**
+     * Redirección
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  String
+     */
+    public function setForceRedirect($url) 
+    {
+        $this->extraData["force_redirect"] = $url;
+        $this->setData($this->originalData);
+    }
+
+    /**
      * Reload json
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      */
