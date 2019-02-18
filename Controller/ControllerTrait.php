@@ -20,6 +20,7 @@ trait ControllerTrait
 {
     /**
      * $jsonResponse
+     * @var JsonResponse
      */
     private $jsonResponse;
 
@@ -42,6 +43,10 @@ trait ControllerTrait
     /**
      * Set flash in json reponse
      * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  String
+     * @param  String
+     * @param  array
+     * @param  integer
      */
     public function setFlashJson($typeFlash, $value, $parameters = array(), $status = 200)
     {
@@ -53,9 +58,8 @@ trait ControllerTrait
 
     /**
      * Json redirect
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  [type]
-     * @return [type]
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  String
      */
     public function setJsonRedirect($url)
     {
@@ -67,9 +71,8 @@ trait ControllerTrait
 
     /**
      * Json force redirect
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  [type]
-     * @return [type]
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  String
      */
     public function setForceRedirect($url)
     {
@@ -81,9 +84,7 @@ trait ControllerTrait
 
     /**
      * Json redirect
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
-     * @param  [type]
-     * @return [type]
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      */
     public function setForceReload()
     {
@@ -98,8 +99,8 @@ trait ControllerTrait
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  String
      * @param  array
-     * @param  String
-     * @return String
+     * @param  string
+     * @return Translation
      */
     protected function trans($id,array $parameters = array(), $domain = "")
     {
