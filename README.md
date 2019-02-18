@@ -3,7 +3,7 @@ AtechnologiesToolsBundle
 
 AtechnologiesToolsBundle desarrollado para Symfony 2.+, 3.+, proporciona un marco flexible de utilizades para la gestión de proyectos que apunta a manejar tareas comunes como repositorios, paginadores, utils en general.
 
-[![Total Downloads](https://img.shields.io/badge/Downloads-165-brightgreen.svg)](https://packagist.org/packages/atechnologies/tools-bundle) 
+[![Total Downloads](https://img.shields.io/badge/Downloads-208-brightgreen.svg)](https://packagist.org/packages/atechnologies/tools-bundle) 
 
 ## Instalación
 
@@ -15,7 +15,8 @@ Las instrucciones de instalación y confirguración se encuentran en la [Documen
 ## Documentación
 
 1. [Inslatación](Resources/doc/install.md)
-2. [Componente paginador](Resources/doc/paginator.md)
+2. [Componente Paginador](Resources/doc/paginator.md)
+2. [Componente Prefijo de Tablas BD](Resources/doc/table_prefix.md)
 
 ## Licencia
 
