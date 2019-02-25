@@ -30,7 +30,8 @@ class CoreExtension extends \Twig_Extension
        return array(
             new \Twig_SimpleFunction('breadcrumb', array($this, 'breadcrumb'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('str_padleft', array($this, 'strpadleft')),
-            new \Twig_SimpleFunction('get_parameter', array($this, 'getParameter'))
+            new \Twig_SimpleFunction('get_parameter', array($this, 'getParameter')),
+            new \Twig_SimpleFunction('render_tabs', array($this, 'renderTabs'),array('is_safe' => ['html']))            
         );
     }
     
@@ -74,12 +75,12 @@ class CoreExtension extends \Twig_Extension
     }
 
     /**
-     *     breadcrumb
-     *     @author Máximo Sojo <maxsojo13@gmail.com>
-     *     @date        2017-01-10
-     *     @anotherdate 2017-01-10T13:34:59-0430
+     * Breadcrumb
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  array
+     * @return Breadcrumb
      */
-    function breadcrumb($args = []) 
+    public function breadcrumb($args = []) 
     {
         $parameters = array();
         $args = func_get_args();
@@ -127,7 +128,7 @@ class CoreExtension extends \Twig_Extension
      * @param type $decimals
      * @return type
      */
-    function myNumberFormat($value, $decimals = 2) 
+    public function myNumberFormat($value, $decimals = 2) 
     {
         return StringUtil::numberFormat($value, $decimals, ',', '.');
     }
@@ -166,6 +167,21 @@ class CoreExtension extends \Twig_Extension
         }
         
         return $dateFormated;
+    }
+
+    /**
+     * Render base tabs
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  \Atechnologies\ToolsBundle\Model\Core\Tab\Tab
+     * @param  array
+     * @return [type]
+     */
+    public function renderTabs(\Atechnologies\ToolsBundle\Model\Core\Tab\Tab $tab,array $parameters = []) 
+    {
+        $parameters["tab"] = $tab;
+        return $this->container->get('templating')->render("AtechnologiesToolsBundle:tab:tabs.html.twig", 
+            $parameters
+        );
     }
 
     /**
