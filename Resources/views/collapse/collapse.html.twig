@@ -1,0 +1,17 @@
+<div id="accordion_{{id}}" ng-controller="CollapseController as collapseCtrl" ng-click="collapseCtrl.setId('{{id}}')">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">
+          <button class="btn btn-link" ng-click="collapseCtrl.collapse('{{id}}','{{url}}')">
+            {% if icon is defined %}
+              <i class="{{icon}}"></i>
+            {% endif %}
+            {% if title is defined %}
+              {{title|trans({},'titles')}}
+            {% endif %}
+          </button>
+        </h5>
+      </div>
+      <div id="{{id}}" class="ng-class:collapseCtrl.class" data-parent="#accordion_{{id}}" ng-include="collapseCtrl.url" ng-loading="collapseCtrl.loading"></div>
+    </div>
+</div>
