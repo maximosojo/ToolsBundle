@@ -25,7 +25,6 @@ use Exception;
 abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2Extension\Context\KernelAwareContext 
 {
     use \Behat\Symfony2Extension\Context\KernelDictionary;
-
     use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 
     /**
@@ -98,6 +97,16 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
            throw new Exception("No html element found for the selector ('$selector')");
        }
        return $element;
+    }
+
+    /**
+     * Espera unos segundos antes de ejecutar el siguiente paso
+     * Example: I wait for 5 seconds
+     * @Given /^I wait for (\d+) seconds$/
+     */
+    public function iWaitForSeconds($seconds)
+    {
+        $this->getSession()->wait($seconds * 1000);
     }
 
     /**
