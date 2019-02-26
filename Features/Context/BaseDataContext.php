@@ -75,12 +75,29 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
     {
         $this->spin(function($context) use ($selector) {
             try {
-                $context->findElement($selector);
+                $this->findElement($selector);
                 return false;
             } catch (Exception $ex) {
                 return true;
             }
        });
+    }
+
+    /**
+    * 
+    * @param type $selector
+    * @return \Behat\Mink\Element\NodeElement
+    * @throws Exception
+    */
+    protected function findElement($selector)
+    {
+       $page = $this->getSession()->getPage();
+       $element = $page->find('css', $selector);
+
+       if (empty($element)) {
+           throw new Exception("No html element found for the selector ('$selector')");
+       }
+       return $element;
     }
 
     /**

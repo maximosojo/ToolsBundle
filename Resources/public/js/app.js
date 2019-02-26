@@ -191,3 +191,54 @@ var app = angular.module('atechnologies', ['ngTable'])
         tab.loading = false;
     };
 })
+
+.controller('CollapseController', function($scope,$rootScope,$window){
+    var self = this;
+    self.url = null;
+    self.class = "collapse";
+    self.loading = false;
+    self.urlRender = null;
+    self.id = null;
+
+    this.setId = function(id){
+        if (!id) {
+            return;
+        }
+        self.id = id;
+        $window.localStorage.setItem("collapse_id",id);
+    }
+
+    this.collapse = function(id,url){
+        self.setId(id);
+        self.urlRender = url;
+        // $window.localStorage.removeItem(key)
+        this.show(false);
+    }
+    
+    this.show = function(refresh){
+        self.loading = true;
+        if (self.class.indexOf("show") != -1 && !refresh) {
+            self.class = "collapsing";
+            self.class = "collapse";
+        } else {
+            if ($window.localStorage.getItem("collapse_id") == self.id) {
+                if (!self.urlRender) {
+                    return;
+                }
+                self.class = "collapsing";
+                self.class = "collapse show";
+                self.url = generateUrl(self.urlRender);
+            }            
+        }
+
+        self.loading = false;
+    }
+
+    this.refresh = function(){
+        this.show(true);
+    }
+
+    $scope.$on("refresh_collapse",function(){
+        self.refresh();
+    })
+})
