@@ -31,7 +31,8 @@ class CoreExtension extends \Twig_Extension
             new \Twig_SimpleFunction('breadcrumb', array($this, 'breadcrumb'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('str_padleft', array($this, 'strpadleft')),
             new \Twig_SimpleFunction('get_parameter', array($this, 'getParameter')),
-            new \Twig_SimpleFunction('render_tabs', array($this, 'renderTabs'),array('is_safe' => ['html']))            
+            new \Twig_SimpleFunction('render_tabs', array($this, 'renderTabs'),array('is_safe' => ['html'])),
+            new \Twig_SimpleFunction('render_collapse', array($this, 'renderCollapse'),array('is_safe' => ['html']))
         );
     }
     
@@ -174,12 +175,26 @@ class CoreExtension extends \Twig_Extension
      * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
      * @param  \Atechnologies\ToolsBundle\Model\Core\Tab\Tab
      * @param  array
-     * @return [type]
+     * @return Tabs
      */
     public function renderTabs(\Atechnologies\ToolsBundle\Model\Core\Tab\Tab $tab,array $parameters = []) 
     {
         $parameters["tab"] = $tab;
         return $this->container->get('templating')->render("AtechnologiesToolsBundle:tab:tabs.html.twig", 
+            $parameters
+        );
+    }
+
+    /**
+     * Render base tabs
+     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @param  array
+     * @return Collapse
+     */
+    public function renderCollapse(array $parameters = []) 
+    {
+        $parameters["id"] = "_collapse_".sha1($parameters['title']);
+        return $this->container->get('templating')->render("AtechnologiesToolsBundle:collapse:collapse.html.twig", 
             $parameters
         );
     }
