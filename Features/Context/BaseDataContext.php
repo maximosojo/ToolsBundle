@@ -151,6 +151,169 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
     }
 
     /**
+     * Limpia clases
+     * @Given a clean entity :class
+     */
+    public function aCleanClass($class, $andWhere = null)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if ($em->getFilters()->isEnabled('softdeleteable')) {
+            $em->getFilters()->disable('softdeleteable');
+        }
+        
+        $query = $em->createQuery("DELETE FROM " . $class . " " . $andWhere);
+        $query->execute();
+        $em->flush();
+        $em->clear();
+    }
+
+    /**
+     * Registro de escenario
+     *  
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  String $key
+     * @param  String $value
+     */
+    public function setScenarioParameter($key, $value) 
+    {
+        if ($this->scenarioParameters === null) {
+            $this->initParameters();
+        }
+        if (is_array($value)) {
+            foreach ($value as $subKey => $val) {
+                $newKey = $key . "." . $subKey;
+                $this->setScenarioParameter($newKey, $val);
+            }
+        } else {
+            if (!$this->isScenarioParameter($key)) {
+                $key = "%" . $key . "%";
+            }
+            $this->scenarioParameters[$key] = $value;
+        }
+    }
+
+    /**
+     * Verifica si el texto es un parametro
+     * @param type $value
+     * @return boolean
+     */
+    public function isScenarioParameter($value,$checkExp = false) 
+    {
+        if ($this->scenarioParameters === null) {
+            $this->initParameters();
+        }
+        $result = isset($this->scenarioParameters[$value]);
+        if (!$result) {
+            if (substr($value, 0, 1) === "%" && substr($value, strlen($value) - 1, 1) === "%") {
+                $result = true;
+            }
+        }
+        if(!$result && $checkExp === true){
+            foreach ($this->scenarioParameters as $key => $v) {
+                if(preg_match("/".$key."/", $value)){
+                    $result = true;
+                    break;
+                }
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Parsea un parametro para ver si es una constante o una traduccion con parametros
+     * Constante seria "Pandco\Bundle\AppBundle\Model\Base\TransactionItemInterface__STATUS_FINISH"
+     * Traduccion con 'validators.invalid.phone.nro::{"%phoneNro%":"02475550001"}'
+     * @param type $value
+     * @param array $parameters
+     * @param type $domain
+     * @return type
+     * @throws \RuntimeException
+     */
+    public function parseParameter($value,$parameters = [],$domain = "flashes") 
+    {
+        $valueExplode = explode("__",$value);
+        if(is_array($valueExplode) && count($valueExplode) == 2){
+//            var_dump($valueExplode[0]);
+            $reflection = new \ReflectionClass($valueExplode[0]);
+            if(!$reflection->hasConstant($valueExplode[1])){
+                throw new \RuntimeException(sprintf("The class '%s' no has a constant name '%s'",$valueExplode[0],$valueExplode[1]));
+            }
+            $value = $reflection->getConstant($valueExplode[1]);
+        } else if ($this->isScenarioParameter($value)) {
+           $value = $this->getScenarioParameter($value);
+        }else {
+            if($parameters === null){
+                $parameters = [];
+            }
+            $value = $this->parseTrans($value, $parameters, $domain);
+        }
+        return $value;
+    }
+
+    /**
+     * Realiza el parse de un string para traducirlo
+     * validators.sale.registration.code_quantity_min::{"%n%":2}::validators seria un ejemplo
+     * validators.sale.registration.code_quantity_min::{}::validators seria un ejemplo
+     * @param type $id
+     */
+    protected function parseTrans($id,array $parameters = [],$domain = "flashes") 
+    {
+        $text = $id;
+        $separator = "::";
+        $subSeparator = ";;";
+        
+        $textExplode = explode($separator, $id);
+        if(is_array($textExplode)){
+            //id a traducir
+            if(isset($textExplode[0])){
+                $text = $textExplode[0];
+            }
+            //Parametros de la traduccion
+            if(isset($textExplode[1])){
+                $paramsString = $textExplode[1];
+//                var_dump($paramsString);
+                $parametersParsed = json_decode($paramsString,true);
+                if(is_array($parametersParsed)){
+                    $this->parseScenarioParameters($parametersParsed);
+                    foreach ($parametersParsed as $x => $v) {
+                        if(strpos($v,$subSeparator) !== false){
+                            $v = str_replace($subSeparator, $separator, $v);
+                            $parametersParsed[$x] = $this->parseTrans($v);
+                        }
+                    }
+//                    var_dump($parametersParsed);
+                    $parameters = $parametersParsed;
+                }
+            }
+            //Dominio e la traduccion
+            if(isset($textExplode[2])){
+                $domain = $textExplode[2];
+            }
+        }
+        if(strpos($text,"|") && isset($parameters["{{ limit }}"])){
+            $trans = $this->container->get('translator')->transChoice($text, (int)$parameters["{{ limit }}"], $parameters,$domain);
+        }else {
+            $trans = $this->trans($text,$parameters,$domain);
+        }
+        return $trans;
+    }
+
+    /**
+     * Busca los parametros dentro de un array por su indice y le hace el parse a su valor final.
+     * @param array $parameters
+     * @param type $checkExp
+     */
+    public function parseScenarioParameters(array &$parameters,$checkExp = false) 
+    {
+        foreach ($parameters as $key => $value) {
+            if($this->isScenarioParameter($value,$checkExp)){
+                $parameters[$key] = $this->getScenarioParameter($value);
+            }
+        }
+        return $parameters;
+    }
+
+    /**
      * @return \Doctrine\Bundle\DoctrineBundle\Registry
      */
     protected function getDoctrine() 
