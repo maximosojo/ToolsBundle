@@ -19,7 +19,7 @@ use Symfony\Component\Lock\Store\SemaphoreStore;
 
 /**
  * Base para comandos
- * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+ * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 abstract class BaseCommand extends \Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand 
 {

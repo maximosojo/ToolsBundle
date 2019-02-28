@@ -350,7 +350,7 @@ class SearchQueryBuilder
     
     /**
      * Sorting apply
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  array
      * @param  array
      * @return [type]
@@ -387,7 +387,7 @@ class SearchQueryBuilder
     
     /**
      * Normalize
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  string
      * @param  string
      * @return string response
@@ -407,7 +407,7 @@ class SearchQueryBuilder
 
     /**
      * Alies repository
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return string
      */
     private function getAlies()

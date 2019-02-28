@@ -172,7 +172,7 @@ class CoreExtension extends \Twig_Extension
 
     /**
      * Render base tabs
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  \Atechnologies\ToolsBundle\Model\Core\Tab\Tab
      * @param  array
      * @return Tabs
@@ -187,7 +187,7 @@ class CoreExtension extends \Twig_Extension
 
     /**
      * Render base tabs
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  array
      * @return Collapse
      */
@@ -201,7 +201,7 @@ class CoreExtension extends \Twig_Extension
 
     /**
      * This is a cool function
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  [type]
      * @param  array
      * @param  string
@@ -240,7 +240,7 @@ class CoreExtension extends \Twig_Extension
 
     /**
      * Configuration
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return [type]
      */
     public function getConfiguration() 

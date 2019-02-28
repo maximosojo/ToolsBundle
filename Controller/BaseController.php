@@ -21,7 +21,7 @@ use Atechnologies\ToolsBundle\DependencyInjection\DoctrineTrait;
 /**
  * Controlador base
  *
- * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+ * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 class BaseController extends FOSRestController
 {
@@ -55,7 +55,7 @@ class BaseController extends FOSRestController
     
     /**
      * Respuestas json mejoradas
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  string  $message
      * @param  integer $code 
      * @return JsonResponse
