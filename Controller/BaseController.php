@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
-use Atechnologies\ToolsBundle\DependencyInjection\DoctrineTrait;
 
 /**
  * Controlador base
@@ -25,8 +24,8 @@ use Atechnologies\ToolsBundle\DependencyInjection\DoctrineTrait;
  */
 class BaseController extends FOSRestController
 {
-    use DoctrineTrait;
     use ControllerTrait;
+    use \Atechnologies\ToolsBundle\DependencyInjection\DoctrineTrait;
 
     /**
      * Tipo error
