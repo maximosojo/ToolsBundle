@@ -14,13 +14,14 @@ namespace Maxtoan\ToolsBundle\Model\SequenceGenerator;
 use LogicException;
 use Doctrine\Common\Util\ClassUtils;
 use Maxtoan\ToolsBundle\Interfaces\SequenceGenerator\ItemReferenceInterface;
+use Maxtoan\ToolsBundle\Interfaces\SequenceGenerator\SequenceGeneratorInterface;
 
 /**
  * Base del generador de secuencias
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-abstract class SequenceGenerator implements SequenceGeneratorBaseInterface
+abstract class SequenceGenerator implements SequenceGeneratorInterface
 {
     /**
      * Instancia del generador de secuencias
@@ -41,6 +42,7 @@ abstract class SequenceGenerator implements SequenceGeneratorBaseInterface
         $field = $config['field'];
         $qb = $this->sequenceGenerator->createQueryBuilder();
         $qb->from($className,'p');
+        
         return $this->sequenceGenerator->generateNext($qb, $mask,$field,[],$config);
     }
     

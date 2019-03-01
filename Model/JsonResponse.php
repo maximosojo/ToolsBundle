@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Custom\HttpFoundation;
+namespace Maxtoan\ToolsBundle\Model;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\JsonResponse as JsonResponseBase;
 
 /**
- * MyJsonResponse custom
+ * JsonResponse custom
  * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class MyJsonResponse extends JsonResponse 
+class JsonResponse extends JsonResponseBase 
 {   
     /**
      * $originalData

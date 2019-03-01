@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Model\SequenceGenerator;
+namespace Maxtoan\ToolsBundle\Interfaces\SequenceGenerator;
 
 /**
- *
+ * Interfas de generador de secuencia
+ * 
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
 interface SequenceGeneratorInterface 

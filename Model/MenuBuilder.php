@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Menu;
+namespace Maxtoan\ToolsBundle\Model;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  *
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-abstract class BaseMenuBuilder implements \Symfony\Component\DependencyInjection\ContainerAwareInterface
+abstract class MenuBuilder implements \Symfony\Component\DependencyInjection\ContainerAwareInterface
 {
     use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Model\Core\Tab;
+namespace Maxtoan\ToolsBundle\Model\Tab;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -157,8 +157,8 @@ class Tab
     
     /**
      * Add tab
-     * @param \Maxtoan\ToolsBundle\Model\Core\Tab\TabContent $tabContent
-     * @return \Maxtoan\ToolsBundle\Model\Core\Tab\Tab
+     * @param \Maxtoan\ToolsBundle\Model\Tab\TabContent $tabContent
+     * @return \Maxtoan\ToolsBundle\Model\Tab\Tab
      * @throws \RuntimeException
      */
     public function addTabContent(TabContent $tabContent) 
