@@ -180,7 +180,7 @@ class CoreExtension extends \Twig_Extension
     public function renderTabs(\Maxtoan\ToolsBundle\Model\Core\Tab\Tab $tab,array $parameters = []) 
     {
         $parameters["tab"] = $tab;
-        return $this->container->get('templating')->render("AtechnologiesToolsBundle:tab:tabs.html.twig", 
+        return $this->container->get('templating')->render("MaxtoanToolsBundle:tab:tabs.html.twig", 
             $parameters
         );
     }
@@ -194,7 +194,7 @@ class CoreExtension extends \Twig_Extension
     public function renderCollapse(array $parameters = []) 
     {
         $parameters["id"] = "_collapse_".sha1($parameters['title']);
-        return $this->container->get('templating')->render("AtechnologiesToolsBundle:collapse:collapse.html.twig", 
+        return $this->container->get('templating')->render("MaxtoanToolsBundle:collapse:collapse.html.twig", 
             $parameters
         );
     }
@@ -245,7 +245,7 @@ class CoreExtension extends \Twig_Extension
      */
     public function getConfiguration() 
     {
-        return $this->container->get("atechnologies.service.configuration");
+        return $this->container->get("maxtoan.service.configuration");
     }
 
     /**
@@ -255,6 +255,6 @@ class CoreExtension extends \Twig_Extension
      */
     public function getName() 
     {
-        return 'atechnologies_core_extension';
+        return 'maxtoan_core_extension';
     }
 }

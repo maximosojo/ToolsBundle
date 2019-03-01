@@ -16,7 +16,7 @@ use Maxtoan\ToolsBundle\Model\Core\Tab\Tab;
 use Maxtoan\ToolsBundle\Model\Core\Tab\TabContent;
 
 /**
- * Servicio generador de tabs (atechnologies.manager.tabs)
+ * Servicio generador de tabs (maxtoan.manager.tabs)
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 class TabsManager extends \Maxtoan\ToolsBundle\Service\BaseService 

@@ -1,18 +1,18 @@
 services:
 # Base service
-  atechnologies.service.base:
+  maxtoan_tools.service.base:
       class: Maxtoan\ToolsBundle\Service\BaseService
       calls: 
           - [setContainer, ['@service_container']]
 
 # Configuraciones
-  atechnologies.service.configuration:
+  maxtoan_tools.service.configuration:
       class: Maxtoan\ToolsBundle\Service\Configuration      
       calls: 
           - [setContainer, ['@service_container']]
 
 # Extension tools para breadcrumb
-  atechnologies.core.extension:
+  maxtoan_tools.core.extension:
       class: Maxtoan\ToolsBundle\Twig\Extension\CoreExtension
       tags:
           - { name: twig.extension}      
@@ -20,24 +20,24 @@ services:
           - [setContainer, ['@service_container']]
           
 # Secuence generator
-  atechnologies.sequence_generator:
+  maxtoan_tools.sequence_generator:
       class: Maxtoan\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService
       calls: 
           - [setContainer, ['@service_container']]
           
 # Repository Factory
-  atechnologies.doctrine.repository.factory:
+  maxtoan_tools.doctrine.repository.factory:
         class: Maxtoan\ToolsBundle\Repository\Factory
         arguments:
             - []
             - '@service_container'
-            - '@atechnologies.doctrine.repository.factory.default'
+            - '@maxtoan_tools.doctrine.repository.factory.default'
 
-  atechnologies.doctrine.repository.factory.default:
+  maxtoan_tools.doctrine.repository.factory.default:
       class: Doctrine\ORM\Repository\DefaultRepositoryFactory
 
   # Manejador de tabs
-  atechnologies.manager.tabs:
+  maxtoan_tools.manager.tabs:
       class: Maxtoan\ToolsBundle\Service\Tabs\TabsManager
       arguments: ["@request_stack"]
       calls: 

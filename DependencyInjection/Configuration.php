@@ -32,7 +32,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('atechnologies_tools', 'array');
+        $rootNode = $treeBuilder->root('maxtoan_tools', 'array');
 
         $rootNode
             ->children()

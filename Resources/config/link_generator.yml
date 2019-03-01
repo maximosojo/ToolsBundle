@@ -1,13 +1,13 @@
 services:
   # Generador de enlaces
-  atechnologies.service.link_generator:
+  maxtoan_tools.service.link_generator:
       class: Maxtoan\ToolsBundle\Service\LinkGenerator\LinkGeneratorService
       calls: 
           - [setContainer, ['@service_container']]
   # Extension Twig generador de link
-  atechnologies.twig.extension_link:
+  maxtoan_tools.twig.extension_link:
       class: Maxtoan\ToolsBundle\Twig\Extension\LinkGeneratorExtension
       tags:
           - { name: twig.extension}
       calls:
-          - [ setLinkGeneratorService, ['@atechnologies.service.link_generator']]
+          - [ setLinkGeneratorService, ['@maxtoan_tools.service.link_generator']]

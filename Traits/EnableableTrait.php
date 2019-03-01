@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * EnableableTrait
  *
- * @author Matías Jiménez matei249@gmail.com <matjimdi at atechnologies>
+ * @author Matías Jiménez <matei249@gmail.com>
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 trait EnableableTrait 

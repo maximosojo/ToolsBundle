@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Exception;
 
 /**
- * Generador de links por objeto (atechnologies.service.link_generator)
+ * Generador de links por objeto (maxtoan.service.link_generator)
  *
  * @author Carlos Mendoza<inhack20@gmail.com>
  */
@@ -130,7 +130,7 @@ class LinkGeneratorService implements ContainerAwareInterface
         $route = $entityConfig['route'];
         $routeParameters = $entityConfig['routeParameters'];
         $labelMethod = $entityConfig['labelMethod'];
-        $color = $this->container->getParameter('atechnologies_tools.service.link_generator.color');
+        $color = $this->container->getParameter('maxtoan_tools.service.link_generator.color');
 
         if($labelMethod !== null){
             $label = call_user_func_array([$entity, $labelMethod],array());

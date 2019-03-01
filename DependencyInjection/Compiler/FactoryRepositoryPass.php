@@ -32,7 +32,7 @@ class FactoryRepositoryPass implements CompilerPassInterface
     public function process(ContainerBuilder $container) 
     {
         $tag = "app.repository";
-        $factory = $container->findDefinition('atechnologies.doctrine.repository.factory');
+        $factory = $container->findDefinition('maxtoan_tools.doctrine.repository.factory');
  
         $repositories = array();
         foreach ($container->findTaggedServiceIds($tag) as $id => $params) {

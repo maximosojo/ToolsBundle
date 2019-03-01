@@ -17,7 +17,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Servicio base con implementación de funciones genericas compartidas
- * service (atechnologies.service.base)
+ * service (maxtoan_tools.service.base)
+ * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 class BaseService implements ContainerAwareInterface 

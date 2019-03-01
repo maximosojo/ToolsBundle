@@ -21,10 +21,10 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
- * AtechnologiestoolsExtension
+ * MaxtoanToolsExtension
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class AtechnologiesToolsExtension extends Extension
+class MaxtoanToolsExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {	
@@ -42,7 +42,7 @@ class AtechnologiesToolsExtension extends Extension
 
         if($config['link_generator']['enable'] === true) {
             $loaderYml->load('link_generator.yml');
-            $container->setParameter('atechnologies_tools.service.link_generator.color', $config['link_generator']['color']); 
+            $container->setParameter('maxtoan_tools.service.link_generator.color', $config['link_generator']['color']); 
         }
 
         if($config['table_prefix']['enable'] === true ) {
@@ -55,10 +55,10 @@ class AtechnologiesToolsExtension extends Extension
                     ->addTag('doctrine.event_subscriber')
                     ;
             $tablePrefixListerner->addMethodCall("setConfig",array($config['table_prefix']));
-            $container->setDefinition('atechnologies_tools.table_prefix_subscriber', $tablePrefixListerner);
+            $container->setDefinition('maxtoan_tools.table_prefix_subscriber', $tablePrefixListerner);
         }
         
-        $container->setParameter('atechnologies_tools.service.link_generator.enable', $config['link_generator']['enable']); 
-        $container->setParameter('atechnologies_tools.loading.color', $config['loading']['color']); 
+        $container->setParameter('maxtoan_tools.service.link_generator.enable', $config['link_generator']['enable']); 
+        $container->setParameter('maxtoan_tools.loading.color', $config['loading']['color']); 
     }
 }

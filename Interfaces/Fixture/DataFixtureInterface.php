@@ -13,7 +13,7 @@ namespace Maxtoan\ToolsBundle\Interfaces\Fixture;
 
 /**
  * DataFixtureInterface
- * @author Matías Jiménez matei249@gmail.com <matjimdi at atechnologies>
+ * @author Matías Jiménez <matei249@gmail.com>
  */
 interface DataFixtureInterface 
 {

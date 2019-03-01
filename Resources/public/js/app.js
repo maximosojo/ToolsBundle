@@ -10,7 +10,7 @@
 
 'use strict';
 
-var app = angular.module('atechnologies', ['ngTable'])
+var app = angular.module('maxtoan_tools', ['ngTable'])
 
 .directive('ngLoading', function() {
     return {

@@ -13,7 +13,7 @@ namespace Maxtoan\ToolsBundle\Service;
 
 /**
  * Configuracion general
- * Service (atechnologies.service.configuration)
+ * Service (maxtoan_tools.service.configuration)
  * 
  * @author Máximo Sojo <maxsojo13@gmail.com> 
  */

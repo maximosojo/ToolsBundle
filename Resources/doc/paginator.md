@@ -1,4 +1,4 @@
-AtechnologiesToolsBundle
+MaxtoanToolsBundle
 ========================
 
 ## Paginator
@@ -27,7 +27,7 @@ Puede configurar el tipo de retorno que desea del paginador:
 3. dataTables
 
 ``` yml
-atechnologies_tools:
+maxtoan_tools:
     paginator:
         format_array: standard #default, standard ó dataTables
 

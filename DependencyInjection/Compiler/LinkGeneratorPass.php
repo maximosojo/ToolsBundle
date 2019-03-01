@@ -23,11 +23,11 @@ class LinkGeneratorPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container) 
     {
-        if($container->getParameter('atechnologies_tools.service.link_generator.enable') === false){
+        if($container->getParameter('maxtoan_tools.service.link_generator.enable') === false){
             return;
         }
         
-        $definition = $container->getDefinition('atechnologies.service.link_generator');
+        $definition = $container->getDefinition('maxtoan_tools.service.link_generator');
         $tags = $container->findTaggedServiceIds('link_generator.item');
         
         foreach ($tags as $id => $attributes) {
