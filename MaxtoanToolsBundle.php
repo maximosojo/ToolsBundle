@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan package.
+ * This file is part of the Maxtoan Tools package.
  * 
  * (c) https://maxtoan.github.io/tools-bundle
  * 
