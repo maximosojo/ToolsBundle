@@ -200,55 +200,6 @@ class CoreExtension extends \Twig_Extension
     }
 
     /**
-     * This is a cool function
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  [type]
-     * @param  array
-     * @param  string
-     * @return [type]
-     */
-    protected function trans($id, array $parameters = array(), $domain = 'messages') 
-    {
-        return $this->container->get('translator')->trans($id, $parameters, $domain);
-    }
-
-    /**
-     * Get a user from the Security Context
-     *
-     * @return mixed
-     *
-     * @throws LogicException If SecurityBundle is not available
-     *
-     * @see TokenInterface::getUser()
-     */
-    public function getUser() 
-    {
-        if (!$this->container->has('security.context')) {
-            throw new LogicException('The SecurityBundle is not registered in your application.');
-        }
-
-        if (null === $token = $this->container->get('security.context')->getToken()) {
-            return;
-        }
-
-        if (!is_object($user = $token->getUser())) {
-            return;
-        }
-
-        return $user;
-    }
-
-    /**
-     * Configuration
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @return [type]
-     */
-    public function getConfiguration() 
-    {
-        return $this->container->get("maxtoan.service.configuration");
-    }
-
-    /**
      * Returns the name of the extension.
      *
      * @return string The extension name
