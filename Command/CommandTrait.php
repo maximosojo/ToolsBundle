@@ -22,7 +22,7 @@ use Symfony\Component\Lock\Store\SemaphoreStore;
  * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-abstract class ConsoleTrait 
+abstract class CommandTrait 
 {
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle

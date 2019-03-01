@@ -15,7 +15,7 @@ namespace Atechnologies\ToolsBundle\Model\SequenceGenerator;
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-interface SequenceGeneratorBaseInterface 
+interface SequenceGeneratorInterface 
 {
     /**
      * Retorna las clases que esta manejando el generador de secuencia

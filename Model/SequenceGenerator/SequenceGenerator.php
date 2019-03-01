@@ -11,8 +11,8 @@
 
 namespace Atechnologies\ToolsBundle\Model\SequenceGenerator;
 
-use Doctrine\Common\Util\ClassUtils;
 use LogicException;
+use Doctrine\Common\Util\ClassUtils;
 use Atechnologies\ToolsBundle\Interfaces\SequenceGenerator\ItemReferenceInterface;
 
 /**
@@ -20,7 +20,7 @@ use Atechnologies\ToolsBundle\Interfaces\SequenceGenerator\ItemReferenceInterfac
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-abstract class SequenceGeneratorBase implements SequenceGeneratorBaseInterface
+abstract class SequenceGenerator implements SequenceGeneratorBaseInterface
 {
     /**
      * Instancia del generador de secuencias
