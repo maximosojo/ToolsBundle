@@ -28,7 +28,6 @@ class CoreExtension extends \Twig_Extension
     public function getFunctions() 
     {
        return array(
-            new \Twig_SimpleFunction('breadcrumb', array($this, 'breadcrumb'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('str_padleft', array($this, 'strpadleft')),
             new \Twig_SimpleFunction('get_parameter', array($this, 'getParameter')),
             new \Twig_SimpleFunction('render_tabs', array($this, 'renderTabs'),array('is_safe' => ['html'])),
@@ -75,54 +74,6 @@ class CoreExtension extends \Twig_Extension
         return $this->container->getParameter($parameter);
     }
 
-    /**
-     * Breadcrumb
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  array
-     * @return Breadcrumb
-     */
-    public function breadcrumb($args = []) 
-    {
-        $parameters = array();
-        $args = func_get_args();
-        $icon = null;
-        foreach ($args as $key => $arg) {
-            if (empty($arg)) {
-                continue;
-            }
-            $item = new \stdClass();
-            $item->link = null;
-            $item->label = null;
-            if (is_array($arg)) {
-                $count = count($arg);
-                if ($count > 1) {
-                    throw new \LogicException('The array elment must be one, count');
-                }
-                foreach ($arg as $key => $value) {
-                    if ($key == 'icon') {
-                        $icon = $value;
-                    }else{
-                        $item->link = $key;
-                        $item->label = $value;                        
-                    }
-                }
-            } else {
-                $item->label = $arg;
-            }
-            if ($item->link != null || $item->label != null ) {
-                $parameters[] = $item;                
-            }
-        }
-        
-        $data = [
-            'breadcrumb' => $parameters,
-            'icon'       => $icon
-        ];
-
-        $route = realpath(__DIR__ . '/../../Resources/views/');
-        return $this->container->get('templating')->render($route.'/breadcrumb/breadcrumb.html.twig', $data);
-    }
-    
     /**
      * Filtro para formatear numero.
      * @param type $value
