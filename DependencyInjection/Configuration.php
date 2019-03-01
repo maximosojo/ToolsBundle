@@ -22,7 +22,7 @@ use Atechnologies\ToolsBundle\Model\Paginator\Paginator;
  * This information is solely responsible for how the different configuration
  * sections are normalized, and merged.
  *
- * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+ * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 class Configuration implements ConfigurationInterface
 {

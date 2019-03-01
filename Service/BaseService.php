@@ -41,7 +41,7 @@ class BaseService implements ContainerAwareInterface
     
     /**
      * Base de archivos de comandos de impresoras
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return Base url
      */
     public function getBaseUrl()
@@ -74,7 +74,7 @@ class BaseService implements ContainerAwareInterface
     
     /**
      * Traducciones
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  [type]
      * @param  array
      * @param  string

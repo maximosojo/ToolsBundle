@@ -79,7 +79,7 @@ class EntityRepository extends \Doctrine\ORM\EntityRepository implements Contain
     }
     
     /**
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return [type]
      */
     public function findAllPaginated()
@@ -89,7 +89,7 @@ class EntityRepository extends \Doctrine\ORM\EntityRepository implements Contain
     
     /**
      * Carga de formato de respuesta
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return [type]
      */
     public function getFormatPaginator()

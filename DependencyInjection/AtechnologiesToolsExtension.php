@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * AtechnologiestoolsExtension
- * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+ * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 class AtechnologiesToolsExtension extends Extension
 {

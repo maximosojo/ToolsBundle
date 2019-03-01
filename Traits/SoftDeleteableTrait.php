@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * SoftDeleteableTrait
  *
- * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies> 
+ * @author Máximo Sojo <maxsojo13@gmail.com> 
  */
 trait SoftDeleteableTrait 
 {

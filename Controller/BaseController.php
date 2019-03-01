@@ -16,17 +16,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
-use Atechnologies\ToolsBundle\DependencyInjection\DoctrineTrait;
 
 /**
  * Controlador base
  *
- * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+ * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 class BaseController extends FOSRestController
 {
-    use DoctrineTrait;
     use ControllerTrait;
+    use \Atechnologies\ToolsBundle\DependencyInjection\DoctrineTrait;
 
     /**
      * Tipo error
@@ -55,7 +54,7 @@ class BaseController extends FOSRestController
     
     /**
      * Respuestas json mejoradas
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  string  $message
      * @param  integer $code 
      * @return JsonResponse

@@ -15,7 +15,7 @@ namespace Atechnologies\ToolsBundle\Service;
  * Configuracion general
  * Service (atechnologies.service.configuration)
  * 
- * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies> 
+ * @author Máximo Sojo <maxsojo13@gmail.com> 
  */
 class Configuration extends BaseService
 {

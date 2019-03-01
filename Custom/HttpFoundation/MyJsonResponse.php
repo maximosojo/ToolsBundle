@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 /**
  * MyJsonResponse custom
  * 
- * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+ * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 class MyJsonResponse extends JsonResponse 
 {   
@@ -40,7 +40,7 @@ class MyJsonResponse extends JsonResponse
     
     /**
      * Carga de data
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  array
      */
     public function setData($data = array()) 
@@ -55,7 +55,7 @@ class MyJsonResponse extends JsonResponse
     
     /**
      * Mensaje flash
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  String
      * @param  String
      */
@@ -75,7 +75,7 @@ class MyJsonResponse extends JsonResponse
     
     /**
      * Redirección
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  String
      */
     public function setRedirect($url) 
@@ -86,7 +86,7 @@ class MyJsonResponse extends JsonResponse
 
     /**
      * Redirección
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  String
      */
     public function setForceRedirect($url) 
@@ -97,7 +97,7 @@ class MyJsonResponse extends JsonResponse
 
     /**
      * Reload json
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      */
     public function setForceReload() 
     {

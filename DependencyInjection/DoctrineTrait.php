@@ -153,7 +153,7 @@ trait DoctrineTrait
 
     /**
      * Remove object
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  Entity
      * @param  boolean
      * @return Entity
@@ -176,7 +176,7 @@ trait DoctrineTrait
     
     /**
      * Flush  object
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return [type]
      */
     protected function flush() 

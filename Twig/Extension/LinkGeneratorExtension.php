@@ -29,7 +29,7 @@ class LinkGeneratorExtension extends Twig_Extension
     
     /**
      * getFunctions
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return array
      */
     public function getFunctions() 
@@ -72,7 +72,7 @@ class LinkGeneratorExtension extends Twig_Extension
 
     /**
      * set Link Generator
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  LinkGeneratorService
      */
     public function setLinkGeneratorService(LinkGeneratorService $linkGeneratorService) 
@@ -84,7 +84,7 @@ class LinkGeneratorExtension extends Twig_Extension
 
     /**
      * getName
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return name
      */
     public function getName() 

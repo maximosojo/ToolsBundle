@@ -103,7 +103,7 @@ class TabContent
     
     /**
      * getUrl
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return url
      */
     public function getUrl() 
@@ -113,7 +113,7 @@ class TabContent
 
     /**
      * getName
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return [type]
      */
     public function getName() 
@@ -123,7 +123,7 @@ class TabContent
 
     /**
      * getOrder
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return order
      */
     public function getOrder()
@@ -133,7 +133,7 @@ class TabContent
 
     /**
      * setUrl
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  url
      */
     public function setUrl($url) 
@@ -145,7 +145,7 @@ class TabContent
 
     /**
      * setName
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  name
      */
     public function setName($name) 
@@ -157,7 +157,7 @@ class TabContent
 
     /**
      * setOrder
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  order
      */
     public function setOrder($order) 
@@ -169,7 +169,7 @@ class TabContent
 
     /**
      * getId
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return id
      */
     public function getId()
@@ -179,7 +179,7 @@ class TabContent
 
     /**
      * setId
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  id
      */
     public function setId($id) 
@@ -191,7 +191,7 @@ class TabContent
     
     /**
      * getActive
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return active
      */
     public function getActive() 
@@ -201,7 +201,7 @@ class TabContent
     
     /**
      * setActive
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  boolean
      */
     public function setActive($active,$recursive = false) 
@@ -219,7 +219,7 @@ class TabContent
     
     /**
      * geticon
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return icon
      */
     public function getIcon()
@@ -229,7 +229,7 @@ class TabContent
 
     /**
      * seticon
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  icon
      */
     public function setIcon($icon) 
@@ -241,7 +241,7 @@ class TabContent
 
     /**
      * getTab
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return tab
      */
     public function getTab()
@@ -251,7 +251,7 @@ class TabContent
 
     /**
      * settab
-     * @author Máximo Sojo maxsojo13@gmail.com <maxtoan at atechnologies>
+     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  tab
      */
     public function setTab(Tab $tab) 
