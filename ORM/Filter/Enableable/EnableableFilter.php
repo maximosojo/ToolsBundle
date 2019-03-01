@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\ORM\Filter\Enableable;
+namespace Maxtoan\ToolsBundle\ORM\Filter\Enableable;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Filter\SQLFilter;
@@ -41,7 +41,7 @@ class EnableableFilter extends SQLFilter
         
         $traits = $targetEntity->reflClass->getTraits();
         // Check if the entity implements the LocalAware interface
-        if (!isset($traits["Atechnologies\ToolsBundle\Traits\EnableableTrait"]) && !$targetEntity->reflClass->hasMethod("getEnabled")) {
+        if (!isset($traits["Maxtoan\ToolsBundle\Traits\EnableableTrait"]) && !$targetEntity->reflClass->hasMethod("getEnabled")) {
             return "";
         }
 

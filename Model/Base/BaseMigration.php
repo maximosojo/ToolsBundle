@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Model\Base;
+namespace Maxtoan\ToolsBundle\Model\Base;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -22,8 +22,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 abstract class BaseMigration extends AbstractMigration implements ContainerAwareInterface
 {
-    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
-    use \Atechnologies\ToolsBundle\DependencyInjection\DoctrineTrait;    
+    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use \Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;    
     /**
      * Shortcut to return the Doctrine Registry service.
      * @return Registry

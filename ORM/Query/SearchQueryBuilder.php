@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\ORM\Query;
+namespace Maxtoan\ToolsBundle\ORM\Query;
 
 /**
  * Query builder search

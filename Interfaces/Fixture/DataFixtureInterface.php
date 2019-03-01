@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Interfaces\Fixture;
+namespace Maxtoan\ToolsBundle\Interfaces\Fixture;
 
 /**
  * DataFixtureInterface

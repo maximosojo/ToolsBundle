@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Service;
+namespace Maxtoan\ToolsBundle\Service;
 
 /**
  * Configuracion general

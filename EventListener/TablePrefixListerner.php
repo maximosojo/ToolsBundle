@@ -1,6 +1,6 @@
 <?php
 
-namespace Atechnologies\ToolsBundle\EventListener;
+namespace Maxtoan\ToolsBundle\EventListener;
 
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 

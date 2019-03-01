@@ -38,7 +38,7 @@ Estructura de servicio:
 <?php
 // AppBundle\Service\LinkGenerator\MyLinkGeneratorItem.php;
 
-use Atechnologies\ToolsBundle\Model\LinkGenerator\LinkGeneratorItem;
+use Maxtoan\ToolsBundle\Model\LinkGenerator\LinkGeneratorItem;
 
 class MyLinkGeneratorItem extends LinkGeneratorItem
 {

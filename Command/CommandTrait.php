@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Command;
+namespace Maxtoan\ToolsBundle\Command;
 
 use Psr\Log\LogLevel;
 use Symfony\Component\Console\Logger\ConsoleLogger;

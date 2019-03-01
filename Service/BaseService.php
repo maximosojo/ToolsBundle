@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Service;
+namespace Maxtoan\ToolsBundle\Service;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -22,8 +22,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class BaseService implements ContainerAwareInterface 
 {
-    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
-    use \Atechnologies\ToolsBundle\DependencyInjection\DoctrineTrait;
+    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use \Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;
 
     /**
      * Shortcut to return the Doctrine Registry service.
@@ -89,7 +89,7 @@ class BaseService implements ContainerAwareInterface
      * Disparar un evento
      * @param type $eventName
      * @param \Symfony\Component\EventDispatcher\Event $event
-     * @return \Atechnologies\ToolsBundle\Service\Event\GenericEvent
+     * @return \Maxtoan\ToolsBundle\Service\Event\GenericEvent
      */
     protected function dispatch($eventName, \Symfony\Component\EventDispatcher\Event $event = null)
     {

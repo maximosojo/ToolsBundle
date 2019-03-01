@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Model\SequenceGenerator;
+namespace Maxtoan\ToolsBundle\Model\SequenceGenerator;
 
 /**
  *

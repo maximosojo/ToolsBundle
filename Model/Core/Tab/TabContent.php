@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Model\Core\Tab;
+namespace Maxtoan\ToolsBundle\Model\Core\Tab;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Atechnologies\ToolsBundle\Model\Core\Tab\Tab;
+use Maxtoan\ToolsBundle\Model\Core\Tab\Tab;
 
 /**
  * Contenido de tab
@@ -77,7 +77,7 @@ class TabContent
     /**
      * Opciones de la tab
      * @param array $options
-     * @return \Atechnologies\ToolsBundle\Model\Core\Tab\TabContent
+     * @return \Maxtoan\ToolsBundle\Model\Core\Tab\TabContent
      */
     public function setOptions(array $options = []) 
     {

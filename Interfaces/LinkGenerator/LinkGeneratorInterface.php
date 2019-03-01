@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Interfaces\LinkGenerator;
+namespace Maxtoan\ToolsBundle\Interfaces\LinkGenerator;
 
-use Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService;
+use Maxtoan\ToolsBundle\Service\LinkGenerator\LinkGeneratorService;
 
 /**
  * Interface de generador de link

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Service\Util;
+namespace Maxtoan\ToolsBundle\Service\Util;
 
 /**
  * Funciones utiles

@@ -38,7 +38,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new Atechnologies\ToolsBundle\AtechnologiesToolsBundle(),
+        new Maxtoan\ToolsBundle\AtechnologiesToolsBundle(),
     );
 }
 ```

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Service\Http;
+namespace Maxtoan\ToolsBundle\Service\Http;
 
 /**
  * Servicio para trabajo con peticiones curl

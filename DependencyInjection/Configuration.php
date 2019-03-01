@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\DependencyInjection;
+namespace Maxtoan\ToolsBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Atechnologies\ToolsBundle\Model\Paginator\Paginator;
+use Maxtoan\ToolsBundle\Model\Paginator\Paginator;
 
 /**
  * This class contains the configuration information for the bundle.
@@ -64,7 +64,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('prefix')->defaultValue("prefix")->end()
                         ->scalarNode('prefix_separator')->defaultValue('_')->cannotBeEmpty()->end()
                         ->scalarNode('on_delete')->defaultNull()->end()
-                        ->scalarNode('listerner_class')->defaultValue('Atechnologies\ToolsBundle\EventListener\TablePrefixListerner')->cannotBeEmpty()->end()
+                        ->scalarNode('listerner_class')->defaultValue('Maxtoan\ToolsBundle\EventListener\TablePrefixListerner')->cannotBeEmpty()->end()
                     ->end()
                 ->end()
             ;

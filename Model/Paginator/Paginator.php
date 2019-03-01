@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Model\Paginator;
+namespace Maxtoan\ToolsBundle\Model\Paginator;
 
 use Pagerfanta\Pagerfanta as BasePagerfanta;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Router;
  */
 class Paginator extends BasePagerfanta implements ContainerAwareInterface
 {
-    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
     
     /**
      * $route

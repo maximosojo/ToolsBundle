@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Model\SequenceGenerator;
+namespace Maxtoan\ToolsBundle\Model\SequenceGenerator;
 
 use LogicException;
 use Doctrine\Common\Util\ClassUtils;
-use Atechnologies\ToolsBundle\Interfaces\SequenceGenerator\ItemReferenceInterface;
+use Maxtoan\ToolsBundle\Interfaces\SequenceGenerator\ItemReferenceInterface;
 
 /**
  * Base del generador de secuencias
@@ -24,7 +24,7 @@ abstract class SequenceGenerator implements SequenceGeneratorBaseInterface
 {
     /**
      * Instancia del generador de secuencias
-     * @var \Atechnologies\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService
+     * @var \Maxtoan\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService
      */
     protected $sequenceGenerator;
     
@@ -79,9 +79,9 @@ abstract class SequenceGenerator implements SequenceGeneratorBaseInterface
     
     /**
      * Establece el generador de secuencia
-     * @param \Atechnologies\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService $sequenceGenerator
+     * @param \Maxtoan\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService $sequenceGenerator
      */
-    function setSequenceGenerator(\Atechnologies\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService $sequenceGenerator) 
+    function setSequenceGenerator(\Maxtoan\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService $sequenceGenerator) 
     {
         $this->sequenceGenerator = $sequenceGenerator;
     }

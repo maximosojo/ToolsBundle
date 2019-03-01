@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Service\LinkGenerator;
+namespace Maxtoan\ToolsBundle\Service\LinkGenerator;
 
 use LogicException;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -24,11 +24,11 @@ use Exception;
  */
 class LinkGeneratorService implements ContainerAwareInterface
 {
-    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
     
     /**
      * Definicion de iconos de objetos
-     * @var \Atechnologies\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface
+     * @var \Maxtoan\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface
      */
     private $linkGeneratorItems;
     private $linkGeneratorItemsForClass = [];
@@ -332,10 +332,10 @@ class LinkGeneratorService implements ContainerAwareInterface
     
     /**
      * Añade un item para generacion
-     * @param \Atechnologies\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface $linkGeneratorItem
-     * @return \Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService
+     * @param \Maxtoan\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface $linkGeneratorItem
+     * @return \Maxtoan\ToolsBundle\Service\LinkGenerator\LinkGeneratorService
      */
-    public function addLinkGeneratorItem(\Atechnologies\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface $linkGeneratorItem) 
+    public function addLinkGeneratorItem(\Maxtoan\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface $linkGeneratorItem) 
     {
         $linkGeneratorItem->setLinkGeneratorService($this);
         

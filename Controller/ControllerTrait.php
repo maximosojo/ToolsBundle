@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Controller;
+namespace Maxtoan\ToolsBundle\Controller;
 
 /**
  * Controlador con funciones base
@@ -29,12 +29,12 @@ trait ControllerTrait
      * @param type $data
      * @param type $status
      * @param type $headers
-     * @return \Atechnologies\ToolsBundle\Custom\HttpFoundation\MyJsonResponse
+     * @return \Maxtoan\ToolsBundle\Custom\HttpFoundation\MyJsonResponse
      */
     protected function myJsonResponse($data = null, $status = 200, $headers = array()) 
     {
         if (!$this->jsonResponse) {
-            $this->jsonResponse = new \Atechnologies\ToolsBundle\Custom\HttpFoundation\MyJsonResponse($data, $status, $headers);
+            $this->jsonResponse = new \Maxtoan\ToolsBundle\Custom\HttpFoundation\MyJsonResponse($data, $status, $headers);
         }
 
         return $this->jsonResponse;

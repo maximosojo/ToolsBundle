@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Twig\Extension;
+namespace Maxtoan\ToolsBundle\Twig\Extension;
 
-use Atechnologies\ToolsBundle\Service\Util\StringUtil;
+use Maxtoan\ToolsBundle\Service\Util\StringUtil;
 
 /**
  * Extension generic applications
@@ -20,7 +20,7 @@ use Atechnologies\ToolsBundle\Service\Util\StringUtil;
  */
 class CoreExtension extends \Twig_Extension 
 {    
-    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
     
     /**
      * {@inheritdoc}
@@ -173,11 +173,11 @@ class CoreExtension extends \Twig_Extension
     /**
      * Render base tabs
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  \Atechnologies\ToolsBundle\Model\Core\Tab\Tab
+     * @param  \Maxtoan\ToolsBundle\Model\Core\Tab\Tab
      * @param  array
      * @return Tabs
      */
-    public function renderTabs(\Atechnologies\ToolsBundle\Model\Core\Tab\Tab $tab,array $parameters = []) 
+    public function renderTabs(\Maxtoan\ToolsBundle\Model\Core\Tab\Tab $tab,array $parameters = []) 
     {
         $parameters["tab"] = $tab;
         return $this->container->get('templating')->render("AtechnologiesToolsBundle:tab:tabs.html.twig", 

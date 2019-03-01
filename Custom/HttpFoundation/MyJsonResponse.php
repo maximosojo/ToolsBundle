@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Custom\HttpFoundation;
+namespace Maxtoan\ToolsBundle\Custom\HttpFoundation;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 

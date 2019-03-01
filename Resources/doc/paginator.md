@@ -41,7 +41,7 @@ Los repositorios que desea usar para paginar se deben extender del base:
 <?php
 // AppBundle/Repository/MyRepository.php
 
-class MyRepository extends Atechnologies\ToolsBundle\Repository\EntityRepository
+class MyRepository extends Maxtoan\ToolsBundle\Repository\EntityRepository
 {
 
 }

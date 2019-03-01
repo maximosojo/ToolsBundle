@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Tests\Service\Util;
+namespace Maxtoan\ToolsBundle\Tests\Service\Util;
 
-use Atechnologies\ToolsBundle\Service\Util\MathUtil;
+use Maxtoan\ToolsBundle\Service\Util\MathUtil;
 
 /**
  * Math Test

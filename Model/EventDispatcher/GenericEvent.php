@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Model\EventDispatcher;
+namespace Maxtoan\ToolsBundle\Model\EventDispatcher;
 
 use Symfony\Component\EventDispatcher\GenericEvent as GenericEventBase;
 
