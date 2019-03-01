@@ -29,12 +29,12 @@ trait ControllerTrait
      * @param type $data
      * @param type $status
      * @param type $headers
-     * @return \Maxtoan\ToolsBundle\Custom\HttpFoundation\MyJsonResponse
+     * @return \Maxtoan\ToolsBundle\Component\HttpFoundation\JsonResponse
      */
     protected function myJsonResponse($data = null, $status = 200, $headers = array()) 
     {
         if (!$this->jsonResponse) {
-            $this->jsonResponse = new \Maxtoan\ToolsBundle\Custom\HttpFoundation\MyJsonResponse($data, $status, $headers);
+            $this->jsonResponse = new \Maxtoan\ToolsBundle\Component\HttpFoundation\JsonResponse($data, $status, $headers);
         }
 
         return $this->jsonResponse;

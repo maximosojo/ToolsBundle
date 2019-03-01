@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Model;
+namespace Maxtoan\ToolsBundle\Component\HttpFoundation;
 
 use Symfony\Component\HttpFoundation\JsonResponse as JsonResponseBase;
 
