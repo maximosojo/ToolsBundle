@@ -173,11 +173,11 @@ class CoreExtension extends \Twig_Extension
     /**
      * Render base tabs
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  \Maxtoan\ToolsBundle\Model\Core\Tab\Tab
+     * @param  \Maxtoan\ToolsBundle\Model\Tab\Tab
      * @param  array
      * @return Tabs
      */
-    public function renderTabs(\Maxtoan\ToolsBundle\Model\Core\Tab\Tab $tab,array $parameters = []) 
+    public function renderTabs(\Maxtoan\ToolsBundle\Model\Tab\Tab $tab,array $parameters = []) 
     {
         $parameters["tab"] = $tab;
         return $this->container->get('templating')->render("MaxtoanToolsBundle:tab:tabs.html.twig", 

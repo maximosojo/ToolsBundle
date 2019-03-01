@@ -12,8 +12,8 @@
 namespace Maxtoan\ToolsBundle\Service\Tabs;
 
 use Symfony\Component\HttpFoundation\RequestStack;
-use Maxtoan\ToolsBundle\Model\Core\Tab\Tab;
-use Maxtoan\ToolsBundle\Model\Core\Tab\TabContent;
+use Maxtoan\ToolsBundle\Model\Tab\Tab;
+use Maxtoan\ToolsBundle\Model\Tab\TabContent;
 
 /**
  * Servicio generador de tabs (maxtoan.manager.tabs)
