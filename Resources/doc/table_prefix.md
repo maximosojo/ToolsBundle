@@ -1,4 +1,4 @@
-maxtoanToolsBundle
+MaxtoanToolsBundle
 ========================
 
 ## Base de datos "Table Prefix"
