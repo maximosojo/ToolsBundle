@@ -1,16 +1,4 @@
 services:
-# Base service
-  maxtoan_tools.service.base:
-      class: Maxtoan\ToolsBundle\Service\BaseService
-      calls: 
-          - [setContainer, ['@service_container']]
-
-# Configuraciones
-  maxtoan_tools.service.configuration:
-      class: Maxtoan\ToolsBundle\Service\Configuration      
-      calls: 
-          - [setContainer, ['@service_container']]
-
 # Extension tools para breadcrumb
   maxtoan_tools.core.extension:
       class: Maxtoan\ToolsBundle\Twig\Extension\CoreExtension
@@ -27,7 +15,7 @@ services:
           
 # Repository Factory
   maxtoan_tools.doctrine.repository.factory:
-        class: Maxtoan\ToolsBundle\Repository\Factory
+        class: Maxtoan\ToolsBundle\ORM\Factory
         arguments:
             - []
             - '@service_container'
