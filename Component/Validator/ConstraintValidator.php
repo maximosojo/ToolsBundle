@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Validator;
+namespace Maxtoan\ToolsBundle\Component\Validator;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\ConstraintValidator as ConstraintValidatorBase;
 
 /**
  * Base de validadores
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-abstract class BaseConstraintValidator extends ConstraintValidator implements ContainerAwareInterface
+abstract class ConstraintValidator extends ConstraintValidatorBase implements ContainerAwareInterface
 {
     use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
     
