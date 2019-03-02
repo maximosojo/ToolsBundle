@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Validator;
+namespace Maxtoan\ToolsBundle\Validator;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -22,7 +22,7 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 abstract class BaseConstraintValidator extends ConstraintValidator implements ContainerAwareInterface
 {
-    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
     
     /**
      * Agrega un error

@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the Atechnologies package.
+ * This file is part of the Maxtoan Tools package.
  * 
- * (c) www.atechnologies.com.ve
+ * (c) https://maxtoan.github.io/tools-bundle
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Controller;
+namespace Maxtoan\ToolsBundle\Controller;
 
 /**
  * Controlador con funciones base
@@ -29,12 +29,12 @@ trait ControllerTrait
      * @param type $data
      * @param type $status
      * @param type $headers
-     * @return \Atechnologies\ToolsBundle\Custom\HttpFoundation\MyJsonResponse
+     * @return \Maxtoan\ToolsBundle\Component\HttpFoundation\JsonResponse
      */
     protected function myJsonResponse($data = null, $status = 200, $headers = array()) 
     {
         if (!$this->jsonResponse) {
-            $this->jsonResponse = new \Atechnologies\ToolsBundle\Custom\HttpFoundation\MyJsonResponse($data, $status, $headers);
+            $this->jsonResponse = new \Maxtoan\ToolsBundle\Component\HttpFoundation\JsonResponse($data, $status, $headers);
         }
 
         return $this->jsonResponse;

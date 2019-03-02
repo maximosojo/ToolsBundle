@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Service\Tabs;
+namespace Maxtoan\ToolsBundle\Service\Tabs;
 
 use Symfony\Component\HttpFoundation\RequestStack;
-use Atechnologies\ToolsBundle\Model\Core\Tab\Tab;
-use Atechnologies\ToolsBundle\Model\Core\Tab\TabContent;
+use Maxtoan\ToolsBundle\Model\Tab\Tab;
+use Maxtoan\ToolsBundle\Model\Tab\TabContent;
 
 /**
- * Servicio generador de tabs (atechnologies.manager.tabs)
+ * Servicio generador de tabs (maxtoan.manager.tabs)
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class TabsManager extends \Atechnologies\ToolsBundle\Service\BaseService 
+class TabsManager extends \Maxtoan\ToolsBundle\Service\BaseService 
 {
     /**
      * $tab

@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the Atechnologies package.
+ * This file is part of the Maxtoan Tools package.
  * 
- * (c) www.atechnologies.com.ve
+ * (c) https://maxtoan.github.io/tools-bundle
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Service\LinkGenerator;
+namespace Maxtoan\ToolsBundle\Service\LinkGenerator;
 
 use LogicException;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -18,17 +18,17 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Exception;
 
 /**
- * Generador de links por objeto (atechnologies.service.link_generator)
+ * Generador de links por objeto (maxtoan.service.link_generator)
  *
  * @author Carlos Mendoza<inhack20@gmail.com>
  */
 class LinkGeneratorService implements ContainerAwareInterface
 {
-    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
     
     /**
      * Definicion de iconos de objetos
-     * @var \Atechnologies\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface
+     * @var \Maxtoan\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface
      */
     private $linkGeneratorItems;
     private $linkGeneratorItemsForClass = [];
@@ -130,7 +130,7 @@ class LinkGeneratorService implements ContainerAwareInterface
         $route = $entityConfig['route'];
         $routeParameters = $entityConfig['routeParameters'];
         $labelMethod = $entityConfig['labelMethod'];
-        $color = $this->container->getParameter('atechnologies_tools.service.link_generator.color');
+        $color = $this->container->getParameter('maxtoan_tools.service.link_generator.color');
 
         if($labelMethod !== null){
             $label = call_user_func_array([$entity, $labelMethod],array());
@@ -332,10 +332,10 @@ class LinkGeneratorService implements ContainerAwareInterface
     
     /**
      * Añade un item para generacion
-     * @param \Atechnologies\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface $linkGeneratorItem
-     * @return \Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService
+     * @param \Maxtoan\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface $linkGeneratorItem
+     * @return \Maxtoan\ToolsBundle\Service\LinkGenerator\LinkGeneratorService
      */
-    public function addLinkGeneratorItem(\Atechnologies\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface $linkGeneratorItem) 
+    public function addLinkGeneratorItem(\Maxtoan\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface $linkGeneratorItem) 
     {
         $linkGeneratorItem->setLinkGeneratorService($this);
         

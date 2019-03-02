@@ -1,11 +1,11 @@
-AtechnologiesToolsBundle
+MaxtoanToolsBundle
 ========================
 
 ## Instalación
 
 La instalación es rápida y sencilla, a sólo 2 pasos:
 
-1. Descarga AtechnologiesToolsBundle via composer
+1. Descarga MaxtoanToolsBundle via composer
 2. Habilitar el paquete
 
 ### Paso 1: Descargar usando composer
@@ -13,7 +13,7 @@ La instalación es rápida y sencilla, a sólo 2 pasos:
 ```js
 {
     "require": {
-        "atechnologies/tools-bundle": "dev-master"
+        "maxtoan/tools-bundle": "dev-master"
     }
 }
 ```
@@ -21,10 +21,10 @@ La instalación es rápida y sencilla, a sólo 2 pasos:
 Puede realizarlo directamente a travez del siguiente comando:
 
 ``` bash
-$ composer require atechnologies/tools-bundle
+$ composer require maxtoan/tools-bundle
 ```
 
-Composer instalará el paquete en el directorio `vendor / atechnologies` de su proyecto.
+Composer instalará el paquete en el directorio `vendor / maxtoan` de su proyecto.
 
 ### Paso 2: Habilitar bundle
 
@@ -38,7 +38,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new Atechnologies\ToolsBundle\AtechnologiesToolsBundle(),
+        new Maxtoan\ToolsBundle\maxtoanToolsBundle(),
     );
 }
 ```

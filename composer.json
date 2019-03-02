@@ -1,9 +1,9 @@
 {
-  "name": "atechnologies/tools-bundle",
+  "name": "maxtoan/tools-bundle",
   "type": "symfony-bundle",
   "description": "Bundle Symfony",
   "keywords": ["breadcrumb", "breadcrumb api", "bundle tools", "link generator", "tabs"],
-  "homepage": "https://atechnologies.com.ve",
+  "homepage": "https://maxtoan.github.io/tools-bundle",
   "type": "symfony-bundle",
   "license": "MIT",
   "authors": [
@@ -19,6 +19,6 @@
       "pagerfanta/pagerfanta": "v1.0.5"
   },
   "autoload": {
-      "psr-4": { "Atechnologies\\ToolsBundle\\": "" }
+      "psr-4": { "Maxtoan\\ToolsBundle\\": "" }
   }
 }

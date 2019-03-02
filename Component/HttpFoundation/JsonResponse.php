@@ -1,24 +1,24 @@
 <?php
 
 /*
- * This file is part of the Atechnologies package.
+ * This file is part of the Maxtoan Tools package.
  * 
- * (c) www.atechnologies.com.ve
+ * (c) https://maxtoan.github.io/tools-bundle
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Custom\HttpFoundation;
+namespace Maxtoan\ToolsBundle\Component\HttpFoundation;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\JsonResponse as JsonResponseBase;
 
 /**
- * MyJsonResponse custom
+ * JsonResponse custom
  * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class MyJsonResponse extends JsonResponse 
+class JsonResponse extends JsonResponseBase 
 {   
     /**
      * $originalData

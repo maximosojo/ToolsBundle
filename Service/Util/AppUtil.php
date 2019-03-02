@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the Atechnologies package.
+ * This file is part of the Maxtoan Tools package.
  * 
- * (c) www.atechnologies.com.ve
+ * (c) https://maxtoan.github.io/tools-bundle
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Service\Util;
+namespace Maxtoan\ToolsBundle\Service\Util;
 
 /**
  * Funciones utiles

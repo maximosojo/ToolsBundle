@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the Atechnologies package.
+ * This file is part of the Maxtoan Tools package.
  * 
- * (c) www.atechnologies.com.ve
+ * (c) https://maxtoan.github.io/tools-bundle
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Service\SequenceGenerator;
+namespace Maxtoan\ToolsBundle\Service\SequenceGenerator;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 
@@ -18,7 +18,7 @@ use Doctrine\Bundle\DoctrineBundle\Registry;
  *
  * @author Carlos Mendoza <inhack20@tecnocreaciones.com>
  */
-class SequenceGeneratorService extends \Atechnologies\ToolsBundle\Service\BaseService
+class SequenceGeneratorService extends \Maxtoan\ToolsBundle\Service\BaseService
 {
     private $sequenceGenerator;
 

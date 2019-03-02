@@ -1,17 +1,17 @@
 <?php
 
 /*
- * This file is part of the Atechnologies package.
+ * This file is part of the Maxtoan Tools package.
  * 
- * (c) www.atechnologies.com.ve
+ * (c) https://maxtoan.github.io/tools-bundle
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Model\Base;
+namespace Maxtoan\ToolsBundle\ORM\DBAL\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\DBAL\Migrations\AbstractMigration as BaseAbstractMigration;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -20,10 +20,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-abstract class BaseMigration extends AbstractMigration implements ContainerAwareInterface
+abstract class AbstractMigration extends BaseAbstractMigration implements ContainerAwareInterface
 {
-    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
-    use \Atechnologies\ToolsBundle\DependencyInjection\DoctrineTrait;    
+    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use \Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;    
+    
     /**
      * Shortcut to return the Doctrine Registry service.
      * @return Registry

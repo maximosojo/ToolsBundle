@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Twig\Extension;
+namespace Maxtoan\ToolsBundle\Twig\Extension;
 
-use Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService;
+use Maxtoan\ToolsBundle\Service\LinkGenerator\LinkGeneratorService;
 use Twig_Extension;
 
 /**

@@ -9,22 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Model\SequenceGenerator;
+namespace Maxtoan\ToolsBundle\Model\SequenceGenerator;
 
-use Doctrine\Common\Util\ClassUtils;
 use LogicException;
-use Atechnologies\ToolsBundle\Interfaces\SequenceGenerator\ItemReferenceInterface;
+use Doctrine\Common\Util\ClassUtils;
+use Maxtoan\ToolsBundle\Interfaces\SequenceGenerator\ItemReferenceInterface;
+use Maxtoan\ToolsBundle\Interfaces\SequenceGenerator\SequenceGeneratorInterface;
 
 /**
  * Base del generador de secuencias
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-abstract class SequenceGeneratorBase implements SequenceGeneratorBaseInterface
+abstract class SequenceGenerator implements SequenceGeneratorInterface
 {
     /**
      * Instancia del generador de secuencias
-     * @var \Atechnologies\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService
+     * @var \Maxtoan\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService
      */
     protected $sequenceGenerator;
     
@@ -41,6 +42,7 @@ abstract class SequenceGeneratorBase implements SequenceGeneratorBaseInterface
         $field = $config['field'];
         $qb = $this->sequenceGenerator->createQueryBuilder();
         $qb->from($className,'p');
+        
         return $this->sequenceGenerator->generateNext($qb, $mask,$field,[],$config);
     }
     
@@ -79,9 +81,9 @@ abstract class SequenceGeneratorBase implements SequenceGeneratorBaseInterface
     
     /**
      * Establece el generador de secuencia
-     * @param \Atechnologies\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService $sequenceGenerator
+     * @param \Maxtoan\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService $sequenceGenerator
      */
-    function setSequenceGenerator(\Atechnologies\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService $sequenceGenerator) 
+    function setSequenceGenerator(\Maxtoan\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService $sequenceGenerator) 
     {
         $this->sequenceGenerator = $sequenceGenerator;
     }

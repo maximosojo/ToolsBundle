@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the Atechnologies package.
+ * This file is part of the Maxtoan Tools package.
  * 
- * (c) www.atechnologies.com.ve
+ * (c) https://maxtoan.github.io/tools-bundle
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Controller;
+namespace Maxtoan\ToolsBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as RouteSensio;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 class BaseController extends FOSRestController
 {
     use ControllerTrait;
-    use \Atechnologies\ToolsBundle\DependencyInjection\DoctrineTrait;
+    use \Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;
 
     /**
      * Tipo error
@@ -78,14 +78,14 @@ class BaseController extends FOSRestController
      */
     public function newGenericEvent($entity)
     {
-        return new \Atechnologies\ToolsBundle\Model\EventDispatcher\GenericEvent($entity);        
+        return new \Maxtoan\ToolsBundle\Model\EventDispatcher\GenericEvent($entity);        
     }
 
     /**
      * Disparar un evento
      * @param type $eventName
      * @param \Symfony\Component\EventDispatcher\Event $event
-     * @return \Atechnologies\ToolsBundle\Event\GenericEvent
+     * @return \Maxtoan\ToolsBundle\Event\GenericEvent
      */
     protected function dispatch($eventName, \Symfony\Component\EventDispatcher\Event $event = null)
     {
@@ -114,7 +114,7 @@ class BaseController extends FOSRestController
     
     /**
      * Construye el una variable para expandir campos dinamicamente al serializar
-     * @param \Atechnologies\ToolsBundle\Controller\Request $request
+     * @param \Maxtoan\ToolsBundle\Controller\Request $request
      * @param array $defaults
      * @return type
      */

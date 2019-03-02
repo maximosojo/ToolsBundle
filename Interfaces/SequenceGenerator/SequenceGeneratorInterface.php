@@ -9,13 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Model\SequenceGenerator;
+namespace Maxtoan\ToolsBundle\Interfaces\SequenceGenerator;
 
 /**
- *
+ * Interfas de generador de secuencia
+ * 
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-interface SequenceGeneratorBaseInterface 
+interface SequenceGeneratorInterface 
 {
     /**
      * Retorna las clases que esta manejando el generador de secuencia

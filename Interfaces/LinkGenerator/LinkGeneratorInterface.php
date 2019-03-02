@@ -1,17 +1,17 @@
 <?php
 
 /*
- * This file is part of the Atechnologies package.
+ * This file is part of the Maxtoan Tools package.
  * 
- * (c) www.atechnologies.com.ve
+ * (c) https://maxtoan.github.io/tools-bundle
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Interfaces\LinkGenerator;
+namespace Maxtoan\ToolsBundle\Interfaces\LinkGenerator;
 
-use Atechnologies\ToolsBundle\Service\LinkGenerator\LinkGeneratorService;
+use Maxtoan\ToolsBundle\Service\LinkGenerator\LinkGeneratorService;
 
 /**
  * Interface de generador de link

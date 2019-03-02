@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the Atechnologies package.
+ * This file is part of the Maxtoan Tools package.
  * 
- * (c) www.atechnologies.com.ve
+ * (c) https://maxtoan.github.io/tools-bundle
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Menu;
+namespace Maxtoan\ToolsBundle\Model;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
@@ -24,9 +24,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  *
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-abstract class BaseMenuBuilder implements \Symfony\Component\DependencyInjection\ContainerAwareInterface
+abstract class MenuBuilder implements \Symfony\Component\DependencyInjection\ContainerAwareInterface
 {
-    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 
     /**
      * Menu factory.

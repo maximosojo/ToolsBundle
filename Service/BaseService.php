@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the Atechnologies package.
+ * This file is part of the Maxtoan Tools package.
  * 
- * (c) www.atechnologies.com.ve
+ * (c) https://maxtoan.github.io/tools-bundle
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Service;
+namespace Maxtoan\ToolsBundle\Service;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -17,13 +17,14 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Servicio base con implementación de funciones genericas compartidas
- * service (atechnologies.service.base)
+ * service (maxtoan_tools.service.base)
+ * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 class BaseService implements ContainerAwareInterface 
 {
-    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
-    use \Atechnologies\ToolsBundle\DependencyInjection\DoctrineTrait;
+    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use \Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;
 
     /**
      * Shortcut to return the Doctrine Registry service.
@@ -89,7 +90,7 @@ class BaseService implements ContainerAwareInterface
      * Disparar un evento
      * @param type $eventName
      * @param \Symfony\Component\EventDispatcher\Event $event
-     * @return \Atechnologies\ToolsBundle\Service\Event\GenericEvent
+     * @return \Maxtoan\ToolsBundle\Service\Event\GenericEvent
      */
     protected function dispatch($eventName, \Symfony\Component\EventDispatcher\Event $event = null)
     {

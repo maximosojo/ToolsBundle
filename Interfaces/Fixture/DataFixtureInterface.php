@@ -1,19 +1,19 @@
 <?php
 
 /*
- * This file is part of the Atechnologies package.
+ * This file is part of the Maxtoan Tools package.
  * 
- * (c) www.atechnologies.com.ve
+ * (c) https://maxtoan.github.io/tools-bundle
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Interfaces\Fixture;
+namespace Maxtoan\ToolsBundle\Interfaces\Fixture;
 
 /**
  * DataFixtureInterface
- * @author Matías Jiménez matei249@gmail.com <matjimdi at atechnologies>
+ * @author Matías Jiménez <matei249@gmail.com>
  */
 interface DataFixtureInterface 
 {

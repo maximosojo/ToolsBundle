@@ -1,8 +1,8 @@
 
 /*
- * This file is part of the Atechnologies package.
+ * This file is part of the Maxtoan Tools package.
  * 
- * (c) www.atechnologies.com.ve
+ * (c) https://maxtoan.github.io/tools-bundle
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -10,7 +10,7 @@
 
 'use strict';
 
-var app = angular.module('atechnologies', ['ngTable'])
+var app = angular.module('maxtoan_tools', ['ngTable'])
 
 .directive('ngLoading', function() {
     return {

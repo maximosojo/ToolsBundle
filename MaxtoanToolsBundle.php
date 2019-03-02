@@ -1,24 +1,24 @@
 <?php
 
 /*
- * This file is part of the Atechnologies package.
+ * This file is part of the Maxtoan Tools package.
  * 
- * (c) www.atechnologies.com.ve
+ * (c) https://maxtoan.github.io/tools-bundle
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle;
+namespace Maxtoan\ToolsBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * AtechnologiestoolsBundle
+ * MaxtoanToolsBundle
  * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class AtechnologiesToolsBundle extends Bundle
+class MaxtoanToolsBundle extends Bundle
 {
 	public function build(\Symfony\Component\DependencyInjection\ContainerBuilder $container) 
     {

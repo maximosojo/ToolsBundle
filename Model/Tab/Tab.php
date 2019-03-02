@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the Atechnologies package.
+ * This file is part of the Maxtoan Tools package.
  * 
- * (c) www.atechnologies.com.ve
+ * (c) https://maxtoan.github.io/tools-bundle
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Model\Core\Tab;
+namespace Maxtoan\ToolsBundle\Model\Tab;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -60,7 +60,7 @@ class Tab
     public function __construct(array $options = []) 
     {
         $this->tabsContent = [];
-        $this->id = md5(\Atechnologies\ToolsBundle\Service\Util\AppUtil::getId());
+        $this->id = md5(\Maxtoan\ToolsBundle\Service\Util\AppUtil::getId());
         $this->setOptions($options);
     }
     
@@ -157,8 +157,8 @@ class Tab
     
     /**
      * Add tab
-     * @param \Atechnologies\ToolsBundle\Model\Core\Tab\TabContent $tabContent
-     * @return \Atechnologies\ToolsBundle\Model\Core\Tab\Tab
+     * @param \Maxtoan\ToolsBundle\Model\Tab\TabContent $tabContent
+     * @return \Maxtoan\ToolsBundle\Model\Tab\Tab
      * @throws \RuntimeException
      */
     public function addTabContent(TabContent $tabContent) 

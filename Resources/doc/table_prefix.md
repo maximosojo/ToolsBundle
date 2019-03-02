@@ -1,4 +1,4 @@
-AtechnologiesToolsBundle
+MaxtoanToolsBundle
 ========================
 
 ## Base de datos "Table Prefix"
@@ -11,7 +11,7 @@ Configuración del generador de prefijo:
 El componente debe ser habilitado y a su vez puede registrar el prefijo deseado para sus tablas:
 
 ``` yml
-atechnologies_tools:
+maxtoan_tools:
     table_prefix:
         enable: true
         prefix: "prefix"

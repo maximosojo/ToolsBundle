@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\Features\Context;
+namespace Maxtoan\ToolsBundle\Features\Context;
 
 use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\RawMinkContext;
@@ -25,7 +25,7 @@ use Exception;
 abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2Extension\Context\KernelAwareContext 
 {
     use \Behat\Symfony2Extension\Context\KernelDictionary;
-    use \Atechnologies\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 
     /**
      * Genera un password estandar en base a un nombre de usuario

@@ -1,20 +1,20 @@
 <?php
 
 /*
- * This file is part of the Atechnologies package.
+ * This file is part of the Maxtoan Tools package.
  * 
- * (c) www.atechnologies.com.ve
+ * (c) https://maxtoan.github.io/tools-bundle
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\DependencyInjection;
+namespace Maxtoan\ToolsBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Atechnologies\ToolsBundle\Model\Paginator\Paginator;
+use Maxtoan\ToolsBundle\Model\Paginator\Paginator;
 
 /**
  * This class contains the configuration information for the bundle.
@@ -32,7 +32,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('atechnologies_tools', 'array');
+        $rootNode = $treeBuilder->root('maxtoan_tools', 'array');
 
         $rootNode
             ->children()
@@ -64,7 +64,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('prefix')->defaultValue("prefix")->end()
                         ->scalarNode('prefix_separator')->defaultValue('_')->cannotBeEmpty()->end()
                         ->scalarNode('on_delete')->defaultNull()->end()
-                        ->scalarNode('listerner_class')->defaultValue('Atechnologies\ToolsBundle\EventListener\TablePrefixListerner')->cannotBeEmpty()->end()
+                        ->scalarNode('listerner_class')->defaultValue('Maxtoan\ToolsBundle\EventListener\TablePrefixListerner')->cannotBeEmpty()->end()
                     ->end()
                 ->end()
             ;

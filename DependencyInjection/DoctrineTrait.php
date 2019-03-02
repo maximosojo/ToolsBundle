@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Atechnologies\ToolsBundle\DependencyInjection;
+namespace Maxtoan\ToolsBundle\DependencyInjection;
 
 /**
  * Doctrine trait.
@@ -26,7 +26,7 @@ trait DoctrineTrait
 
     /**
      * Retorna el repositorio principal
-     * @return \Atechnologies\ToolsBundle\Model\Base\EntityRepository
+     * @return \Maxtoan\ToolsBundle\Model\Base\EntityRepository
      */
     protected function getRepository($repository = null)
     {
@@ -41,7 +41,7 @@ trait DoctrineTrait
 
     /**
      * Debe retornar la clase principal que se esta manejando
-     * @throws \Atechnologies\ToolsBundle\Exception\NotImplementedException
+     * @throws \Maxtoan\ToolsBundle\Exception\NotImplementedException
      */
     protected function getClass()
     {
