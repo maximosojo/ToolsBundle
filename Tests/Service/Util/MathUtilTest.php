@@ -11,7 +11,7 @@
 
 namespace Maxtoan\ToolsBundle\Tests\Service\Util;
 
-use Maxtoan\ToolsBundle\Service\Util\MathUtil;
+use Maxtoan\Common\Util\MathUtil;
 
 /**
  * Math Test

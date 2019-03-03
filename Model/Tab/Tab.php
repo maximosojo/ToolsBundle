@@ -60,7 +60,7 @@ class Tab
     public function __construct(array $options = []) 
     {
         $this->tabsContent = [];
-        $this->id = md5(\Maxtoan\ToolsBundle\Service\Util\AppUtil::getId());
+        $this->id = md5(\Maxtoan\Common\Util\StringUtil::getId());
         $this->setOptions($options);
     }
     
