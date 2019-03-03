@@ -78,7 +78,7 @@ class BaseController extends FOSRestController
      */
     public function newGenericEvent($entity)
     {
-        return new \Maxtoan\ToolsBundle\Model\EventDispatcher\GenericEvent($entity);        
+        return new \Maxtoan\ToolsBundle\Component\EventDispatcher\GenericEvent($entity);        
     }
 
     /**

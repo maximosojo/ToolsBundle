@@ -1,9 +1,6 @@
 {% include "MaxtoanToolsBundle:util:loading.css.twig" %}
 
 <style type="text/css">
-    .nav-tabs-custom>.nav-tabs.pull-right>li:first-of-type {
-        margin-right: 0;
-    }
     .nav-tabs-custom>.nav-tabs>li.tab-header {
         line-height: 35px;
         padding: 0 10px;
@@ -18,7 +15,7 @@
     }
 </style>
 <div ng-controller="TabsController as tabsCtrl" class="ng-cloak nav-tabs-custom" ng-init="tabsCtrl.init({ tab: {{ tab.toArray()|json_encode }} })">
-    <ul id="tabs" class="nav nav-tabs pull-right">        
+    <ul id="tabs" class="nav nav-tabs">
         <li class="pull-left tab-header">
             {% if tab.icon %}
                 <i class="{{ tab.icon }}"></i>
