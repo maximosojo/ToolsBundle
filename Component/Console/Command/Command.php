@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Command;
+namespace Maxtoan\ToolsBundle\Component\Console\Command;
 
 use Psr\Log\LogLevel;
 use Symfony\Component\Console\Logger\ConsoleLogger;
@@ -18,11 +18,11 @@ use Symfony\Component\Lock\Factory;
 use Symfony\Component\Lock\Store\SemaphoreStore;
 
 /**
- * Trait Console
+ * Command
  * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-abstract class CommandTrait 
+class Command extends \Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand
 {
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle

@@ -45,7 +45,7 @@ class MaxtoanToolsExtension extends Extension
             $container->setParameter('maxtoan_tools.service.link_generator.color', $config['link_generator']['color']); 
         }
 
-        if($config['table_prefix']['enable'] === true ) {
+        if($config['table_prefix']['enable'] === true) {
             $tablePrefix = $config['table_prefix']['prefix'].$config['table_prefix']['prefix_separator'];
             $tableNameLowercase = $config['table_prefix']['name_lowercase'];
             $tablePrefixListerner = new Definition($config['table_prefix']['listerner_class']);
@@ -57,8 +57,23 @@ class MaxtoanToolsExtension extends Extension
             $tablePrefixListerner->addMethodCall("setConfig",array($config['table_prefix']));
             $container->setDefinition('maxtoan_tools.table_prefix_subscriber', $tablePrefixListerner);
         }
+
+        $container->setParameter('maxtoan_tools.command.db_clean_truncate_entities', false);
+        $container->setParameter('maxtoan_tools.command.db_clean_delete_entities', false);
+        if(isset($config['command'])) {
+            if(isset($config['command']['db'])) {
+                if(isset($config['command']['db']['clean'])) {
+                    if(isset($config['command']['db']['clean']['truncate_entities'])) {
+                        $container->setParameter('maxtoan_tools.command.db_clean_truncate_entities', $config['command']['db']['clean']['truncate_entities']);
+                    }
+                    if(isset($config['command']['db']['clean']['delete_entities'])) {
+                        $container->setParameter('maxtoan_tools.command.db_clean_delete_entities', $config['command']['db']['clean']['delete_entities']);
+                    }
+                }
+            }
+        }
         
-        $container->setParameter('maxtoan_tools.service.link_generator.enable', $config['link_generator']['enable']); 
-        $container->setParameter('maxtoan_tools.loading.color', $config['loading']['color']); 
+        $container->setParameter('maxtoan_tools.service.link_generator.enable', $config['link_generator']['enable']);
+        $container->setParameter('maxtoan_tools.loading.color', $config['loading']['color']);
     }
 }
