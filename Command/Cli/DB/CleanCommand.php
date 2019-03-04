@@ -20,7 +20,8 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Comando para instalación de aplicación
+ * Comando para limpieza de base de datos
+ * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 class CleanCommand extends \Maxtoan\ToolsBundle\Component\Console\Command\Command
@@ -97,7 +98,7 @@ EOT
 
     /**
      * Delete records
-     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @author Carlos Mendoza <inhack20@gmail.com>
      * @param  String
      * @param  DoctrineManager
      * @param  String
@@ -130,7 +131,7 @@ EOT
 
     /**
      * Truncate
-     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @author Carlos Mendoza <inhack20@gmail.com>
      * @param  String
      * @param  String
      * @param  \Doctrine\DBAL\Platforms\MySqlPlatform
@@ -145,7 +146,7 @@ EOT
 
     /**
      * Drop
-     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @author Carlos Mendoza <inhack20@gmail.com>
      * @param  String
      * @param  String
      * @param  \Doctrine\DBAL\Platforms\MySqlPlatform
