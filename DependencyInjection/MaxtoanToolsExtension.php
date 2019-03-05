@@ -58,6 +58,7 @@ class MaxtoanToolsExtension extends Extension
             $container->setDefinition('maxtoan_tools.table_prefix_subscriber', $tablePrefixListerner);
         }
 
+        // Command for clean db
         $container->setParameter('maxtoan_tools.command.db_clean_truncate_entities', false);
         $container->setParameter('maxtoan_tools.command.db_clean_delete_entities', false);
         if(isset($config['command'])) {
@@ -68,6 +69,18 @@ class MaxtoanToolsExtension extends Extension
                     }
                     if(isset($config['command']['db']['clean']['delete_entities'])) {
                         $container->setParameter('maxtoan_tools.command.db_clean_delete_entities', $config['command']['db']['clean']['delete_entities']);
+                    }
+                }
+            }
+        }
+
+        // Command for clean folders
+        $container->setParameter('maxtoan_tools.command.folder_clean_clean_paths', false);
+        if(isset($config['command'])) {
+            if(isset($config['command']['folder'])) {
+                if(isset($config['command']['folder']['clean'])) {
+                    if(isset($config['command']['folder']['clean']['clean_paths'])) {
+                        $container->setParameter('maxtoan_tools.command.folder_clean_clean_paths', $config['command']['folder']['clean']['clean_paths']);
                     }
                 }
             }

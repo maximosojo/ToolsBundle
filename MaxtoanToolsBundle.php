@@ -13,6 +13,13 @@ namespace Maxtoan\ToolsBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+// Directories and Paths
+define('DS', '/');
+if (!defined('TOOLS_ROOT')) {
+    define('TOOLS_ROOT', str_replace(DIRECTORY_SEPARATOR, DS, getcwd()));
+}
+define('ROOT_DIR', TOOLS_ROOT . '/');
+
 /**
  * MaxtoanToolsBundle
  * 

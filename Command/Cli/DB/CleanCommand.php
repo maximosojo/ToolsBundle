@@ -35,7 +35,7 @@ class CleanCommand extends \Maxtoan\ToolsBundle\Component\Console\Command\Comman
     {
         $this
             ->setName('mtools:db:clean')
-            ->setDescription('Run clear database for develop.')
+            ->setDescription('Run clean database for develop.')
             ->addOption(
                 'force',
                     null,
