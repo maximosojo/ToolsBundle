@@ -139,7 +139,7 @@ EOT
      */
     private function truncate($tableName,$output,\Doctrine\DBAL\Platforms\MySqlPlatform $dbPlatform,$connection) 
     {
-        $this->io->text(sprintf("Cleaning audit table <info>'%s'</info>...",$tableName));
+        $this->io->text(sprintf("Cleaning table <info>'%s'</info>...",$tableName));
         $q = $dbPlatform->getTruncateTableSql($tableName);
         $connection->executeUpdate($q);
     }
@@ -154,7 +154,7 @@ EOT
      */
     private function drop($tableName,$output,\Doctrine\DBAL\Platforms\MySqlPlatform $dbPlatform,$connection) 
     {
-        $this->io->text(sprintf("Drop audit table <info>'%s'</info>...",$tableName));
+        $this->io->text(sprintf("Drop table <info>'%s'</info>...",$tableName));
         $q = $dbPlatform->getDropTableSql($tableName);
         $connection->executeUpdate($q);
     }
