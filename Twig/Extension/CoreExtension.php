@@ -11,7 +11,7 @@
 
 namespace Maxtoan\ToolsBundle\Twig\Extension;
 
-use Maxtoan\ToolsBundle\Service\Util\StringUtil;
+use Maxtoan\Common\Util\StringUtil;
 
 /**
  * Extension generic applications

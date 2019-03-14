@@ -1,9 +1,7 @@
 MaxtoanToolsBundle
 ========================
 
-MaxtoanToolsBundle desarrollado para Symfony 2.+, 3.+, proporciona un marco flexible de utilizades para la gestión de proyectos que apunta a manejar tareas comunes como repositorios, paginadores, utils en general.
-
-[![Total Downloads](https://img.shields.io/badge/Downloads-208-brightgreen.svg)](https://packagist.org/packages/maxtoan/tools-bundle) 
+MaxtoanToolsBundle desarrollado para Symfony 2.+, 3.+, 4.+, proporciona un marco flexible de utilidades para la gestión de proyectos que apunta a manejar tareas comunes como repositorios, paginadores, utils en general.
 
 ## Instalación
 

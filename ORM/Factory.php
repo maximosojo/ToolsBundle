@@ -22,8 +22,22 @@ use Doctrine\ORM\Repository\RepositoryFactory;
  */
 class Factory implements RepositoryFactory
 {
+    /**
+     * $ids
+     * @var String
+     */
     private $ids;
+
+    /**
+     * $container
+     * @var ContainerInterface
+     */
     private $container;
+
+    /**
+     * $default
+     * @var String
+     */
     private $default;
  
     public function __construct(array $ids, ContainerInterface $container, RepositoryFactory $default)

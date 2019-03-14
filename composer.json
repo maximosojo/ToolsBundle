@@ -16,7 +16,8 @@
   "require": {
       "php": ">=5.3.2",
       "friendsofsymfony/rest-bundle": "^2.1",
-      "pagerfanta/pagerfanta": "v1.0.5"
+      "pagerfanta/pagerfanta": "v1.0.5",
+      "maxtoan/common": "dev-master"
   },
   "autoload": {
       "psr-4": { "Maxtoan\\ToolsBundle\\": "" }
