@@ -55,7 +55,7 @@ abstract class MenuBuilder implements \Symfony\Component\DependencyInjection\Con
      *
      * @return string
      */
-    protected function trans($id,array $parameters = array(), $domain = 'messages')
+    protected function trans($id,array $parameters = array(), $domain = 'titles')
     {
         return $this->container->get('translator')->trans($id, $parameters, $domain);
     }
