@@ -88,5 +88,9 @@ class MaxtoanToolsExtension extends Extension
         
         $container->setParameter('maxtoan_tools.service.link_generator.enable', $config['link_generator']['enable']);
         $container->setParameter('maxtoan_tools.loading.color', $config['loading']['color']);
+
+        if($config['jms_serializer']['enable'] === true) {
+            $loaderYml->load('jms_serializer.yml');
+        }
     }
 }

@@ -1,0 +1,2 @@
+parameters:
+    jms_serializer.metadata.yaml_driver.class: 'Maxtoan\ToolsBundle\Component\JMS\Serializer\Metadata\Driver\YamlDriver'

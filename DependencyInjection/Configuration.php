@@ -96,6 +96,12 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('listerner_class')->defaultValue('Maxtoan\ToolsBundle\EventListener\TablePrefixListerner')->cannotBeEmpty()->end()
                     ->end()
                 ->end()
+                ->arrayNode('jms_serializer')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('enable')->defaultFalse()->end()
+                    ->end()
+                ->end()
             ;
 
         return $treeBuilder;
