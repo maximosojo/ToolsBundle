@@ -104,4 +104,14 @@ class JsonResponse extends JsonResponseBase
         $this->extraData["forceReload"] = true;
         $this->setData($this->originalData);
     }
+
+    /**
+     * Refresca paginador
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     */
+    public function setRefreshPaginator() 
+    {
+        $this->extraData["refresh_paginator"] = true;
+        $this->setData($this->originalData);
+    }
 }

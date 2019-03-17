@@ -94,6 +94,18 @@ trait ControllerTrait
         return $response;
     }
 
+    /**
+     * Refresh paginator
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     */
+    public function setRefreshPaginator()
+    {
+        $response = $this->myJsonResponse();
+        $response->setRefreshPaginator();
+
+        return $response;
+    }
+
 	/**
      * Traducción
      * @author Máximo Sojo <maxsojo13@gmail.com>
