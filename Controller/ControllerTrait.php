@@ -118,4 +118,33 @@ trait ControllerTrait
     {
         return $this->container->get('translator')->trans($id, $parameters, $domain);
     }
+
+    /**
+     * Habilitar filtro
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return Filter
+     */
+    public function filterEnabled($filter)
+    {
+        if (!$filter) {
+            return;
+        }
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->getFilters()->enable($filter);
+    }
+
+    /**
+     * Deshabilidar filtro
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return Filter
+     */
+    public function filterDisabled($filter)
+    {
+        if (!$filter) {
+            return;
+        }
+        $em = $this->getDoctrine()->getManager();
+        $em->getFilters()->disable($filter);
+    }
 }
