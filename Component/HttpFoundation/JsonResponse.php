@@ -101,7 +101,7 @@ class JsonResponse extends JsonResponseBase
      */
     public function setForceReload() 
     {
-        $this->extraData["forceReload"] = true;
+        $this->extraData["force_reload"] = true;
         $this->setData($this->originalData);
     }
 
