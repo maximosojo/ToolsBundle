@@ -137,7 +137,7 @@ trait DoctrineTrait
      * @param  boolean
      * @return Entity
      */
-    protected function save($entity, $andFlush = true)
+    protected function emSave($entity, $andFlush = true)
     {
         $em = $this->getDoctrine()->getManager();
         
@@ -158,7 +158,7 @@ trait DoctrineTrait
      * @param  boolean
      * @return Entity
      */
-    protected function remove($entity = null, $andFlush = true) 
+    protected function emRemove($entity = null, $andFlush = true)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -179,7 +179,7 @@ trait DoctrineTrait
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return [type]
      */
-    protected function flush() 
+    protected function emFlush()
     {
         $em = $this->getDoctrine()->getManager();
 
