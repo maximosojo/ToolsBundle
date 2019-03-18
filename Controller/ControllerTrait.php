@@ -106,19 +106,6 @@ trait ControllerTrait
         return $response;
     }
 
-	/**
-     * Traducción
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  String
-     * @param  array
-     * @param  string
-     * @return Translation
-     */
-    protected function trans($id,array $parameters = array(), $domain = "")
-    {
-        return $this->container->get('translator')->trans($id, $parameters, $domain);
-    }
-
     /**
      * Habilitar filtro
      * @author Máximo Sojo <maxsojo13@gmail.com>
@@ -129,7 +116,6 @@ trait ControllerTrait
         if (!$filter) {
             return;
         }
-        
         $em = $this->getDoctrine()->getManager();
         $em->getFilters()->enable($filter);
     }
@@ -146,5 +132,5 @@ trait ControllerTrait
         }
         $em = $this->getDoctrine()->getManager();
         $em->getFilters()->disable($filter);
-    }
+    }   
 }

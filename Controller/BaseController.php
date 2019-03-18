@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Controlador base
@@ -26,6 +27,17 @@ class BaseController extends AbstractFOSRestController
 {
     use ControllerTrait;
     use \Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;
+
+    /**
+     * $translator
+     * @var Translator
+     */
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
 
     /**
      * Tipo error
@@ -155,4 +167,17 @@ class BaseController extends AbstractFOSRestController
         $request = $this->container->get('request_stack')->getCurrentRequest();
         return 'json' == $request->getRequestFormat();
     }
+
+    /**
+     * Traducción
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  String
+     * @param  array
+     * @param  string
+     * @return Translation
+     */
+    protected function trans($id,array $parameters = array(), $domain = "")
+    {
+        return $this->translator->trans($id, $parameters, $domain);
+    }   
 }
