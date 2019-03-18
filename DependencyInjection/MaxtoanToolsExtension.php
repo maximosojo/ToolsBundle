@@ -61,28 +61,17 @@ class MaxtoanToolsExtension extends Extension
         // Command for clean db
         $container->setParameter('maxtoan_tools.command.db_clean_truncate_entities', false);
         $container->setParameter('maxtoan_tools.command.db_clean_delete_entities', false);
-        if(isset($config['command'])) {
-            if(isset($config['command']['db'])) {
-                if(isset($config['command']['db']['clean'])) {
-                    if(isset($config['command']['db']['clean']['truncate_entities'])) {
-                        $container->setParameter('maxtoan_tools.command.db_clean_truncate_entities', $config['command']['db']['clean']['truncate_entities']);
-                    }
-                    if(isset($config['command']['db']['clean']['delete_entities'])) {
-                        $container->setParameter('maxtoan_tools.command.db_clean_delete_entities', $config['command']['db']['clean']['delete_entities']);
-                    }
-                }
-            }
-        }
-
         // Command for clean folders
         $container->setParameter('maxtoan_tools.command.folder_clean_clean_paths', false);
         if(isset($config['command'])) {
-            if(isset($config['command']['folder'])) {
-                if(isset($config['command']['folder']['clean'])) {
-                    if(isset($config['command']['folder']['clean']['clean_paths'])) {
-                        $container->setParameter('maxtoan_tools.command.folder_clean_clean_paths', $config['command']['folder']['clean']['clean_paths']);
-                    }
-                }
+            if(isset($config['command']['db']['clean']['truncate_entities'])) {
+                $container->setParameter('maxtoan_tools.command.db_clean_truncate_entities', $config['command']['db']['clean']['truncate_entities']);
+            }
+            if(isset($config['command']['db']['clean']['delete_entities'])) {
+                $container->setParameter('maxtoan_tools.command.db_clean_delete_entities', $config['command']['db']['clean']['delete_entities']);
+            }
+            if(isset($config['command']['folder']['clean']['clean_paths'])) {
+                $container->setParameter('maxtoan_tools.command.folder_clean_clean_paths', $config['command']['folder']['clean']['clean_paths']);
             }
         }
         
