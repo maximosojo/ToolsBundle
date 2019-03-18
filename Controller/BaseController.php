@@ -15,14 +15,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as RouteSensio;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 
 /**
  * Controlador base
  *
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class BaseController extends FOSRestController
+class BaseController extends AbstractFOSRestController
 {
     use ControllerTrait;
     use \Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;
