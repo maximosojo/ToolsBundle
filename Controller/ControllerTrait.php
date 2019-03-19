@@ -39,22 +39,6 @@ trait ControllerTrait
 
         return $this->jsonResponse;
     }
-    
-    /**
-     * Set flash in json reponse
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  String
-     * @param  String
-     * @param  array
-     * @param  integer
-     */
-    public function setData($data)
-    {
-        $response = $this->myJsonResponse();
-        $response->setData($data);
-
-        return $response;
-    }
 
     /**
      * Set flash in json reponse
