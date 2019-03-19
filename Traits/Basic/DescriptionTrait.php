@@ -23,7 +23,7 @@ trait DescriptionTrait
     /**
      * Description
      * @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
