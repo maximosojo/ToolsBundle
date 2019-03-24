@@ -33,11 +33,11 @@ class BaseService implements ContainerAwareInterface
      */
     public function getDoctrine() 
     {
-        if (!$this->container->has('doctrine')) {
+        if (!$this->getContainer()->has('doctrine')) {
             throw new LogicException('The DoctrineBundle is not registered in your application.');
         }
 
-        return $this->container->get('doctrine');
+        return $this->getContainer()->get('doctrine');
     }
     
     /**
@@ -115,5 +115,15 @@ class BaseService implements ContainerAwareInterface
     protected function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
     {
         return $this->container->get('router')->generate($route, $parameters, $referenceType);
+    }
+
+    /**
+     * Container
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return Container
+     */
+    public function getContainer()
+    {
+        return $this->container;
     }
 }
