@@ -33,6 +33,7 @@ class MaxtoanToolsExtension extends Extension
         
         $loaderYml = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loaderYml->load('services.yml');
+        $loaderYml->load('commands.yml');
 
         $config = $processor->processConfiguration($configuration, $configs);
         if ($config['paginator']['format_array']) {
