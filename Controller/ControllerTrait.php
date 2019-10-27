@@ -114,10 +114,10 @@ trait ControllerTrait
      * Refresh paginator
      * @author Máximo Sojo <maxsojo13@gmail.com>
      */
-    public function setRefreshPaginator()
+    public function setRefreshPaginator($key = null)
     {
         $response = $this->myJsonResponse();
-        $response->setRefreshPaginator();
+        $response->setRefreshPaginator($key);
 
         return $response;
     }
