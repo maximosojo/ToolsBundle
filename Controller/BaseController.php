@@ -27,6 +27,7 @@ class BaseController extends AbstractFOSRestController
 {
     use ControllerTrait;
     use \Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;
+    use \Maxtoan\ToolsBundle\Traits\Component\EventDispatcherTrait;
 
     /**
      * $translator
@@ -79,38 +80,6 @@ class BaseController extends AbstractFOSRestController
         ];
         
         return new JsonResponse($result, $code);
-    }
-
-    /**
-     * GenericEvent
-     *  
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  Entity
-     * @return GenericEvent
-     */
-    public function newGenericEvent($entity)
-    {
-        return new \Maxtoan\ToolsBundle\Component\EventDispatcher\GenericEvent($entity);        
-    }
-
-    /**
-     * Disparar un evento
-     * @param type $eventName
-     * @param \Symfony\Component\EventDispatcher\Event $event
-     * @return \Maxtoan\ToolsBundle\Event\GenericEvent
-     */
-    protected function dispatch($eventName, \Symfony\Component\EventDispatcher\Event $event = null)
-    {
-        return $this->getEventDispatcher()->dispatch($eventName, $event);
-    }
-
-    /**
-     * Retorna el disparador de eventos
-     * @return \Symfony\Component\EventDispatcher\EventDispatcher
-     */
-    protected function getEventDispatcher()
-    {
-        return $this->get("event_dispatcher");
     }
 
     /**
