@@ -16,6 +16,7 @@ Las instrucciones de instalación y confirguración se encuentran en la [Documen
 2. [Componente Paginador](Resources/doc/paginator.md)
 3. [Componente Prefijo de Tablas BD](Resources/doc/table_prefix.md)
 4. [Componente Generador de Enlaces](Resources/doc/link_generator.md)
+5. [Componente Mailer](Resources/doc/mailer.md)
 
 ## Licencia
 
