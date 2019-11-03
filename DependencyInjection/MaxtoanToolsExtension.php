@@ -46,6 +46,16 @@ class MaxtoanToolsExtension extends Extension
             $container->setParameter('maxtoan_tools.service.link_generator.color', $config['link_generator']['color']); 
         }
 
+        if($config['mailer']['enable'] === true) {
+            $loaderYml->load('mailer.yml');
+            $container->setParameter("maxtoan_tools.swiftmailer.mailer_template_class", $config['mailer']["mailer_template_class"]);
+            $container->setParameter("maxtoan_tools.swiftmailer.mailer_component_class", $config['mailer']["mailer_component_class"]);
+            $container->setParameter("maxtoan_tools.swiftmailer.mailer_repository_manager", $config['mailer']["mailer_repository_manager"]);
+
+            $idManager = $container->getParameter("maxtoan_tools.swiftmailer.mailer_repository_manager");
+            $container->setAlias("maxtoan_tools.repository.mailer.em",$idManager);
+        }
+
         if($config['table_prefix']['enable'] === true) {
             $tablePrefix = $config['table_prefix']['prefix'].$config['table_prefix']['prefix_separator'];
             $tableNameLowercase = $config['table_prefix']['name_lowercase'];
