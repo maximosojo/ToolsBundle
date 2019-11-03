@@ -4,6 +4,6 @@ services:
       tags:
             - { name: 'console.command', command: 'mtools:db:clean' }
   # Limpiar carpetas
-  Maxtoan\ToolsBundle\Command\Cli\CleanCommand:
+  Maxtoan\ToolsBundle\Command\Cli\Folder\CleanCommand:
       tags:
             - { name: 'console.command', command: 'mtools:folder:clean' }
