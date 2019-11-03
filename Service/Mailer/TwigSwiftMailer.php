@@ -36,14 +36,32 @@ class TwigSwiftMailer
         $this->twig = $twig;
         $this->adapter = $adapter;
 
-               $this->templateSource = <<<EOF
-                {% extends template_from_string(baseString) %}
-                
-                {% block header %}{% include template_from_string(headerString) %}{% endblock %}
+        $resolver = new OptionsResolver();
+        $resolver->setDefaults([
+            "debug" => false,
+            "extra_params" => null,
+            "skeleton_email" => "skeleton_email.html.twig",//TODO falta agregar ruta completa
+        ]);
+        $resolver->setRequired([
+            "debug_mail", 
+            "env", 
+            "from_email", 
+            "from_name",
+            "skeleton_email"]);
+        $resolver->setDefined(["extra_params"]);
+        $resolver->setAllowedTypes("debug", "boolean");
+        $resolver->setAllowedTypes("debug_mail", "string");
 
-                {% block content_html %}{% include(template_from_string(bodyString)) with _context %}{% endblock %}
-                        
-                {% block footer %}{% include(template_from_string(footerString)) with _context %}{% endblock %}
+        $this->options = $resolver->resolve($options);
+        
+        $this->templateSource = <<<EOF
+        {% extends template_from_string(baseString) %}
+        
+        {% block header %}{% include template_from_string(headerString) %}{% endblock %}
+
+        {% block content_html %}{% include(template_from_string(bodyString)) with _context %}{% endblock %}
+                
+        {% block footer %}{% include(template_from_string(footerString)) with _context %}{% endblock %}
 EOF;
     }
 
@@ -64,7 +82,7 @@ EOF;
     public function buildEmail($templateName, $toEmail, $context, $fromEmail = null)
     {
         $context['toEmail'] = $toEmail;   
-        $context['appName'] = "maxsojo13@gmail.com";//$this->options["from_name"];
+        $context['appName'] = $this->options["from_name"];
         
         if($templateName instanceof \Twig_Template){
             $template = $templateName;            
@@ -79,11 +97,16 @@ EOF;
         $subject = $tplSubjet->renderBlock('subject', $context);
         $htmlBody = $template->render($context);
 
-        $message = new \Swift_Message("Holaaaa");
+        if ($fromEmail === null) {
+            $fromEmail = array($this->options["from_email"] => $this->options["from_name"]);
+        }
+
+        $toEmail = (array)$toEmail;
+        $message = new \Swift_Message("");
         $message
             ->setSubject($subject)
-            ->setFrom("maxtoan.develop@gmail.com")
-            ->setTo("maxsojo13@gmail.com");
+            ->setFrom($fromEmail)
+            ->setTo($toEmail);
         $message->setBody($htmlBody,'text/html');
         
         $this->mailer->send($message);
@@ -100,6 +123,7 @@ EOF;
         if($document === null){
             throw new \RuntimeException(sprintf("Document '%s' not found.",$id));
         }
+        
         $headerString = $baseString = $footerString = "";
         $header = $document->getHeader();
         $base = $document->getBase();
@@ -110,14 +134,17 @@ EOF;
         if($header){
             $headerString = $header->getBody();
         }
+
         if($base){
             $baseString = "{% block body_html %}".$base->getBody()."{% endblock body_html %}";
         }else {
             $baseString = "{% block body_html %}{% endblock body_html %}";
         }
+
         if($footer){
             $footerString = $footer->getBody();
         }
+
         $body = $bodyDocument->getBody();
         $headerString = html_entity_decode($headerString);
         $baseString = html_entity_decode($baseString);
@@ -131,6 +158,7 @@ EOF;
             "bodyString" => $bodyString,
             "subjectString" => $subject,
         ]);
+
         return $context;
     }
 }
