@@ -123,6 +123,19 @@ trait ControllerTrait
     }
 
     /**
+     * Json open modal
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  String
+     */
+    public function setOpenPopUp($url)
+    {
+        $response = $this->myJsonResponse();
+        $response->setOpenPopUp($url);
+
+        return $response;
+    }
+
+    /**
      * Habilitar filtro
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return Filter

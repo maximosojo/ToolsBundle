@@ -114,4 +114,19 @@ class JsonResponse extends JsonResponseBase
         $this->extraData["refresh_paginator"] = $key;
         $this->setData($this->originalData);
     }
+
+    /**
+     * [setOpenPopUp Abrir popUP]
+     *  
+     * @param  [String] $url
+     * @param  array  $parameters
+     */
+    public function setOpenPopUp($url,array $parameters = []) 
+    {
+        $this->extraData["openPopUp"] = [
+            "url" => $url,
+            "parameters" => $parameters,
+        ];
+        $this->setData($this->originalData);
+    }
 }
