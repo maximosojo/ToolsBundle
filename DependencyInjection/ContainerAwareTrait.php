@@ -23,7 +23,7 @@ trait ContainerAwareTrait
     /**
      * @var ContainerInterface
      */
-    private $container;
+    protected $container;
 
     /**
      * Register container
