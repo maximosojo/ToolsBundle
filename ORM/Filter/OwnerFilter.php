@@ -48,6 +48,10 @@ class OwnerFilter extends SQLFilter
         }
         
         $user = $this->getUser();
+        if (is_null($user)) {
+            return "";
+        }
+
         $this->setParameter("owner",$user->getId());
         return $targetTableAlias.'.owner_id = ' . $this->getParameter('owner'); // getParameter applies quoting automatically
     }
