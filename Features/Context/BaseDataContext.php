@@ -16,6 +16,7 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Behat\Tester\Exception\PendingException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Exception;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Base de contexto para generar data
@@ -26,6 +27,44 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
 {
     use \Behat\Symfony2Extension\Context\KernelDictionary;
     use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+
+    /**
+     *
+     * @var \Symfony\Bundle\FrameworkBundle\Client
+     */
+    protected $client;
+    protected $scenarioParameters;
+    protected $requestFiles;
+    protected $requestBody;
+    protected $lastRequestBody;
+
+    /**
+     *
+     * @var \Symfony\Component\HttpFoundation\Response
+     */
+    protected $response;
+
+    /**
+     * Respuesta de la ultima peticion http
+     * @var array
+     */
+    protected $data;
+
+    /**
+     * Usuario logueado
+     * @var UserInterface
+     */
+    protected $currentUser;
+
+    /**
+     * Initializes context.
+     */
+    public function __construct()
+    {
+        $this->parameters = [
+            "token_url" => "/api/login_check"
+        ];
+    }
 
     /**
      * Genera un password estandar en base a un nombre de usuario
@@ -384,5 +423,235 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
     protected function trans($id,array $parameters = array(), $domain = '')
     {
         return $this->container->get('translator')->trans($id, $parameters, $domain);
+    }
+
+    /**
+     * Obtiene el valor de un parametro en el escenario
+     * @param type $key
+     * @return type
+     * @throws Exception
+     */
+    public function getScenarioParameter($key, $checkExp = false)
+    {
+        $parameters = $this->getScenarioParameters();
+        // var_dump(array_keys($parameters));
+        $user = null;
+        if ($this->currentUser) {
+            $user = $this->find($this->userClass, $this->currentUser->getId());
+        }
+        $value = null;
+        if (empty($key)) {
+            xdebug_print_function_stack();
+            throw new Exception("The scenario parameter can not be empty.");
+        }
+        if (isset($parameters[$key])) {
+            if (is_callable($parameters[$key])) {
+                $value = call_user_func_array($parameters[$key], [$user, $this]);
+            } else {
+                $value = $parameters[$key];
+            }
+        } else {
+            $found = false;
+            if ($checkExp === true) {
+                foreach ($parameters as $k => $v) {
+                    if (preg_match("/" . $k . "/", $key)) {
+                        $value = str_replace($k, $this->getScenarioParameter($k), $key);
+                        $found = true;
+                        break;
+                    }
+                }
+            }
+            if (!$found) {
+                throw new Exception(sprintf("The scenario parameter '%s' is not defined", $key));
+            }
+        }
+        return $value;
+    }
+
+    /**
+     * Retorna los parametros definidos
+     * @return type
+     */
+    private function getScenarioParameters()
+    {
+        if ($this->scenarioParameters === null) {
+            $this->initParameters();
+        }
+        return $this->scenarioParameters;
+    }
+
+    /**
+     * Crea un cliente para hacer peticiones
+     * @return \Symfony\Component\BrowserKit\Client
+     */
+    public function createClient()
+    {
+        $this->client = $this->getKernel()->getContainer()->get('test.client');
+        $client = $this->client;
+        return $client;
+    }
+
+    public function replaceParameters(&$array)
+    {
+        $this->arrayReplaceRecursiveValue($array, $this->scenarioParameters);
+    }
+
+    /**
+     * Reemplaza recursivamente los parametros en un array
+     * @param type $array
+     * @param type $parameters
+     * @return type
+     */
+    private function arrayReplaceRecursiveValue(&$array, $parameters)
+    {
+        foreach ($array as $key => $value) {
+            // create new key in $array, if it is empty or not an array
+            if (!isset($array[$key]) || (isset($array[$key]) && !is_array($array[$key]))) {
+                $array[$key] = array();
+            }
+
+            // overwrite the value in the base array
+            if (is_array($value)) {
+                $value = $this->arrayReplaceRecursiveValue($array[$key], $parameters);
+            } else {
+                $value = $this->parseParameter($value, $parameters);
+            }
+            $array[$key] = $value;
+        }
+        return $array;
+    }
+
+    /**
+     * Realiza una peticion a la API Rest
+     * @When I request :fullUrl
+     */
+    public function iRequest($fullUrl, array $parameters = null, array $files = null,array $options = [])
+    {
+        $resolver = new OptionsResolver();
+        $resolver->setDefaults([
+            "clear_request" => true,
+        ]);
+        $options = $resolver->resolve($options);
+        $explode = explode(" ", $fullUrl);
+        $method = $explode[0];
+        $url = $explode[1];
+        if ($parameters === null) {
+            $parameters = $this->getRequestBody();
+        }
+        if ($files === null) {
+            $files = $this->requestFiles;
+        }
+        if ($parameters === null) {
+            $parameters = [];
+        }
+        if ($files === null) {
+            $files = [];
+        }
+        
+        $this->getClient()->request($method, $url, $parameters, $files);
+        $this->response = $this->getClient()->getResponse();
+        if($options["clear_request"] === true){
+            $this->initRequest();
+        }
+        $contentType = (string) $this->response->headers->get('Content-type');
+        if ($this->response->getStatusCode() != 404 && !empty($contentType) && $contentType !== 'application/json') {
+            throw new \Exception(sprintf("Content-type must be application/json received '%s' \n%s", $contentType, $this->echoLastResponse()));
+        }
+        $content = $this->response->getContent();
+        $this->data = [];
+        if ($content) {
+            $this->data = json_decode($this->response->getContent(), true);
+            $this->lastErrorJson = json_last_error();
+            if ($this->response->getStatusCode() != 404 && $this->lastErrorJson != JSON_ERROR_NONE) {
+                throw new \Exception(sprintf("Error parsing response JSON " . "\n\n %s", $this->echoLastResponse()));
+            }
+        }
+        if (isset($this->data["id"])) {
+            $this->setScenarioParameter("%lastId%", $this->data["id"]);
+        }
+        $this->setScenarioParameter("request",$this->data);
+        $this->restartKernel();
+    }
+
+    /**
+     * @Then echo last response
+     */
+    public function echoLastResponse()
+    {
+        $this->printDebug(sprintf("Request:\n %s \n\n Response:\n %s", json_encode($this->lastRequestBody, JSON_PRETTY_PRINT, 10), $this->response->getContent()));
+    }
+
+    /**
+     * Prints beautified debug string.
+     *
+     * @param string $string debug string
+     */
+    protected function printDebug($string)
+    {
+        echo sprintf("\n\033[36m| %s\033[0m\n\n", strtr($string, ["\n" => "\n|  "]));
+    }
+
+    public function restartKernel()
+    {
+        $kernel = $this->getKernel();
+        $kernel->shutdown();
+        $kernel->boot();
+        $this->setKernel($kernel);
+    }
+
+    public function getRequestBody($key = null,$default = null)
+    {
+        if($key === null){
+            return $this->requestBody;
+        }
+        if(isset($this->requestBody[$key])){
+            $default = $this->requestBody[$key];
+        }
+        return $default;
+    }
+
+    public function setRequestBody($key,$value)
+    {
+        $this->requestBody[$key] = $value;
+        return $this;
+    }
+    
+    public function initRequestBody(array $body = [])
+    {
+        $this->requestBody = $body;
+        return $this;
+    }
+
+    /**
+     * Inicializa los datos para un siguiente request
+     */
+    public function initRequest()
+    {
+        $this->lastRequestBody = $this->getRequestBody();
+        $this->lastResponse = $this->response;
+        $this->initRequestBody();
+        $this->requestFiles = [];
+    }
+
+    /**
+     * 
+     *  \Symfony\Component\BrowserKit\Client
+     * @return \Symfony\Bundle\FrameworkBundle\Client
+     */
+    function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * @Then the response status code is :httpStatus
+     */
+    public function theResponseStatusCodeIs($httpStatus)
+    {
+        if ((string) $this->response->getStatusCode() !== (string) $httpStatus) {
+            throw new \Exception(sprintf("HTTP code does not match %s (actual: %s)\n\n %s", $httpStatus, $this->response->getStatusCode(), $this->echoLastResponse()));
+        }
+        
+        return true;
     }
 }
