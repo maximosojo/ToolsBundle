@@ -27,20 +27,20 @@ use App\Entity\M\Group;
 class AbstractMinkContext extends MinkContext
 {	
     /**
-     * [$scenarioParameters description]
-     * @var [type]
+     * $scenarioParameters
+     * @var ScenarioParameters
      */
     protected $scenarioParameters;
 
 	/**
-	 * [$kernel description]
-	 * @var [type]
+	 * $kernel
+	 * @var Kernel
 	 */
 	protected $kernel;
 
 	/**
-	 * [$container description]
-	 * @var [type]
+	 * $container
+	 * @var Container
 	 */
     protected $container;
 
