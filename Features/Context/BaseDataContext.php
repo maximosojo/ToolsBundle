@@ -654,4 +654,131 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
         
         return true;
     }
+
+    /**
+     * Limia una tabla de la base de datos
+     * @example Given a clear entity "App\Entity\EntityName" table
+     * @Given a clear entity :className table
+     * @Given a clear entity :className table and where :where
+     */
+    public function aClearEntityTable($className, $andWhere = null)
+    {
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        if ($em->getFilters()->isEnabled('softdeleteable')) {
+            $em->getFilters()->disable('softdeleteable');
+        }
+        
+        $query = $em->createQuery("DELETE FROM " . $className . " " . $andWhere);
+        $query->execute();
+        $em->flush();
+        $em->clear();
+    }
+
+    /**
+     * Verifica que una propiedad x contiene un error
+     * @example And the response has a errors in property "number" and contains "El número de la cuenta bancaria debe tener minimo 19 digitos."
+     * @Then the response has a errors in property :propertyName and contains :message
+     */
+    public function theResponseHasAErrorsInPropertyAndContains($propertyName, $message = null,$negate = false)
+    {
+        $properties = explode(".", $propertyName);
+        $errors = $this->getPropertyValue("errors");
+        $children = $errors["children"];
+        if (count($properties) > 1) {
+            $data = $children;
+            foreach ($properties as $property) {
+                if (isset($data[$property]) && isset($data[$property]["children"])) {
+                    $data = $data[$property]["children"];
+                }
+                if (isset($data[$property]) && isset($data[$property]["errors"])) {
+                    $children = $data;
+                    $propertyName = $property;
+                    break;
+                }
+            }
+        }        
+        if (!isset($children[$propertyName])) {
+            throw new Exception(sprintf("The response no contains error property '%s' \n Available are %s", $propertyName, implode(", ", array_keys($children))));
+        }
+        $message = $this->parseParameter($message, [], 'validators');
+        if (isset($children[$propertyName]["errors"])) {
+            if ($message === null) {
+                if (count($children[$propertyName]["errors"]) == 0) {
+                    throw new Exception(sprintf("The error property no contains errors in '%s', response with '%s'", $propertyName, var_export($errors, true)));
+                }
+            } else {
+                $found = false;
+                foreach ($children[$propertyName]["errors"] as $error) {
+                    if ($error === $message) {
+                        $found = true;
+                        break;
+                    }
+                }
+                if ($negate === false && $found === false) {
+                    throw new Exception(sprintf("The error property no contains error message '%s', response with '%s'", $propertyName, implode(", ", $children[$propertyName]["errors"])));
+                }else if ($negate === true && $found === true) {
+                    throw new Exception(sprintf("The error property contains error message '%s', response with '%s'", $propertyName, implode(", ", $children[$propertyName]["errors"])));
+                }
+            }
+        } else {
+            throw new Exception(sprintf("The error property no contains errors '%s', response with '%s'", $propertyName, var_export($errors, true)));
+        }
+    }
+
+    /**
+     * Get property value from response data
+     *
+     * @param string $propertyName property name
+     */
+    public function getPropertyValue($propertyName)
+    {
+        return $this->getValue($propertyName, $this->data);
+    }
+
+    /**
+     * Get property value from data
+     *
+     * @param string $propertyName property name
+     * @param mixed $data data as array or object
+     */
+    protected function getValue($propertyName, $data)
+    {
+        if ($data === null) {
+            throw new Exception(sprintf("Response was not set\n %s", var_export($data, true)));
+        }
+
+        $properties = explode(".", $propertyName);
+        $totalProperties = count($properties);
+        if (count($properties) > 1) {
+            $data2 = $data;
+            $i = 0;
+            foreach ($properties as $property) {
+                $i++;
+                if (is_numeric($property)) {
+                    $data2 = $data2[(int) $property];
+                } else if (isset($data2[$property]) && is_array($data2[$property]) && $i < $totalProperties) {
+                    $data2 = $data2[$property];
+                }
+                if ($i == $totalProperties && isset($data2[$property])) {
+                    $data = $data2;
+                    $propertyName = $property;
+                    break;
+                }
+            }
+        }
+
+        if (is_array($data) && array_key_exists($propertyName, $data)) {
+            $data = $data[$propertyName];
+            return $data;
+        }
+        if (is_object($data) && property_exists($data, $propertyName)) {
+            $data = $data->$propertyName;
+            return $data;
+        }
+        if (is_string($data)) {
+            throw new LogicException(sprintf("The response is a string data, verify call 'I request' not 'I html request'."));
+        }
+        throw new LogicException(sprintf("Property '%s' is not set! \n%s", $propertyName, var_export($data, true)));
+    }
 }
