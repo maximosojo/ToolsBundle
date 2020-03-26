@@ -676,6 +676,32 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
     }
 
     /**
+     * Verifica que exista un mensaje de error
+     * @example And the response has a errors property and contains "Por motivos de seguridad, debe validar su cuenta mPandco antes de usar sus tarjetas de crédito."
+     * @Then the response has a errors property and contains :message
+     */
+    public function theResponseHasAErrorsPropertyAndContains($message)
+    {
+        $message = $this->parseParameter($message, [], "validators");
+        $errors = $this->getPropertyValue("errors");
+        
+        $found = false;
+        if (is_array($errors['errors'])) {
+            foreach ($errors['errors'] as $error) {
+                if ($error === $message) {
+                    $found = true;
+                    break;
+                }
+            }
+        } else {
+            throw new Exception(sprintf("The error property no contains error message. '%s' \n \n %s", $message, var_export($errors['errors'], true), $this->echoLastResponse()));
+        }
+        if ($found === false) {
+            throw new Exception(sprintf("The error response no contains error message '%s', response with '%s'", $message, implode(",", $errors['errors'])));
+        }
+    }
+
+    /**
      * Verifica que una propiedad x contiene un error
      * @example And the response has a errors in property "number" and contains "El número de la cuenta bancaria debe tener minimo 19 digitos."
      * @Then the response has a errors in property :propertyName and contains :message
