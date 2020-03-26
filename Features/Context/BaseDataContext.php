@@ -17,6 +17,8 @@ use Behat\Behat\Tester\Exception\PendingException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Exception;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Behat\Symfony2Extension\Context\KernelDictionary;
+use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 
 /**
  * Base de contexto para generar data
@@ -25,8 +27,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2Extension\Context\KernelAwareContext 
 {
-    use \Behat\Symfony2Extension\Context\KernelDictionary;
-    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use KernelDictionary;
+    use ContainerAwareTrait;
 
     /**
      *
@@ -684,7 +686,7 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
     {
         $message = $this->parseParameter($message, [], "validators");
         $errors = $this->getPropertyValue("errors");
-        
+
         $found = false;
         if (is_array($errors['errors'])) {
             foreach ($errors['errors'] as $error) {
