@@ -355,7 +355,7 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
     /**
      * @return \Doctrine\Bundle\DoctrineBundle\Registry
      */
-    protected function getDoctrine() 
+    public function getDoctrine() 
     {
         return $this->container->get("doctrine");
     }
