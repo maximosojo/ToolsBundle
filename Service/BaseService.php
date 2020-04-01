@@ -14,6 +14,7 @@ namespace Maxtoan\ToolsBundle\Service;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Maxtoan\ToolsBundle\Traits\Component\ErrorTrait;
 
 /**
  * Servicio base con implementación de funciones genericas compartidas
@@ -25,7 +26,8 @@ class BaseService implements ContainerAwareInterface
 {
     use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
     use \Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;
-
+    use ErrorTrait;
+    
     /**
      * Shortcut to return the Doctrine Registry service.
      * @return Registry
