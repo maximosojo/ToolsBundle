@@ -83,6 +83,11 @@ class ModelComponent
         return $this;
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function setTypeComponent($typeComponent)
     {
         $this->typeComponent = $typeComponent;

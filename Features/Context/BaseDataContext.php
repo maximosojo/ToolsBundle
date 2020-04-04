@@ -15,10 +15,11 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Behat\Tester\Exception\PendingException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Exception;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Behat\Symfony2Extension\Context\KernelDictionary;
 use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+use LogicException;
+use Exception;
 
 /**
  * Base de contexto para generar data
@@ -692,7 +693,7 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
 
     /**
      * Verifica que exista un mensaje de error
-     * @example And the response has a errors property and contains "Por motivos de seguridad, debe validar su cuenta mPandco antes de usar sus tarjetas de crédito."
+     * @example And the response has a errors property and contains "Invalid username or password."
      * @Then the response has a errors property and contains :message
      */
     public function theResponseHasAErrorsPropertyAndContains($message)
@@ -718,7 +719,24 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
 
     /**
      * Verifica que una propiedad x contiene un error
-     * @example And the response has a errors in property "number" and contains "El número de la cuenta bancaria debe tener minimo 19 digitos."
+     * @example And the response has a errors in property "message" and contains "Invalid username or password."
+     * @Then the response in property :propertyName and contains :message
+     */
+    public function theResponseInPropertyAndContains($propertyName, $message)
+    {
+        $properties = explode(".", $propertyName);
+        $property = $this->getPropertyValue($propertyName);        
+        $message = $this->parseParameter($message, [], 'validators');        
+        if ($property === $message) {
+            $found = true;
+        } else {
+            throw new Exception(sprintf("The error property contains error message '%s', response with '%s'", $propertyName, implode(", ", $property)));
+        }
+    }
+
+    /**
+     * Verifica que una propiedad x contiene un error
+     * @example And the response has a errors in property "username_password" and contains "Invalid username or password."
      * @Then the response has a errors in property :propertyName and contains :message
      */
     public function theResponseHasAErrorsInPropertyAndContains($propertyName, $message = null,$negate = false)
@@ -821,5 +839,52 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
             throw new LogicException(sprintf("The response is a string data, verify call 'I request' not 'I html request'."));
         }
         throw new LogicException(sprintf("Property '%s' is not set! \n%s", $propertyName, var_export($data, true)));
+    }
+
+
+
+    /**
+     * Afirma que la respuesta es un paginador
+     * @Then the response is a paginator
+     */
+    public function theResponseIsAPaginator()
+    {
+        $this->theResponseHasAProperty("links");
+        $this->theResponseHasAProperty("meta");
+        $this->theResponseHasAProperty("data");
+        // \assertCount(3, $this->data);
+//        echo json_encode($this->data,JSON_PRETTY_PRINT);
+    }
+
+    /**
+     * Verifica que el ultimo resultado tenga unas propiedades separadas por coma (id,name,description)
+     * @example And the response has a "id,number,secure_label,email,bank,alias,digital_account" properties
+     * @Then the response has a :propertiesName properties
+     */
+    public function theResponseHasAProperties($propertiesName)
+    {
+        $propertiesName = explode(",", $propertiesName);
+        foreach ($propertiesName as $propertyName) {
+            $this->theResponseHasAProperty($propertyName);
+        }
+    }
+
+    /**
+     * Verifica que la ultima respuesta tenga una propiedad
+     * @Then the response has a :propertyName property
+     */
+    public function theResponseHasAProperty($propertyName)
+    {
+        if ((isset($this->parameters['recommended'][$propertyName]) && !$this->parameters['recommended'][$propertyName])) {
+            return;
+        }
+        if ((isset($this->parameters['optional'][$propertyName]) && !$this->parameters['optional'][$propertyName])) {
+            return;
+        }
+        try {
+            return $this->getPropertyValue($propertyName);
+        } catch (\LogicException $e) {
+            throw new \Exception(sprintf("%s\n\n %s", $e->getMessage(), $this->echoLastResponse()));
+        }
     }
 }

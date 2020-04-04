@@ -101,6 +101,11 @@ class ModelTemplate
         return $this;
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function setStatus($status)
     {
         $this->status = $status;
