@@ -379,6 +379,19 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
     }
 
     /**
+     * Se hace flush de datos
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  [type]
+     * @param  boolean
+     * @return [type]
+     */
+    public function flush()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+    }
+
+    /**
      * Generate page url.
      * This method uses simple convention where page argument is prefixed
      * with "sylius_" and used as route name passed to router generate method.
