@@ -20,6 +20,7 @@ use Behat\Symfony2Extension\Context\KernelDictionary;
 use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 use LogicException;
 use Exception;
+use FOS\UserBundle\Model\UserInterface;
 
 /**
  * Base de contexto para generar data
@@ -919,7 +920,7 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
      * @param User $currentUser
      * @return \DataContext
      */
-    public function setCurrentUser(User $currentUser)
+    public function setCurrentUser(UserInterface $currentUser)
     {
         $this->currentUser = $currentUser;
         if($this->client !== null){
@@ -954,6 +955,16 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
         }
         
         return $this;
+    }
+
+    /**
+     * Retorna el usuario actual
+     * @param User $currentUser
+     * @return \DataContext
+     */
+    public function getCurrentUser()
+    {
+        return $this->currentUser;
     }
 
     /**
