@@ -887,4 +887,129 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
             throw new \Exception(sprintf("%s\n\n %s", $e->getMessage(), $this->echoLastResponse()));
         }
     }
+
+    /**
+     * Establece el usuario de la sesion actual en el cliente http
+     * @param User $currentUser
+     * @return \DataContext
+     */
+    public function setCurrentUser(User $currentUser)
+    {
+        $this->currentUser = $currentUser;
+        if($this->client !== null){
+            $container = $this->client->getContainer();
+            $session = $this->client->getContainer()->get('session');
+            /** @var $loginManager \FOS\UserBundle\Security\LoginManager */
+            $loginManager = $container->get('FOS\UserBundle\Security\LoginManager');//fos_user.security.login_manager
+            $firewallName = $container->getParameter('fos_user.firewall_name');
+            // the firewall context defaults to the firewall name
+            $firewallContext = $firewallName;
+            $fwName = '_security_'.$firewallContext;
+            if($currentUser === null){
+                $session->remove($fwName);
+                $session->save();
+                $cookie = new \Symfony\Component\BrowserKit\Cookie($session->getName(), $session->getId());
+                $this->client->getCookieJar()->set($cookie);
+                // assertTrue(is_null($container->get('security.token_storage')->getToken()->getUser()));
+            }else{
+                $loginManager->loginUser($firewallName, $currentUser);
+                $token = new \Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken(
+                    $currentUser,
+                    $currentUser->getPassword(),
+                    $firewallContext,
+                    $currentUser->getRoles()
+                );
+                $session->set($fwName, serialize($token));
+                $session->save();
+                $cookie = new \Symfony\Component\BrowserKit\Cookie($session->getName(), $session->getId());
+                $this->client->getCookieJar()->set($cookie);
+                // assertTrue(is_object($container->get('security.token_storage')->getToken()->getUser()));
+            }
+        }
+        
+        return $this;
+    }
+
+    /**
+     * Devuelve el primer elemento que encuentr de la base de datos
+     * @param type $class
+     * @return type
+     */
+    public function findOneElement($class, UserInterface $user = null)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->getFilters()->enable("enableable");
+        $alias = "o";
+        $qb = $em->createQueryBuilder()
+                ->select($alias)
+                ->from($class, $alias);
+        if ($user !== null) {
+            $qb
+                    ->andWhere("o.user = :user")
+                    ->setParameter("user", $user)
+            ;
+        }
+        $qb->orderBy("o.createdAt", "DESC");
+        $entity = $qb->setMaxResults(1)->getQuery()->getOneOrNullResult();
+        return $entity;
+    }
+
+    /**
+     * Busca una entidad
+     * @param type $className
+     * @param type $id
+     * @return type
+     */
+    public function find($className, $id) 
+    {
+        return $this->getDoctrine()->getManager()->find($className, $id);
+    }
+
+    /**
+     * iDeleteForTest
+     *  
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  $class
+     * @param  array  $method
+     * @return Entity
+     */
+    public function iDeleteForTest($class, array $method = []) 
+    {
+        $em = $this->getDoctrine()->getManager();
+        if ($em->getFilters()->isEnabled('softdeleteable')) {
+            $em->getFilters()->disable('softdeleteable');
+        }
+        
+        $a = "c";
+        foreach ($method as $key => $value) {
+            $query = $em->createQuery("DELETE FROM " . $class ." c WHERE ". sprintf("%s.%s = '%s",$a,$key,$value). "'");
+            $query->execute();
+        }
+        $em->flush();
+    }
+
+    /**
+     * Contruye un queryBuilder de una clase
+     * @param type $class
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function findQueryBuilderForClass($class, array $method = [], $queryResult = null) 
+    {
+        $em = $this->getDoctrine()->getManager();        
+        $alias = "c";
+        $qb = $em->createQueryBuilder()
+                ->select($alias)
+                ->from($class, $alias);
+        foreach ($method as $key => $value) {
+            $qb
+                ->andWhere(sprintf("%s.%s = :%s",$alias,$key,$key))
+                ->setParameter($key, $value)
+            ;
+        }
+        if ($queryResult == "OneOrNull") {
+            return $qb->setMaxResults(1)->getQuery()->getOneOrNullResult();
+        } else {
+            return $qb->getQuery()->getResult();
+        }
+    }
 }
