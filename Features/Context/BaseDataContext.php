@@ -36,13 +36,33 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
      * @var \Symfony\Bundle\FrameworkBundle\Client
      */
     protected $client;
+
+    /**
+     * $scenarioParameters
+     * @var Scenario
+     */
     protected $scenarioParameters;
+
+    /**
+     * $requestFiles
+     * @var files
+     */
     protected $requestFiles;
+
+    /**
+     * $requestBody
+     * @var Body
+     */
     protected $requestBody;
+
+    /**
+     * $lastRequestBody
+     * @var Request
+     */
     protected $lastRequestBody;
 
     /**
-     *
+     * $response
      * @var \Symfony\Component\HttpFoundation\Response
      */
     protected $response;
@@ -58,6 +78,12 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
      * @var UserInterface
      */
     protected $currentUser;
+
+    /**
+     * User
+     * @var string 
+     */
+    protected $userClass;
 
     /**
      * Initializes context.
@@ -1011,5 +1037,30 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
         } else {
             return $qb->getQuery()->getResult();
         }
+    }
+
+    /**
+     * Elimina un usuario de prueba
+     * Ejemplo: Given I delete user "maximosojo" for test
+     * @Given I delete user :username for test
+     */
+    public function iDeleteUserForTest($username) 
+    {
+        $this->iDeleteForTest($this->userClass,["username" => $username]);
+    }
+
+    /**
+     * Busca un usuario en la base de datos
+     * @param type $username
+     * @return User
+     */
+    public function findUser($username)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository($this->userClass)->findOneByUsername($username);
+        if($entity){
+            $em->refresh($entity);
+        }
+        return $entity;
     }
 }
