@@ -18,6 +18,8 @@ namespace Maxtoan\ToolsBundle\Traits\Component;
  */
 trait ErrorTrait
 {
+    protected $context;
+    
     protected $errors;
 
     /**
