@@ -570,7 +570,6 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
      */
     public function iRequest($fullUrl, array $parameters = null, array $files = null,array $options = [])
     {
-        $this->createClient();
         $resolver = new OptionsResolver();
         $resolver->setDefaults([
             "clear_request" => true,
@@ -684,6 +683,9 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
      */
     function getClient()
     {
+        if (!$this->client) {
+            $this->createClient();
+        }
         return $this->client;
     }
 
