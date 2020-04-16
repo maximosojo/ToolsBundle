@@ -14,9 +14,10 @@ namespace Maxtoan\ToolsBundle\Features\Context;
 use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Symfony2Extension\Context\KernelDictionary;
+use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Behat\Symfony2Extension\Context\KernelDictionary;
 use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 use LogicException;
 use Exception;
@@ -27,7 +28,7 @@ use FOS\UserBundle\Model\UserInterface;
  *
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2Extension\Context\KernelAwareContext 
+abstract class BaseDataContext extends RawMinkContext implements KernelAwareContext
 {
     use KernelDictionary;
     use ContainerAwareTrait;
@@ -103,7 +104,7 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
      */
     public function getPassword($username) 
     {
-        $pass = substr(md5($username), 0, 8) . '.5$';
+        $pass = substr(md5($username), 0, 8) . '.*/';
         return $pass;
     }
 
@@ -152,11 +153,11 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
     }
 
     /**
-    * 
-    * @param type $selector
-    * @return \Behat\Mink\Element\NodeElement
-    * @throws Exception
-    */
+     * Obtine un elemento
+     * @param type $selector
+     * @return \Behat\Mink\Element\NodeElement
+     * @throws Exception
+     */
     protected function findElement($selector)
     {
        $page = $this->getSession()->getPage();
@@ -302,7 +303,6 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
     {
         $valueExplode = explode("__",$value);
         if(is_array($valueExplode) && count($valueExplode) == 2){
-//            var_dump($valueExplode[0]);
             $reflection = new \ReflectionClass($valueExplode[0]);
             if(!$reflection->hasConstant($valueExplode[1])){
                 throw new \RuntimeException(sprintf("The class '%s' no has a constant name '%s'",$valueExplode[0],$valueExplode[1]));
@@ -321,8 +321,8 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
 
     /**
      * Realiza el parse de un string para traducirlo
-     * validators.sale.registration.code_quantity_min::{"%n%":2}::validators seria un ejemplo
-     * validators.sale.registration.code_quantity_min::{}::validators seria un ejemplo
+     * validators.test.translation::{"%n%":2}::validators seria un ejemplo
+     * validators.test.translation::{}::validators seria un ejemplo
      * @param type $id
      */
     protected function parseTrans($id,array $parameters = [],$domain = "flashes") 
@@ -340,7 +340,6 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
             //Parametros de la traduccion
             if(isset($textExplode[1])){
                 $paramsString = $textExplode[1];
-//                var_dump($paramsString);
                 $parametersParsed = json_decode($paramsString,true);
                 if(is_array($parametersParsed)){
                     $this->parseScenarioParameters($parametersParsed);
@@ -350,7 +349,6 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
                             $parametersParsed[$x] = $this->parseTrans($v);
                         }
                     }
-//                    var_dump($parametersParsed);
                     $parameters = $parametersParsed;
                 }
             }
@@ -477,7 +475,6 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
     public function getScenarioParameter($key, $checkExp = false)
     {
         $parameters = $this->getScenarioParameters();
-        // var_dump(array_keys($parameters));
         $user = null;
         if ($this->currentUser) {
             $user = $this->find($this->userClass, $this->currentUser->getId());
@@ -653,12 +650,26 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
         return $default;
     }
 
+    /**
+     * setRequestBody
+     *  
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  $key
+     * @param  $value
+     */
     public function setRequestBody($key,$value)
     {
         $this->requestBody[$key] = $value;
         return $this;
     }
     
+    /**
+     * initRequestBody
+     *  
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  array  $body
+     * @return This
+     */
     public function initRequestBody(array $body = [])
     {
         $this->requestBody = $body;
@@ -677,8 +688,7 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
     }
 
     /**
-     * 
-     *  \Symfony\Component\BrowserKit\Client
+     * \Symfony\Component\BrowserKit\Client
      * @return \Symfony\Bundle\FrameworkBundle\Client
      */
     function getClient()
@@ -870,8 +880,6 @@ abstract class BaseDataContext extends RawMinkContext implements \Behat\Symfony2
         }
         throw new LogicException(sprintf("Property '%s' is not set! \n%s", $propertyName, var_export($data, true)));
     }
-
-
 
     /**
      * Afirma que la respuesta es un paginador
