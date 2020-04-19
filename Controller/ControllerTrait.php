@@ -127,10 +127,10 @@ trait ControllerTrait
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  String
      */
-    public function setOpenPopUp($url)
+    public function setOpenPopUp($url,array $parameters = [])
     {
         $response = $this->myJsonResponse();
-        $response->setOpenPopUp($url);
+        $response->setOpenPopUp($url,$parameters);
 
         return $response;
     }
