@@ -40,7 +40,7 @@ class TwigSwiftMailer
         $resolver->setDefaults([
             "debug" => false,
             "extra_params" => null,
-            "skeleton_email" => "skeleton_email.html.twig",//TODO falta agregar ruta completa
+            "skeleton_email" => "skeleton_email.html.twig"
         ]);
         $resolver->setRequired([
             "debug_mail", 
@@ -53,6 +53,7 @@ class TwigSwiftMailer
         $resolver->setAllowedTypes("debug_mail", "string");
 
         $this->options = $resolver->resolve($options);
+        $this->twig->addExtension(new \Twig\Extension\StringLoaderExtension());
         
         $this->templateSource = <<<EOF
         {% extends template_from_string(baseString) %}
@@ -68,7 +69,7 @@ EOF;
     public function email($templateName, $toEmail, $context, $fromEmail = null,array $attachs = [])
     {
         $context = $this->buildDocumentContext($templateName, $context, $toEmail, $attachs);
-    	$template =$this->twig->createTemplate($this->templateSource);  
+    	$template = $this->twig->createTemplate($this->templateSource);
         $email = $this->buildEmail($template, $toEmail, $context);
     }
 
