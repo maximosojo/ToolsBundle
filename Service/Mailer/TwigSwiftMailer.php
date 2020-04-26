@@ -66,11 +66,26 @@ class TwigSwiftMailer
 EOF;
     }
 
-    public function email($templateName, $toEmail, $context, $fromEmail = null,array $attachs = [])
+    public function email($templateName, $toEmail, $context,array $attachs = [])
+    {
+        $message = $this->render($templateName,$toEmail,$context,$attachs);
+        foreach ($attachs as $name => $path) {
+            $message->attach(\Swift_Attachment::fromPath($path)->setFilename($name));
+        }
+        $this->send($message);
+    }
+
+    private function render($templateName, $toEmail, $context,array $attachs = [])
     {
         $context = $this->buildDocumentContext($templateName, $context, $toEmail, $attachs);
     	$template = $this->twig->createTemplate($this->templateSource);
-        $email = $this->buildEmail($template, $toEmail, $context);
+        $message = $this->buildEmail($template, $toEmail, $context);
+        return $message;
+    }
+
+    private function send($message)
+    {
+        $this->mailer->send($message);
     }
 
 	/**
@@ -80,7 +95,7 @@ EOF;
      * @param type $toEmail
      * @return EmailQueueInterface
      */
-    public function buildEmail($templateName, $toEmail, $context, $fromEmail = null)
+    private function buildEmail($templateName, $toEmail, $context)
     {
         $context['toEmail'] = $toEmail;   
         $context['appName'] = $this->options["from_name"];
@@ -98,10 +113,7 @@ EOF;
         $subject = $tplSubjet->renderBlock('subject', $context);
         $htmlBody = $template->render($context);
 
-        if ($fromEmail === null) {
-            $fromEmail = array($this->options["from_email"] => $this->options["from_name"]);
-        }
-
+        $fromEmail = array($this->options["from_email"] => $this->options["from_name"]);
         $toEmail = (array)$toEmail;
         $message = new \Swift_Message("");
         $message
@@ -109,11 +121,10 @@ EOF;
             ->setFrom($fromEmail)
             ->setTo($toEmail);
         $message->setBody($htmlBody,'text/html');
-        
-        $this->mailer->send($message);
+        return $message;
     }
 
-    protected function buildDocumentContext($id,$context,$toEmail,array $attachs = [])
+    private function buildDocumentContext($id,$context,$toEmail,array $attachs = [])
     {
         $idExp = explode("/",$id);
         if(count($idExp) > 0){
