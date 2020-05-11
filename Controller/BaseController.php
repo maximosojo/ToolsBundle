@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;
+use Maxtoan\ToolsBundle\Traits\Component\EventDispatcherTrait;
 
 /**
  * Controlador base
@@ -26,8 +28,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class BaseController extends AbstractFOSRestController
 {
     use ControllerTrait;
-    use \Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;
-    use \Maxtoan\ToolsBundle\Traits\Component\EventDispatcherTrait;
+    use DoctrineTrait;
+    use EventDispatcherTrait;
 
     /**
      * $translator

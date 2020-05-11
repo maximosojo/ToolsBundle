@@ -11,6 +11,8 @@
 
 namespace Maxtoan\ToolsBundle\DependencyInjection;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * Doctrine trait.
  *
@@ -67,14 +69,14 @@ trait DoctrineTrait
      * @return type
      * @throws type
      */
-    protected function findOr404(\Symfony\Component\HttpFoundation\Request $request) 
+    protected function findOr404(Request $request,$className = null,$property = "id") 
     {
-        $id = $request->get("id");
+        $id = $request->get($property);
         if(empty($id)){
             throw $this->createNotFoundException("The identifier can not be empty.");
         }
 
-        $resource = $this->getRepository()->find($id);
+        $resource = $this->getRepository($className)->find($id);
         if(!$resource){
             throw $this->createNotFoundException();
         }
