@@ -20,6 +20,12 @@ use Maxtoan\ToolsBundle\Service\BaseService;
  */
 class ConfigurationManager extends BaseService
 {
+    /**
+     * Registra nueva
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  $class
+     * @return Configuration
+     */
     public function createNew($class = null)
     {
         $entity = new $class();
@@ -44,6 +50,12 @@ class ConfigurationManager extends BaseService
         return $value;
     }
 
+    /**
+     * Registra configuración
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  $key
+     * @param  $value
+     */
     public function set($key,$value)
     {
         $config = $this->getConfigurationKey($key);
@@ -55,6 +67,12 @@ class ConfigurationManager extends BaseService
         return $config;
     }
 
+    /**
+     * Consulta
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  $key
+     * @return Configuration
+     */
     public function getConfigurationKey($key)
     {
         return $this->getRepository(Configuration::class)->findOneByKey($key);
