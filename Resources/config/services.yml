@@ -30,3 +30,7 @@ services:
       arguments: ["@request_stack"]
       calls: 
           - [setContainer, ['@service_container']]
+
+  configuration.adapter.orm:
+      class: Maxtoan\ToolsBundle\Service\Core\Configuration\Adapter\DoctrineORMAdapter
+      arguments: ["@doctrine.orm.entity_manager", "App\\Entity\\M\\Core\\Configuration"]

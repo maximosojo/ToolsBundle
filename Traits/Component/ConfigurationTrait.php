@@ -26,6 +26,6 @@ trait ConfigurationTrait
      */
     public function getConfigurationManager()
     {
-        return $this->container->get("Maxtoan\ToolsBundle\Service\Core\ConfigurationManager");
+        return $this->container->get("maxtoan_tools.manager.configuration");
     }
 }

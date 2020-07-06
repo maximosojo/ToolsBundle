@@ -33,5 +33,6 @@ class MaxtoanToolsBundle extends Bundle
         //Agrega repositorios como servicios e inyecta contenedor de dependencias
         $container->addCompilerPass(new DependencyInjection\Compiler\LinkGeneratorPass());
         $container->addCompilerPass(new DependencyInjection\Compiler\FactoryRepositoryPass());
+        $container->addCompilerPass(new DependencyInjection\Compiler\ConfigurationPass());
     }
 }
