@@ -15,6 +15,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Maxtoan\ToolsBundle\Traits\Component\ErrorTrait;
+use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+use Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;
 
 /**
  * Servicio base con implementación de funciones genericas compartidas
@@ -24,8 +26,8 @@ use Maxtoan\ToolsBundle\Traits\Component\ErrorTrait;
  */
 class BaseService implements ContainerAwareInterface 
 {
-    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
-    use \Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;
+    use ContainerAwareTrait;
+    use DoctrineTrait;
     use ErrorTrait;
     
     /**
@@ -35,11 +37,11 @@ class BaseService implements ContainerAwareInterface
      */
     public function getDoctrine() 
     {
-        if (!$this->getContainer()->has('doctrine')) {
+        if (!$this->container->has('doctrine')) {
             throw new LogicException('The DoctrineBundle is not registered in your application.');
         }
 
-        return $this->getContainer()->get('doctrine');
+        return $this->container->get('doctrine');
     }
     
     /**
@@ -49,7 +51,7 @@ class BaseService implements ContainerAwareInterface
      */
     public function getBaseUrl()
     {
-        return $this->getContainer()->getParameter('kernel.root_dir');
+        return $this->container->getParameter('kernel.root_dir');
     }
 
     /**
@@ -60,11 +62,11 @@ class BaseService implements ContainerAwareInterface
      */
     public function getUser()
     {
-        if (!$this->getContainer()->has('security.token_storage')) {
+        if (!$this->container->has('security.token_storage')) {
             throw new LogicException('The SecurityBundle is not registered in your application.');
         }
 
-        if (null === $token = $this->getContainer()->get('security.token_storage')->getToken()) {
+        if (null === $token = $this->container->get('security.token_storage')->getToken()) {
             return;
         }
 
@@ -105,7 +107,7 @@ class BaseService implements ContainerAwareInterface
      */
     protected function getEventDispatcher()
     {
-        return $this->getContainer()->get("event_dispatcher");
+        return $this->container->get("event_dispatcher");
     }
 
     /**
@@ -123,6 +125,7 @@ class BaseService implements ContainerAwareInterface
      * Container
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return Container
+     * @deprecated
      */
     public function getContainer()
     {
