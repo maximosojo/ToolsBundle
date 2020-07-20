@@ -15,6 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Validator\ConstraintValidator as ConstraintValidatorBase;
 use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+use Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;
 
 /**
  * Base de validadores
@@ -24,6 +25,7 @@ use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 abstract class ConstraintValidator extends ConstraintValidatorBase implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
+    use DoctrineTrait;
     
     /**
      * Agrega un error
@@ -50,21 +52,5 @@ abstract class ConstraintValidator extends ConstraintValidatorBase implements Co
             }
             $builder->addViolation();
         }
-    }
-    
-    /**
-     * Shortcut to return the Doctrine Registry service.
-     *
-     * @return \Doctrine\Bundle\DoctrineBundle\Registry
-     *
-     * @throws \LogicException If DoctrineBundle is not available
-     */
-    protected function getDoctrine()
-    {
-        if (!$this->container->has('doctrine')) {
-            throw new \LogicException('The DoctrineBundle is not registered in your application.');
-        }
-
-        return $this->container->get('doctrine');
     }
 }

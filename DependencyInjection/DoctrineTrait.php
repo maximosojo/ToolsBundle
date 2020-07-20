@@ -27,6 +27,22 @@ trait DoctrineTrait
     private $isBeginTransaction = false;
 
     /**
+     * Shortcut to return the Doctrine Registry service.
+     *
+     * @return \Doctrine\Bundle\DoctrineBundle\Registry
+     *
+     * @throws \LogicException If DoctrineBundle is not available
+     */
+    protected function getDoctrine()
+    {
+        if (!$this->container->has('doctrine')) {
+            throw new \LogicException('The DoctrineBundle is not registered in your application.');
+        }
+
+        return $this->container->get('doctrine');
+    }
+
+    /**
      * Retorna el repositorio principal
      * @return \Maxtoan\ToolsBundle\Model\Base\EntityRepository
      */
