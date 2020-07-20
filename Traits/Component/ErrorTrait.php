@@ -18,14 +18,24 @@ namespace Maxtoan\ToolsBundle\Traits\Component;
  */
 trait ErrorTrait
 {
+    /**
+     * $context
+     */
     protected $context;
     
+    /**
+     * $errors
+     * @var Array
+     */
     protected $errors;
 
     /**
      * Agrega un error
-     * @param string|array $errors
-     * @throws Exception
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  string|array $errors
+     * @param  array|null $parameters
+     * @param  string     $domain
+     * @param  $atPath
      */
     function addError($errors,array $parameters = null, $domain = "flashes",$atPath = null)
     {
@@ -56,7 +66,8 @@ trait ErrorTrait
 
     /**
      * Retorna true si existe algun error
-     * @return boolean
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return Boolean
      */
     public function hasErrors()
     {
@@ -69,16 +80,27 @@ trait ErrorTrait
         return (count($this->errors) > 0);
     }
 
+    /**
+     * Retorna lo errores
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return Array
+     */
     public function getErrors()
     {
         $errors = $this->errors;
-        $this->errors = array();
+        $this->clearErrors();
+
         if($errors === null){
             $errors = [];
         }
+
         return $errors;
     }
     
+    /**
+     * Limpia los errores
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     */
     public function clearErrors()
     {
         $this->errors = array();
