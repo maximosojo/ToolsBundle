@@ -122,6 +122,8 @@ trait DoctrineTrait
 
     /**
      * Inicia una transaccion en la base de datos
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return Booleam
      */
     protected function managerBeginTransaction()
     {
@@ -137,7 +139,7 @@ trait DoctrineTrait
     /**
      * Realiza el commit de una transaccion
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @return Doctrine
+     * @return Booleam
      */
     protected function managerCommit()
     {
@@ -155,7 +157,7 @@ trait DoctrineTrait
     /**
      * Roll back si falla la transaccion
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @return Doctrine
+     * @return Booleam
      */
     protected function managerRollback()
     {
