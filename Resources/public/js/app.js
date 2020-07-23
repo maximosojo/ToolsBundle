@@ -118,7 +118,7 @@ var app = angular.module('maxtoan_tools', ['ngTable'])
 
     this.clearFilters = function () {
         $timeout(function () {
-          clearFilters();
+          clearAllFilters();
         });
     };    
 
