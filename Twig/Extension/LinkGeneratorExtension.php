@@ -36,7 +36,7 @@ class LinkGeneratorExtension extends Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('link_generator', array($this, 'linkGenerator'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('link_generator_url', array($this, 'linkGeneratorUrl'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('link_is_granted', array($this, 'linkIsGranted'), array('is_safe' => array('html'))),
         ];
     }
     
@@ -61,13 +61,14 @@ class LinkGeneratorExtension extends Twig_Extension
      * @param type $type
      * @return type
      */
-    function linkGeneratorUrl($entity, $type = LinkGeneratorService::TYPE_LINK_DEFAULT, array $parameters = array()) 
+    function linkIsGranted($entity, $role = "ROLE_USER") 
     {
         if($entity === null){
             return "";
         }
 
-        return $this->linkGeneratorService->generateOnlyUrl($entity, $type, $parameters);
+        $parameters["role"] = $role;
+        return $this->linkGeneratorService->generate($entity, null, $parameters);
     }
 
     /**

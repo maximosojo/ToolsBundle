@@ -174,8 +174,13 @@ class LinkGeneratorService implements ContainerAwareInterface
             return $href;
         }
 
+        $isGranted = true;
+        if (isset($parameters["role"]) && !$this->isGranted($parameters["role"])) {
+            $isGranted = false;
+        }
+
         $link = sprintf('%s&nbsp;%s',$icon,$label);
-        if($href != ''){
+        if($href != '' && $isGranted){
             $extraParameters = '';
             if($addTitle === true){
                 $extraParameters .= 'title = "'.$originalLabel.'"';
@@ -342,5 +347,26 @@ class LinkGeneratorService implements ContainerAwareInterface
         $this->linkGeneratorItems[] = $linkGeneratorItem;
 
         return $this;
+    }
+
+    /**
+     * Checks if the attributes are granted against the current authentication token and optionally supplied subject.
+     *
+     * @param mixed $attributes The attributes
+     * @param mixed $subject    The subject
+     *
+     * @return bool
+     *
+     * @throws \LogicException
+     *
+     * @final since version 3.4
+     */
+    protected function isGranted($attributes, $subject = null) 
+    {
+        if (!$this->container->has('security.authorization_checker')) {
+            throw new \LogicException('The SecurityBundle is not registered in your application. Try running "composer require symfony/security-bundle".');
+        }
+
+        return $this->container->get('security.authorization_checker')->isGranted($attributes, $subject);
     }
 }
