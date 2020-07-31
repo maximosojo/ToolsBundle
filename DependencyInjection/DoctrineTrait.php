@@ -21,10 +21,46 @@ use Symfony\Component\HttpFoundation\Request;
 trait DoctrineTrait
 {
     /**
+     * Entity Manager
+     * @var Doctrine Entity Manager
+     */
+    private $em;
+
+    /**
      * Bandera para permitir una transaccion simultanea
      * @var type 
      */
     private $isBeginTransaction = false;
+
+    /**
+     * Shortcut to return the Doctrine Registry service.
+     *
+     * @return \Doctrine\Bundle\DoctrineBundle\Registry
+     *
+     * @throws \LogicException If DoctrineBundle is not available
+     */
+    protected function getDoctrine()
+    {
+        if (!$this->container->has('doctrine')) {
+            throw new \LogicException('The DoctrineBundle is not registered in your application.');
+        }
+
+        return $this->container->get('doctrine');
+    }
+
+    /**
+     * Manegador de doctrine
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return EntityManager
+     */
+    protected function getEntityManager()
+    {
+        if (!$this->em) {
+            $this->em = $this->getDoctrine()->getManager();
+        }
+
+        return $this->em;
+    }
 
     /**
      * Retorna el repositorio principal
@@ -32,7 +68,7 @@ trait DoctrineTrait
      */
     protected function getRepository($repository = null)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getEntityManager();
         
         if (!$repository) {
             $repository = $this->getClass();
@@ -86,6 +122,8 @@ trait DoctrineTrait
 
     /**
      * Inicia una transaccion en la base de datos
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return Boolean
      */
     protected function managerBeginTransaction()
     {
@@ -93,7 +131,7 @@ trait DoctrineTrait
             throw new \LogicException("No puede iniciar la transaccion dos veces. Realize el commit de la anterior");
         }
 
-        $this->getDoctrine()->getManager()->getConnection()->beginTransaction();
+        $this->getEntityManager()->getConnection()->beginTransaction();
 
         $this->isBeginTransaction = true;
     }
@@ -101,7 +139,7 @@ trait DoctrineTrait
     /**
      * Realiza el commit de una transaccion
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @return Doctrine
+     * @return Boolean
      */
     protected function managerCommit()
     {
@@ -109,7 +147,7 @@ trait DoctrineTrait
             throw new \LogicException("No hay ninguna transaccion iniciada, primero debe iniciarla.");
         }
 
-        $em = $this->getDoctrine()->getManager();        
+        $em = $this->getEntityManager();
         $em->flush();
         $em->getConnection()->commit();
         
@@ -119,7 +157,7 @@ trait DoctrineTrait
     /**
      * Roll back si falla la transaccion
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @return Doctrine
+     * @return Boolean
      */
     protected function managerRollback()
     {
@@ -127,7 +165,8 @@ trait DoctrineTrait
             //throw new \LogicException("No hay ninguna transaccion iniciada, primero debe iniciarla.");
             return;
         }
-        $this->getDoctrine()->getManager()->getConnection()->rollback();
+
+        $this->getEntityManager()->getConnection()->rollback();
         
         $this->isBeginTransaction = false;
     }
@@ -141,7 +180,7 @@ trait DoctrineTrait
      */
     protected function emSave($entity, $andFlush = true)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getEntityManager();
         
         try {
             $em->persist($entity);
@@ -162,7 +201,7 @@ trait DoctrineTrait
      */
     protected function emRemove($entity = null, $andFlush = true)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getEntityManager();
 
         try {
             if ($entity !== null) {
@@ -183,7 +222,7 @@ trait DoctrineTrait
      */
     protected function emFlush()
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getEntityManager();
 
         try {
             $em->flush();            

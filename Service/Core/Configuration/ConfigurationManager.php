@@ -124,7 +124,7 @@ class ConfigurationManager extends BaseService
         $config = $this->getConfigurationKey($key);
         if ($config) {
             $config->setValue($value);
-            $this->emSave($config,false);
+            $this->save($config,false);
         }
 
         return $config;

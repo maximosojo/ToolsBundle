@@ -14,14 +14,12 @@ namespace Maxtoan\ToolsBundle\Service;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Maxtoan\ToolsBundle\Traits\Component\ErrorTrait;
 use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 use Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;
+use Maxtoan\ToolsBundle\Traits\Component\ErrorTrait;
 
 /**
  * Servicio base con implementación de funciones genericas compartidas
- * service (maxtoan_tools.service.base)
- * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 class BaseService implements ContainerAwareInterface 
@@ -29,20 +27,6 @@ class BaseService implements ContainerAwareInterface
     use ContainerAwareTrait;
     use DoctrineTrait;
     use ErrorTrait;
-    
-    /**
-     * Shortcut to return the Doctrine Registry service.
-     * @return Registry
-     * @throws LogicException If DoctrineBundle is not available
-     */
-    public function getDoctrine() 
-    {
-        if (!$this->container->has('doctrine')) {
-            throw new LogicException('The DoctrineBundle is not registered in your application.');
-        }
-
-        return $this->container->get('doctrine');
-    }
     
     /**
      * Base de archivos de comandos de impresoras
@@ -76,39 +60,6 @@ class BaseService implements ContainerAwareInterface
 
         return $user;
     }
-    
-    /**
-     * Traducciones
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  [type]
-     * @param  array
-     * @param  string
-     * @return [type]
-     */
-    protected function trans($id, array $parameters = array(), $domain = 'messages') 
-    {
-        return $this->container->get('translator')->trans($id, $parameters, $domain);
-    }
-    
-     /**
-     * Disparar un evento
-     * @param type $eventName
-     * @param \Symfony\Component\EventDispatcher\Event $event
-     * @return \Maxtoan\ToolsBundle\Service\Event\GenericEvent
-     */
-    protected function dispatch($eventName, \Symfony\Component\EventDispatcher\Event $event = null)
-    {
-        return $this->getEventDispatcher()->dispatch($eventName, $event);
-    }
-    
-    /**
-     * Retorna el disparador de eventos
-     * @return \Symfony\Component\EventDispatcher\EventDispatcher
-     */
-    protected function getEventDispatcher()
-    {
-        return $this->container->get("event_dispatcher");
-    }
 
     /**
      * Genera una url
@@ -119,16 +70,5 @@ class BaseService implements ContainerAwareInterface
     protected function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
     {
         return $this->container->get('router')->generate($route, $parameters, $referenceType);
-    }
-
-    /**
-     * Container
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @return Container
-     * @deprecated
-     */
-    public function getContainer()
-    {
-        return $this->container;
     }
 }
