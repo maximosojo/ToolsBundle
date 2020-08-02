@@ -53,7 +53,7 @@ class TwigSwiftMailer
         $resolver->setAllowedTypes("debug_mail", "string");
 
         $this->options = $resolver->resolve($options);
-        $this->twig->addExtension(new \Twig\Extension\StringLoaderExtension());
+        // $this->twig->addExtension(new \Twig\Extension\StringLoaderExtension());
         
         $this->templateSource = <<<EOF
         {% extends template_from_string(baseString) %}
