@@ -12,6 +12,7 @@
 namespace Maxtoan\ToolsBundle\DependencyInjection;
 
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * Doctrine trait.
@@ -39,7 +40,7 @@ trait DoctrineTrait
      *
      * @throws \LogicException If DoctrineBundle is not available
      */
-    protected function getDoctrine()
+    protected function getDoctrine(): ManagerRegistry
     {
         if (!$this->container->has('doctrine')) {
             throw new \LogicException('The DoctrineBundle is not registered in your application.');

@@ -1041,7 +1041,7 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
      * @param type $class
      * @return \Doctrine\ORM\QueryBuilder
      */
-    protected function findQueryBuilderForClass($class, array $method = [], $queryResult = null) 
+    public function findQueryBuilderForClass($class, array $method = [], $queryResult = null) 
     {
         $em = $this->getDoctrine()->getManager();        
         $alias = "c";
