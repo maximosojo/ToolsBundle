@@ -105,4 +105,21 @@ trait ErrorTrait
     {
         $this->errors = array();
     }
+
+    /**
+     * Retorna errores formateados para formularios
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @return FormError
+     */
+    public function getFormErrors()
+    {
+        $errors = $this->getErrors();
+        $formErrors = [];
+        if (is_array($errors)) {
+            foreach ($errors as $error) {
+                $formErrors [] = new \Symfony\Component\Form\FormError($error);
+            }
+        }
+        return $formErrors;
+    }
 }
