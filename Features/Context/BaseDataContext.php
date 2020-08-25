@@ -1085,4 +1085,26 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
         }
         return $entity;
     }
+
+    /**
+     * @When I send a access token request
+     */
+    public function iMakeAAccessTokenRequest()
+    {
+        $url = $this->parameters['token_url'];
+        $body = $this->getRequestBody();
+        
+        $this->getClient()->request("POST", $url, $body);
+        $this->response = $this->getClient()->getResponse();
+        $contentType = (string) $this->response->headers->get('Content-type');
+        $this->initRequest();
+        if ($contentType !== 'application/json') {
+            throw new \Exception(sprintf("Content-type must be application/json %s", $this->echoLastResponse()));
+        }
+        $this->data = json_decode($this->response->getContent(), true);
+        $this->lastErrorJson = json_last_error();
+        if ($this->lastErrorJson != JSON_ERROR_NONE) {
+            throw new \Exception(sprintf("Error parsing response JSON " . "\n\n %s", $this->echoLastResponse()));
+        }
+    }
 }

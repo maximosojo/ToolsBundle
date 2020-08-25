@@ -91,6 +91,7 @@ class AbstractMinkContext extends MinkContext
     /**
      * Se loguea con un usuario en la api
      * @Given I am logged in api as :username
+     * @Given I am logged in api as :username and :usePassword
      */
     public function iAmLoggedInApiAs($username, $usePassword = null)
     {
