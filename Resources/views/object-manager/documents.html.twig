@@ -1,0 +1,81 @@
+<h5 class="mt-4 mb-2 font-size-16">
+    Documentos subidos
+    <small>
+        <a href="javascript:;" class="pull-right mt-0 btn_upload" onclick="addUpload()">
+            <i class="fa fa-plus"></i> Subir nuevo
+        </a>
+    </small>
+</h5>
+
+<div id="documents_form" class="d-none">
+    <form action="{{ path("object_manager_documents_upload",parameters_to_route) }}" enctype="multipart/form-data" method="POST" autocomplete="off">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    {{ form_widget(form_documents.documents) }}
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    {{ form_widget(form_documents.comments) }}
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <button type="input" class="btn btn-info btn-block btn-addon"><i class="fas fa-file-upload"></i>&nbsp;{{ "Subir"|trans }}</button>
+                </div>
+            </div>
+        </div>
+        {{ form_rest(form_documents) }}
+    </form>
+</div>
+
+{% set files = objectDataManager.documents.getAll() %}
+
+{% set deleteFtn = "delete"~random() %}
+{% for file in files %}
+    {% set params = parameters_to_route|merge({filename: file.filename}) %}
+    <div class="card mb-2 shadow-none border">
+        <div class="p-1 px-2">
+            <div class="row align-items-center">
+                <div class="col">
+                    <a href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{file.filename}}" class="text-mute font-weight-bold">
+                        {{ file.filename|length > 25 ? file.filename|slice(0, 25) ~ '...' : file.filename }}
+                    </a>
+                    <p class="mb-0">{{ staticCall("App\\Services\\Util\\StringUtil","formatBytes",[file.getSize()]) }}</p>
+                </div>
+                <div class="col-auto">
+                    <a href="{{ path("object_manager_documents_get",params) }}" data-toggle="tooltip" data-placement="bottom" title="" class="btn btn-link text-muted btn-lg p-0" data-original-title="Descargar">
+                        <i class="uil uil-cloud-download font-size-14"></i>
+                    </a>
+                    <button
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title=""
+                        class="btn btn-link text-danger btn-lg p-0"
+                        data-original-title="Remover"
+                        onclick="{{ deleteFtn }}('{{ file.filename }}', '{{ path("object_manager_documents_delete",params) }}');"
+                        >
+                        <i class="uil uil-multiply font-size-14"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <p class="text-mute">Sin documentos registrados.</p>
+{% endfor %}
+
+<script>
+        function {{ deleteFtn }}(name, url) {
+            if (confirm("Seguro de remover el archivo " + name)) {
+                window.location = url;
+            }
+        }
+        function addUpload(){
+            const el = document.querySelector('#documents_form');
+            if (el.classList.contains("d-none")) {
+                el.classList.remove("d-none");
+            }
+        }
+</script>

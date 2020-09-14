@@ -31,7 +31,8 @@ class CoreExtension extends \Twig_Extension
             new \Twig_SimpleFunction('str_padleft', array($this, 'strpadleft')),
             new \Twig_SimpleFunction('get_parameter', array($this, 'getParameter')),
             new \Twig_SimpleFunction('render_tabs', array($this, 'renderTabs'),array('is_safe' => ['html'])),
-            new \Twig_SimpleFunction('render_collapse', array($this, 'renderCollapse'),array('is_safe' => ['html']))
+            new \Twig_SimpleFunction('render_collapse', array($this, 'renderCollapse'),array('is_safe' => ['html'])),
+            new \Twig_SimpleFunction('staticCall', array($this, 'staticCall'))
         );
     }
     
@@ -148,6 +149,20 @@ class CoreExtension extends \Twig_Extension
         return $this->container->get('templating')->render("MaxtoanToolsBundle:collapse:collapse.html.twig", 
             $parameters
         );
+    }
+
+    /**
+     * Llama un metodo estatico de una clase
+     * @param type $class
+     * @param type $function
+     * @param type $args
+     * @return type
+     */
+    public function staticCall($class, $function, $args = array())
+    {
+        if (class_exists($class) && method_exists($class, $function))
+            return call_user_func_array(array($class, $function), $args);
+        return null;
     }
 
     /**

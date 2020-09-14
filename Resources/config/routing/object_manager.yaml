@@ -1,0 +1,20 @@
+object_manager_documents_upload:
+    path: /documents/upload
+    defaults:
+        _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController::uploadAction
+        _format: html
+    requirements: { _method: POST }
+    
+object_manager_documents_delete:
+    path: /documents/delete/{filename}
+    defaults:
+        _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController::deleteAction
+        _format: html
+    requirements: { _method: GET }
+    
+object_manager_documents_get:
+    path: /documents/get/{filename}
+    defaults:
+        _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController::getAction
+        _format: html
+    requirements: { _method: GET }
