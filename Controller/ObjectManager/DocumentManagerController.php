@@ -17,8 +17,6 @@ class DocumentManagerController extends ManagerController
     {
         $objectDataManager = $this->getObjectDataManager($request);
         
-        $objectDataManager->documents()->delete($request->get("name"));
-
         $form = $this->createForm(DocumentsType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
