@@ -927,6 +927,112 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
     }
 
     /**
+     * Verifica que la respuesta no tenga una propiedad en especifico
+     * @Then the response does not have :propertyName property
+     */
+    public function theResponseDoesNotHaveProperty($propertyName)
+    {
+        try {
+            $this->getPropertyValue($propertyName);
+        } catch (\LogicException $e) {
+            //La propiedad no existe
+            return;
+        }
+        throw new \Exception(sprintf("Property %s is exists in response!\n\n %s", $propertyName, $this->echoLastResponse()));
+    }
+
+    /**
+     * Busca una propiedad y verifica que la cantidad de elmentos sea la deseada
+     * @example Then the response has a "transactions.0.pay_tokens" property and contains "= 0" values
+     * @Then the response has a :propertyName property and contains :expresion values
+     */
+    public function theResponseHasAPropertyAndContainsValues($propertyName, $expresion)
+    {
+        $this->theResponseHasAPropertyAndItsTypeIs($propertyName, "array");
+        $value = $this->theResponseHasAProperty($propertyName);
+        $expresionExplode = explode(" ", $expresion);
+        $quantity = count($value);
+        if (version_compare($quantity, (int) $expresionExplode[1], $expresionExplode[0]) === false) {
+            throw new Exception(sprintf("Expected '%s' but there is '%s' elements.\n%s", $expresion, $quantity, var_export($value, true)));
+        }
+    }
+    
+    /**
+     * @example And the response its type is "array" and contains "= 1" values
+     * @Then the response its type is :typeString and contains :expresion values
+     * @Then the response its type is :typeString
+     */
+    public function theResponseItsTypeIsAndContainsValues($typeString, $expresion = null) {
+        $value = $this->data;
+
+        // check our type
+        switch (strtolower($typeString)) {
+            case 'numeric':
+                if (is_numeric($value)) {
+                    break;
+                }
+            case 'array':
+                if (is_array($value)) {
+                    break;
+                }
+            case 'null':
+                if ($value === NULL) {
+                    break;
+                }
+            default:
+                throw new \Exception(sprintf("Property %s is not of the correct type: %s!\n\n %s", $propertyName, $typeString, $this->echoLastResponse()));
+        }
+        
+        if ($expresion !== null) {
+            $quantity = count($value);
+            ToolsUtils::testQuantityExp($expresion, $quantity);
+        }
+    }
+
+    /**
+     * @Given the response has a :propertyName property and it is equals :propertyValue
+     */
+    public function theResponseHasAPropertyAndItIsEquals($propertyName, $propertyValue)
+    {
+        if ($this->dataContext->isScenarioParameter($propertyValue)) {
+            $propertyValue = $this->dataContext->getScenarioParameter($propertyValue);
+        }
+        $propertyValue = $this->dataContext->parseParameter($propertyValue);
+        $value = $this->theResponseHasAProperty($propertyName);
+        if ($value == $propertyValue) {
+            return;
+        }
+        throw new \Exception(sprintf("Given %s value is not %s is equals to '%s'\n\n %s", $propertyName, $propertyValue, $value, $this->echoLastResponse()));
+    }
+
+    /**
+     * Verifica que un campo sea de un tipo en especifico
+     * @example And the response has a "files" property and its type is "array"
+     * @Then the response has a :propertyName property and its type is :typeString
+     */
+    public function theResponseHasAPropertyAndItsTypeIs($propertyName, $typeString)
+    {
+        $value = $this->theResponseHasAProperty($propertyName);
+        // check our type
+        switch (strtolower($typeString)) {
+            case 'numeric':
+                if (is_numeric($value)) {
+                    break;
+                }
+            case 'array':
+                if (is_array($value)) {
+                    break;
+                }
+            case 'null':
+                if ($value === NULL) {
+                    break;
+                }
+            default:
+                throw new \Exception(sprintf("Property %s is not of the correct type: %s!\n\n %s", $propertyName, $typeString, $this->echoLastResponse()));
+        }
+    }
+
+    /**
      * Establece el usuario de la sesion actual en el cliente http
      * @param User $currentUser
      * @return \DataContext
