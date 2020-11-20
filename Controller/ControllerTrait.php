@@ -11,6 +11,8 @@
 
 namespace Maxtoan\ToolsBundle\Controller;
 
+use Maxtoan\ToolsBundle\Component\HttpFoundation\JsonResponse;
+
 /**
  * Controlador con funciones base
  *  
@@ -31,6 +33,19 @@ trait ControllerTrait
      * @param type $headers
      * @return \Maxtoan\ToolsBundle\Component\HttpFoundation\JsonResponse
      */
+    protected function newJsonResponse($data = null, $status = 200, $headers = array()) 
+    {
+        return new JsonResponse($data, $status, $headers);
+    }
+
+    /**
+     * Json reponse
+     * @param type $data
+     * @param type $status
+     * @param type $headers
+     * @return \Maxtoan\ToolsBundle\Component\HttpFoundation\JsonResponse
+     * @deprecated
+     */
     protected function myJsonResponse($data = null, $status = 200, $headers = array()) 
     {
         if (!$this->jsonResponse) {
@@ -47,6 +62,7 @@ trait ControllerTrait
      * @param  String
      * @param  array
      * @param  integer
+     * @deprecated
      */
     public function setData($data)
     {
@@ -63,6 +79,7 @@ trait ControllerTrait
      * @param  String
      * @param  array
      * @param  integer
+     * @deprecated
      */
     public function setFlashJson($typeFlash, $value, $parameters = array(), $status = 200)
     {
@@ -76,6 +93,7 @@ trait ControllerTrait
      * Json redirect
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  String
+     * @deprecated
      */
     public function setJsonRedirect($url)
     {
@@ -89,6 +107,7 @@ trait ControllerTrait
      * Json force redirect
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  String
+     * @deprecated
      */
     public function setForceRedirect($url)
     {
@@ -101,6 +120,7 @@ trait ControllerTrait
     /**
      * Json redirect
      * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @deprecated
      */
     public function setForceReload()
     {
@@ -113,6 +133,7 @@ trait ControllerTrait
     /**
      * Refresh paginator
      * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @deprecated
      */
     public function setRefreshPaginator($key = null)
     {
@@ -126,6 +147,7 @@ trait ControllerTrait
      * Json open modal
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  String
+     * @deprecated
      */
     public function setOpenPopUp($url,array $parameters = [])
     {

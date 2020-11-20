@@ -13,6 +13,12 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
  */
 class DocumentManagerController extends ManagerController
 {
+    /**
+     * Sube un documento
+     *
+     * @param   Request  $request
+     * @return  returnUrl
+     */
     public function uploadAction(Request $request)
     {
         $objectDataManager = $this->getObjectDataManager($request);
@@ -32,6 +38,12 @@ class DocumentManagerController extends ManagerController
         return $this->toReturnUrl();
     }
     
+    /**
+     * Remueve un documento
+     *
+     * @param   Request  $request
+     * @return  returnUrl
+     */
     public function deleteAction(Request $request)
     {
         $objectDataManager = $this->getObjectDataManager($request);
@@ -39,12 +51,22 @@ class DocumentManagerController extends ManagerController
         return $this->toReturnUrl();
     }
     
+    /**
+     * Busca un documento
+     *
+     * @param   Request  $request
+     * @return  BinaryFileResponse $response
+     */
     public function getAction(Request $request)
     {
         $fileName = $request->get("filename");
+
+        // ObjectDataManager
         $objectDataManager = $this->getObjectDataManager($request);
         $disposition = $request->get("disposition",ResponseHeaderBag::DISPOSITION_ATTACHMENT);
         $file = $objectDataManager->documents()->get($fileName);
+        
+        // BinaryFileResponse
         $response = new \Symfony\Component\HttpFoundation\BinaryFileResponse($file);
         $response->setContentDisposition($disposition);
         return $response;
