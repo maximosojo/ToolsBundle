@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use FOS\RestBundle\Util\Codes;
 use Maxtoan\ToolsBundle\Form\ObjectManager\ExporterManager\DocumentsType;
+use Maxtoan\ToolsBundle\Component\HttpFoundation\JsonResponse;
 
 /**
  * Controlador para exportar los documentos
@@ -22,7 +23,7 @@ class ExporterManagerController extends ManagerController
     public function generateAction(Request $request) 
     {
         $objectDataManager = $this->getObjectDataManager($request);
-        $chain = $objectDataManager->exporter()->resolveChainModel();
+        $chain = $objectDataManager->exporters()->resolveChainModel();
         $choices = [];
         $models = $chain->getModels();
         foreach ($models as $model) {
@@ -35,9 +36,10 @@ class ExporterManagerController extends ManagerController
                 "fileName" => $request->get("fileName")
             ];
             $name = $form->get("name")->getData();
-            $objectDataManager->exporter()->generateWithSource($name,$options);
+            $objectDataManager->exporters()->generateWithSource($name,$options);
         }
         
-        return $this->toReturnUrl();
+        return new JsonResponse([]);
+        // return $this->toReturnUrl();
     }
 }

@@ -57,8 +57,10 @@ class ConfigurationPass implements CompilerPassInterface
             $documentManager->addArgument($adapterDefinition);
 
             // Manejador de exportaciones
+            $adapterDefinition = $container->findDefinition($config["exporter_manager"]["adapter"]);
             $exporterManager = $container->getDefinition("maxtoan_tools.exporter_manager");
             $exporterManager->addArgument($documentManager);
+            $exporterManager->addMethodCall("setAdapter", array($adapterDefinition));
             $chaines = $container->findTaggedServiceIds("exporter.chain");
             $models = $container->findTaggedServiceIds("exporter.chain.model");
             foreach ($models as $id => $model) {

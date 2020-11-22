@@ -126,6 +126,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('template')->defaultValue("MaxtoanToolsBundle:objectManager:exporterManager/documents.html.twig")->end()
+                                ->scalarNode('adapter')->defaultValue("maxtoan_tools.exporter_manager_doctrine_orm_adapter")->end()
                             ->end()
                         ->end()
                     ->end()

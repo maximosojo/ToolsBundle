@@ -40,8 +40,6 @@ class ModelExcel extends ModelDocumentExporter
         $path = $this->getDocumentPath($variables);
         $parameters = $template->getParametersArray();
         $parameters["force-download"] = false;
-        $configurationManager = $this->container->get($this->container->getParameter("tecnocreaciones_tools.configuration_manager.name"));
-        $variables["configurationManager"] = $configurationManager;
         $variables["container"] = $this->container;
         
         $this->getTemplateService()->compile($template, $path, $variables, $parameters);

@@ -21,7 +21,8 @@ class DoctrineORMAdapter implements ExporterAdapterInterface
         $this->em = $em;
     }
     
-    public function find($className,$id) {
+    public function find($className,$id)
+    {
         return $this->em->find($className, $id);
     }
 }

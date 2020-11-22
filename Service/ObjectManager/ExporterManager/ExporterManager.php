@@ -13,13 +13,14 @@ use Maxtoan\ToolsBundle\Service\ObjectManager\TraitConfigure;
 use Maxtoan\ToolsBundle\Form\ObjectManager\ExporterManager\DocumentsType;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Form\FormInterface;
+use Maxtoan\ToolsBundle\Service\ObjectManager\ConfigureInterface;
 
 /**
  * Servicio para generar y exportar documentos PDF, XLS, DOC, TXT de los modulos (app.service.exporter)
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class ExporterManager implements ExporterAdapterInterface
+class ExporterManager implements ConfigureInterface
 {
     use TraitConfigure;
     use ContainerAwareTrait;
@@ -46,6 +47,12 @@ class ExporterManager implements ExporterAdapterInterface
      * @var DocumentManager 
      */
     private $documentManager;
+
+    /**
+     * Parametros que necesita la vista al renderizarse
+     * @var array
+     */
+    private $parametersToView = [];
     
     public function __construct(DocumentManager $documentManager,array $options = [])
     {
@@ -259,20 +266,22 @@ class ExporterManager implements ExporterAdapterInterface
         //     }
         // } else {
             foreach ($models as $model) {
-                $choices[$model->getName() . " [" . strtoupper($model->getFormat()) . "]"] = $model->getName();
-                // $choices[$this->trans($model->getName()) . " [" . strtoupper($model->getFormat()) . "]"] = $model->getName();
+                $choices[$this->trans($model->getName(),[],"labels") . " [" . strtoupper($model->getFormat()) . "]"] = $model->getName();
             }
         // }
 
         $form = $this->createForm(DocumentsType::class, $choices);
-        // $this->parametersToView["parameters_to_route"]["_conf"]["folder"] = "generated";
+        $this->parametersToView["parameters_to_route"]["_conf"]["folder"] = "generated";
+        $this->parametersToView["parameters_to_route"]["_conf"]["objectId"] = $this->objectId;
+        $this->parametersToView["parameters_to_route"]["_conf"]["objectType"] = $this->objectType;
+        $this->parametersToView["parameters_to_route"]["_conf"]["returnUrl"] = "";
         return $this->container->get('templating')->render($this->options["exporter_manager"]["template"],
                         [
                             'chain' => $chain,
                             'entity' => $entity,
                             // 'objectDataManager' => $this->getObjectDataManager(),
-                            'form' => $form->createView()
-                            // 'parametersToView' => $this->parametersToView,
+                            'form' => $form->createView(),
+                            'parametersToView' => $this->parametersToView,
                         ]
         );
     }
@@ -285,6 +294,18 @@ class ExporterManager implements ExporterAdapterInterface
     protected function createForm(string $type, $data = null, array $options = []): FormInterface
     {
         return $this->container->get('form.factory')->create($type, $data, $options);
+    }
+
+    /**
+     * Traducciones
+     *
+     * @param   $id
+     * @param   array  $parameters
+     * @param   array  $domain
+     */
+    public function trans($id,array $parameters = array(), $domain = "")
+    {
+        return $this->container->get('translator')->trans($id, $parameters, $domain);
     }
     
     /**

@@ -18,7 +18,7 @@ class XLSXAdapter implements AdapterInterface
 {
     public function __construct()
     {
-        \Maxtoan\ToolsBundle\Util\ConfigurationUtil::checkLib("phpoffice/phpspreadsheet");
+        // \Maxtoan\ToolsBundle\Util\ConfigurationUtil::checkLib("phpoffice/phpspreadsheet");
     }
     
     public function render(TemplateInterface $template, array $variables)

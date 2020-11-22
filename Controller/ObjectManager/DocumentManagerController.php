@@ -5,6 +5,7 @@ namespace Maxtoan\ToolsBundle\Controller\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Maxtoan\ToolsBundle\Form\ObjectManager\DocumentManager\DocumentsType;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Controlador de manejador de documentos
@@ -48,7 +49,24 @@ class DocumentManagerController extends ManagerController
     {
         $objectDataManager = $this->getObjectDataManager($request);
         $objectDataManager->documents()->delete($request->get("filename"));
-        return $this->toReturnUrl();
+        $referer = $request->headers->get('referer');
+        return new RedirectResponse($referer);
+    }
+
+    /**
+     * Descarga un documento
+     *
+     * @param   Request  $request
+     * @return  BinaryFileResponse
+     */
+    public function downloadAction(Request $request)
+    {
+        $objectDataManager = $this->getObjectDataManager($request);
+        $file = $objectDataManager->documents()->get($request->get("filename"));
+        $response = new \Symfony\Component\HttpFoundation\BinaryFileResponse($file);
+        $response = new \Symfony\Component\HttpFoundation\BinaryFileResponse($file->getRealPath());
+        $response->setContentDisposition(\Symfony\Component\HttpFoundation\ResponseHeaderBag::DISPOSITION_ATTACHMENT);
+        return $response;
     }
     
     /**
@@ -70,5 +88,18 @@ class DocumentManagerController extends ManagerController
         $response = new \Symfony\Component\HttpFoundation\BinaryFileResponse($file);
         $response->setContentDisposition($disposition);
         return $response;
+    }
+
+    public function allAction(Request $request)
+    {
+        $arrayFile = [];
+        $objectDataManager = $this->getObjectDataManager($request);
+        $documentsManager = $objectDataManager->documents();
+        $files = $documentsManager->getAll();
+        foreach ($files as $file) {
+            $arrayFile[] = $documentsManager->toArray($file);
+        }
+
+        return new \Symfony\Component\HttpFoundation\JsonResponse(["files" => $arrayFile]);
     }
 }

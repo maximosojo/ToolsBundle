@@ -11,6 +11,17 @@ object_manager_documents_delete:
         _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController::deleteAction
         _format: html
     requirements: { _method: GET }
+    options:
+        expose: true
+
+object_manager_documents_download:
+    path: /documents/download/{filename}
+    defaults:
+        _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController::downloadAction
+        _format: html
+    requirements: { _method: GET }
+    options:
+        expose: true
     
 object_manager_documents_get:
     path: /documents/get/{filename}
@@ -18,6 +29,15 @@ object_manager_documents_get:
         _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController::getAction
         _format: html
     requirements: { _method: GET }
+
+object_manager_documents_all:
+    path: /documents/all
+    defaults:
+        _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController::allAction
+        _format: html
+    requirements: { _method: GET }
+    options:
+        expose: true
 
 object_manager_exporters_generate:
     path: /exporters/generate
