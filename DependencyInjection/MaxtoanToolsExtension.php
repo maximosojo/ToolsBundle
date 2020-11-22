@@ -34,8 +34,7 @@ class MaxtoanToolsExtension extends Extension
         $loaderYml = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loaderYml->load('services.yml');
         $loaderYml->load('commands.yml');
-        $loaderYml->load('services/object_manager.yml');
-
+        
         $config = $processor->processConfiguration($configuration, $configs);
         if ($config['paginator']['format_array']) {
             $container->setParameter('paginator_format_array', $config['paginator']['format_array']);
@@ -92,6 +91,13 @@ class MaxtoanToolsExtension extends Extension
 
         if($config['jms_serializer']['enable'] === true) {
             $loaderYml->load('jms_serializer.yml');
+        }
+
+        $container->setParameter('maxtoan_tools.object_manager.enable',$config['object_manager']['enable']);
+        if($config['object_manager']['enable'] === true){
+            $loaderYml->load('services/object_manager.yml');
+            unset($config['object_manager']["enable"]);
+            $container->setParameter('maxtoan_tools.object_manager',$config['object_manager']);
         }
     }
 }

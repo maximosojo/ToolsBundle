@@ -2,10 +2,19 @@ services:
     maxtoan_tools.document_manager_disk_adapter:
         class: Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\Adapter\DiskAdapter
         arguments:
-            - { "debug": "%kernel.debug%", "documents_path": "%kernel.root_dir%/../var/documents","env": "%kernel.environment%" }
+            # - { "debug": "%kernel.debug%", "documents_path": "%kernel.root_dir%/../var/documents","env": "%kernel.environment%" }
+            - { "debug": "%kernel.debug%", "base_path": "%kernel.root_dir%/../var", "documents_path": "documents","env": "%kernel.environment%" }
     maxtoan_tools.document_manager:
         class: Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\DocumentManager
+    maxtoan_tools.exporter_manager:
+        class: Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\ExporterManager
+        calls:
+            - [ setContainer, ['@service_container']  ]
     Maxtoan\ToolsBundle\Service\ObjectManager\ObjectDataManager:
         public: true
         class: Maxtoan\ToolsBundle\Service\ObjectManager\ObjectDataManager
-        arguments: ["@maxtoan_tools.document_manager"]
+        arguments: ["@maxtoan_tools.document_manager","@maxtoan_tools.exporter_manager"]
+        calls:
+            - [ setOptions, ["%maxtoan_tools.object_manager%"]  ]
+    Maxtoan\ToolsBundle\Service\Template\TemplateService:
+        public: true

@@ -46,5 +46,32 @@ class ConfigurationPass implements CompilerPassInterface
             $definition = $container->findDefinition($id);
             $manager->addMethodCall("addWrapper", array($definition));
         }
+
+        // Verificar el manejador de objetos activo
+        if ($container->getParameter('maxtoan_tools.object_manager.enable') === true) {
+            $config = $container->getParameter("maxtoan_tools.object_manager");
+
+            // Manejador de documentos
+            $adapterDefinition = $container->findDefinition($config["document_manager"]["adapter"]);
+            $documentManager = $container->findDefinition("maxtoan_tools.document_manager");
+            $documentManager->addArgument($adapterDefinition);
+
+            // Manejador de exportaciones
+            $exporterManager = $container->getDefinition("maxtoan_tools.exporter_manager");
+            $exporterManager->addArgument($documentManager);
+            $chaines = $container->findTaggedServiceIds("exporter.chain");
+            $models = $container->findTaggedServiceIds("exporter.chain.model");
+            foreach ($models as $id => $model) {
+                $idChain = $model[0]["chain"];
+                if (!isset($chaines[$idChain])) {
+                    throw new \InvalidArgumentException(sprintf("The exporter chain '%s' is not exists.", $idChain));
+                }
+                $chain = $container->getDefinition($idChain);
+                $chain->addMethodCall("add", [$container->getDefinition($id)]);
+            }
+            foreach ($chaines as $id => $chain) {
+                $exporterManager->addMethodCall("addChainModel", [$container->getDefinition($id)]);
+            }
+        }
     }
 }

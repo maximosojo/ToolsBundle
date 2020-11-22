@@ -12,6 +12,8 @@
 namespace Maxtoan\ToolsBundle\Twig\Extension;
 
 use Maxtoan\Common\Util\StringUtil;
+use Maxtoan\ToolsBundle\Service\ObjectManager\ObjectDataManager;
+use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 
 /**
  * Extension generic applications
@@ -20,8 +22,10 @@ use Maxtoan\Common\Util\StringUtil;
  */
 class CoreExtension extends \Twig_Extension 
 {    
-    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use ContainerAwareTrait;
     
+    private $exporterManager;
+
     /**
      * {@inheritdoc}
      */
@@ -32,6 +36,7 @@ class CoreExtension extends \Twig_Extension
             new \Twig_SimpleFunction('get_parameter', array($this, 'getParameter')),
             new \Twig_SimpleFunction('render_tabs', array($this, 'renderTabs'),array('is_safe' => ['html'])),
             new \Twig_SimpleFunction('render_collapse', array($this, 'renderCollapse'),array('is_safe' => ['html'])),
+            new \Twig_SimpleFunction('render_files_generated', array($this, 'renderFilesGenerated'),array('is_safe' => ['html'])),
             new \Twig_SimpleFunction('staticCall', array($this, 'staticCall'))
         );
     }
@@ -152,6 +157,18 @@ class CoreExtension extends \Twig_Extension
     }
 
     /**
+     * Renderiza la lista de archivos generados
+     * @param $entity
+     * @return type
+     */
+    public function renderFilesGenerated($entity) 
+    {
+        $objectDataManager = $this->container->get(ObjectDataManager::class);
+        $exporterManager = $objectDataManager->exporters();
+        return $exporterManager->renderFiles($entity);
+    }
+
+    /**
      * Llama un metodo estatico de una clase
      * @param type $class
      * @param type $function
@@ -163,6 +180,17 @@ class CoreExtension extends \Twig_Extension
         if (class_exists($class) && method_exists($class, $function))
             return call_user_func_array(array($class, $function), $args);
         return null;
+    }
+
+    /**
+     * ExporterManager
+     *
+     * @param   ExporterManager  $exporterManager
+     * @required
+     */
+    public function setExporterManager(ExporterManager $exporterManager)
+    {
+        $this->exporterManager = $exporterManager;
     }
 
     /**

@@ -18,3 +18,12 @@ object_manager_documents_get:
         _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController::getAction
         _format: html
     requirements: { _method: GET }
+
+object_manager_exporters_generate:
+    path: /exporters/generate
+    defaults:
+        _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\ExporterManagerController::generateAction
+        _format: html
+    requirements: { _method: POST }
+    options:
+        expose: true
