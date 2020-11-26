@@ -44,10 +44,10 @@ var app = angular.module('maxtoan_tools', ['ngTable'])
 })
 
 .controller('PaginatorController', function($scope, $rootScope, NgTableParams, $http, $timeout){
-    $scope.model = {};
-    $scope.paginator = null;
-    this.apiUrl = null;
     var self = this;
+    $scope.model = {};
+    self.apiUrl = null;
+
     this.tableParams = new NgTableParams({
         page: 1, // show first page
         count: 10 // count per page
@@ -63,7 +63,6 @@ var app = angular.module('maxtoan_tools', ['ngTable'])
             self.apiUrl = apiUrl;
             return $http.get(apiUrl, {params: parameters}).then(function (r) {
                 var response = r.data;
-                $scope.paginator = response;
                 if(response && response.meta){
                     params.total(response.meta.totalResults);
                     return response.data;
@@ -151,6 +150,65 @@ var app = angular.module('maxtoan_tools', ['ngTable'])
             }, 1200);
         });
     };
+
+    // $scope.$watch(function() {
+    //         return self.checkboxes.checked;
+    //     }, function(value) {
+    //         angular.forEach(self.tableParams.data, function(item) {
+    //             console.log(self.checkboxes)
+    //             // self.checkboxes.items[item.id] = value;
+    //         });
+    //     }
+    // );
+
+    // $scope.names = function(column) {
+    //     var def = $q.defer(),
+    //         arr = [],
+    //         names = [];
+    //     angular.forEach(data, function(item){
+    //         if (inArray(item.name, arr) === -1) {
+    //             arr.push(item.name);
+    //             names.push({
+    //                 'id': item.name,
+    //                 'title': item.name
+    //             });
+    //         }
+    //     });
+    //     def.resolve(names);
+    //     return def;
+    // };
+    
+    $scope.checkboxes = {
+        checked: false,
+        items: {}
+    };
+
+    // watch for check all checkbox
+    $scope.$watch('checkboxes.checked', function(value) {
+        angular.forEach(self.tableParams.data, function(item) {
+            if (angular.isDefined(item.id)) {
+                $scope.checkboxes.items[item.id] = value;
+            }
+        });
+    });
+
+    // watch for data checkboxes
+    $scope.$watch('checkboxes.items', function(values) {
+        if (!self.tableParams.data) {
+            return;
+        }
+        var checked = 0, unchecked = 0,
+            total = self.tableParams.data.length;
+        angular.forEach(self.tableParams.data, function(item) {
+            checked   +=  ($scope.checkboxes.items[item.id]) || 0;
+            unchecked += (!$scope.checkboxes.items[item.id]) || 0;
+        });
+        if ((unchecked == 0) || (checked == 0)) {
+            $scope.checkboxes.checked = (checked == total);
+        }
+        // grayed checkbox
+        angular.element(document.getElementById("select_all")).prop("indeterminate", (checked != 0 && unchecked != 0));
+    }, true);
 })
 
 .controller('TabsController', function(){
