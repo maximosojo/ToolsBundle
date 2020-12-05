@@ -23,6 +23,11 @@ use LogicException;
 use Exception;
 use FOS\UserBundle\Model\UserInterface;
 
+if(class_exists("PHPUnit\Exception")){
+    $reflection = new \ReflectionClass("PHPUnit\Exception");
+    require_once dirname($reflection->getFileName()) . '/Framework/Assert/Functions.php';
+}
+
 /**
  * Base de contexto para generar data
  *
@@ -1212,5 +1217,28 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
         if ($this->lastErrorJson != JSON_ERROR_NONE) {
             throw new \Exception(sprintf("Error parsing response JSON " . "\n\n %s", $this->echoLastResponse()));
         }
+    }
+
+    /**
+     * Evalua el campo de retorno _sever contenga un mensaje flash
+     * @example And the response server has flash type "success" with message 'Registro exitoso.'
+     * @Then the response server has flash type :type with message :message
+     */
+    public function theResponseServerHasFlashTypeWithMessage($type, $message)
+    {
+        $server = $this->response->headers->get("_server");
+        if($server){
+            $server = json_decode($server,true);
+        }
+        // assertArrayHasKey("flashes", $server);
+        $message = $this->parseParameter($message,[],"flashes");
+        $found = false;
+        foreach ($server["flashes"] as $flash) {
+            if ($flash["type"] === $type && $flash["message"] === $message) {
+                $found = true;
+                break;
+            }
+        }
+        // assertTrue($found, sprintf("The flash type '%s' no found with message '%s', response contains: \n%s", $type, $message, var_export($server["flashes"], true)));
     }
 }
