@@ -12,11 +12,11 @@
 namespace Maxtoan\ToolsBundle\Traits\Component;
 
 /**
- * ConfigurationTrait
+ * ConfigurationManagerTrait
  * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-trait ConfigurationTrait
+trait ConfigurationManagerTrait
 {    
     /**
      * Manejador de configuraciones
