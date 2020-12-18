@@ -55,7 +55,10 @@ trait TimestampableUTCTrait
      */
     public function getCreatedAt()
     {
-        $this->createdAt->setTimeZone(new \DateTimeZone($_ENV['APP_DEFAULT_TIMEZONE']));
+        if ($this->createdAt) {
+            $this->createdAt->setTimeZone(new \DateTimeZone($_ENV['APP_DEFAULT_TIMEZONE']));
+        }
+        
         return $this->createdAt;
     }
 
@@ -77,7 +80,10 @@ trait TimestampableUTCTrait
      */
     public function getUpdatedAt()
     {
-        $this->updatedAt->setTimeZone(new \DateTimeZone($_ENV['APP_DEFAULT_TIMEZONE']));
+        if ($this->updatedAt) {
+            $this->updatedAt->setTimeZone(new \DateTimeZone($_ENV['APP_DEFAULT_TIMEZONE']));
+        }
+        
         return $this->updatedAt;
     }
 }
