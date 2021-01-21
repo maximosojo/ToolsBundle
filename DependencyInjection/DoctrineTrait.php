@@ -231,4 +231,60 @@ trait DoctrineTrait
             $em->rollBack();
         }
     }
+
+    /**
+     * Contruye un queryBuilder de una clase
+     * @param type $class
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function findQueryBuilderForClass($class, array $method = [])
+    {
+        $em = $this->getEntityManager();        
+        $alias = "c";
+        $qb = $em->createQueryBuilder()
+                ->select($alias)
+                ->from($class, $alias);
+        foreach ($method as $key => $value) {
+            $qb
+                ->andWhere(sprintf("%s.%s = :%s",$alias,$key,$key))
+                ->setParameter($key, $value)
+            ;
+        }
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * 
+     * @param type $class
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function findQueryBuilder($class)
+    {
+        $em = $this->getEntityManager();        
+        $alias = "c";
+        $qb = $em->createQueryBuilder()
+                ->select($alias)
+                ->from($class, $alias);
+        return $qb;
+    }
+
+    protected function emClear()
+    {
+        $em = $this->getEntityManager();
+        $em->clear();
+    }
+
+    /**
+     * Repara el error:
+     * A new entity was found through the relationship 'App\Entity\Example#property' that was not configured to cascade persist operations for entity: Data entity example.. To solve this issue: Either explicitly call EntityManager#persist() on this unknown entity or configure cascade persist  this association in the mapping for example @ManyToOne(..,cascade={"persist"})
+     * Importante: Usar con la variable para que funcione "$object = $this->emMerge($object);"
+     * @param type $entity
+     * @return type
+     */
+    protected function emMerge($entity)
+    {
+        $em = $this->getEntityManager();
+        $entity = $em->merge($entity)
+        return $entity;
+    }
 }
