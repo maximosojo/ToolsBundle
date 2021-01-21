@@ -276,7 +276,7 @@ trait DoctrineTrait
 
     /**
      * Repara el error:
-     * A new entity was found through the relationship 'App\Entity\Example#property' that was not configured to cascade persist operations for entity: Data entity example.. To solve this issue: Either explicitly call EntityManager#persist() on this unknown entity or configure cascade persist  this association in the mapping for example @ManyToOne(..,cascade={"persist"})
+     * A new entity was found through the relationship 'App\Entity\Example#property' that was not configured to cascade persist operations for entity: Data entity example.. To solve this issue: Either explicitly call EntityManager#persist() on this unknown entity or configure cascade persist  this association in the mapping for example ManyToOne(..,cascade={"persist"})
      * Importante: Usar con la variable para que funcione "$object = $this->emMerge($object);"
      * @param type $entity
      * @return type
@@ -284,7 +284,7 @@ trait DoctrineTrait
     protected function emMerge($entity)
     {
         $em = $this->getEntityManager();
-        $entity = $em->merge($entity)
+        $entity = $em->merge($entity);
         return $entity;
     }
 }
