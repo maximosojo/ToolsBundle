@@ -37,6 +37,14 @@ class FormEventListener extends AbstractTypeExtension
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function () use ($options) {
           $em = $this->container->get('doctrine')->getManager();
           if(!$em->getFilters()->isEnabled("enableable")){
+            $request = $this->container->get("request_stack")->getCurrentRequest();
+            $route = $request->get("_route");
+            if (in_array($route, [
+                        "easyadmin"
+                    ])) {
+                return;
+            }
+
             $em->getFilters()->enable("enableable");
             $em->getFilters()->getFilter("enableable")->disableForEntity($options["data_class"]);
           }  
