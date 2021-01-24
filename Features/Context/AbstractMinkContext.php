@@ -52,6 +52,8 @@ class AbstractMinkContext extends MinkContext
 
     protected $parameters;
 
+    private $isMaximized = false;
+
     /** @BeforeScenario */
     public function gatherContexts(\Behat\Behat\Hook\Scope\BeforeScenarioScope $scope)
     {
@@ -72,6 +74,18 @@ class AbstractMinkContext extends MinkContext
         $this->container = $this->kernel->getContainer();
         $this->dataContext->setContainer($this->container);
         return $this;
+    }
+
+    /**
+     * @BeforeStep
+     */
+    public function beforeStep()
+    {
+        if($this->dataContext->isOpenBrowser() && $this->isMaximized === false
+                && $this->getSession()->getDriver()->isStarted()){
+            $this->isMaximized = true;
+            $this->getSession()->getDriver()->maximizeWindow();
+        }
     }
     
     /**
