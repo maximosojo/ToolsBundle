@@ -169,7 +169,7 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
      * @return \Behat\Mink\Element\NodeElement
      * @throws Exception
      */
-    protected function findElement($selector)
+    public function findElement($selector)
     {
        $page = $this->getSession()->getPage();
        $element = $page->find('css', $selector);
@@ -1293,5 +1293,23 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
     {
         $this->parseParameterCallBack = $parseParameterCallBack;
         return $this;
+    }
+
+    /**
+     * Click a un elemento visible por su id
+     * Example: And I click the "#idelement" element
+     * @Given I click the :selector element
+     */
+    public function iClickTheElement($selector)
+    {
+        $element = $this->findElement($selector);
+        $this->getSession()->wait(2 * 1000);
+        try {
+            $element->click();
+        } catch (\Exception $ex) {
+            //esperamos 2 segundos para intentar de nuevo hacer click
+            $this->getSession()->wait(2 * 1000);
+            $element->click();
+        }
     }
 }
