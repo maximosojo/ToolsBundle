@@ -146,4 +146,36 @@ class AbstractMinkContext extends MinkContext
             }
         }
     }
+
+    /**
+     * @Given I should see :text appear
+     */
+    public function iShouldSeeAppear($text)
+    {
+        $text = $this->dataContext->parseParameter($text,[],"titles");
+
+       	$this->dataContext->spin(function($context) use ($text) {
+           /** @var $context FeatureContext */
+           return $context->getSession()->getPage()->hasContent($text);
+       	},15,function() use ($text){
+           echo sprintf("No se encontro el texto '%s'",$text);
+       	});
+    }
+
+    public function pressButton($button)
+    {
+        $locator = $this->dataContext->parseParameter($button,[],"buttons");
+        $this->dataContext->spin(function($context) use ($locator){
+            return $context->getSession()->getPage()->findButton($locator) !== null;
+        });
+
+        try {
+           parent::pressButton($locator);
+        } catch (\Exception $ex) {
+        //    $this->iScrollBottomAndElementAppear($locator);
+        //    //esperamos 2 segundos para intentar de nuevo hacer click
+        //    //$this->getSession()->wait(2 * 1000);
+        //    parent::pressButton($locator);
+        }
+    }
 }

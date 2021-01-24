@@ -93,6 +93,12 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
     protected $userClass;
 
     /**
+     * Funcion para hacer parse de parametros customs
+     * @var callable
+     */
+    protected $parseParameterCallBack;
+
+    /**
      * Initializes context.
      */
     public function __construct()
@@ -304,19 +310,60 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
      * @return type
      * @throws \RuntimeException
      */
-    public function parseParameter($value,$parameters = [],$domain = "flashes") 
+    public function parseParameter($value, $parameters = [], $domain = "flashes",array $options = [])
     {
-        $valueExplode = explode("__",$value);
-        if(is_array($valueExplode) && count($valueExplode) == 2){
+        if (is_string($value)) {
+            $jsonObject = json_decode((string) $value, true);
+            if(is_array($jsonObject)){
+                $this->replaceParameters($jsonObject);
+                return $jsonObject;
+            }
+        }else if(is_array($value)){
+            //No se procesa un array nativo, solo array en string.
+            return $value;
+        }else if(is_bool($value)){
+            //No se procesa un booleano nativo
+            return $value;
+        }
+        $resolver = new OptionsResolver();
+        $resolver->setDefaults([
+            "return_object" => false,
+        ]);
+        $options = $resolver->resolve($options);
+        if ($value === "now()") {
+            return new \DateTime();
+        }
+        if (strpos($value, "date::") !== false) {
+            $exploded = explode("::", $value);
+            $value = \DateTime::createFromFormat("Y-m-d", $exploded[1]);
+            if ($value === null) {
+                throw new \RuntimeException(sprintf("The date format must be Y-m-d of '%s'", $exploded[1]));
+            }
+            return $value;
+        }
+        if (strpos($value, "lastResponse::") !== false) {
+            $exploded = explode("::", $value);
+            $propertyPath = $exploded[1];
+            $lastResponse = $this->getScenarioParameter("%lastResponse%");
+            $value = $this->accessor->getValue($lastResponse, $propertyPath);
+            return $value;
+        }
+        if($this->parseParameterCallBack){
+            $value = call_user_func_array($this->parseParameterCallBack, [$value, $parameters,$domain,$this]);
+        }
+        $valueExplode = explode("__", $value);
+        if (is_array($valueExplode) && count($valueExplode) == 2) {
+//            var_dump($valueExplode[0]);
+            $valueExplode[0] = str_replace("\\\\","\\", $valueExplode[0]);//Fix de clases con doble \\
             $reflection = new \ReflectionClass($valueExplode[0]);
-            if(!$reflection->hasConstant($valueExplode[1])){
-                throw new \RuntimeException(sprintf("The class '%s' no has a constant name '%s'",$valueExplode[0],$valueExplode[1]));
+            if (!$reflection->hasConstant($valueExplode[1])) {
+                throw new \RuntimeException(sprintf("The class '%s' no has a constant name '%s'", $valueExplode[0], $valueExplode[1]));
             }
             $value = $reflection->getConstant($valueExplode[1]);
         } else if ($this->isScenarioParameter($value)) {
-           $value = $this->getScenarioParameter($value);
-        }else {
-            if($parameters === null){
+            $value = $this->getScenarioParameter($value,false,$options["return_object"]);
+        } else {
+            if ($parameters === null) {
                 $parameters = [];
             }
             $value = $this->parseTrans($value, $parameters, $domain);
@@ -1240,5 +1287,11 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
             }
         }
         // assertTrue($found, sprintf("The flash type '%s' no found with message '%s', response contains: \n%s", $type, $message, var_export($server["flashes"], true)));
+    }
+
+    public function setParseParameterCallBack($parseParameterCallBack)
+    {
+        $this->parseParameterCallBack = $parseParameterCallBack;
+        return $this;
     }
 }
