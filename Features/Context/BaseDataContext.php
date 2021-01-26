@@ -108,6 +108,11 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
         ];
     }
 
+    public function setParameters($parameters)
+    {
+        $this->parameters = $parameters;
+    }
+
     /**
      * Genera un password estandar en base a un nombre de usuario
      * @param type $username
@@ -1199,6 +1204,20 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
      * @param type $class
      * @return \Doctrine\ORM\QueryBuilder
      */
+    public function findQueryBuilder($class, $alias = "o",$manager = null)
+    {
+        $em = $this->getDoctrine()->getManager($manager);
+        $qb = $em->createQueryBuilder()
+                ->select($alias)
+                ->from($class, $alias);
+        return $qb;
+    }
+
+    /**
+     * Contruye un queryBuilder de una clase
+     * @param type $class
+     * @return \Doctrine\ORM\QueryBuilder
+     */
     public function findQueryBuilderForClass($class, array $method = [], $queryResult = null) 
     {
         $em = $this->getDoctrine()->getManager();        
@@ -1311,5 +1330,55 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
             $this->getSession()->wait(2 * 1000);
             $element->click();
         }
+    }
+
+    /**
+     * Executa un comando
+     * @Given a execute command to :command
+     */
+    public function aExecuteCommandTo($command)
+    {
+        $this->restartKernel();
+        $kernel = $this->getKernel();
+
+        $application = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
+        $application->setAutoExit(false);
+
+        $exploded = explode(" ", $command);
+
+        $commandsParams = [
+        ];
+        foreach ($exploded as $value) {
+            if (!isset($commandsParams["command"])) {
+                $commandsParams["command"] = $value;
+            } else {
+                $e2 = explode("=", $value);
+//                var_dump($e2);
+                if (count($e2) == 1) {
+                    $commandsParams[$e2[0]] = true;
+                } else if (count($e2) == 2) {
+                    $commandsParams[$e2[0]] = $e2[1];
+                }
+            }
+        }
+        foreach ($commandsParams as $key => $value) {
+            $commandsParams[$key] = $value;
+        }
+        $input = new \Symfony\Component\Console\Input\ArrayInput($commandsParams);
+        if ($output === null) {
+            $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+        }
+        $application->run($input, $output);
+//         $content = $output->fetch();
+    }
+
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    public function getData()
+    {
+        return $this->data;
     }
 }
