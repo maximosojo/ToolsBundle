@@ -1051,10 +1051,10 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
      */
     public function theResponseHasAPropertyAndItIsEquals($propertyName, $propertyValue)
     {
-        if ($this->dataContext->isScenarioParameter($propertyValue)) {
-            $propertyValue = $this->dataContext->getScenarioParameter($propertyValue);
+        if ($this->isScenarioParameter($propertyValue)) {
+            $propertyValue = $this->getScenarioParameter($propertyValue);
         }
-        $propertyValue = $this->dataContext->parseParameter($propertyValue);
+        $propertyValue = $this->parseParameter($propertyValue);
         $value = $this->theResponseHasAProperty($propertyName);
         if ($value == $propertyValue) {
             return;
