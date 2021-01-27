@@ -1348,12 +1348,12 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
 
         $commandsParams = [
         ];
+        
         foreach ($exploded as $value) {
             if (!isset($commandsParams["command"])) {
                 $commandsParams["command"] = $value;
             } else {
                 $e2 = explode("=", $value);
-//                var_dump($e2);
                 if (count($e2) == 1) {
                     $commandsParams[$e2[0]] = true;
                 } else if (count($e2) == 2) {
@@ -1361,15 +1361,17 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
                 }
             }
         }
+
         foreach ($commandsParams as $key => $value) {
             $commandsParams[$key] = $value;
         }
+
+        $output = null;
         $input = new \Symfony\Component\Console\Input\ArrayInput($commandsParams);
         if ($output === null) {
             $output = new \Symfony\Component\Console\Output\ConsoleOutput();
         }
         $application->run($input, $output);
-//         $content = $output->fetch();
     }
 
     public function getResponse()
