@@ -46,6 +46,7 @@ var app = angular.module('maxtoan_tools', ['ngTable'])
 .controller('PaginatorController', function($scope, $rootScope, NgTableParams, $http, $timeout){
     var self = this;
     $scope.model = {};
+    $scope.paginator = null;
     self.apiUrl = null;
 
     this.tableParams = new NgTableParams({
@@ -64,6 +65,7 @@ var app = angular.module('maxtoan_tools', ['ngTable'])
             return $http.get(apiUrl, {params: parameters}).then(function (r) {
                 var response = r.data;
                 if(response && response.meta){
+                    $scope.paginator = response;
                     params.total(response.meta.totalResults);
                     return response.data;
                 }
@@ -105,16 +107,6 @@ var app = angular.module('maxtoan_tools', ['ngTable'])
 
     };
     
-    this.postCurrentUrl = function (url) {
-        var url = self.getCurrentUrl(url);
-        clientService.post(url);
-    };
-    
-    this.callCurrentUrl = function (url) {
-        var url = self.getCurrentUrl(url);
-        window.location = url;
-    };
-
     this.clearFilters = function () {
         $timeout(function () {
           clearAllFilters();
