@@ -144,6 +144,11 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
         if ($parameters) {
             $parameters = (array)json_decode($parameters);
         }
+
+        $requestBody = $this->getRequestBody();
+        if($requestBody != null){
+            $parameters = $requestBody;
+        }
         
         $this->getSession()->visit($this->generatePageUrl($route,$parameters));
         if($this->isOpenBrowser()){
