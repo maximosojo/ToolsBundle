@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Command\Cli\Folder;
+namespace Maxtoan\ToolsBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,11 +18,11 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Maxtoan\Common\Filesystem\Folder;
 
 /**
- * CleanCommand
+ * FolderClearCommand
  * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class CleanCommand extends \Maxtoan\ToolsBundle\Component\Console\Command\Command
+class FolderClearCommand extends \Maxtoan\ToolsBundle\Component\Console\Command\Command
 {
 	/* @var InputInterface $output */
     protected $input;
@@ -42,8 +42,8 @@ class CleanCommand extends \Maxtoan\ToolsBundle\Component\Console\Command\Comman
     protected function configure()
     {
         $this
-            ->setName('mtools:folder:clean')
-            ->setDescription('Run clean folders project.')
+            ->setName('mtools:folder:clear')
+            ->setDescription('Run clear folders project.')
         ;
     }
 
@@ -57,13 +57,13 @@ class CleanCommand extends \Maxtoan\ToolsBundle\Component\Console\Command\Comman
     {
         $this->setupConsole($input, $output);
 
-        if ($this->getContainer()->getParameter("maxtoan_tools.command.folder_clean_clean_paths")) {
-            $this->paths_to_remove = $this->getContainer()->getParameter("maxtoan_tools.command.folder_clean_clean_paths");
-            $this->cleanPaths();
+        if ($this->getContainer()->getParameter("maxtoan_tools.command.folder_clear_clear_paths")) {
+            $this->paths_to_remove = $this->getContainer()->getParameter("maxtoan_tools.command.folder_clear_clear_paths");
+            $this->clearPaths();
         }
     }
 
-    private function cleanPaths()
+    private function clearPaths()
     {
         $this->output->writeln('');
         $this->output->writeln('<red>DELETING</red>');
@@ -81,7 +81,7 @@ class CleanCommand extends \Maxtoan\ToolsBundle\Component\Console\Command\Comman
 
         if (!$anything) {
             $this->output->writeln('');
-            $this->output->writeln('<green>Nothing to clean...</green>');
+            $this->output->writeln('<green>Nothing to clear...</green>');
         }
     }
 

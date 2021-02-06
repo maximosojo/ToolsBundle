@@ -1,9 +1,9 @@
 services:
   # Limpiar base de datos
-  Maxtoan\ToolsBundle\Command\Cli\DB\CleanCommand:
+  Maxtoan\ToolsBundle\Command\DataBaseClearCommand:
       tags:
-            - { name: 'console.command', command: 'mtools:db:clean' }
+            - { name: 'console.command', command: 'mtools:database:clear' }
   # Limpiar carpetas
-  Maxtoan\ToolsBundle\Command\Cli\Folder\CleanCommand:
+  Maxtoan\ToolsBundle\Command\FolderClearCommand:
       tags:
-            - { name: 'console.command', command: 'mtools:folder:clean' }
+            - { name: 'console.command', command: 'mtools:folder:clear' }

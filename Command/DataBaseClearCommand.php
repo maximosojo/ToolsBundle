@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Command\Cli\DB;
+namespace Maxtoan\ToolsBundle\Command;
 
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
@@ -24,7 +24,7 @@ use Symfony\Component\Console\Input\InputArgument;
  * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class CleanCommand extends \Maxtoan\ToolsBundle\Component\Console\Command\Command
+class DataBaseClearCommand extends \Maxtoan\ToolsBundle\Component\Console\Command\Command
 {
     /**
      * Configuración
@@ -34,8 +34,8 @@ class CleanCommand extends \Maxtoan\ToolsBundle\Component\Console\Command\Comman
     protected function configure()
     {
         $this
-            ->setName('mtools:db:clean')
-            ->setDescription('Run clean database for develop.')
+            ->setName('mtools:database:clear')
+            ->setDescription('Run clear database for develop.')
             ->addOption(
                 'force',
                     null,
@@ -72,16 +72,16 @@ EOT
         }
 
         // Truncate
-        if ($this->getContainer()->getParameter("maxtoan_tools.command.db_clean_truncate_entities")) {
-            $toTruncate = $this->getContainer()->getParameter("maxtoan_tools.command.db_clean_truncate_entities");
+        if ($this->getContainer()->getParameter("maxtoan_tools.command.db_clear_truncate_entities")) {
+            $toTruncate = $this->getContainer()->getParameter("maxtoan_tools.command.db_clear_truncate_entities");
             foreach ($toTruncate as $tableName) {
                 $this->truncate($tableName,$output,$dbPlatform,$connection);
             }
         }
         
         // Delete
-        if ($this->getContainer()->getParameter("maxtoan_tools.command.db_clean_delete_entities")) {
-            $toDelete = $this->getContainer()->getParameter("maxtoan_tools.command.db_clean_delete_entities");
+        if ($this->getContainer()->getParameter("maxtoan_tools.command.db_clear_delete_entities")) {
+            $toDelete = $this->getContainer()->getParameter("maxtoan_tools.command.db_clear_delete_entities");
             foreach ($toDelete as $className) {
                 $this->deleteRecords($className,$em,$output);
             }
@@ -108,7 +108,7 @@ EOT
     {
         $query = $em->createQuery(sprintf('SELECT COUNT(u.id) FROM %s u',$className));
         $count = $query->getSingleScalarResult();
-        $this->io->writeln(sprintf(" Cleaning <info>'%s'</info> records in table entity <info>'%s'</info>...",$count,$className));
+        $this->io->writeln(sprintf(" Clearing <info>'%s'</info> records in table entity <info>'%s'</info>...",$count,$className));
         $total = $count;
         $deleted = 0;
         $this->io->progressStart($total);
@@ -139,7 +139,7 @@ EOT
      */
     private function truncate($tableName,$output,\Doctrine\DBAL\Platforms\MySqlPlatform $dbPlatform,$connection) 
     {
-        $this->io->text(sprintf("Cleaning table <info>'%s'</info>...",$tableName));
+        $this->io->text(sprintf("Clearing table <info>'%s'</info>...",$tableName));
         $q = $dbPlatform->getTruncateTableSql($tableName);
         $connection->executeUpdate($q);
     }
