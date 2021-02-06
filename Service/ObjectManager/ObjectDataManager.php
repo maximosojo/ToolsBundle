@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Carlos Mendoza <inhack20@gmail.com>
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class ObjectDataManager implements ConfigureInterface
+class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterface
 {
     /**
      * @var array
@@ -28,11 +28,17 @@ class ObjectDataManager implements ConfigureInterface
      * @var ExporterManager\ExporterManager
      */
     private $exporterManager;
+
+    /**
+     * @var StatisticManager\StatisticsManager
+     */
+    private $statisticsManager;
     
-    public function __construct(DocumentManager\DocumentManager $documentManager, ExporterManager\ExporterManager $exporterManager)
+    public function __construct(DocumentManager\DocumentManager $documentManager, ExporterManager\ExporterManager $exporterManager, StatisticManager\StatisticsManager $statisticsManager)
     {
         $this->documentManager = $documentManager;
         $this->exporterManager = $exporterManager;
+        $this->statisticsManager = $statisticsManager;
     }
     
     public function setOptions($options)
@@ -44,7 +50,8 @@ class ObjectDataManager implements ConfigureInterface
             ],
             "exporter_manager" => [
                 "template" => null
-            ]
+            ],
+            "statistics_manager" => []
         ]);
         $resolver->setDefined(["object_types"]);
         $this->options = $resolver->resolve($options);
@@ -59,11 +66,15 @@ class ObjectDataManager implements ConfigureInterface
     public function configure($objectId, $objectType)
     {
         if($this->documentManager){
-            $this->documentManager->configure($objectId, $objectType, $this->options);
+            $this->documentManager->configure($objectId, $objectType, $this->options["document_manager"]);
         }
 
         if($this->exporterManager){
-            $this->exporterManager->configure($objectId, $objectType, $this->options);
+            $this->exporterManager->configure($objectId, $objectType, $this->options["exporter_manager"]);
+        }
+
+        if($this->statisticsManager){
+            $this->statisticsManager->configure($objectId, $objectType,$this->options["statistics_manager"]);
         }
 
         return $this;
@@ -91,5 +102,17 @@ class ObjectDataManager implements ConfigureInterface
             throw new UnconfiguredException(sprintf("El '%s' no esta configurado para usar esta caracteristica.",ExporterManager\ExporterManager::class));
         }
         return $this->exporterManager;
+    }
+
+    /**
+     * @return StatisticManager\StatisticsManager
+     * @throws UnconfiguredException
+     */
+    public function statistics()
+    {
+        if(!$this->statisticsManager){
+            throw new UnconfiguredException(sprintf("El '%s' no esta configurado para usar esta caracteristica.", StatisticManager\StatisticsManager::class));
+        }
+        return $this->statisticsManager;
     }
 }

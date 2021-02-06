@@ -34,7 +34,7 @@ class TCPDFAdapter implements AdapterInterface
 
         // set document information
         $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('Tecnoready Common');
+        $pdf->SetAuthor('Mtools bundle');
 //        $pdf->SetTitle('TCPDF Example 001');
 //        $pdf->SetSubject('TCPDF Tutorial');
 //        $pdf->SetKeywords('TCPDF, PDF, example, test, guide');

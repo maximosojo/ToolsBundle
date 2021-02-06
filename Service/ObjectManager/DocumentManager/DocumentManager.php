@@ -12,6 +12,7 @@ use SplFileInfo;
  * Administrador de documentos
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
+ * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 class DocumentManager implements DocumentAdapterInterface
 {

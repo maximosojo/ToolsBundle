@@ -47,11 +47,31 @@ class ConfigurationPass implements CompilerPassInterface
             $manager->addMethodCall("addWrapper", array($definition));
         }
 
-        // Verificar el manejador de objetos activo
-        if ($container->getParameter('maxtoan_tools.object_manager.enable') === true) {
-            $config = $container->getParameter("maxtoan_tools.object_manager");
+        // Registra manejador de objetos
+        $config = $container->getParameter("maxtoan_tools.object_manager.options");
+        // Manejador de estadísticas
+        if ($container->getParameter('maxtoan_tools.object_manager.statistic.enable') === true) {
+            $statistic = $container->getParameter("maxtoan_tools.object_manager.statistic");
+            $idHistoryManagerAdapter = $statistic["adapter"];
+            if ($idHistoryManagerAdapter && $container->hasDefinition($idHistoryManagerAdapter)) {
+                $adapterDefinition = $container->findDefinition($idHistoryManagerAdapter);
+                $historyManagerDefinition = $container->findDefinition("maxtoan_tools.statistics_manager");
+                $historyManagerDefinition->addArgument($adapterDefinition);                
+            }
 
-            // Manejador de documentos
+            $statisticManager = $container->getDefinition("maxtoan_tools.statistics_manager"); 
+            foreach ($statistic["object_types"] as $param) {
+                if ($param["adapter"]) {
+                    $statisticManager->addMethodCall("addAdapter", [$container->getDefinition($param["adapter"]),$param["objectType"]]);
+                }
+                if ($param["objectValids"]) {
+                    $statisticManager->addMethodCall("addObjectValids", [$param["objectType"],$param["objectValids"]]);
+                }
+            }
+        }
+
+        // Manejador de documentos
+        if ($container->getParameter('maxtoan_tools.object_manager.document.enable') === true) {
             $adapterDefinition = $container->findDefinition($config["document_manager"]["adapter"]);
             $documentManager = $container->findDefinition("maxtoan_tools.document_manager");
             $documentManager->addArgument($adapterDefinition);

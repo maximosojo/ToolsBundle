@@ -1,0 +1,33 @@
+services:
+    maxtoan_tools.document_manager_disk_adapter:
+        class: Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\Adapter\DiskAdapter
+        arguments:
+            # - { "debug": "%kernel.debug%", "documents_path": "%kernel.root_dir%/../var/documents","env": "%kernel.environment%" }
+            - { "debug": "%kernel.debug%", "base_path": "%kernel.root_dir%/../var", "documents_path": "documents","env": "%kernel.environment%" }
+    maxtoan_tools.document_manager:
+        class: Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\DocumentManager
+    # Manejador de exportables
+    maxtoan_tools.exporter_manager_doctrine_orm_adapter:
+        class: Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Adapter\DoctrineORMAdapter
+        arguments: ["@doctrine.orm.default_entity_manager"]
+    maxtoan_tools.exporter_manager:
+        class: Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\ExporterManager
+        calls:
+            - [ setContainer, ['@service_container']  ]
+    
+    # Templates service
+    # Maxtoan\ToolsBundle\Service\Template\Adapter\TXTAdapter:
+    #     public: false
+    Maxtoan\ToolsBundle\Service\Template\Adapter\XLSXAdapter:
+        public: false
+    # maxtoan_tools.template.txtadapter:
+    #     alias: Maxtoan\ToolsBundle\Service\Template\Adapter\TXTAdapter
+    #     public: false
+    maxtoan_tools.template.xlsxadapter:
+        alias: Maxtoan\ToolsBundle\Service\Template\Adapter\XLSXAdapter
+        public: false
+    Maxtoan\ToolsBundle\Service\Template\TemplateService:
+        public: true
+        calls:
+            # - [ addAdapter, ["@maxtoan_tools.template.txtadapter"]  ]
+            - [ addAdapter, ["@maxtoan_tools.template.xlsxadapter"]  ]
