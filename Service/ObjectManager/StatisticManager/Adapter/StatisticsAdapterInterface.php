@@ -21,18 +21,18 @@ interface StatisticsAdapterInterface
     public function flush();
     
     /**
-     * @return \Tecnoready\Common\Model\Configuration\Statistics\StatisticsYearInterface Description
+     * @return \Maxtoan\ToolsBundle\Model\Configuration\Statistics\StatisticsYearInterface Description
      */
     public function newYearStatistics(\Maxtoan\ToolsBundle\Service\ObjectManager\StatisticManager\StatisticsManager $statisticsManager);
     /**
-     * @return \Tecnoready\Common\Model\Configuration\Statistics\StatisticsMonthInterface Description
+     * @return \Maxtoan\ToolsBundle\Model\Configuration\Statistics\StatisticsMonthInterface Description
      */
     public function newStatisticsMonth(\Maxtoan\ToolsBundle\Service\ObjectManager\StatisticManager\StatisticsManager $statisticsManager);
     
     /**
      * Busca las estadisticas de un año
      * @param array $params
-     * @return \Tecnoready\Common\Model\Statistics\StatisticsYearInterface
+     * @return \Maxtoan\ToolsBundle\Model\Statistics\StatisticsYearInterface
      */
     public function findStatisticsYear(array $params = array());
 }

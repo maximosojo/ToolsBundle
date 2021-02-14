@@ -34,11 +34,18 @@ class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterfac
      */
     private $statisticsManager;
     
-    public function __construct(DocumentManager\DocumentManager $documentManager, ExporterManager\ExporterManager $exporterManager, StatisticManager\StatisticsManager $statisticsManager)
+    /**
+     * Manejador del historial
+     * @var HistoryManager\HistoryManager
+     */
+    private $historyManager;
+
+    public function __construct(DocumentManager\DocumentManager $documentManager, ExporterManager\ExporterManager $exporterManager, StatisticManager\StatisticsManager $statisticsManager, HistoryManager\HistoryManager $historyManager)
     {
         $this->documentManager = $documentManager;
         $this->exporterManager = $exporterManager;
         $this->statisticsManager = $statisticsManager;
+        $this->historyManager = $historyManager;
     }
     
     public function setOptions($options)
@@ -75,6 +82,10 @@ class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterfac
 
         if($this->statisticsManager){
             $this->statisticsManager->configure($objectId, $objectType,$this->options["statistics_manager"]);
+        }
+
+        if($this->historyManager){
+            $this->historyManager->configure($objectId, $objectType,$this->options["history_manager"]);
         }
 
         return $this;
@@ -114,5 +125,17 @@ class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterfac
             throw new UnconfiguredException(sprintf("El '%s' no esta configurado para usar esta caracteristica.", StatisticManager\StatisticsManager::class));
         }
         return $this->statisticsManager;
+    }
+
+    /**
+     * Retorna el manejador de historiales
+     * @return HistoryManager\HistoryManager
+     */
+    public function histories()
+    {
+        if(!$this->historyManager){
+            throw new UnconfiguredException(sprintf("El '%s' no esta configurado para usar esta caracteristica.", HistoryManager\HistoryManager::class));
+        }
+        return $this->historyManager;
     }
 }

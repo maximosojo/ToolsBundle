@@ -276,7 +276,7 @@ class StatisticsManager implements ConfigureInterface
      * Retorna las estadisticas de un año
      * @param type $year
      * @param type $month
-     * @return \Tecnoready\Common\Model\Statistics\StatisticsYearInterface
+     * @return \Maxtoan\ToolsBundle\Model\Statistics\StatisticsYearInterface
      */
     private function findStatisticsYear($year)
     {
@@ -298,7 +298,7 @@ class StatisticsManager implements ConfigureInterface
      * Cuenta uno a las estadisticas de un objeto por el año, mes y dia<br/>
      * <b>$value: Puede incrementar +20, restar -15 o colocar un valor fijo 5</b>
      * @param array $options [year,month,day,value] 
-     * @return \Tecnoready\Common\Model\Statistics\StatisticsMonthInterface
+     * @return \Maxtoan\ToolsBundle\Model\Statistics\StatisticsMonthInterface
      */
     public function countStatisticsMonth(array $options = [])
     {

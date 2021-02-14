@@ -96,14 +96,14 @@ class MaxtoanToolsExtension extends Extension
 
         $container->setParameter('maxtoan_tools.object_manager.statistic.enable',$config['object_manager']['statistics_manager']['enable']);
         $container->setParameter('maxtoan_tools.object_manager.document.enable',$config['object_manager']['document_manager']['enable']);
-        if($config['object_manager']['statistics_manager']['enable'] === true){
-            $loaderYml->load('services/object-manager/statistics_manager.yml');
+        // if($config['object_manager']['statistics_manager']['enable'] === true){
+        //     $loaderYml->load('services/object-manager/statistics_manager.yml');
             $container->setParameter('maxtoan_tools.object_manager.statistic',$config['object_manager']['statistics_manager']);
-        }
+        // }
 
-        if($config['object_manager']['document_manager']['enable'] === true){
-            $loaderYml->load('services/object-manager/document_manager.yml');
-        }
+        // if($config['object_manager']['document_manager']['enable'] === true){
+            // $loaderYml->load('services/object-manager/document_manager.yml');
+        // }
         
         // Carga el manejador de objetos
         $loaderYml->load('services/object_manager.yml');
