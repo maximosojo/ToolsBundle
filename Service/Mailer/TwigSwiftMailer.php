@@ -54,8 +54,6 @@ class TwigSwiftMailer
 
         $this->options = $resolver->resolve($options);
         
-        $this->twig->addExtension(new \Twig\Extension\StringLoaderExtension());
-        
         $this->templateSource = <<<EOF
         {% extends template_from_string(baseString) %}
         
