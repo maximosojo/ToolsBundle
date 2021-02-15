@@ -58,7 +58,8 @@ class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterfac
             "exporter_manager" => [
                 "template" => null
             ],
-            "statistics_manager" => []
+            "statistics_manager" => [],
+            "history_manager" => []
         ]);
         $resolver->setDefined(["object_types"]);
         $this->options = $resolver->resolve($options);

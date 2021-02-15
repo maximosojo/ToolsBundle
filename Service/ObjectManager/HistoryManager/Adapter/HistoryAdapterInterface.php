@@ -11,7 +11,7 @@ use Maxtoan\ToolsBundle\Service\ObjectManager\ConfigureInterface;
  */
 interface HistoryAdapterInterface extends ConfigureInterface
 {
-    public function create(HistoryInterface $entity);
+    public function create(array $options = []);
     
     public function delete(HistoryInterface $entity);
     

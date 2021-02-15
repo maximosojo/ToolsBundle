@@ -64,6 +64,10 @@ abstract class ModelHistory implements HistoryInterface
      * @ORM\Column(name="mobile",type="boolean") 
      */
     protected $mobile;
+
+    public function setUser($user){}
+    
+    public function getUser(){}
     
     public function getEventName()
     {

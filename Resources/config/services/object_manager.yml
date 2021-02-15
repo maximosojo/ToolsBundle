@@ -37,7 +37,7 @@ services:
         class: Maxtoan\ToolsBundle\Service\ObjectManager\StatisticManager\StatisticsManager
         calls:
             - [ setContainer, ['@service_container']  ]
-    # Manejador de hjistoriales
+    # Manejador de historiales
     maxtoan_tools.history_manager:
         class: Maxtoan\ToolsBundle\Service\ObjectManager\HistoryManager\HistoryManager
         calls:

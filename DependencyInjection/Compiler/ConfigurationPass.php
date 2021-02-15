@@ -49,14 +49,15 @@ class ConfigurationPass implements CompilerPassInterface
 
         // Registra manejador de objetos
         $config = $container->getParameter("maxtoan_tools.object_manager.options");
+
         // Manejador de estadísticas
         // if ($container->getParameter('maxtoan_tools.object_manager.statistic.enable') === true) {
             $statistic = $container->getParameter("maxtoan_tools.object_manager.statistic");
-            $idHistoryManagerAdapter = $statistic["adapter"];
-            if ($idHistoryManagerAdapter && $container->hasDefinition($idHistoryManagerAdapter)) {
-                $adapterDefinition = $container->findDefinition($idHistoryManagerAdapter);
-                $historyManagerDefinition = $container->findDefinition("maxtoan_tools.statistics_manager");
-                $historyManagerDefinition->addArgument($adapterDefinition);                
+            $idStatisticManagerAdapter = $statistic["adapter"];
+            if ($idStatisticManagerAdapter && $container->hasDefinition($idStatisticManagerAdapter)) {
+                $adapterDefinition = $container->findDefinition($idStatisticManagerAdapter);
+                $statisticManagerDefinition = $container->findDefinition("maxtoan_tools.statistics_manager");
+                $statisticManagerDefinition->addArgument($adapterDefinition);                
             }
 
             $statisticManager = $container->getDefinition("maxtoan_tools.statistics_manager"); 
@@ -69,6 +70,22 @@ class ConfigurationPass implements CompilerPassInterface
                 }
             }
         // }
+
+        // Manejador de Historial
+        $history = $container->getParameter("maxtoan_tools.object_manager.history");
+        $idHistoryManagerAdapter = $history["adapter"];
+        if ($idHistoryManagerAdapter && $container->hasDefinition($idHistoryManagerAdapter)) {
+            $adapterDefinition = $container->findDefinition($idHistoryManagerAdapter);
+            $historyManagerDefinition = $container->findDefinition("maxtoan_tools.history_manager");
+            $historyManagerDefinition->addArgument($adapterDefinition);                
+        }
+
+        $historyManager = $container->getDefinition("maxtoan_tools.history_manager"); 
+        foreach ($history["object_types"] as $param) {
+            if ($param["adapter"]) {
+                $historyManager->addMethodCall("addAdapter", [$container->getDefinition($param["adapter"]),$param["objectType"]]);
+            }
+        }
 
         // Manejador de documentos
         // if ($container->getParameter('maxtoan_tools.object_manager.document.enable') === true) {
