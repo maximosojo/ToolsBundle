@@ -4,8 +4,8 @@ namespace Maxtoan\ToolsBundle\Service\ObjectManager\HistoryManager\Adapter;
 
 use Maxtoan\ToolsBundle\Service\ObjectManager\HistoryManager\HistoryInterface;
 use Doctrine\ORM\EntityManager;
-use Pagerfanta\Pagerfanta as Paginator;
 use Pagerfanta\Adapter\DoctrineORMAdapter as Adapter;
+use Maxtoan\ToolsBundle\Model\Paginator\Paginator;
 
 /**
  * Adaptador de doctrine2
@@ -78,6 +78,7 @@ class DoctrineORMAdapter implements HistoryAdapterInterface
             ->orderBy("e.createdAt","DESC")
             ;
         $pagerfanta = new Paginator(new Adapter($qb));
+        $pagerfanta->setDefaultFormat(Paginator::FORMAT_ARRAY_STANDARD);
         return $pagerfanta;
     }
 
