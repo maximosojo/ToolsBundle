@@ -56,13 +56,14 @@ class DoctrineORMAdapter implements ConfigurationAdapterInterface
         return $r;
     }
 
-    public function persist(ConfigurationInterface $configuration) {
+    public function persist(ConfigurationInterface $configuration)
+    {
         $this->em->persist($configuration);
-        $success = true;
-        return $success;
+        return true;
     }
 
-    public function flush() {
+    public function flush()
+    {
         $this->em->flush();
         return true;
     }

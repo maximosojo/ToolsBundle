@@ -6,6 +6,8 @@ use Maxtoan\ToolsBundle\Service\ObjectManager\HistoryManager\HistoryInterface;
 use Doctrine\ORM\EntityManager;
 use Pagerfanta\Adapter\DoctrineORMAdapter as Adapter;
 use Maxtoan\ToolsBundle\Model\Paginator\Paginator;
+use Sinergi\BrowserDetector\Browser;
+use Sinergi\BrowserDetector\Os;
 
 /**
  * Adaptador de doctrine2
@@ -33,6 +35,9 @@ class DoctrineORMAdapter implements HistoryAdapterInterface
     
     public function create(array $options = [])
     {
+        $browser = new Browser();
+        $os = new Os();
+
         $entity = new $this->className;
         $entity->setEventName($options["eventName"]);
         $entity->setType($options["type"]);
@@ -41,10 +46,10 @@ class DoctrineORMAdapter implements HistoryAdapterInterface
         $entity->setObjectId($options["objectId"]);
         $entity->setObjectType($options["objectType"]);
         $entity->setUserAgent($this->getUserAgent());
-        $entity->setBrowser("Chrome");
-        $entity->setOs("Android");
+        $entity->setBrowser($browser->getName());
+        $entity->setOs($os->getName());
         $entity->setMobile(true);
-        $entity->setBrowserVersion(88);
+        $entity->setBrowserVersion($browser->getVersion());
         $entity->setCreatedAt(new \DateTime());
         $this->em->persist($entity);
         return $this->em->flush();

@@ -102,14 +102,13 @@ class ConfigurationManager extends BaseService
      */
     function get($key,$wrapperName = null,$default = null)
     {
-        // $configuration = $this->getConfiguration($key,$wrapperName);
         $configuration = $this->adapter->find($key);
         if($configuration !== null){
             $value = $configuration->getValue();
-            // $value = $this->reverseTransform($configuration->getValue(), $configuration);
         }else{
             $value = $default;
         }
+
         return $value;
     }
 
@@ -121,29 +120,14 @@ class ConfigurationManager extends BaseService
      */
     public function set($key,$value)
     {
-        $config = $this->getConfigurationKey($key);
-        if ($config) {
-            $config->setValue($value);
-            $this->save($config,false);
+        $configuration = $this->adapter->find($key);
+        if ($configuration) {
+            $configuration->setValue($value);
+            $this->adapter->persist($configuration);
+            $this->adapter->flush();
         }
 
-        return $config;
-    }
-
-    /**
-     * Retorna la configuracion
-     * @param type $key
-     * @param type $wrapperName
-     * @return \Maxtoan\ToolsBundle\Model\Core\Configuration\ConfigurationInterface
-     */
-    private function getConfiguration($key,$wrapperName = null)
-    {
-        if($wrapperName === null){
-            $wrapperName = DefaultConfigurationWrapper::getName();
-        }
-        $key = strtoupper($key);
-        $wrapperName = strtoupper($wrapperName);
-        return $this->getWrapper($wrapperName);
+        return $configuration;
     }
 
     /**
