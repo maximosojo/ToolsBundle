@@ -313,7 +313,7 @@ class StatisticsManager implements ConfigureInterface
         $resolver->setDefaults($defaults);
         foreach ($defaults as $option => $v) {
             if(in_array($option,["$option"])){
-                $resolver->setAllowedTypes($option,["int","string","null"]);
+                $resolver->setAllowedTypes($option,["int","string","null","double"]);
                 continue;
             }
             $resolver->setAllowedTypes($option,"int");
