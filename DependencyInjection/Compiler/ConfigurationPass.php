@@ -80,13 +80,6 @@ class ConfigurationPass implements CompilerPassInterface
             $historyManagerDefinition->addArgument($adapterDefinition);                
         }
 
-        $historyManager = $container->getDefinition("maxtoan_tools.history_manager"); 
-        foreach ($history["object_types"] as $param) {
-            if ($param["adapter"]) {
-                $historyManager->addMethodCall("addAdapter", [$container->getDefinition($param["adapter"]),$param["objectType"]]);
-            }
-        }
-
         // Manejador de documentos
         // if ($container->getParameter('maxtoan_tools.object_manager.document.enable') === true) {
             $adapterDefinition = $container->findDefinition($config["document_manager"]["adapter"]);

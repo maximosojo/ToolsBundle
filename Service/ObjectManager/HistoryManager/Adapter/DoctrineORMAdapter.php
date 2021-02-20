@@ -45,6 +45,7 @@ class DoctrineORMAdapter implements HistoryAdapterInterface
         $entity->setDescription($options["description"]);
         $entity->setObjectId($options["objectId"]);
         $entity->setObjectType($options["objectType"]);
+        $entity->setUser($options["user"]);
         $entity->setUserAgent($this->getUserAgent());
         $entity->setBrowser($browser->getName());
         $entity->setOs($os->getName());
@@ -76,12 +77,30 @@ class DoctrineORMAdapter implements HistoryAdapterInterface
         $repository = $this->em->getRepository($this->className);
         $qb = $repository->createQueryBuilder("e");
         $qb
-            ->andWhere("e.objectId = :objectId")
-            ->andWhere("e.objectType = :objectType")
-            ->setParameter("objectId",$this->objectId)
-            ->setParameter("objectType",$this->objectType)
             ->orderBy("e.createdAt","DESC")
             ;
+
+        if (isset($criteria["objectId"])) {
+            $qb
+                ->andWhere("e.objectId = :objectId")
+                ->setParameter("objectId",$criteria["objectId"])
+            ;
+        }
+
+        if (isset($criteria["objectType"])) {
+            $qb
+                ->andWhere("e.objectType = :objectType")
+                ->setParameter("objectType",$criteria["objectType"])
+            ;
+        }
+
+        if (isset($criteria["user"])) {
+            $qb
+                ->andWhere("e.user = :user")
+                ->setParameter("user",$criteria["user"])
+            ;
+        }
+
         $pagerfanta = new Paginator(new Adapter($qb));
         $pagerfanta->setDefaultFormat(Paginator::FORMAT_ARRAY_STANDARD);
         return $pagerfanta;

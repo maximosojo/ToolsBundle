@@ -23,39 +23,21 @@ class HistoryManager implements HistoryAdapterInterface
      * @var HistoryAdapterInterface 
      */
     private $adapter;
-
-    /**
-     * Adaptadores disponibles
-     * @var Adapters
-     */
-    private $adapters;
-
-    /**
-     * Adaptador por defecto
-     * @var HistoryAdapterInterface
-     */
-    private $defaultAdapter;
     
     /**
      * Opciones de configuracion
      * @var array
      */
     private $options;
-
-    /**
-     * Objetos validos
-     * @var objectValids
-     */
-    private $objectValids;
     
     public function __construct(HistoryAdapterInterface $adapter = null,array $options = [])
     {
+        $this->adapter = $adapter;
         $resolver = new OptionsResolver();
         $resolver->setDefaults([
-            "debug" => false,
+            "debug" => false
         ]);
         $this->options = $resolver->resolve($options);
-        $this->defaultAdapter = $adapter;
     }
 
     /**
@@ -66,23 +48,9 @@ class HistoryManager implements HistoryAdapterInterface
      */
     public function configure($objectId, $objectType, array $options = [])
     {
-        $this->adapter = $this->defaultAdapter;
-        if (isset($this->adapters[$objectType])) {
-            $this->adapter = $this->adapters[$objectType];
-        }
-        if ($this->adapter === null) {
-            throw new \RuntimeException(sprintf("No hay ningun adaptador configurado para '%s' en '%s' debe agregar por lo menos uno.", $objectType, HistoryManager::class));
-        }
-        
         $this->objectId = $objectId;
         $this->objectType = $objectType;
-        
-        $resolver = new OptionsResolver();
-        $resolver->setDefaults([
-            "current_ip" => null,
-        ]);
-        $this->options = $resolver->resolve($options);
-        $this->adapter->configure($objectId, $objectType);
+        $this->adapter->configure($objectId, $objectType, $options);
     }
     
     public function create(array $options = [])
@@ -94,6 +62,7 @@ class HistoryManager implements HistoryAdapterInterface
         $resolver->setDefined("extra");
         $resolver->setDefined("objectId");
         $resolver->setDefined("objectType");
+        $resolver->setDefined("user");
 
         $resolver->setDefaults([
             "description" => "",
@@ -102,7 +71,7 @@ class HistoryManager implements HistoryAdapterInterface
             "extra" => []
         ]);
 
-        $resolver->setRequired(["eventName","type","description","objectId","objectType"]);
+        $resolver->setRequired(["eventName","type","description","objectId","objectType","user"]);
 
         $options = $resolver->resolve($options);
         
@@ -122,16 +91,5 @@ class HistoryManager implements HistoryAdapterInterface
     public function getPaginator(array $criteria = array(), array $sortBy = array())
     {
         return $this->adapter->getPaginator($criteria,$sortBy);
-    }
-
-    /**
-     * Agrega un adaptador
-     * @param HistoryAdapterInterface $adapter
-     */
-    public function addAdapter(HistoryAdapterInterface $adapter, $objectType)
-    {
-        $this->adapters[$objectType] = $adapter;
-        
-        return $this;
     }
 }

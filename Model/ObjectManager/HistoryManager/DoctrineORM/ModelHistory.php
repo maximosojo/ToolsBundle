@@ -5,6 +5,7 @@ namespace Maxtoan\ToolsBundle\Model\ObjectManager\HistoryManager\DoctrineORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Maxtoan\ToolsBundle\Model\ObjectManager\HistoryManager\HistoryInterface;
+use App\Entity\M\User;
 
 /**
  * Modelo de historial
@@ -65,10 +66,13 @@ abstract class ModelHistory implements HistoryInterface
      */
     protected $mobile;
 
-    public function setUser($user){}
-    
-    public function getUser(){}
-    
+    /**
+     * Usuario
+     * @var \App\Entity\M\User
+     * @ORM\Column(name="user_id", type="string", length=36)
+     */
+    protected $user;
+
     public function getEventName()
     {
         return $this->eventName;
@@ -99,48 +103,71 @@ abstract class ModelHistory implements HistoryInterface
         return $default;
     }
     
-    public function getExtra() {
+    public function getExtra()
+    {
         return $this->extra;
     }
 
-    public function setExtra(array $extra) {
+    public function setExtra(array $extra)
+    {
         $this->extra = $extra;
         return $this;
     }
 
-    public function getBrowser() {
+    public function getBrowser()
+    {
         return $this->browser;
     }
 
-    public function getOs() {
+    public function getOs()
+    {
         return $this->os;
     }
 
-    public function getMobile() {
+    public function getMobile()
+    {
         return $this->mobile;
     }
 
-    public function setBrowser($browser) {
+    public function setBrowser($browser)
+    {
         $this->browser = $browser;
         return $this;
     }
 
-    public function setOs($os) {
+    public function setOs($os)
+    {
         $this->os = $os;
         return $this;
     }
 
-    public function setMobile($mobile) {
+    public function setMobile($mobile)
+    {
         $this->mobile = $mobile;
         return $this;
     }
     
-    public function getBrowserVersion() {
+    public function getBrowserVersion()
+    {
         return $this->browserVersion;
     }
 
-    public function setBrowserVersion($browserVersion) {
+    public function setBrowserVersion($browserVersion)
+    {
         $this->browserVersion = $browserVersion;
+        return $this;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function setUser($user)
+    {
+        if($user instanceof User){
+            $this->user = $user->getId();
+        }
         return $this;
     }
 }
