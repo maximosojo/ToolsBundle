@@ -11,6 +11,8 @@
 
 namespace Maxtoan\ToolsBundle\ORM\Query;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 /**
  * Query builder search
  *
@@ -115,28 +117,44 @@ class SearchQueryBuilder
      * @param array $fields
      * @return 
      */
-    public function addFieldLike(array $fields,$defaultValueField = null)
+    public function addFieldLike(array $fields,$defaultValueField = null,array $options = [])
     {
-        $orX = $this->qb->expr()->orX();
+        $resolver = new OptionsResolver();
+        $resolver->setDefaults([
+            "expr" => "andX",
+        ]);
+        $resolver->setAllowedValues("expr",["andX","orX"]);
+        $options = $resolver->resolve($options);
+        
+        if($options["expr"] == "andX"){
+            $x = $this->qb->expr()->andX();//Se coloco andX para buscar siempre por todos los campos en conjutos
+        } else if($options["expr"] == "orX"){
+            $x = $this->qb->expr()->orX();//Se coloco andX para buscar siempre por todos los campos en conjutos
+        }
         foreach ($fields as $key => $field){
             $fieldValue = $field;
             if(is_string($key)){
                 $fieldValue = $key;
             }
-            $normalizeField = $this->normalizeField($this->getAlies(),$field);
+            $normalizeField = $this->normalizeField($this->getAlies(),$field);            
             $valueField = $this->criteria->remove($fieldValue);
             if($defaultValueField !== null){
                 $valueField = $defaultValueField;
             }
             if($valueField !== null){
-                $orX->add($this->qb->expr()->like($normalizeField,$this->qb->expr()->literal("%".$valueField."%")));
+                $values = $valueField;
+                if(!is_array($valueField)){
+                    $values = [$valueField];
+                }
+                foreach ($values as $value) {
+                    $value = $this->normalizeValue($value);
+                    $x->add($this->qb->expr()->like($normalizeField,$this->qb->expr()->literal("%".$value."%")));
+                }
             }
         }
-        
-        if($orX->count() > 0){
-            $this->qb->andWhere($orX);
+        if($x->count() > 0){
+            $this->qb->andWhere($x);
         }
-
         return $this;
     }
 
@@ -160,9 +178,14 @@ class SearchQueryBuilder
     {
         $valueField = $this->criteria->remove($queryField);
         if($valueField !== null){
-            $this->addFieldLike($fields,$valueField);
+            $valueField = $this->normalizeValue($valueField);
+            $values = explode(" ", $valueField);
+            foreach ($values as $value) {
+                $this->addFieldLike($fields,$value,[
+                    "expr" => "orX",//Como es "query" debe ser un orX para que busque en todos los campos.
+                ]);
+            }
         }
-
         return $this;
     }
 
@@ -403,6 +426,17 @@ class SearchQueryBuilder
         }
         
         return $fieldResponse;
+    }
+
+    /**
+     * Decodifica los valores, como se envia por GET la data puede tener
+     * @param type $valueField
+     * @return type
+     */
+    private function normalizeValue($valueField)
+    {
+        $valueField = urldecode($valueField);
+        return $valueField;
     }
 
     /**
