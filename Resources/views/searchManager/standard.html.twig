@@ -1,0 +1,118 @@
+{% macro label_filter(label,id,type) %}
+    {% import _self as filters %}
+    <label class="label-filter text-center">
+        {{ label|trans({},'labels')}}
+    </label>
+    {{ filters.eraser(id,type) }}
+{% endmacro %}
+
+{% macro eraserAll(searchManager) %}
+    {% set id = uniqueId() %}
+    <a id="{{ id }}" href="#" class="eraser-all btn btn-primary" title="Clear all">
+        {# <i class="fa fa-eraser fa-2x"></i> #}
+        {{"search_manager.filter.clean_all"|trans({},"ToolsBundle")}}
+    </a>
+    <script type="text/javascript">
+        var clearFilters = null;
+        $(document).ready(function () {
+            clearFilters = function () {
+                $(".eraser").click();
+            };
+            $("#{{ id }}").on("click", function () {
+                clearFilters();
+            });
+        });
+    </script>
+{% endmacro %}
+
+{% macro eraser(id,type) %}
+    <a 
+        href="javascript:;" 
+        class="float-right eraser text-danger"
+        onclick="clearFilters('{{ id }}','{{ type }}')"
+        data-toggle="tooltip"
+        data-placement="top" title=""
+        data-original-title="{{"search_manager.filter.label"|trans({},"ToolsBundle")}}"
+        >
+        {# <i class="ico ico-trash"></i> #}
+        {{"search_manager.filter.clean"|trans({},"ToolsBundle")}}
+    </a>
+{% endmacro %}
+
+{% block input %}
+    {% set modelName = modelName|replace({'.': '__'}) %}
+    {% import _self as filters %}
+    {% if id is null %}
+        {% set id = uniqueId() %}
+    {% endif %}
+
+    <div class="form-group" ng-init="initWatch('{{ modelName }}')">
+        {{ filters.label_filter(label,id,'input') }}
+        <input id="{{ id }}" class="form-control" ng-model="model.{{ modelName }}"/>
+    </div>
+{% endblock %}
+
+{% macro select(label,modelName,values,parameters,searchManager) %}
+    {% set modelName = modelName|replace({'.': '__'}) %}
+
+    {% import _self as filters %}
+
+    {% set multiple = true %}
+    {% set id = uniqueId() %}
+    {% if parameters %}
+        {% if parameters["multiple"] is defined and parameters["multiple"] == false %}
+            {% set multiple = false %}
+        {% endif %}
+    {% endif %}
+    {% if values is null %}
+        {% set values = currentFilter.parameter('values',[]) %}
+    {% endif %}
+
+    <div class="form-group" ng-init="initWatch('{{ modelName }}')">
+        {{ filters.label_filter(label,id,'select', searchManager) }}
+        <div class="filters">
+            <select id="{{ id }}"  {% if multiple %} multiple="multiple" {% endif %} class="form-control select2filters" ng-model="model.{{ modelName }}">
+                <option value=""></option>
+                {% for key,value in values %}
+                    <option value="{{ value }}">{{ key|trans({},'labels') }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro select2Entity(label,modelName,parameters,searchManager) %}    
+    {% set modelName = modelName|replace({'.': '__'}) %}
+
+    {% import _self as filters %}
+
+    {% set id = uniqueId() %}
+    
+    <div class="form-group" ng-init="initWatch('{{ modelName }}')">
+        {{ filters.label_filter(label,id,'select', searchManager) }}
+        <div class="filters">
+            <select
+                id="{{id}}"
+                class="form-control select2entity select2-hidden-accessible"
+                autocomplete="off"
+                {% if parameters.ajax_url is defined %}
+                    data-ajax--url="{{parameters.ajax_url}}?page_limit=10"
+                {% endif %}
+                data-ajax--cache-timeout="1"
+                data-ajax--delay="250"
+                data-ajax--data-type="json"
+                data-language="es"
+                data-minimum-input-length="0"
+                data-page-limit="10"
+                data-scroll="false"
+                data-autostart="true"
+                tabindex="-1"
+                {% if parameters.req_params is defined %}
+                    data-req_params="{{params.req_params}}"
+                {% endif %}
+                ng-model="model.{{ modelName }}"
+                aria-hidden="true"></select>
+        
+        </div>
+    </div>
+{% endmacro %}

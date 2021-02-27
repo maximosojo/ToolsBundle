@@ -47,6 +47,11 @@ class MaxtoanToolsExtension extends Extension
             $container->setParameter('maxtoan_tools.service.link_generator.color', $config['link_generator']['color']); 
         }
 
+        if($config['search_manager']['enable'] === true) {
+            $loaderYml->load('services/search_manager.yml');
+            // $container->setParameter('maxtoan_tools.service.search_manager.color', $config['search_manager']['color']); 
+        }
+
         if($config['mailer']['enable'] === true) {
             $loaderYml->load('mailer.yml');
             $container->setParameter("maxtoan_tools.swiftmailer.mailer_template_class", $config['mailer']["mailer_template_class"]);

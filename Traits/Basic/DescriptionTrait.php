@@ -25,7 +25,7 @@ trait DescriptionTrait
      * @var string
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
      * Set description
