@@ -8,21 +8,10 @@
 
 {% macro eraserAll(searchManager) %}
     {% set id = uniqueId() %}
-    <a id="{{ id }}" href="#" class="eraser-all btn btn-primary" title="Clear all">
-        {# <i class="fa fa-eraser fa-2x"></i> #}
+    <a id="{{ id }}" href="javascript:;" class="eraser-all btn btn-primary" title="Clear all" onclick="clearAllFilters()">
+        <i class="{{get_parameter('maxtoan_tools.service.search_manager.icons.clean')}}"></i>
         {{"search_manager.filter.clean_all"|trans({},"ToolsBundle")}}
     </a>
-    <script type="text/javascript">
-        var clearFilters = null;
-        $(document).ready(function () {
-            clearFilters = function () {
-                $(".eraser").click();
-            };
-            $("#{{ id }}").on("click", function () {
-                clearFilters();
-            });
-        });
-    </script>
 {% endmacro %}
 
 {% macro eraser(id,type) %}
@@ -34,8 +23,8 @@
         data-placement="top" title=""
         data-original-title="{{"search_manager.filter.label"|trans({},"ToolsBundle")}}"
         >
-        {# <i class="ico ico-trash"></i> #}
-        {{"search_manager.filter.clean"|trans({},"ToolsBundle")}}
+        <i class="{{get_parameter('maxtoan_tools.service.search_manager.icons.clean')}}"></i>
+        {#{{"search_manager.filter.clean"|trans({},"ToolsBundle")}}#}
     </a>
 {% endmacro %}
 

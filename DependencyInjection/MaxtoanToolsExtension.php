@@ -49,7 +49,8 @@ class MaxtoanToolsExtension extends Extension
 
         if($config['search_manager']['enable'] === true) {
             $loaderYml->load('services/search_manager.yml');
-            // $container->setParameter('maxtoan_tools.service.search_manager.color', $config['search_manager']['color']); 
+            //var_dump($config['search_manager']);die;
+            $container->setParameter('maxtoan_tools.service.search_manager.icons.clean', $config['search_manager']['icons']['clean']); 
         }
 
         if($config['mailer']['enable'] === true) {

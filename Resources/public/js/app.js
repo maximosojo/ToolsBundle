@@ -107,12 +107,6 @@ var app = angular.module('maxtoan_tools', ['ngTable'])
 
     };
     
-    this.clearFilters = function () {
-        $timeout(function () {
-          clearAllFilters();
-        });
-    };    
-
     $scope.initWatch = function (modelName) {
         modelName = modelName.replace(".", "__");
         if ($scope.model[modelName]) {
