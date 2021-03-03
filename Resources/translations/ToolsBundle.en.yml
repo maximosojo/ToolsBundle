@@ -8,3 +8,7 @@ search_manager:
             label: "Clean"
             clean: "Clean"
             clean_all: "Clean all"
+            select:
+                empty: "Please select..."
+            input:
+                placeholder: "Filter by "

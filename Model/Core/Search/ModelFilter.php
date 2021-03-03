@@ -20,6 +20,7 @@ class ModelFilter extends ModelStandarMaster implements ItemReferenceInterface
     const TYPE_DATE = "date";
     const TYPE_SELECT = "select";
     const TYPE_SELECT2 = "select2";
+    const TYPE_SELECT2_ENTITY = "select2Entity";
     
     /**
      * Tipo de filtro (self::TYPE_*)
@@ -155,6 +156,15 @@ class ModelFilter extends ModelStandarMaster implements ItemReferenceInterface
     public function getParameters()
     {
         return $this->parameters;
+    }
+
+    public function getParameter($key,$default = null)
+    {
+        if(isset($this->parameters[$key])){
+            return $this->parameters[$key];
+        }
+        
+        return $default;
     }
 
     /**

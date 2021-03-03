@@ -12,6 +12,29 @@
 
 var app = angular.module('maxtoan_tools', ['ngTable'])
 
+.directive('select2', function() {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        scope: {
+            ngModel: '='
+        },
+        link: function(scope, element, attr, ngModel) {
+            element.on('change', function() {
+                 var val = $(this).val();
+                 scope.$apply(function(){
+                    ngModel.$modelValue = val;
+                    scope.ngModel = val;
+                 });
+            });
+            ngModel.$render = function() {
+                element.value = ngModel.$viewValue;
+            }
+
+        }
+    }
+})
+
 .directive('ngLoading', function() {
     return {
         restrict: "A",

@@ -37,7 +37,7 @@
 
     <div class="form-group" ng-init="initWatch('{{ modelName }}')">
         {{ filters.label_filter(label,id,'input') }}
-        <input id="{{ id }}" class="form-control" ng-model="model.{{ modelName }}"/>
+        <input id="{{ id }}" class="form-control" ng-model="model.{{ modelName }}" placeholder="{{"search_manager.filter.input.placeholder"|trans({},"ToolsBundle")}}{{ label|trans({},'labels')}}"/>
     </div>
 {% endblock %}
 
@@ -70,38 +70,51 @@
     </div>
 {% endmacro %}
 
-{% macro select2Entity(label,modelName,parameters,searchManager) %}    
-    {% set modelName = modelName|replace({'.': '__'}) %}
-
+{% block select2Entity %}
     {% import _self as filters %}
 
+    {% set modelName = modelName|replace({'.': '__'}) %}
+
     {% set id = uniqueId() %}
+    {% if currentFilter.parameter('id') %}
+        {% set id = currentFilter.parameter('id') %}
+    {% endif %}
+
+    {% set page_limit = 10 %}
+    {% if currentFilter.parameter('page_limit') %}
+        {% set page_limit = currentFilter.parameter('page_limit') %}
+    {% endif %}
     
     <div class="form-group" ng-init="initWatch('{{ modelName }}')">
-        {{ filters.label_filter(label,id,'select', searchManager) }}
+        {{ filters.label_filter(label,id,'select2', searchManager) }}
         <div class="filters">
             <select
                 id="{{id}}"
+                {% if currentFilter.parameter('name') %}
+                    name="{{ currentFilter.parameter('name') }}"
+                {% endif %}
                 class="form-control select2entity select2-hidden-accessible"
                 autocomplete="off"
-                {% if parameters.ajax_url is defined %}
-                    data-ajax--url="{{parameters.ajax_url}}?page_limit=10"
+                {% if currentFilter.parameter('ajax_url') %}
+                    data-ajax--url="{{ path(currentFilter.parameter('ajax_url')) }}?maxPerPage={{page_limit}}"
                 {% endif %}
                 data-ajax--cache-timeout="1"
                 data-ajax--delay="250"
                 data-ajax--data-type="json"
                 data-language="es"
                 data-minimum-input-length="0"
-                data-page-limit="10"
+                data-placeholder="{{"search_manager.filter.select.empty"|trans({},"ToolsBundle")}}"
+                data-page-limit="{{page_limit}}"
                 data-scroll="false"
                 data-autostart="true"
                 tabindex="-1"
-                {% if parameters.req_params is defined %}
-                    data-req_params="{{params.req_params}}"
+                {% if currentFilter.parameter('req_params') %}
+                    data-req_params="{{ currentFilter.parameter('req_params') }}"
                 {% endif %}
+                select2
                 ng-model="model.{{ modelName }}"
                 aria-hidden="true"></select>
         
         </div>
     </div>
-{% endmacro %}
+{% endblock %}
