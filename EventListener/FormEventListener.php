@@ -40,7 +40,8 @@ class FormEventListener extends AbstractTypeExtension
             $request = $this->container->get("request_stack")->getCurrentRequest();
             $route = $request->get("_route");
             if (in_array($route, [
-                        "easyadmin"
+                        "easyadmin",
+                        "admin"
                     ])) {
                 return;
             }
