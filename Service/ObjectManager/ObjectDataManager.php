@@ -3,6 +3,8 @@
 namespace Maxtoan\ToolsBundle\Service\ObjectManager;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 
 /**
  * Administrador de datos de un objeto (documentos,notas,historial)
@@ -12,41 +14,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterface
 {
+    use ContainerAwareTrait;
+
     /**
      * @var array
      */
     private $options;
 
-    /**
-     * Manejador de documentos
-     * @var DocumentManager\DocumentManager
-     */
-    private $documentManager;
+    private $objectId;
 
-    /**
-     * Generador de documentos
-     * @var ExporterManager\ExporterManager
-     */
-    private $exporterManager;
-
-    /**
-     * @var StatisticManager\StatisticsManager
-     */
-    private $statisticsManager;
-    
-    /**
-     * Manejador del historial
-     * @var HistoryManager\HistoryManager
-     */
-    private $historyManager;
-
-    public function __construct(DocumentManager\DocumentManager $documentManager, ExporterManager\ExporterManager $exporterManager, StatisticManager\StatisticsManager $statisticsManager, HistoryManager\HistoryManager $historyManager)
-    {
-        $this->documentManager = $documentManager;
-        $this->exporterManager = $exporterManager;
-        $this->statisticsManager = $statisticsManager;
-        $this->historyManager = $historyManager;
-    }
+    private $objectType;
     
     public function setOptions($options)
     {
@@ -73,22 +50,8 @@ class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterfac
      */
     public function configure($objectId, $objectType)
     {
-        if($this->documentManager){
-            $this->documentManager->configure($objectId, $objectType, $this->options["document_manager"]);
-        }
-
-        if($this->exporterManager){
-            $this->exporterManager->configure($objectId, $objectType, $this->options["exporter_manager"]);
-        }
-
-        if($this->statisticsManager){
-            $this->statisticsManager->configure($objectId, $objectType,$this->options["statistics_manager"]);
-        }
-
-        if($this->historyManager){
-            $this->historyManager->configure($objectId, $objectType,$this->options["history_manager"]);
-        }
-
+        $this->objectId = $objectId;
+        $this->objectType = $objectType;
         return $this;
     }
     
@@ -98,10 +61,9 @@ class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterfac
      */
     public function documents()
     {
-        if(!$this->documentManager){
-            throw new UnconfiguredException(sprintf("El '%s' no esta configurado para usar esta caracteristica.",DocumentManager\DocumentManager::class));
-        }
-        return $this->documentManager;
+        $documentManager = $this->container->get("maxtoan_tools.document_manager");
+        $documentManager->configure($this->objectId, $this->objectType);
+        return $documentManager;
     }
 
     /**
@@ -110,10 +72,9 @@ class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterfac
      */
     public function exporters()
     {
-        if(!$this->exporterManager){
-            throw new UnconfiguredException(sprintf("El '%s' no esta configurado para usar esta caracteristica.",ExporterManager\ExporterManager::class));
-        }
-        return $this->exporterManager;
+        $exporterManager = $this->container->get("maxtoan_tools.exporter_manager");
+        $exporterManager->configure($this->objectId, $this->objectType, $this->options["exporter_manager"]);
+        return $exporterManager;
     }
 
     /**
@@ -122,10 +83,9 @@ class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterfac
      */
     public function statistics()
     {
-        if(!$this->statisticsManager){
-            throw new UnconfiguredException(sprintf("El '%s' no esta configurado para usar esta caracteristica.", StatisticManager\StatisticsManager::class));
-        }
-        return $this->statisticsManager;
+        $statisticsManager = $this->container->get("maxtoan_tools.statistics_manager");
+        $statisticsManager->configure($this->objectId, $this->objectType, $this->options["statistics_manager"]);
+        return $statisticsManager;
     }
 
     /**
@@ -134,9 +94,8 @@ class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterfac
      */
     public function histories()
     {
-        if(!$this->historyManager){
-            throw new UnconfiguredException(sprintf("El '%s' no esta configurado para usar esta caracteristica.", HistoryManager\HistoryManager::class));
-        }
-        return $this->historyManager;
+        $historyManager = $this->container->get("maxtoan_tools.history_manager");
+        $historyManager->configure($this->objectId, $this->objectType, $this->options["history_manager"]);
+        return $historyManager;
     }
 }

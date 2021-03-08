@@ -22,7 +22,7 @@ class DocumentManagerController extends ManagerController
      */
     public function uploadAction(Request $request)
     {
-        $objectDataManager = $this->getObjectDataManager($request);
+        $documentManager = $this->getDocumentManager($request);
         
         $form = $this->createForm(DocumentsType::class);
         $form->handleRequest($request);
@@ -30,12 +30,13 @@ class DocumentManagerController extends ManagerController
             $documents = $form->get("documents")->getData();
             $comments = $form->get("comments")->getData();
             foreach ($documents as $document) {
-                $objectDataManager->documents()->upload($document,[
+                $documentManager->upload($document,[
                     "comments" => $comments,
                     "name" => $request->get("name")
                 ]);
             }
         }
+        
         return $this->toReturnUrl();
     }
     
@@ -47,8 +48,8 @@ class DocumentManagerController extends ManagerController
      */
     public function deleteAction(Request $request)
     {
-        $objectDataManager = $this->getObjectDataManager($request);
-        $objectDataManager->documents()->delete($request->get("filename"));
+        $documentManager = $this->getDocumentManager($request);
+        $documentManager->delete($request->get("filename"));
         $referer = $request->headers->get('referer');
         return new RedirectResponse($referer);
     }
@@ -61,8 +62,8 @@ class DocumentManagerController extends ManagerController
      */
     public function downloadAction(Request $request)
     {
-        $objectDataManager = $this->getObjectDataManager($request);
-        $file = $objectDataManager->documents()->get($request->get("filename"));
+        $documentManager = $this->getDocumentManager($request);
+        $file = $documentManager->get($request->get("filename"));
         $response = new \Symfony\Component\HttpFoundation\BinaryFileResponse($file);
         $response = new \Symfony\Component\HttpFoundation\BinaryFileResponse($file->getRealPath());
         $response->setContentDisposition(\Symfony\Component\HttpFoundation\ResponseHeaderBag::DISPOSITION_ATTACHMENT);
@@ -80,9 +81,9 @@ class DocumentManagerController extends ManagerController
         $fileName = $request->get("filename");
 
         // ObjectDataManager
-        $objectDataManager = $this->getObjectDataManager($request);
+        $documentManager = $this->getDocumentManager($request);
         $disposition = $request->get("disposition",ResponseHeaderBag::DISPOSITION_ATTACHMENT);
-        $file = $objectDataManager->documents()->get($fileName);
+        $file = $documentManager->get($fileName);
         
         // BinaryFileResponse
         $response = new \Symfony\Component\HttpFoundation\BinaryFileResponse($file);
@@ -93,11 +94,10 @@ class DocumentManagerController extends ManagerController
     public function allAction(Request $request)
     {
         $arrayFile = [];
-        $objectDataManager = $this->getObjectDataManager($request);
-        $documentsManager = $objectDataManager->documents();
-        $files = $documentsManager->getAll();
+        $documentManager = $this->getDocumentManager($request);
+        $files = $documentManager->getAll();
         foreach ($files as $file) {
-            $arrayFile[] = $documentsManager->toArray($file);
+            $arrayFile[] = $documentManager->toArray($file);
         }
 
         return new \Symfony\Component\HttpFoundation\JsonResponse(["files" => $arrayFile]);

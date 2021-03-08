@@ -27,17 +27,31 @@ abstract class ManagerController extends Controller
      */
     protected function getObjectDataManager(Request $request)
     {
-        $objectDataManager = $this->container->get(ObjectDataManager::class);
+        // Se resuelven las opciones
         $resolver = new OptionsResolver();
         $resolver->setDefaults([
             "folder" => null,
         ]);
         $resolver->setRequired(["returnUrl","objectId","objectType"]);
         $config = $resolver->resolve($request->get("_conf"));
-        $objectDataManager->configure($config["objectId"],$config["objectType"]);
-        $objectDataManager->documents()->folder($config["folder"]);
         $this->config = $config;
+
+        $objectDataManager = $this->container->get("maxtoan_tools.object_manager");
+        $objectDataManager->configure($this->config["objectId"],$this->config["objectType"]);        
         return $objectDataManager;
+    }
+
+    /**
+     * Obtiene el Document Manager y configura desde el request el ObjectDataManager
+     * @param Request $request
+     * @return DocumentManager
+     */
+    protected function getDocumentManager(Request $request)
+    {
+        $objectDataManager = $this->getObjectDataManager($request);
+        $documentManager = $objectDataManager->documents();
+        $documentManager->folder($this->config["folder"]);
+        return $documentManager;
     }
     
     /**

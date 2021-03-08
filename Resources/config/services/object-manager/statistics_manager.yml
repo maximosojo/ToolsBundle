@@ -1,0 +1,5 @@
+services:
+    maxtoan_tools.statistics_manager:
+        class: Maxtoan\ToolsBundle\Service\ObjectManager\StatisticManager\StatisticsManager
+        calls:
+            - [ setContainer, ['@service_container']  ]

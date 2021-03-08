@@ -1,0 +1,5 @@
+services:
+    maxtoan_tools.history_manager:
+        class: Maxtoan\ToolsBundle\Service\ObjectManager\HistoryManager\HistoryManager
+        calls:
+            - [ setContainer, ['@service_container']  ]

@@ -51,7 +51,7 @@ class ConfigurationPass implements CompilerPassInterface
         $config = $container->getParameter("maxtoan_tools.object_manager.options");
 
         // Manejador de estadísticas
-        // if ($container->getParameter('maxtoan_tools.object_manager.statistic.enable') === true) {
+        if ($container->getParameter('maxtoan_tools.object_manager.statistic.enable') === true) {
             $statistic = $container->getParameter("maxtoan_tools.object_manager.statistic");
             $idStatisticManagerAdapter = $statistic["adapter"];
             if ($idStatisticManagerAdapter && $container->hasDefinition($idStatisticManagerAdapter)) {
@@ -69,19 +69,21 @@ class ConfigurationPass implements CompilerPassInterface
                     $statisticManager->addMethodCall("addObjectValids", [$param["objectType"],$param["objectValids"]]);
                 }
             }
-        // }
+        }
 
         // Manejador de Historial
-        $history = $container->getParameter("maxtoan_tools.object_manager.history");
-        $idHistoryManagerAdapter = $history["adapter"];
-        if ($idHistoryManagerAdapter && $container->hasDefinition($idHistoryManagerAdapter)) {
-            $adapterDefinition = $container->findDefinition($idHistoryManagerAdapter);
-            $historyManagerDefinition = $container->findDefinition("maxtoan_tools.history_manager");
-            $historyManagerDefinition->addArgument($adapterDefinition);                
+        if ($container->getParameter('maxtoan_tools.object_manager.history.enable') === true) {
+            $history = $container->getParameter("maxtoan_tools.object_manager.history");
+            $idHistoryManagerAdapter = $history["adapter"];
+            if ($idHistoryManagerAdapter && $container->hasDefinition($idHistoryManagerAdapter)) {
+                $adapterDefinition = $container->findDefinition($idHistoryManagerAdapter);
+                $historyManagerDefinition = $container->findDefinition("maxtoan_tools.history_manager");
+                $historyManagerDefinition->addArgument($adapterDefinition);                
+            }
         }
 
         // Manejador de documentos
-        // if ($container->getParameter('maxtoan_tools.object_manager.document.enable') === true) {
+        if ($container->getParameter('maxtoan_tools.object_manager.document.enable') === true) {
             $adapterDefinition = $container->findDefinition($config["document_manager"]["adapter"]);
             $documentManager = $container->findDefinition("maxtoan_tools.document_manager");
             $documentManager->addArgument($adapterDefinition);
@@ -104,6 +106,6 @@ class ConfigurationPass implements CompilerPassInterface
             foreach ($chaines as $id => $chain) {
                 $exporterManager->addMethodCall("addChainModel", [$container->getDefinition($id)]);
             }
-        // }
+        }
     }
 }
