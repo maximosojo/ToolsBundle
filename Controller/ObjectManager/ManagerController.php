@@ -36,9 +36,7 @@ abstract class ManagerController extends Controller
         $config = $resolver->resolve($request->get("_conf"));
         $this->config = $config;
 
-        $objectDataManager = $this->container->get("maxtoan_tools.object_manager");
-        $objectDataManager->configure($this->config["objectId"],$this->config["objectType"]);        
-        return $objectDataManager;
+        return $this->container->get("maxtoan_tools.object_manager");
     }
 
     /**
@@ -50,6 +48,7 @@ abstract class ManagerController extends Controller
     {
         $objectDataManager = $this->getObjectDataManager($request);
         $documentManager = $objectDataManager->documents();
+        $documentManager->configure($this->config["objectId"],$this->config["objectType"]);        
         $documentManager->folder($this->config["folder"]);
         return $documentManager;
     }
