@@ -12,7 +12,7 @@ use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
  * @author Carlos Mendoza <inhack20@gmail.com>
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterface
+class ObjectDataManager implements ObjectDataManagerInterface
 {
     use ContainerAwareTrait;
 
@@ -20,10 +20,6 @@ class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterfac
      * @var array
      */
     private $options;
-
-    private $objectId;
-
-    private $objectType;
     
     public function setOptions($options)
     {
@@ -43,27 +39,12 @@ class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterfac
     }
     
     /**
-     * Configura el servicio para manejar un objeto y tipo en especifico
-     * @param type $objectId
-     * @param type $objectType
-     * @return \Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\DocumentManager
-     */
-    public function configure($objectId, $objectType)
-    {
-        $this->objectId = $objectId;
-        $this->objectType = $objectType;
-        return $this;
-    }
-    
-    /**
      * Retorna el manejador de documentos
      * @return DocumentManager\DocumentManager
      */
     public function documents()
     {
-        $documentManager = $this->container->get("maxtoan_tools.document_manager");
-        $documentManager->configure($this->objectId, $this->objectType);
-        return $documentManager;
+        return $this->container->get("maxtoan_tools.document_manager");
     }
 
     /**
@@ -72,9 +53,7 @@ class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterfac
      */
     public function exporters()
     {
-        $exporterManager = $this->container->get("maxtoan_tools.exporter_manager");
-        $exporterManager->configure($this->objectId, $this->objectType, $this->options["exporter_manager"]);
-        return $exporterManager;
+        return $this->container->get("maxtoan_tools.exporter_manager");
     }
 
     /**
@@ -83,9 +62,7 @@ class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterfac
      */
     public function statistics()
     {
-        $statisticsManager = $this->container->get("maxtoan_tools.statistics_manager");
-        $statisticsManager->configure($this->objectId, $this->objectType, $this->options["statistics_manager"]);
-        return $statisticsManager;
+        return $this->container->get("maxtoan_tools.statistics_manager");
     }
 
     /**
@@ -94,8 +71,6 @@ class ObjectDataManager implements ConfigureInterface, ObjectDataManagerInterfac
      */
     public function histories()
     {
-        $historyManager = $this->container->get("maxtoan_tools.history_manager");
-        $historyManager->configure($this->objectId, $this->objectType, $this->options["history_manager"]);
-        return $historyManager;
+        return $this->container->get("maxtoan_tools.history_manager");
     }
 }

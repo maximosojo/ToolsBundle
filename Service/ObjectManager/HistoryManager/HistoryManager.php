@@ -46,11 +46,11 @@ class HistoryManager implements HistoryAdapterInterface
      * @param  $objectId
      * @param  $objectType
      */
-    public function configure($objectId, $objectType, array $options = [])
+    public function configure($objectId, $objectType)
     {
         $this->objectId = $objectId;
         $this->objectType = $objectType;
-        $this->adapter->configure($objectId, $objectType, $options);
+        $this->adapter->configure($objectId, $objectType);
     }
     
     public function create(array $options = [])
