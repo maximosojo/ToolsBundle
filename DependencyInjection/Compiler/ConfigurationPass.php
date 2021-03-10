@@ -78,33 +78,25 @@ class ConfigurationPass implements CompilerPassInterface
             if ($idHistoryManagerAdapter && $container->hasDefinition($idHistoryManagerAdapter)) {
                 $adapterDefinition = $container->findDefinition($idHistoryManagerAdapter);
                 $historyManagerDefinition = $container->findDefinition("maxtoan_tools.history_manager");
-                $historyManagerDefinition->addArgument($adapterDefinition);                
+                $historyManagerDefinition->addArgument($adapterDefinition);
             }
         }
 
         // Manejador de documentos
         if ($container->getParameter('maxtoan_tools.object_manager.document.enable') === true) {
+            // Manejador de documentos
             $adapterDefinition = $container->findDefinition($config["document_manager"]["adapter"]);
             $documentManager = $container->findDefinition("maxtoan_tools.document_manager");
             $documentManager->addArgument($adapterDefinition);
-
             // Manejador de exportaciones
             $adapterDefinition = $container->findDefinition($config["exporter_manager"]["adapter"]);
             $exporterManager = $container->getDefinition("maxtoan_tools.exporter_manager");
             $exporterManager->addArgument($documentManager);
             $exporterManager->addMethodCall("setAdapter", array($adapterDefinition));
-            $chaines = $container->findTaggedServiceIds("exporter.chain");
-            $models = $container->findTaggedServiceIds("exporter.chain.model");
-            foreach ($models as $id => $model) {
-                $idChain = $model[0]["chain"];
-                if (!isset($chaines[$idChain])) {
-                    throw new \InvalidArgumentException(sprintf("The exporter chain '%s' is not exists.", $idChain));
-                }
-                $chain = $container->getDefinition($idChain);
-                $chain->addMethodCall("add", [$container->getDefinition($id)]);
-            }
-            foreach ($chaines as $id => $chain) {
-                $exporterManager->addMethodCall("addChainModel", [$container->getDefinition($id)]);
+            // Registro de chaines soportados
+            $chaines = $config["exporter_manager"]["chaines"];
+            foreach ($chaines as $key => $chain) {
+                $exporterManager->addMethodCall("addChainModel", [$chain]);
             }
         }
     }

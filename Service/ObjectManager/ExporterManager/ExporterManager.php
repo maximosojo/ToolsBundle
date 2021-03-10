@@ -71,7 +71,6 @@ class ExporterManager implements ConfigureInterface
         $this->objectId = $objectId;
         $this->objectType = $objectType;
         $this->documentManager->configure($objectId, $objectType, $options);
-        // $this->options = $options;
         return $this;
     }
     
@@ -86,28 +85,34 @@ class ExporterManager implements ConfigureInterface
         $this->adapter = $adapter;
         return $this;
     }
+
+    /**
+     * Retorna una opcion
+     * @param type $name
+     * @return type
+     * @throws InvalidArgumentException
+     */
+    public function getOption($name)
+    {
+        if(!isset($this->options[$name])){
+            throw new InvalidArgumentException(sprintf("The option name '%s' is invalid, available are %s.",$name, implode(",",array_keys($this->options))));
+        }
+        return $this->options[$name];
+    }
     
     /**
      * Agrega un modelo de exportacion
      * @param ChainModel $chainModel
      * @throws InvalidArgumentException
      */
-    public function addChainModel(ChainModel $chainModel)
+    public function addChainModel(array $chain = array())
     {
-        if(isset($this->chainModels[$chainModel->getObjectType()])){
-           throw new InvalidArgumentException(sprintf("The chain model to '%s' is already added, please add you model to tag '%s'",$chainModel->getClassName(),$chainModel->getClassName())); 
-        }
-        $this->chainModels[$chainModel->getObjectType()] = $chainModel;
-    }
-    
-    /**
-     * Verifica si existe un modelo de exportacion
-     * @param type $className
-     * @return type
-     */
-    public function hasChainModel($className)
-    {
-        return isset($this->chainModels[$className]);
+        var_dump($chain);
+        die;
+        //if(isset($this->chainModels[$chainModel->getObjectType()])){
+          throw new InvalidArgumentException(sprintf("The chain model to '%s' is already added, please add you model to tag '%s'",$chainModel->getClassName(),$chainModel->getClassName())); 
+        //}
+        //$this->chainModels[$chainModel->getObjectType()] = $chainModel;
     }
     
     /**
@@ -123,20 +128,6 @@ class ExporterManager implements ConfigureInterface
         }
         $this->chainModels[$id]->setObjectId($this->objectId);
         return $this->chainModels[$id];
-    }
-    
-    /**
-     * Retorna una opcion
-     * @param type $name
-     * @return type
-     * @throws InvalidArgumentException
-     */
-    public function getOption($name)
-    {
-        if(!isset($this->options[$name])){
-            throw new InvalidArgumentException(sprintf("The option name '%s' is invalid, available are %s.",$name, implode(",",array_keys($this->options))));
-        }
-        return $this->options[$name];
     }
     
     /**
