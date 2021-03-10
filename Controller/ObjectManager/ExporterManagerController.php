@@ -22,13 +22,15 @@ class ExporterManagerController extends ManagerController
      */ 
     public function generateAction(Request $request) 
     {
-        $objectDataManager = $this->getObjectDataManager($request);
-        $chain = $objectDataManager->exporters()->resolveChainModel();
+        $exporterManager = $this->getExporterManager($request);
+
+        $chain = $exporterManager->resolveChainModel();
         $choices = [];
         $models = $chain->getModels();
         foreach ($models as $model) {
             $choices[$model->getName()] = $model->getName();
         }
+
         $form = $this->createForm(DocumentsType::class,$choices);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
@@ -36,10 +38,9 @@ class ExporterManagerController extends ManagerController
                 "fileName" => $request->get("fileName")
             ];
             $name = $form->get("name")->getData();
-            $objectDataManager->exporters()->generateWithSource($name,$options);
+            $exporterManager->generateWithSource($name,$options);
         }
         
         return new JsonResponse([]);
-        // return $this->toReturnUrl();
     }
 }

@@ -48,9 +48,22 @@ abstract class ManagerController extends Controller
     {
         $objectDataManager = $this->getObjectDataManager($request);
         $documentManager = $objectDataManager->documents();
-        $documentManager->configure($this->config["objectId"],$this->config["objectType"]);        
+        $documentManager->configure($this->config["objectId"],$this->config["objectType"]);
         $documentManager->folder($this->config["folder"]);
         return $documentManager;
+    }
+
+    /**
+     * Obtiene el Document Manager y configura desde el request el ObjectDataManager
+     * @param Request $request
+     * @return DocumentManager
+     */
+    protected function getExporterManager(Request $request)
+    {
+        $objectDataManager = $this->getObjectDataManager($request);
+        $exporterManager = $objectDataManager->exporters();
+        $exporterManager->configure($this->config["objectId"],$this->config["objectType"]);
+        return $exporterManager;
     }
     
     /**
