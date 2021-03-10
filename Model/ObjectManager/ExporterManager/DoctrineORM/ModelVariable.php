@@ -1,11 +1,14 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\Template;
+namespace Maxtoan\ToolsBundle\Model\ObjectManager\ExporterManager\DoctrineORM;
 
 use Doctrine\ORM\Mapping as ORM;
+use Maxtoan\ToolsBundle\Traits\Basic\NameTrait;
+use Maxtoan\ToolsBundle\Traits\Basic\DescriptionTrait;
+use Maxtoan\ToolsBundle\Traits\IdentifiableTrait;
 
 /**
- * Modelo de parametros
+ * Modelo de variables
  *
  * @author Máximo Sojo <maxsojo13@gmail.com>
  * @ORM\MappedSuperclass()
@@ -16,20 +19,6 @@ class ModelVariable
     const TYPE_FLOAT = "FLOAT";
     const TYPE_OBJECT = "OBJECT";
     const TYPE_STRING = "STRING";
-    
-    /**
-     * Nombre
-     * @var string
-     * @ORM\Column(name="name",type="string")
-     */
-    protected $name;
-    
-    /**
-     * Descripcion del contenido de la variable
-     * @var string
-     * @ORM\Column(name="description",type="text")
-     */
-    protected $description;
     
     /**
      * Tipo de contenido de la variable (self::TYPE_*)
@@ -44,42 +33,13 @@ class ModelVariable
      */
     protected $template;
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set name
-     * @param string $name
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        
-        return $this;
-    }
-    
-    public function getDescription()
-    {
-        return $this->description;
-    }
+    use IdentifiableTrait;
+    use NameTrait;
+    use DescriptionTrait;
 
     public function getTypeVariable()
     {
         return $this->typeVariable;
-    }
-
-    public function setDescription($description)
-    {
-        $this->description = $description;
-        return $this;
     }
 
     public function setTypeVariable($typeVariable)
@@ -87,13 +47,12 @@ class ModelVariable
         $this->typeVariable = $typeVariable;
         return $this;
     }
-    
+
     public function getTypeVariableLabel()
     {
         $type = $this->getTypeVariable();
         return $type === null ? : array_search($type,self::getLabelsTypeVariable());
     }
-        
     
     public static function getLabelsTypeVariable() 
     {

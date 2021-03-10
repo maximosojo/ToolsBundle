@@ -1,28 +1,13 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\Template;
+namespace Maxtoan\ToolsBundle\Model\ObjectManager\ExporterManager;
 
 /**
  * Interfaz para plantillas
- * @author Carlos Mendoza <inhack20@gmail.com>
+ * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 interface TemplateInterface
-{
-    /**
-     * Se usa wkhtmltopdf para generar el PDF a partir de HTML
-     */
-    const TYPE_PDF = "PDF";
-    
-    /**
-     * Tipo: Texto
-     */
-    const TYPE_TXT = "TXT";
-    
-    /**
-     * Tipo: Excel
-     */
-    const TYPE_XLSX = "XLSX";
-    
+{    
     public function getTypeTemplate();
     
     public function getContent();

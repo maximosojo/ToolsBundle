@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormInterface;
 use Maxtoan\ToolsBundle\Service\ObjectManager\ConfigureInterface;
 
 /**
- * Servicio para generar y exportar documentos PDF, XLS, DOC, TXT de los modulos (app.service.exporter)
+ * Servicio para generar y exportar documentos PDF, XLS, DOC, TXT de los modulos
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
@@ -56,12 +56,12 @@ class ExporterManager implements ConfigureInterface
     
     public function __construct(DocumentManager $documentManager,array $options = [])
     {
-        // $resolver = new OptionsResolver();
-        // $resolver->setDefaults([
-        //     "debug" => false,
-        // ]);
-        // $resolver->setRequired(["debug"]);
-        // $this->options = $resolver->resolve($options);
+        $resolver = new OptionsResolver();
+        $resolver->setDefaults([
+            "debug" => false,
+        ]);
+        $resolver->setRequired(["debug"]);
+        $this->options = $resolver->resolve($options);
         $this->chainModels = [];
         $this->documentManager = $documentManager;
     }
@@ -70,8 +70,8 @@ class ExporterManager implements ConfigureInterface
     {
         $this->objectId = $objectId;
         $this->objectType = $objectType;
-        // $this->documentManager->configure($objectId, $objectType, $options);
-        $this->options = $options;
+        $this->documentManager->configure($objectId, $objectType, $options);
+        // $this->options = $options;
         return $this;
     }
     
@@ -194,6 +194,14 @@ class ExporterManager implements ConfigureInterface
         if(!$this->adapter){
             throw new RuntimeException(sprintf("The adapter must be set for enable this feature."));
         }
+
+        $resolver = new OptionsResolver();
+        $resolver->setDefaults([
+            "fileName" => null,
+            "request" => null
+        ]);
+        $options = $resolver->resolve($options);
+
         $chainModel = $this->getChainModel($this->objectType);
         $className = $chainModel->getClassName();
         $entity = $this->adapter->find($chainModel->getClassName(),$this->objectId);
@@ -201,6 +209,8 @@ class ExporterManager implements ConfigureInterface
             throw new RuntimeException(sprintf("The source '%s' with '%s' not found.",$className,$this->objectId));
         }
         $options["data"]["entity"] = $entity;
+        $options["data"]["request"] = $options["request"];
+        
         return $this->generate($name,$options,$overwrite);
     }
 

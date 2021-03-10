@@ -1,11 +1,11 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\Template;
+namespace Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager;
 
-use Maxtoan\ToolsBundle\Model\Template\TemplateInterface;
+use Maxtoan\ToolsBundle\Model\ObjectManager\ExporterManager\TemplateInterface;
 
 /**
- *
+ * Interfas de adaptador de motor
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
 interface AdapterInterface

@@ -3,11 +3,11 @@ services:
     maxtoan_tools.document_manager_disk_adapter:
         class: Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\Adapter\DiskAdapter
         arguments:
-            # - { "debug": "%kernel.debug%", "documents_path": "%kernel.root_dir%/../var/documents","env": "%kernel.environment%" }
             - { "debug": "%kernel.debug%", "base_path": "%kernel.root_dir%/../var", "documents_path": "documents","env": "%kernel.environment%" }
     maxtoan_tools.document_manager:
         class: Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\DocumentManager
         public: true
+
     # Manejador de exportables
     maxtoan_tools.exporter_manager_doctrine_orm_adapter:
         class: Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Adapter\DoctrineORMAdapter
@@ -18,19 +18,15 @@ services:
         calls:
             - [ setContainer, ['@service_container']  ]
     
-    # Templates service
-    # Maxtoan\ToolsBundle\Service\Template\Adapter\TXTAdapter:
-    #     public: false
-    Maxtoan\ToolsBundle\Service\Template\Adapter\XLSXAdapter:
+    # Manejador de plantillas     
+    Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\PhpSpreadsheetXLSXEngine:
+        arguments: []
         public: false
-    # maxtoan_tools.template.txtadapter:
-    #     alias: Maxtoan\ToolsBundle\Service\Template\Adapter\TXTAdapter
-    #     public: false
-    maxtoan_tools.template.xlsxadapter:
-        alias: Maxtoan\ToolsBundle\Service\Template\Adapter\XLSXAdapter
+    Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\TCPDFEngine:
+        arguments: ["@twig"]
         public: false
-    Maxtoan\ToolsBundle\Service\Template\TemplateService:
-        public: true
+    Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService:
+        arguments: [ {"debug":"%kernel.debug%", "env": "%kernel.environment%"} ]
         calls:
-            # - [ addAdapter, ["@maxtoan_tools.template.txtadapter"]  ]
-            - [ addAdapter, ["@maxtoan_tools.template.xlsxadapter"]  ]
+            - [ addEngine, ["@Maxtoan\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\TCPDFEngine"]  ]
+            - [ addEngine, ["@Maxtoan\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\PhpSpreadsheetXLSXEngine"]  ]
