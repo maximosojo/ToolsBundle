@@ -24,8 +24,6 @@ class CoreExtension extends \Twig_Extension
 {    
     use ContainerAwareTrait;
     
-    private $exporterManager;
-
     /**
      * {@inheritdoc}
      */
@@ -163,9 +161,8 @@ class CoreExtension extends \Twig_Extension
      */
     public function renderFilesGenerated($entity) 
     {
-        $objectDataManager = $this->container->get(ObjectDataManager::class);
-        $exporterManager = $objectDataManager->exporters();
-        return $exporterManager->renderFiles($entity);
+        $objectDataManager = $this->container->get("maxtoan_tools.object_manager");
+        return $objectDataManager->exporters()->renderFiles($entity);
     }
 
     /**
@@ -180,17 +177,6 @@ class CoreExtension extends \Twig_Extension
         if (class_exists($class) && method_exists($class, $function))
             return call_user_func_array(array($class, $function), $args);
         return null;
-    }
-
-    /**
-     * ExporterManager
-     *
-     * @param   ExporterManager  $exporterManager
-     * @required
-     */
-    public function setExporterManager(ExporterManager $exporterManager)
-    {
-        $this->exporterManager = $exporterManager;
     }
 
     /**

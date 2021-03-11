@@ -220,6 +220,119 @@ var app = angular.module('maxtoan_tools', ['ngTable'])
     }, true);
 })
 
+.controller('ExporterController', function($scope, $rootScope, $http, $q){
+    var self = this;
+    this.files = [];
+    this.name = null;
+    $scope.loading = false;
+    this.data = {};
+    this.params = {};
+
+    /**
+     * Registro de parametros
+     * @author  Máximo Sojo <maxsojo13@gmail.com>
+     * @param   {Array}  $params
+     */
+    this.setParams = function(params) {
+        this.params = params;
+        self.getFiles();
+    }
+
+    /**
+     * Llamado a generar el documento
+     * @author  Máximo Sojo <maxsojo13@gmail.com>
+     * @param   {Event}  $event
+     * @return  {Boolean}
+     */
+    this.submit = function ($event) {
+        $event.preventDefault();
+        var form = angular.element('#form');
+        var formData = form.serialize();
+        var action = form.attr("action");
+        var currentParams = "";
+        
+        if (typeof $scope.$parent != undefined && $scope.$parent.paginatorCtrl) {
+            currentParams = "&" + $scope.$parent.paginatorCtrl.getCurrentParams();
+        }
+
+        var defered = $q.defer();
+        var promise = defered.promise;
+        $http({
+            method: 'POST',
+            url: action + currentParams,
+            data: formData,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' }  // set the headers so angular passing info as form data (not request payload)
+        })
+        .then(function (response) {
+            var status = response.status;
+            if (status == 400 || status == 500) {
+                defered.reject(response);
+            } else {
+                self.getFiles();
+                defered.resolve(response, status);
+            }
+        }, function (err, status, headers, config) {
+            $rootScope.setErrors(err);
+            defered.reject(err);
+            progessService.stop();
+        });
+        return promise;
+    };
+
+    /**
+     * Consulta los documentos
+     * @author  Máximo Sojo <maxsojo13@gmail.com>
+     * @return  {Json}
+     */
+    this.getFiles = function() {
+        if (!this.params) {
+            return;
+        }
+
+        var defered = $q.defer();
+        var url = generateUrl("object_manager_documents_all",this.params)
+        $http
+        .get(url, {})
+        .then(function (response) {
+            if(!response){
+                defered.reject(null);
+                return;
+            }
+            var status = response.status;
+            var data = response.data;
+            if (status == 400 || status == 500) {
+                defered.reject(response);
+            } else {
+                self.files = response.files;
+                defered.resolve(data, status);
+            }
+        }, function (err) {
+            defered.reject(err);
+        })
+        ;
+    }
+
+    /**
+     * Descarga un documento
+     * @author  Máximo Sojo <maxsojo13@gmail.com>
+     */
+    this.downloadFile = function (file) {
+        this.params.filename = file.fileName;
+        var url = generateUrl("object_manager_documents_download",this.params,true)
+        window.location = url;
+    };
+
+    /**
+     * Remueve un documento
+     * @author  Máximo Sojo <maxsojo13@gmail.com>
+     */
+    this.deleteFile = function (file) {
+        this.params.filename = file.fileName;
+        var url = generateUrl("object_manager_documents_delete",this.params,true)
+        window.location = url;
+    };
+})
+
 .controller('TabsController', function(){
     var self = this;
     this.tab = null;

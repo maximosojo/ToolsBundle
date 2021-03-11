@@ -2,9 +2,12 @@
 
 namespace Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager;
 
+use RuntimeException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Maxtoan\ToolsBundle\Model\ObjectManager\ExporterManager\TemplateInterface;
-use RuntimeException;
+use Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService\Adapter\TemplateAdapterInterface;
+use Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\EngineInterface;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Servicio que renderiza y compila plantillas para generar documentos
@@ -54,15 +57,12 @@ class TemplateService
     
     /**
      * Añade un adaptador
-     * @param \Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\AdapterInterface $adapter
+     * @param \Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService\Adapter\TemplateAdapterInterface $adapter
      * @throws RuntimeException
      */
-    public function addAdapter(AdapterInterface $adapter)
+    public function addAdapter(TemplateAdapterInterface $adapter)
     {
-        if(isset($this->adapters[$adapter->getExtension()])){
-            throw new RuntimeException(sprintf("The adapter with extension '%s' is already added.",$adapter->getExtension()));
-        }
-        $this->adapters[$adapter->getExtension()] = $adapter;
+        $this->adapter = $adapter;
     }
 
     /**
@@ -114,10 +114,10 @@ class TemplateService
      * @param array $parameters
      * @return File
      */
-    public function compile($id,string $filename = null, array $variables = [], array $parameters = [])
+    public function compile($id, array $options = [])
     {
         $template = $this->adapter->find($id);
-        return $this->compileTemplate($template, $filename, $variables, $parameters);
+        return $this->compileTemplate($template, $options);
     }
 
     /**
@@ -126,13 +126,23 @@ class TemplateService
      * @param array $parameters
      * @return File
      */
-    public function compileTemplate(TemplateInterface $template, string $path = null, array $variables = [], array $parameters = []) :?File
+    public function compileTemplate(TemplateInterface $template, array $options = []) :?File
     {
+        $resolver = new OptionsResolver();
+        $resolver->setDefaults([
+            "path" => null,
+            "parameters" => []
+        ]);
+        $resolver->setRequired(["variables","parameters"]);
+        $options = $resolver->resolve($options);
+        $variables = $options["variables"];
+        $parameters = $options["parameters"];
+        $path = $options["path"];
+
         $adapter = $this->getEngine($template->getTypeTemplate());
 
         //Todas las variables son requeridas
         $variablesToCheck = $template->getVariables();
-       
         if (count($variablesToCheck) > 0) {
             $diff = [];
             foreach ($variablesToCheck as $variable) {
@@ -142,7 +152,6 @@ class TemplateService
                 }
             }
             if (count($diff) > 0) {
-                die;
                 throw new RuntimeException(sprintf("Las variables '%s' son requeridos.", implode(", ", $diff)));
             }
         }
@@ -169,11 +178,18 @@ class TemplateService
         if($path === null){
             $path = tempnam(null,"tpl");
         }
-        $fileNameCalculated = $adapter->getFileName();
+        
+        $fileName = $adapter->getFileName();
+        if (empty($fileName)) {
+            $fileName = $template->getName();
+        }
+
+        $fileNameCalculated = sprintf("%s.%s",$fileName,strtolower($adapter->getExtension()));
         //Si durante la renderizacion se calculo el nombre entonces se toma ese como final
         if(!empty($fileNameCalculated)){
             $path = dirname($path).DIRECTORY_SEPARATOR.$fileNameCalculated;
         }
+
         $adapter->compile($path, $string, $parameters);
         $file = null;
         if(is_file($path)){

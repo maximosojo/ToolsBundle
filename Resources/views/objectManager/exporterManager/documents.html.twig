@@ -1,0 +1,63 @@
+{% set params = parametersToView["parameters_to_route"]|merge({}) %}
+<div class="row" ng-controller="ExporterController as exportCtrl" ng-init="exportCtrl.setParams({{params|serialize}})">
+    <div class="col-12">
+        <div class="header-title">
+            <div class="header-icon">
+                <i class="mp mp-document iconos2"></i>
+            </div>
+            <h5 class="header-divisor">
+                {{"documents.generated.title"|trans}}
+                <a data-toggle="collapse" class="collapsed" data-target="#collapse_documents">
+                    <i data-toggle="tooltip" data-placement="top" class="row-circulo float-right mp mp-arrow-filter m-2"></i>
+                </a>
+            </h5>
+        </div>
+    </div>
+    <div class="col-1 p-0"></div>
+    <div class="col-11  pt-3">
+        <div class="my-0 table-responsive">
+            <form action="{{ path("object_manager_exporters_generate",params) }}" method="POST" id="form" ng-submit="exportCtrl.submit($event)">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center">
+                                {{ "documents.generated.title.model"|trans }}
+                                {{ form_widget(form.name) }}
+                            </th>
+                            <th class="text-right">
+                                <button type="submit" class="btn btn-sm btn-primary">{{ "documents.generated.button.generate"|trans }}</button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" style="padding: 0px;">
+                                <table class="table table-striped" style="width: 100%">
+                                    <tbody>
+                                        <tr ng-repeat="file in exportCtrl.files">
+                                            <td class="bold" style="width: 5%">{$ $index + 1 $}</td>
+                                            <td style="width: 55%" class="text-left">
+                                                <a href="javascript:;" ng-click="exportCtrl.downloadFile(file)">
+                                                    {$ file.fileName $}
+                                                </a>
+                                            </td>
+                                            <td style="width: 35%">
+                                                {$ file.date  $}
+                                            </td>
+                                            <td style="width: 5%">
+                                                <a class="color-black" href="javascript:;" ng-click="exportCtrl.deleteFile(file)">
+                                                    <i class="mp mp-paper-bin" data-toggle="tooltip" data-original-title="{{ "documents.generated.button.delete"|trans }}"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                {{ form_rest(form) }}
+            </form>
+        </div>
+    </div>
+</div>

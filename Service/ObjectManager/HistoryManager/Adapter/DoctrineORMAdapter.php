@@ -22,6 +22,7 @@ class DoctrineORMAdapter implements HistoryAdapterInterface
      * @var string
      */
     private $className;
+    
     /**
      * @var EntityManager
      */

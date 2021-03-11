@@ -58,6 +58,16 @@ class ChainModel
         return $this;
     }
 
+    public function addTemplates(array $templates = array())
+    {
+        foreach ($templates as $key => $value) {
+            $modelDocument = new ModelDocumentExporter($value["label"]);
+            $modelDocument->setId($value["id"]);
+            $modelDocument->setChainModel($this);
+            $this->add($modelDocument);
+        }
+    }
+
     /**
      * Retorna el modelo de un documento por su nombre
      * @param type $name

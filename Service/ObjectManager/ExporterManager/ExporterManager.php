@@ -59,6 +59,9 @@ class ExporterManager implements ConfigureInterface
         $resolver = new OptionsResolver();
         $resolver->setDefaults([
             "debug" => false,
+            "template" => "",
+            "adapter" => "",
+            "chaines" => []
         ]);
         $resolver->setRequired(["debug"]);
         $this->options = $resolver->resolve($options);
@@ -107,12 +110,17 @@ class ExporterManager implements ConfigureInterface
      */
     public function addChainModel(array $chain = array())
     {
-        var_dump($chain);
-        die;
-        //if(isset($this->chainModels[$chainModel->getObjectType()])){
+        $resolver = new OptionsResolver();
+        $resolver->setRequired(["chain","class","templates"]);
+        $chain = $resolver->resolve($chain);
+        
+        $chainModel = new ChainModel($chain["chain"],$chain["class"]);
+        $chainModel->setObjectId($this->objectId);
+        $chainModel->addTemplates($chain["templates"]);
+        if(isset($this->chainModels[$chainModel->getObjectType()])){
           throw new InvalidArgumentException(sprintf("The chain model to '%s' is already added, please add you model to tag '%s'",$chainModel->getClassName(),$chainModel->getClassName())); 
-        //}
-        //$this->chainModels[$chainModel->getObjectType()] = $chainModel;
+        }
+        $this->chainModels[$chainModel->getObjectType()] = $chainModel;
     }
     
     /**
@@ -144,30 +152,39 @@ class ExporterManager implements ConfigureInterface
         
         $modelDocument = $chainModel->getModel($name);
         
-        $pathFileOut = $modelDocument
-                ->setChainModel($chainModel)
-                ->write($options["data"]);
-        if($pathFileOut === null){
-            throw new RuntimeException(sprintf("Failed to generate document '%s' with name '%s'",$this->objectType,$name));
-        }
         $fileName = $modelDocument->getFileName();
         if(isset($options["fileName"]) && !empty($options["fileName"])){
             $fileName = $options["fileName"];
             $fileName .= ".".$modelDocument->getFormat();
             unset($options["fileName"]);
         }
+
+        $templateService = $this->container->get('maxtoan_tools.template_service');
+        $pathFileOut = $templateService->compile($modelDocument->getId(),$options["data"]);
+        
+        if(empty($fileName)){
+            $fileName = $pathFileOut->getFileName();
+        }
+
         if(empty($fileName)){
             throw new RuntimeException(sprintf("The fileName can not be empty."));
         }
+
+        if($pathFileOut === null){
+            throw new RuntimeException(sprintf("Failed to generate document '%s' with name '%s'",$this->objectType,$name));
+        }
+
         if(!is_readable($pathFileOut)){
             throw new RuntimeException(sprintf("Failed to generate document '%s' with name '%s'. File '%s' is not readable.",$this->objectType,$name,$pathFileOut));
         }
+
         $this->documentManager->folder("generated");
         $file = new File($pathFileOut);
         $file = $this->documentManager->upload($file,[
             "overwrite" => $overwrite,
             "name" => $fileName,
         ]);
+
         return $file;
     }
     
@@ -199,8 +216,8 @@ class ExporterManager implements ConfigureInterface
         if(!$entity){
             throw new RuntimeException(sprintf("The source '%s' with '%s' not found.",$className,$this->objectId));
         }
-        $options["data"]["entity"] = $entity;
-        $options["data"]["request"] = $options["request"];
+        $options["data"]["variables"]["entity"] = $entity;
+        $options["data"]["variables"]["request"] = $options["request"];
         
         return $this->generate($name,$options,$overwrite);
     }
@@ -240,6 +257,7 @@ class ExporterManager implements ConfigureInterface
         $resolver->setDefaults([
             "data" => [],
             "fileName" => null,
+            "request" => null
         ]);
         $resolver->setAllowedTypes("data","array");
         $options = $resolver->resolve($options);
@@ -255,36 +273,24 @@ class ExporterManager implements ConfigureInterface
      */
     public function renderFiles($entity)
     {
-        // $chain = $this->getObjectDataManager()->exporter()->resolveChainModel();
         $chain = $this->getChainModel($this->objectType);
         $choices = [];
         $models = $chain->getModels();
-        // if (!is_null($this->models) && is_array($this->models)) {
-        //     foreach ($models as $model) {
-        //         if (in_array($model->getId(),$this->models)) {
-        //             $choices[$this->trans($model->getName()) . " [" . strtoupper($model->getFormat()) . "]"] = $model->getName();
-        //         }
-        //     }
-        // } else {
-            foreach ($models as $model) {
-                $choices[$this->trans($model->getName(),[],"labels") . " [" . strtoupper($model->getFormat()) . "]"] = $model->getName();
-            }
-        // }
+        foreach ($models as $model) {
+            $choices[$this->trans($model->getName(),[],"labels") . " [" . strtoupper($model->getFormat()) . "]"] = $model->getName();
+        }
 
         $form = $this->createForm(DocumentsType::class, $choices);
         $this->parametersToView["parameters_to_route"]["_conf"]["folder"] = "generated";
         $this->parametersToView["parameters_to_route"]["_conf"]["objectId"] = $this->objectId;
         $this->parametersToView["parameters_to_route"]["_conf"]["objectType"] = $this->objectType;
         $this->parametersToView["parameters_to_route"]["_conf"]["returnUrl"] = "";
-        return $this->container->get('templating')->render($this->options["exporter_manager"]["template"],
-                        [
-                            'chain' => $chain,
-                            'entity' => $entity,
-                            // 'objectDataManager' => $this->getObjectDataManager(),
-                            'form' => $form->createView(),
-                            'parametersToView' => $this->parametersToView,
-                        ]
-        );
+        return $this->container->get('templating')->render($this->options["template"],[
+                'chain' => $chain,
+                'entity' => $entity,
+                'form' => $form->createView(),
+                'parametersToView' => $this->parametersToView,
+            ]);
     }
 
     /**

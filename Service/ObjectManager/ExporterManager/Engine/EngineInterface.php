@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager;
+namespace Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine;
 
 use Maxtoan\ToolsBundle\Model\ObjectManager\ExporterManager\TemplateInterface;
 
@@ -8,7 +8,7 @@ use Maxtoan\ToolsBundle\Model\ObjectManager\ExporterManager\TemplateInterface;
  * Interfas de adaptador de motor
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-interface AdapterInterface
+interface EngineInterface
 {
     public function render(TemplateInterface $template,array $variables);
     

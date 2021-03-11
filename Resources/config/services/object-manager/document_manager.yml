@@ -25,7 +25,10 @@ services:
     Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\TCPDFEngine:
         arguments: ["@twig"]
         public: false
-    Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService:
+    
+    maxtoan_tools.template_service:
+        class: Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService
+        public: true
         arguments: [ {"debug":"%kernel.debug%", "env": "%kernel.environment%"} ]
         calls:
             - [ addEngine, ["@Maxtoan\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\TCPDFEngine"]  ]

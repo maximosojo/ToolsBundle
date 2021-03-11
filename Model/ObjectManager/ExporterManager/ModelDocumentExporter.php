@@ -9,7 +9,7 @@ use InvalidArgumentException;
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-abstract class ModelDocumentExporter
+class ModelDocumentExporter
 {   
     /**
      * $id
@@ -51,7 +51,8 @@ abstract class ModelDocumentExporter
      */
     protected $pathFileOut;
 
-    public function __construct($name) {
+    public function __construct($name)
+    {
         $this->name = $name;
     }
 
@@ -85,7 +86,8 @@ abstract class ModelDocumentExporter
      * @return type
      * @throws InvalidArgumentException
      */
-    public function getFilePathContent() {
+    public function getFilePathContent()
+    {
         if($this->filePathContent === null){
             throw new InvalidArgumentException(sprintf("The filePathContent must be setter."));
         }
@@ -97,7 +99,8 @@ abstract class ModelDocumentExporter
      * @return type
      * @throws InvalidArgumentException
      */
-    public function getFilePathHeader() {
+    public function getFilePathHeader()
+    {
         if($this->filePathHeader === null){
             throw new InvalidArgumentException(sprintf("The filePathContent must be setter."));
         }
@@ -108,33 +111,38 @@ abstract class ModelDocumentExporter
      * Hay ruta en el archivo de contenido?
      * @return boolean
      */
-    public function hasFilePathContent() {
+    public function hasFilePathContent()
+    {
         return $this->filePathContent !== null;
     }
+    
     /**
      * ¿Hay ruta de archivo de la cabecera?
      * @return boolean
      */
-    public function hasFilePathHeader() {
+    public function hasFilePathHeader()
+    {
         return $this->filePathHeader !== null;
     }
     
-    public function setFilePathContent($filePathContent) {
+    public function setFilePathContent($filePathContent)
+    {
         $this->filePathContent = $filePathContent;
         return $this;
     }
 
-    public function setFilePathHeader($filePathHeader) {
+    public function setFilePathHeader($filePathHeader)
+    {
         $this->filePathHeader = $filePathHeader;
         return $this;
     }
-
     
     /**
      * Retorna la ruta completa del archivo
      * @return string
      */
-    protected function getDocumentPath(array $parameters = []) {
+    protected function getDocumentPath(array $parameters = [])
+    {
         return tempnam(sys_get_temp_dir(),"md_exp"); // good ;
     }
 
@@ -142,14 +150,18 @@ abstract class ModelDocumentExporter
      * Retorna el tipo de document (PDF,XLS,DOC,TXT)
      * @return string
      */
-    public abstract function getFormat();
+    public function getFormat()
+    {
+        return "PDF";
+    }
     
     /**
      * Escribe el archivo en el disco
      */
-    public abstract function write(array $parameters = []);
+    // public abstract function write(array $parameters = []);
     
-    public function setChainModel(ChainModel $chainModel) {
+    public function setChainModel(ChainModel $chainModel)
+    {
         $this->chainModel = $chainModel;
         return $this;
     }
