@@ -6,7 +6,7 @@ object_manager_documents_upload:
     requirements: { _method: POST }
     
 object_manager_documents_delete:
-    path: /documents/delete/{filename}
+    path: /documents/delete
     defaults:
         _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController::deleteAction
         _format: html
@@ -15,7 +15,7 @@ object_manager_documents_delete:
         expose: true
 
 object_manager_documents_download:
-    path: /documents/download/{filename}
+    path: /documents/download
     defaults:
         _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController::downloadAction
         _format: html
@@ -24,7 +24,7 @@ object_manager_documents_download:
         expose: true
     
 object_manager_documents_get:
-    path: /documents/get/{filename}
+    path: /documents/get
     defaults:
         _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController::getAction
         _format: html
