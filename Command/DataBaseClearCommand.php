@@ -78,6 +78,7 @@ EOT
                 $this->truncate($tableName,$output,$dbPlatform,$connection);
             }
         }
+        $this->io->newLine();
         
         // Delete
         if ($this->getContainer()->getParameter("maxtoan_tools.command.db_clear_delete_entities")) {
@@ -126,7 +127,9 @@ EOT
             $count = $query->getSingleScalarResult();
             $em->clear();
             $this->io->progressAdvance($deleted);
+            $this->io->newLine();
         }
+        $this->io->newLine();
     }
 
     /**
