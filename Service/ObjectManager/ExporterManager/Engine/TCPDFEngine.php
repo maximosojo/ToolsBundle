@@ -32,7 +32,7 @@ class TCPDFEngine extends BaseEngine
 
         // set document information
         $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('Tecnoready Common');
+        $pdf->SetAuthor('Maxtoan ToolsBundle');
 //        $pdf->SetTitle('TCPDF Example 001');
 //        $pdf->SetSubject('TCPDF Tutorial');
 //        $pdf->SetKeywords('TCPDF, PDF, example, test, guide');

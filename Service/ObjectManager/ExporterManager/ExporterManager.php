@@ -218,6 +218,7 @@ class ExporterManager implements ConfigureInterface
         }
         $options["data"]["variables"]["entity"] = $entity;
         $options["data"]["variables"]["request"] = $options["request"];
+        $options["data"]["variables"]["container"] = $this->container;
         
         return $this->generate($name,$options,$overwrite);
     }

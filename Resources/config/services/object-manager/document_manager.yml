@@ -25,6 +25,8 @@ services:
     Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\TCPDFEngine:
         arguments: ["@twig"]
         public: false
+    Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\TCPDFNativeEngine:
+        public: false
     
     maxtoan_tools.template_service:
         class: Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService
@@ -32,4 +34,5 @@ services:
         arguments: [ {"debug":"%kernel.debug%", "env": "%kernel.environment%"} ]
         calls:
             - [ addEngine, ["@Maxtoan\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\TCPDFEngine"]  ]
+            - [ addEngine, ["@Maxtoan\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\TCPDFNativeEngine"]  ]
             - [ addEngine, ["@Maxtoan\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\PhpSpreadsheetXLSXEngine"]  ]

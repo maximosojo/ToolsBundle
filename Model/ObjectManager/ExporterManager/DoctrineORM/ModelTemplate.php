@@ -32,7 +32,7 @@ class ModelTemplate implements TemplateInterface
     /**
      * Tipo de plantilla (self::TYPE_*)
      * @var string
-     * @ORM\Column(type="string",length=10,nullable=false)
+     * @ORM\Column(type="string",length=30,nullable=false)
      */
     protected $typeTemplate;
     
