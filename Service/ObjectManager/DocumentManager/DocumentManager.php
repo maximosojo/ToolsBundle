@@ -14,7 +14,7 @@ use SplFileInfo;
  * @author Carlos Mendoza <inhack20@gmail.com>
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class DocumentManager implements DocumentAdapterInterface
+class DocumentManager implements DocumentAdapterInterface, DocumentManagerInterface
 {
     /**
      * Opciones de configuracion

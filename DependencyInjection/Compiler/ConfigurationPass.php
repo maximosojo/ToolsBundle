@@ -86,9 +86,12 @@ class ConfigurationPass implements CompilerPassInterface
         if ($container->getParameter('maxtoan_tools.object_manager.document.enable') === true) {
             // Manejador de documentos
             $adapterDefinition = $container->findDefinition($config["document_manager"]["adapter"]);
-            $documentManager = $container->findDefinition("maxtoan_tools.document_manager");
+            $documentManager = $container->findDefinition("maxtoan_tools.document_manager.default");
             $documentManager->addArgument($adapterDefinition);
-            // Manejador de exportaciones
+        }
+
+        // Manejador de exportaciones
+        if ($container->getParameter('maxtoan_tools.object_manager.exporter.enable') === true) {
             $adapterDefinition = $container->findDefinition($config["exporter_manager"]["adapter"]);
             $exporterManager = $container->getDefinition("maxtoan_tools.exporter_manager");
             $exporterManager->addArgument($documentManager);

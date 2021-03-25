@@ -1,0 +1,28 @@
+services:
+    maxtoan_tools.exporter_manager_doctrine_orm_adapter:
+        class: Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Adapter\DoctrineORMAdapter
+        arguments: ["@doctrine.orm.default_entity_manager"]
+    maxtoan_tools.exporter_manager:
+        class: Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\ExporterManager
+        public: true
+        calls:
+            - [ setContainer, ['@service_container']  ]
+    
+    # Manejador de plantillas
+    Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\PhpSpreadsheetXLSXEngine:
+        arguments: []
+        public: false
+    Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\TCPDFEngine:
+        arguments: ["@twig"]
+        public: false
+    Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\TCPDFNativeEngine:
+        public: false
+    
+    maxtoan_tools.template_service:
+        class: Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService
+        public: true
+        arguments: [ {"debug":"%kernel.debug%", "env": "%kernel.environment%"} ]
+        calls:
+            - [ addEngine, ["@Maxtoan\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\TCPDFEngine"]  ]
+            - [ addEngine, ["@Maxtoan\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\TCPDFNativeEngine"]  ]
+            - [ addEngine, ["@Maxtoan\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\PhpSpreadsheetXLSXEngine"]  ]

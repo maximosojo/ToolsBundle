@@ -138,6 +138,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('exporter_manager')
                             ->addDefaultsIfNotSet()
                             ->children()
+                                ->booleanNode('enable')->defaultFalse()->end()
                                 ->scalarNode('template')->defaultValue("MaxtoanToolsBundle:objectManager:exporterManager/documents.html.twig")->end()
                                 ->scalarNode('adapter')->defaultValue("maxtoan_tools.exporter_manager_doctrine_orm_adapter")->end()
                                 ->arrayNode('chaines')
