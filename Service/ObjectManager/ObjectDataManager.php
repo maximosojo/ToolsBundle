@@ -44,7 +44,7 @@ class ObjectDataManager implements ObjectDataManagerInterface
      */
     public function documents()
     {
-        return $this->container->get("maxtoan_tools.document_manager");
+        return $this->container->get("maxtoan_tools.document_manager.default");
     }
 
     /**
@@ -53,7 +53,7 @@ class ObjectDataManager implements ObjectDataManagerInterface
      */
     public function exporters()
     {
-        return $this->container->get("maxtoan_tools.exporter_manager");
+        return $this->container->get("maxtoan_tools.exporter_manager.default");
     }
 
     /**
@@ -62,7 +62,7 @@ class ObjectDataManager implements ObjectDataManagerInterface
      */
     public function statistics()
     {
-        return $this->container->get("maxtoan_tools.statistics_manager");
+        return $this->container->get("maxtoan_tools.statistics_manager.default");
     }
 
     /**
@@ -71,6 +71,6 @@ class ObjectDataManager implements ObjectDataManagerInterface
      */
     public function histories()
     {
-        return $this->container->get("maxtoan_tools.history_manager");
+        return $this->container->get("maxtoan_tools.history_manager.default");
     }
 }

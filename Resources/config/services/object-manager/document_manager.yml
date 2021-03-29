@@ -11,6 +11,7 @@ services:
     
     maxtoan_tools.document_manager.default:
         class: Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\DocumentManager
+        public: true
         
     Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\DocumentManagerInterface:
         alias: maxtoan_tools.document_manager

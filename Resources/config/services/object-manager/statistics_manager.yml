@@ -1,6 +1,14 @@
 services:
-    maxtoan_tools.statistics_manager:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false
+        
+    maxtoan_tools.statistics_manager.default:
         class: Maxtoan\ToolsBundle\Service\ObjectManager\StatisticManager\StatisticsManager
         public: true
         calls:
             - [ setContainer, ['@service_container']  ]
+
+    Maxtoan\ToolsBundle\Service\ObjectManager\StatisticsManager\StatisticsManagerInterface:
+        alias: maxtoan_tools.statistics_manager

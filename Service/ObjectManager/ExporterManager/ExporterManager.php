@@ -59,6 +59,7 @@ class ExporterManager implements ConfigureInterface
         $resolver = new OptionsResolver();
         $resolver->setDefaults([
             "debug" => false,
+            "enable" => false,
             "template" => "",
             "adapter" => "",
             "chaines" => []

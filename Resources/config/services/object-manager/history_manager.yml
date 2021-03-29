@@ -1,6 +1,14 @@
 services:
-    maxtoan_tools.history_manager:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false
+
+    maxtoan_tools.history_manager.default:
         class: Maxtoan\ToolsBundle\Service\ObjectManager\HistoryManager\HistoryManager
         public: true
         calls:
             - [ setContainer, ['@service_container']  ]
+
+    Maxtoan\ToolsBundle\Service\ObjectManager\HistoryManager\HistoryManagerInterface:
+        alias: maxtoan_tools.history_manager

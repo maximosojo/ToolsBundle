@@ -56,11 +56,11 @@ class ConfigurationPass implements CompilerPassInterface
             $idStatisticManagerAdapter = $statistic["adapter"];
             if ($idStatisticManagerAdapter && $container->hasDefinition($idStatisticManagerAdapter)) {
                 $adapterDefinition = $container->findDefinition($idStatisticManagerAdapter);
-                $statisticManagerDefinition = $container->findDefinition("maxtoan_tools.statistics_manager");
+                $statisticManagerDefinition = $container->findDefinition("maxtoan_tools.statistics_manager.default");
                 $statisticManagerDefinition->addArgument($adapterDefinition);                
             }
 
-            $statisticManager = $container->getDefinition("maxtoan_tools.statistics_manager"); 
+            $statisticManager = $container->getDefinition("maxtoan_tools.statistics_manager.default"); 
             foreach ($statistic["object_types"] as $param) {
                 if ($param["adapter"]) {
                     $statisticManager->addMethodCall("addAdapter", [$container->getDefinition($param["adapter"]),$param["objectType"]]);
@@ -77,7 +77,7 @@ class ConfigurationPass implements CompilerPassInterface
             $idHistoryManagerAdapter = $history["adapter"];
             if ($idHistoryManagerAdapter && $container->hasDefinition($idHistoryManagerAdapter)) {
                 $adapterDefinition = $container->findDefinition($idHistoryManagerAdapter);
-                $historyManagerDefinition = $container->findDefinition("maxtoan_tools.history_manager");
+                $historyManagerDefinition = $container->findDefinition("maxtoan_tools.history_manager.default");
                 $historyManagerDefinition->addArgument($adapterDefinition);
             }
         }
@@ -93,7 +93,7 @@ class ConfigurationPass implements CompilerPassInterface
         // Manejador de exportaciones
         if ($container->getParameter('maxtoan_tools.object_manager.exporter.enable') === true) {
             $adapterDefinition = $container->findDefinition($config["exporter_manager"]["adapter"]);
-            $exporterManager = $container->getDefinition("maxtoan_tools.exporter_manager");
+            $exporterManager = $container->getDefinition("maxtoan_tools.exporter_manager.default");
             $exporterManager->addArgument($documentManager);
             $exporterManager->addArgument($config["exporter_manager"]);
             $exporterManager->addMethodCall("setAdapter", array($adapterDefinition));

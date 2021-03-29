@@ -1,22 +1,29 @@
 services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false
+
     maxtoan_tools.exporter_manager_doctrine_orm_adapter:
         class: Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Adapter\DoctrineORMAdapter
         arguments: ["@doctrine.orm.default_entity_manager"]
-    maxtoan_tools.exporter_manager:
+
+    maxtoan_tools.exporter_manager.default:
         class: Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\ExporterManager
         public: true
         calls:
             - [ setContainer, ['@service_container']  ]
+
+    Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\ExporterManagerInterface:
+        alias: maxtoan_tools.exporter_manager
     
     # Manejador de plantillas
     Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\PhpSpreadsheetXLSXEngine:
         arguments: []
-        public: false
     Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\TCPDFEngine:
         arguments: ["@twig"]
-        public: false
     Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\TCPDFNativeEngine:
-        public: false
+        arguments: []
     
     maxtoan_tools.template_service:
         class: Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService
