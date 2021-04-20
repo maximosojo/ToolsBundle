@@ -116,9 +116,9 @@ class JsonResponse extends JsonResponseBase
     }
 
     /**
-     * [setOpenPopUp Abrir popUP]
+     * Abrir popUP
      *  
-     * @param  [String] $url
+     * @param  String $url
      * @param  array  $parameters
      */
     public function setOpenPopUp($url,array $parameters = []) 
@@ -127,6 +127,17 @@ class JsonResponse extends JsonResponseBase
             "url" => $url,
             "parameters" => $parameters,
         ];
+        $this->setData($this->originalData);
+    }
+
+    /**
+     * Recarga el contenido sin refrescar la pagina completa
+     *
+     * @return  JsonResponse
+     */ 
+    public function setReloadContent() 
+    {
+        $this->extraData["reload_content"] = true;
         $this->setData($this->originalData);
     }
 }
