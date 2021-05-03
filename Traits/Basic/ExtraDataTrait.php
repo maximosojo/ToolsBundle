@@ -11,6 +11,8 @@
 
 namespace Maxtoan\ToolsBundle\Traits\Basic;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Data extra de una entidad
  *
