@@ -104,7 +104,7 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
     public function __construct()
     {
         $this->parameters = [
-            "token_url" => "/api/login_check"
+            "token_url" => "/oauth/v2/token",
         ];
     }
 
