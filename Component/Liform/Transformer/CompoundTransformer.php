@@ -54,8 +54,8 @@ class CompoundTransformer extends AbstractCompoundTransformer
         }
         
         foreach ($form->all() as $name => $field) {
-//            var_dump($name);
             $transformerData = $this->resolver->resolve($field);
+            $properties[$name]["key"] = $name;
             $properties[$name]["required"] = $transformerData['transformer']->isRequired($field);
             $properties[$name]["disabled"] = $this->isDisabled($field);
             $properties[$name]["property_order"] = $properties[$name]["propertyOrder"];//Orden de campo a renderizar
