@@ -137,6 +137,9 @@ class CompoundTransformer extends AbstractCompoundTransformer
                                 }
                             } else {
                                 foreach ($validationGroups as $validationGroup) {
+                                    if (!is_array($validationGroup)) {
+                                        $validationGroup = [$validationGroup];
+                                    }
                                     if (in_array($constraintGroup, $validationGroup)) {
                                         foreach ($constraints AS $constraint) {
                                             $constraintsProperty[] = $this->formatConstraint($constraint);
