@@ -295,6 +295,19 @@ abstract class BaseOAuth2Context implements Context
         $this->theResponseHasTheOAuth2Format();
         $this->dataContext->getClient()->setServerParameter("HTTP_AUTHORIZATION", sprintf("Bearer %s", $this->getPropertyValue("access_token")));
     }
+
+    /**
+     * @When I log in with client apps
+     */
+    public function iLogInWithClientApps()
+    {
+        $this->iCreateOAuth2Request();
+        $this->dataContext->setRequestBody('grant_type', 'urn:client_apps');
+        $this->dataContext->iMakeAAccessTokenRequest();
+        $this->dataContext->theResponseStatusCodeIs('200');
+        $this->theResponseHasTheOAuth2Format();
+        $this->dataContext->getClient()->setServerParameter("HTTP_AUTHORIZATION", sprintf("Bearer %s", $this->getPropertyValue("access_token")));
+    }
     
     /**
      * @When I log in with password
