@@ -34,7 +34,7 @@ abstract class ConstraintValidator extends ConstraintValidatorBase implements Co
      */
     protected function addError($errors,array $parameters = array(),$atPath = null)
     {
-        if($errors === null || count($errors) == 0){
+        if($errors === null || is_array($errors) && count($errors) == 0){
             return;
         }
         if(is_array($errors)){
