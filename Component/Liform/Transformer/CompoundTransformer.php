@@ -82,7 +82,7 @@ class CompoundTransformer extends AbstractCompoundTransformer
         unset($schema["required"]);//Esto va en cada campo
         $schema["action"] = $form->getConfig()->getOption('action');
         $schema["method"] = $form->getConfig()->getOption('method');
-        $schema["id"] = $form->getName();
+        $schema["name"] = $form->getName();
         $schema["info"] = $form->getConfig()->getOption('info');
         $schema["properties"] = $properties;
 
