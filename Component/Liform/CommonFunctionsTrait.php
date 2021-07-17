@@ -159,6 +159,12 @@ trait CommonFunctionsTrait
      */
     protected function addData(FormInterface $form, array $schema)
     {
+        $schema['data'] = null;
+        
+        if (isset($this->formView->vars["value"]) && ($value = $this->formView->vars["value"]) != null) {
+            $schema['data'] = $value;
+        }
+
         if ($data = $form->getConfig()->getOption('data')) {
             $schema['data'] = $data;
         }

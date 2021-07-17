@@ -34,6 +34,7 @@ class StringTransformer extends AbstractStringTransformer
         $schema = $this->addHelp($form, $schema);
         $schema = $this->addEmptyData($form, $schema);
         $schema = $this->addCommonCustom($form, $schema);
+        $schema = $this->addData($form, $schema);
         $this->addWidget($form, $schema, false);
 
         return $schema;

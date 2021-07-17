@@ -30,22 +30,22 @@ class ChoiceTransformer extends AbstractTransformer
     {
         $this->initCommonCustom($form);
         $formView = $this->formView;
+        $translationDomain = $form->getConfig()->getOption('translation_domain');
+        $emptyData = $form->getConfig()->getOption('empty_data');
+        
         $choices = [];
+        $currentValue = isset($formView->vars["value"]) ? $formView->vars["value"] : null;
+        if(empty($currentValue)){
+            $currentValue = $emptyData;
+        }
+
         foreach ($formView->vars['choices'] as $choiceView) {
             if ($choiceView instanceof ChoiceGroupView) {
                 foreach ($choiceView->choices as $choiceItem) {
-                    $choices[] = [
-                        "id" => $choiceItem->value,
-                        "label" => $this->translator->trans($choiceItem->label),
-//                        "disabled" => $this->isDisabled($choiceItem->attr)
-                    ];
+                    $choices[] = $this->buildChoice($choiceItem, $currentValue, $translationDomain);
                 }
             } else {
-                $choices[] = [
-                    "id" => $choiceView->value,
-                    "label" => $this->translator->trans($choiceView->label),
-//                    "disabled" => $this->isDisabled($choiceView->attr)
-                ];
+                $choices[] = $this->buildChoice($choiceView, $currentValue, $translationDomain);
             }
         }
 
@@ -60,6 +60,7 @@ class ChoiceTransformer extends AbstractTransformer
         $schema = $this->addHelp($form, $schema);
         $schema = $this->addCommonCustom($form, $schema);
         $schema = $this->addEmptyData($form,$formView,$schema);
+        $schema = $this->addData($form,$schema);
         
         return $schema;
     }
@@ -152,5 +153,30 @@ class ChoiceTransformer extends AbstractTransformer
         }
         
         return $disabled;
+    }
+
+    /**
+     * Construye la opcion para json
+     * @param type $choiceView
+     * @param type $currentValue
+     * @param type $translationDomain
+     * @return type
+     */
+    private function buildChoice($choiceView, $currentValue, $translationDomain)
+    {
+        $selected = $currentValue != null && $currentValue === $choiceView->value;
+        $choice = [
+            "id" => $choiceView->value,
+            "label" => $this->translator->trans($choiceView->label, [], $translationDomain),
+            "selected" => $selected,
+            "disabled" => $this->isDisabled($choiceView->attr)
+        ];
+        if(isset($choiceView->attr["extra_json_keys"]) && is_array($choiceView->attr["extra_json_keys"])){
+            foreach ($choiceView->attr["extra_json_keys"] as $key => $value) {
+                $choice[$key] = $value;
+            }
+            unset($choiceView->attr["extra_json_keys"]);
+        }
+        return $choice;
     }
 }
