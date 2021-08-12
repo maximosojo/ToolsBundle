@@ -130,5 +130,12 @@ class MaxtoanToolsExtension extends Extension
         $container->setAlias('maxtoan_tools.object_manager', new Alias($config['object_manager']['manager'], true));
         unset($config['object_manager']["manager"]);
         $container->setParameter('maxtoan_tools.object_manager.options',$config['object_manager']);
+
+        // Revisa los componentes
+        if(($componentsConfig = $config['component']) !== null) {
+            if ($componentsConfig["liform"]["enable"] === true) {
+                $loaderYml->load('services/component/liform/transformers.yml');   
+            }
+        }
     }
 }
