@@ -7,33 +7,14 @@ use Limenius\Liform\ResolverInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormTypeGuesserInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Limenius\Liform\Transformer\AbstractTransformer;
+use Limenius\Liform\Transformer\ArrayTransformer;
 
 /**
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class CollectionTransformer extends AbstractTransformer
+class CollectionTransformer extends ArrayTransformer
 {
     use \Maxtoan\ToolsBundle\Component\Liform\CommonFunctionsTrait;
-
-    /**
-     * @var ResolverInterface
-     */
-    protected $resolver;
-
-    /**
-     * @param TranslatorInterface           $translator
-     * @param FormTypeGuesserInterface|null $validatorGuesser
-     * @param ResolverInterface             $resolver
-     */
-    public function __construct(
-        TranslatorInterface $translator,
-        FormTypeGuesserInterface $validatorGuesser = null,
-        ResolverInterface $resolver
-    ) {
-        parent::__construct($translator, $validatorGuesser);
-        $this->resolver = $resolver;
-    }
 
     /**
      * {@inheritdoc}
