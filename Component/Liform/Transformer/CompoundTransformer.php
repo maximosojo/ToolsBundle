@@ -84,6 +84,7 @@ class CompoundTransformer extends AbstractCompoundTransformer
         $schema["method"] = $form->getConfig()->getOption('method');
         $schema["name"] = $form->getName();
         $schema["info"] = $form->getConfig()->getOption('info');
+        $schema["meta"] = $form->getConfig()->getOption('meta');
         $schema["properties"] = $properties;
 
         return $schema;
