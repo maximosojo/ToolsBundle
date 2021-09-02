@@ -103,25 +103,6 @@ class ChoiceTransformer extends AbstractTransformer
     }
 
     /**
-     * Añadir help
-     *  
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  FormInterface $form
-     * @param  array         $schema
-     */
-    protected function addHelp(FormInterface $form, array $schema)
-    {
-        $translationDomain = $form->getConfig()->getOption('translation_domain');
-        if ($attr = $form->getConfig()->getOption('attr')) {
-            if (isset($attr['help'])) {
-                $schema['attr']['help'] = $this->translator->trans($attr['help'], [], $translationDomain);
-            }
-        }
-
-        return $schema;
-    }
-
-    /**
      * @param FormInterface $form
      * @param array         $schema
      *

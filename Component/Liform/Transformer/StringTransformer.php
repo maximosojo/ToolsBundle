@@ -46,24 +46,6 @@ class StringTransformer extends AbstractStringTransformer
      *
      * @return array
      */
-    protected function addHelp(FormInterface $form, array $schema)
-    {
-        $translationDomain = $form->getConfig()->getOption('translation_domain');
-        if ($help = $form->getConfig()->getOption('help')) {
-            if (!empty($help)) {
-                $schema['help'] = $this->translator->trans($help, $form->getConfig()->getOption("help_translation_parameters"), $translationDomain);
-            }
-        }
-
-        return $schema;
-    }
-
-    /**
-     * @param FormInterface $form
-     * @param array         $schema
-     *
-     * @return array
-     */
     protected function addEmptyData(FormInterface $form, array $schema)
     {
         $schema['empty_data'] = null;
