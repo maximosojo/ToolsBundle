@@ -50,7 +50,7 @@ services:
         class: Maxtoan\ToolsBundle\Component\Liform\Transformer\Select2EntityTransformer
         autowire: true
         tags:
-            - { name: liform.transformer, form_type: tetranz_select2entity, widget: picker-select2 }
+            - { name: liform.transformer, form_type: tetranz_select2entity, widget: select2entity }
     
     liform.transformer.readonly:
         class: Maxtoan\ToolsBundle\Component\Liform\Transformer\ReadOnlyTransformer
