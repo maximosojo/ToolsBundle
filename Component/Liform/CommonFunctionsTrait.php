@@ -162,6 +162,12 @@ trait CommonFunctionsTrait
         $schema['data'] = null;
         
         if (isset($this->formView->vars["value"]) && ($value = $this->formView->vars["value"]) != null) {
+            if (is_array($value)) {
+                foreach ($value as $key => $v) {
+                    $value = $key;
+                    break;
+                }
+            }
             $schema['data'] = $value;
         }
 

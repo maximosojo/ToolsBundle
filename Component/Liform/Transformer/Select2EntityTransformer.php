@@ -26,11 +26,6 @@ class Select2EntityTransformer extends AbstractTransformer
         $choices = [];
         
         $schema = ['type' => 'string'];
-//        if ($formView->vars['multiple']) {
-//            $schema = $this->transformMultiple($form, $choices);
-//        } else {
-//            $schema = $this->transformSingle($form, $choices);
-//        }
 
         $this->addWidget($form, $schema, false);
         $schema = $this->addCommonSpecs($form, $schema, $extensions, $widget);
@@ -38,7 +33,7 @@ class Select2EntityTransformer extends AbstractTransformer
         $schema = $this->addCommonCustom($form, $schema);
         $schema = $this->addEmptyData($form,$formView,$schema);
         $schema = $this->addSelect2($form, $formView,$schema);
-        
+        $schema = $this->addData($form,$schema);
         
         return $schema;
     }
@@ -71,13 +66,10 @@ class Select2EntityTransformer extends AbstractTransformer
     protected function addSelect2(FormInterface $form,FormView $formView, array $schema)
     {
         $translationDomain = $form->getConfig()->getOption('translation_domain');
-//        if ($attr = $form->getConfig()->getOption('attr')) {
-//        }
         if (isset($formView->vars['attr']['data-req_params'])) {
             $schema["req_params"] = @json_decode($formView->vars['attr']['data-req_params'],true);
         }
-//        var_dump($attr);
-//        die;
+
         $schema["remote_path"] = $formView->vars["remote_path"];
         $schema["minimum_input_length"] = $form->getConfig()->getOption('minimum_input_length');
 
