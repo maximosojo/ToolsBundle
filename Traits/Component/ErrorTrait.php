@@ -44,7 +44,7 @@ trait ErrorTrait
         }
 
         if ($errors === null || (is_array($errors) && count($errors) == 0)) {
-            throw new Exception("No se puede agregar un error vacio, por favor enviar el error.");
+            throw new \Exception("No se puede agregar un error vacio, por favor enviar el error.");
         }
         if (is_array($errors)) {
             $this->errors = array_merge($this->errors, $errors);
