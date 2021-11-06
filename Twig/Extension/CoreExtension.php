@@ -101,6 +101,10 @@ class CoreExtension extends \Twig_Extension
     {
         $dateFormated = "";
         if ($myFormatDate instanceof \DateTime) {
+            // Si existe la configuración le agregamos timezone
+            if (isset($_ENV['APP_DEFAULT_TIMEZONE'])) {
+                $myFormatDate->setTimeZone(new \DateTimeZone($_ENV['APP_DEFAULT_TIMEZONE']));
+            }
             $dateFormated = $myFormatDate->format($format);
         }
 
@@ -119,6 +123,10 @@ class CoreExtension extends \Twig_Extension
     {
         $dateFormated = "";
         if ($myFormatDate instanceof \DateTime) {
+            // Si existe la configuración le agregamos timezone
+            if (isset($_ENV['APP_DEFAULT_TIMEZONE'])) {
+                $myFormatDate->setTimeZone(new \DateTimeZone($_ENV['APP_DEFAULT_TIMEZONE']));
+            }
             $dateFormated = $myFormatDate->format($format);
         }
         
