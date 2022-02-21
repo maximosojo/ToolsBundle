@@ -11,8 +11,7 @@
 
 namespace Maxtoan\ToolsBundle\Service\Sms;
 
-use App\Entity\M\Core\Sms\Message;
-use App\Entity\M\User;
+use Maxtoan\ToolsBundle\Model\Sms\ModelMessage;
 use Maxtoan\ToolsBundle\Service\BaseService;
 use Maxtoan\Common\Util\DateUtil;
 use Maxtoan\Common\Util\StringUtil;
@@ -155,7 +154,6 @@ class SmsManager extends BaseService implements SmsManagerInterface
             "category" => "default",
         ]);
         $resolver->setAllowedTypes("priority", "integer");
-        $resolver->setAllowedTypes("sentBy", ["null", User::class]);
         $resolver->setAllowedTypes("shippingDate", ["null", \DateTime::class]);
         $options = $resolver->resolve($options);
 
@@ -186,14 +184,14 @@ class SmsManager extends BaseService implements SmsManagerInterface
         return $messageSend;
     }
 
-    private function newMessage($recipient, $content, $priority = 50, User $sentBy = null, \DateTime $shippingDate = null)
+    private function newMessage($recipient, $content, $priority = 50, $sentBy = null, \DateTime $shippingDate = null)
     {
         if ($shippingDate === null) {
             $shippingDate = new \DateTime();
         }
         $content = StringUtil::clearSpecialChars($content,"",$this->forbiddenChars);
         $content = $this->parseContent($content);
-        $sms = new Message();
+        $sms = new $this->class;
         $sms
                 ->setRecipient($recipient)
                 ->setContent($content)
@@ -205,7 +203,7 @@ class SmsManager extends BaseService implements SmsManagerInterface
         }
         
         $sms->setEnvironment($this->environment);
-        $sms->setStatus(Message::STATUS_READY);
+        $sms->setStatus(ModelMessage::STATUS_READY);
         $sms->setRetries(0);
         $this->emSave($sms);
 
@@ -226,12 +224,12 @@ class SmsManager extends BaseService implements SmsManagerInterface
     /**
      * Envíar mensaje
      *
-     * @param   Message             $message
+     * @param   ModelMessage             $message
      * @param   TransportInterface  $transport
      *
      * @return  $result
      */
-    protected function handleSend(Message $message, TransportInterface $transport = null)
+    protected function handleSend(ModelMessage $message, TransportInterface $transport = null)
     {   
         $phone = $message->getRecipient();
         $str = substr($phone, 2, 3);
@@ -267,12 +265,12 @@ class SmsManager extends BaseService implements SmsManagerInterface
         $result = $lastTransport->send($message);
         $rs = array("transport"=>$lastTransport->getName());
         if ($result === true) {
-            $message->setStatus(Message::STATUS_COMPLETE);
+            $message->setStatus(ModelMessage::STATUS_COMPLETE);
             $message->setSentAt(new \DateTime());
             $message->setErrorMessage('');
         } else {
             $message->setErrorMessage($result);
-            $message->setStatus(Message::STATUS_FAILED);
+            $message->setStatus(ModelMessage::STATUS_FAILED);
             $message->setRetries($message->getRetries() + 1);
             if(!empty($message->getErrorMessage()) && $this->logger !== null){
                 $this->logger->critical($message->getErrorMessage());
