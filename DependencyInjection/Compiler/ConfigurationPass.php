@@ -110,5 +110,33 @@ class ConfigurationPass implements CompilerPassInterface
                 $templateService->addMethodCall("addAdapter", [$container->getDefinition($id)]);
             }
         }
+
+        // Manejador de mensajes
+        if ($container->getParameter('maxtoan_tools.sms_manager.enable') === true) {
+            // Manejador de sms
+            $smsManager = $container->getDefinition("maxtoan_tools.service.sms_manager");
+            // Inicia transporter de interconectados
+            $optionsTransportsInterconectados = [];
+            $container->setParameter("maxtoan_tools.service.sms_manager.transports.interconectados.options", []);
+            $optionsTransportsInterconectados["enabled"] = isset($_ENV["MAXTOAN_TOOLS_SMS_INTERCONECTADOS_HOST"],$_ENV["MAXTOAN_TOOLS_SMS_INTERCONECTADOS_USER"],$_ENV["MAXTOAN_TOOLS_SMS_INTERCONECTADOS_PASSWORD"]);
+            // Interconectados
+            if ($optionsTransportsInterconectados["enabled"] === true) {
+                $optionsTransportsInterconectados["host"] = $_ENV["MAXTOAN_TOOLS_SMS_INTERCONECTADOS_HOST"];
+                $optionsTransportsInterconectados["user"] = $_ENV["MAXTOAN_TOOLS_SMS_INTERCONECTADOS_USER"];
+                $optionsTransportsInterconectados["password"] = $_ENV["MAXTOAN_TOOLS_SMS_INTERCONECTADOS_PASSWORD"];
+                $container->setParameter("maxtoan_tools.service.sms_manager.transports.interconectados.options", $optionsTransportsInterconectados);
+                // Transport
+                $smsManager->addMethodCall("addTransport", [$container->getDefinition("maxtoan_tools.service.sms_manager.transports.interconectados")]);
+            }
+
+            // Inicia transporter de dummy
+            $optionsTransportsDummy = [];
+            $optionsTransportsDummy["enabled"] = isset($_ENV["MAXTOAN_TOOLS_SMS_DUMMY_ENABLE"]);
+            // Dummy
+            if ($optionsTransportsDummy["enabled"] === true) {
+                // Transport
+                $smsManager->addMethodCall("addTransport", [$container->getDefinition("maxtoan_tools.service.sms_manager.transports.dummy")]);
+            }
+        }
     }
 }

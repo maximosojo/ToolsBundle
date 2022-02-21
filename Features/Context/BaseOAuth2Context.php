@@ -156,7 +156,7 @@ abstract class BaseOAuth2Context implements Context
     }
     
     /**
-     * And the response server has property name "Pandco\Bundle\AppBundle\Custom\HttpFoundation\MyView__EXTRA_DIGITAL_ACCOUNT"
+     * And the response server has property name "App\Custom\HttpFoundation\View__EXTRA"
      * @Then the response server has property name :property
      */
     public function theResponseServerHasPropertyName($property)

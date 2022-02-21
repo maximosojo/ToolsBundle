@@ -1,0 +1,22 @@
+services:
+  _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false
+
+  # Manejador
+  maxtoan_tools.service.sms_manager:
+      class: Maxtoan\ToolsBundle\Service\Sms\SmsManager
+      public: true
+      arguments: [{ env: "%kernel.environment%", disable_delivery: "%maxtoan_tools.sms_manager.disable_delivery%", class: "%maxtoan_tools.sms_manager.message_class%" }]
+      #calls: 
+      #    - [ setContainer, ['@service_container'] ]
+
+  # Transports
+  maxtoan_tools.service.sms_manager.transports.interconectados:
+      class: Maxtoan\ToolsBundle\Service\Sms\Transports\InterconectadosTransport
+      calls: 
+          - [ setOptions, ["%maxtoan_tools.service.sms_manager.transports.interconectados.options%"]  ]
+
+  maxtoan_tools.service.sms_manager.transports.dummy:
+      class: Maxtoan\ToolsBundle\Service\Sms\Transports\DummyTransport

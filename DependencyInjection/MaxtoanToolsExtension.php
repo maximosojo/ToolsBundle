@@ -49,7 +49,6 @@ class MaxtoanToolsExtension extends Extension
 
         if($config['search_manager']['enable'] === true) {
             $loaderYml->load('services/search_manager.yml');
-            //var_dump($config['search_manager']);die;
             $container->setParameter('maxtoan_tools.service.search_manager.icons.clean', $config['search_manager']['icons']['clean']); 
         }
 
@@ -58,9 +57,15 @@ class MaxtoanToolsExtension extends Extension
             $container->setParameter("maxtoan_tools.swiftmailer.mailer_template_class", $config['mailer']["mailer_template_class"]);
             $container->setParameter("maxtoan_tools.swiftmailer.mailer_component_class", $config['mailer']["mailer_component_class"]);
             $container->setParameter("maxtoan_tools.swiftmailer.mailer_repository_manager", $config['mailer']["mailer_repository_manager"]);
-
             $idManager = $container->getParameter("maxtoan_tools.swiftmailer.mailer_repository_manager");
             $container->setAlias("maxtoan_tools.repository.mailer.em",$idManager);
+        }
+
+        if($config['sms_manager']['enable'] === true) {
+            $loaderYml->load('services/sms_manager.yml');
+            $container->setParameter("maxtoan_tools.sms_manager.enable", $config['sms_manager']["enable"]);
+            $container->setParameter("maxtoan_tools.sms_manager.message_class", $config['sms_manager']["message_class"]);
+            $container->setParameter("maxtoan_tools.sms_manager.disable_delivery", $config['sms_manager']["disable_delivery"]);
         }
 
         if($config['table_prefix']['enable'] === true) {

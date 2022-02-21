@@ -4,7 +4,7 @@ services:
       class: Maxtoan\ToolsBundle\Service\Core\Search\SearchManager
       calls: 
           - [ setTwig, ['@twig']]
-          - [setContainer, ['@service_container']]
+          - [ setContainer, ['@service_container']]
   # Extension Twig
   maxtoan_tools.twig.extension_search:
       class: Maxtoan\ToolsBundle\Twig\Extension\SearchExtension
