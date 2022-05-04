@@ -3,7 +3,9 @@
     <label class="label-filter text-center">
         {{ label|trans({},'labels')}}
     </label>
-    {{ filters.eraser(id,type) }}
+    {% if id is not iterable %}
+        {{ filters.eraser(id,type) }}
+    {% endif %}
 {% endmacro %}
 
 {% macro eraserAll(searchManager) %}
@@ -14,11 +16,16 @@
     </a>
 {% endmacro %}
 
-{% macro eraser(id,type) %}
+{% macro eraser(ids,type) %}
+    {#{% if ids is not iterable %}
+        {% set ids = [ids] %}
+    {% endif %}
+    {% set id2 = uniqueId() %}#}
+
     <a 
         href="javascript:;" 
         class="float-right eraser text-danger"
-        onclick="clearFilters('{{ id }}','{{ type }}')"
+        onclick="clearFilters('{{ ids }}','{{ type }}')"
         data-toggle="tooltip"
         data-placement="top" title=""
         data-original-title="{{"search_manager.filter.label"|trans({},"ToolsBundle")}}"
@@ -26,6 +33,35 @@
         <i class="{{get_parameter('maxtoan_tools.service.search_manager.icons.clean')}}"></i>
         {#{{"search_manager.filter.clean"|trans({},"ToolsBundle")}}#}
     </a>
+    {#<script>
+        $(document).ready(function(){
+            // showHover();
+            $("#{{ id2 }}").on("click", function () {
+                {% for id in ids %}
+                    var input = $("#{{ id }},.{{ id }}");
+                    {% if type == "select" %}
+                        input.select2("val", "");
+                        var html = input.html();
+                        input.html("");
+                        input.html(html);
+                        input.each(function(){
+                            $(this).prop('selectedIndex', 0);
+                            $('option', this).removeAttr('selected');
+                        });
+                        input.trigger("change");
+                    {% elseif type == "select2" %}
+                        input.select2("val", "");
+                        input.html("");
+                        input.trigger("change");
+                    {% elseif type == "input" %}
+                        input.val("");
+                        input.val(null);
+                        input.trigger("change");
+                    {% endif %}        
+                {% endfor %}
+            });
+        });
+    </script>#}
 {% endmacro %}
 
 {% block input %}
@@ -58,7 +94,7 @@
     {% endif %}
 
     <div class="form-group" ng-init="initWatch('{{ modelName }}')">
-        {{ filters.label_filter(label,id,'select', searchManager) }}
+        {{ filters.label_filter(label,id,'select') }}
         <div class="filters">
             <select id="{{ id }}"  {% if multiple %} multiple="multiple" {% endif %} class="form-control select2filters" ng-model="model.{{ modelName }}">
                 <option value=""></option>
@@ -86,7 +122,7 @@
     {% endif %}
     
     <div class="form-group" ng-init="initWatch('{{ modelName }}')">
-        {{ filters.label_filter(label,id,'select2', searchManager) }}
+        {{ filters.label_filter(label,id,'select2') }}
         <div class="filters">
             <select
                 id="{{id}}"
@@ -115,6 +151,49 @@
                 ng-model="model.{{ modelName }}"
                 aria-hidden="true"></select>
         
+        </div>
+    </div>
+{% endblock %}
+
+{% block date %}
+    {% set modelName = modelName|replace({'.': '__'}) %}
+
+    {% set modelNameDay = "day_" ~ modelName %}
+    {% set modelNameMonth = "month_" ~ modelName %}
+    {% set modelNameYear = "year_" ~ modelName %}
+    {% import _self as filters %}
+    {% set idDay = uniqueId() %}
+    {% set idMonth = uniqueId() %}
+    {% set idYear = uniqueId() %}
+
+    <div class="form-group">
+        {{ filters.label_filter(label,[idDay,idMonth,idYear],'select') }}
+        <div class="filters row">
+            <div class="col-12 col-lg-4">
+                <select id="{{ idDay }}" style="width: 100%" ng-model="model.{{ modelNameDay }}" ng-init="initWatch('{{ modelNameDay }}')" class="form-control">
+                    <option value="">Día</option>
+                    {% for i in 1..31 %}
+                        <option value="{{ str_padleft(i,2,"0") }}">{{ str_padleft(i,2,"0") }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-12 col-lg-4">
+                <select id="{{ idMonth }}" style="width: 100%" ng-model="model.{{ modelNameMonth }}" ng-init="initWatch('{{ modelNameMonth }}')" class="form-control">
+                    <option value="">Mes</option>
+                    {% for i in 1..12 %}
+                        <option value="{{ str_padleft(i,2,"0") }}">{{ str_padleft(i,2,"0") }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-12 col-lg-4">
+                {% set date = date("now") %}
+                <select id="{{ idYear }}" style="width: 100%" ng-model="model.{{ modelNameYear }}" ng-init="initWatch('{{ modelNameYear }}')" class="form-control">
+                    <option value="">Año</option>
+                    {% for i in (date.format("Y"))..(date.format("Y") - 30) %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
     </div>
 {% endblock %}
