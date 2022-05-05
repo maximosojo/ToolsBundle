@@ -61,9 +61,9 @@ class MaxtoanToolsExtension extends Extension
             $container->setAlias("maxtoan_tools.repository.mailer.em",$idManager);
         }
 
+        $container->setParameter("maxtoan_tools.sms_manager.enable", $config['sms_manager']["enable"]);
         if($config['sms_manager']['enable'] === true) {
             $loaderYml->load('services/sms_manager.yml');
-            $container->setParameter("maxtoan_tools.sms_manager.enable", $config['sms_manager']["enable"]);
             $container->setParameter("maxtoan_tools.sms_manager.message_class", $config['sms_manager']["message_class"]);
             $container->setParameter("maxtoan_tools.sms_manager.disable_delivery", $config['sms_manager']["disable_delivery"]);
         }
