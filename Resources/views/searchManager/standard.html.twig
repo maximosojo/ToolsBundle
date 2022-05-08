@@ -120,6 +120,13 @@
     {% if currentFilter.parameter('page_limit') %}
         {% set page_limit = currentFilter.parameter('page_limit') %}
     {% endif %}
+
+    {% set remoteParams = {
+        maxPerPage:  page_limit 
+    } %}
+    {% if currentFilter.parameter('remote_params') %}
+        {%- set remoteParams = remoteParams|merge(currentFilter.parameter('remote_params')) -%}
+    {% endif %}
     
     <div class="form-group" ng-init="initWatch('{{ modelName }}')">
         {{ filters.label_filter(label,id,'select2') }}
@@ -132,7 +139,7 @@
                 class="form-control select2entity select2-hidden-accessible"
                 autocomplete="off"
                 {% if currentFilter.parameter('ajax_url') %}
-                    data-ajax--url="{{ path(currentFilter.parameter('ajax_url')) }}?maxPerPage={{page_limit}}"
+                    data-ajax--url="{{ path(currentFilter.parameter('ajax_url'),remoteParams) }}"
                 {% endif %}
                 data-ajax--cache-timeout="1"
                 data-ajax--delay="250"
@@ -157,43 +164,13 @@
 
 {% block date %}
     {% set modelName = modelName|replace({'.': '__'}) %}
-
-    {% set modelNameDay = "day_" ~ modelName %}
-    {% set modelNameMonth = "month_" ~ modelName %}
-    {% set modelNameYear = "year_" ~ modelName %}
     {% import _self as filters %}
-    {% set idDay = uniqueId() %}
-    {% set idMonth = uniqueId() %}
-    {% set idYear = uniqueId() %}
+    {% if id is null %}
+        {% set id = uniqueId() %}
+    {% endif %}
 
-    <div class="form-group">
-        {{ filters.label_filter(label,[idDay,idMonth,idYear],'select') }}
-        <div class="filters row">
-            <div class="col-12 col-lg-4">
-                <select id="{{ idDay }}" style="width: 100%" ng-model="model.{{ modelNameDay }}" ng-init="initWatch('{{ modelNameDay }}')" class="form-control">
-                    <option value="">Día</option>
-                    {% for i in 1..31 %}
-                        <option value="{{ str_padleft(i,2,"0") }}">{{ str_padleft(i,2,"0") }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-12 col-lg-4">
-                <select id="{{ idMonth }}" style="width: 100%" ng-model="model.{{ modelNameMonth }}" ng-init="initWatch('{{ modelNameMonth }}')" class="form-control">
-                    <option value="">Mes</option>
-                    {% for i in 1..12 %}
-                        <option value="{{ str_padleft(i,2,"0") }}">{{ str_padleft(i,2,"0") }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-12 col-lg-4">
-                {% set date = date("now") %}
-                <select id="{{ idYear }}" style="width: 100%" ng-model="model.{{ modelNameYear }}" ng-init="initWatch('{{ modelNameYear }}')" class="form-control">
-                    <option value="">Año</option>
-                    {% for i in (date.format("Y"))..(date.format("Y") - 30) %}
-                        <option value="{{ i }}">{{ i }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
+    <div class="form-group" ng-init="initWatch('{{ modelName }}')">
+        {{ filters.label_filter(label,id,'input') }}
+        <input type="date" id="{{ id }}" class="form-control" ng-model="model.{{ modelName }}" placeholder="{{"search_manager.filter.input.placeholder"|trans({},"ToolsBundle")}}{{ label|trans({},'labels')}}"/>
     </div>
 {% endblock %}
