@@ -154,6 +154,9 @@
                 {% if currentFilter.parameter('req_params') %}
                     data-req_params="{{ currentFilter.parameter('req_params') }}"
                 {% endif %}
+                {% if currentFilter.parameter('multiple') %}
+                    multiple
+                {% endif %}
                 select2
                 ng-model="model.{{ modelName }}"
                 aria-hidden="true"></select>
