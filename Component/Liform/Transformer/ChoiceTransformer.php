@@ -86,13 +86,8 @@ class ChoiceTransformer extends AbstractTransformer
         $formView = $form->createView();
 
         $schema = [
-            'items' => [
-                'type' => 'string',
-                'choices' => $choices,
-                'minItems' => $this->isRequired($form) ? 1 : 0,
-            ],
-            'uniqueItems' => true,
-            'type' => 'array',
+            'choices' => $choices,
+            'type' => 'array'
         ];
 
         if ($formView->vars['expanded']) {
