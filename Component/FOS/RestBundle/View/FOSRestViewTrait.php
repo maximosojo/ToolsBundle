@@ -11,6 +11,8 @@
 
 namespace Maxtoan\ToolsBundle\Component\FOS\RestBundle\View;
 
+use FOS\RestBundle\View\View;
+
 /**
  * FOSRestView trait.
  *
