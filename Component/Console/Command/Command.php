@@ -16,14 +16,18 @@ use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Lock\Factory;
 use Symfony\Component\Lock\Store\SemaphoreStore;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 
 /**
  * Command
  * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class Command extends \Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand
+class Command extends SymfonyCommand
 {
+    use ContainerAwareTrait;
+    
     /**
      * @var \Symfony\Component\Console\Style\SymfonyStyle
      */

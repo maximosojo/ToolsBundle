@@ -31,8 +31,14 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('maxtoan_tools', 'array');
+        $treeBuilder = new TreeBuilder('maxtoan_tools');
+
+        if (method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            // BC layer for symfony/config 4.1 and older
+            $rootNode = $treeBuilder->root('maxtoan_tools', 'array');
+        }
 
         $rootNode
             ->children()
