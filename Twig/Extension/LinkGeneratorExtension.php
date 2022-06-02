@@ -12,14 +12,15 @@
 namespace Maxtoan\ToolsBundle\Twig\Extension;
 
 use Maxtoan\ToolsBundle\Service\LinkGenerator\LinkGeneratorService;
-use Twig_Extension;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Extension de link generador
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class LinkGeneratorExtension extends Twig_Extension
+class LinkGeneratorExtension extends AbstractExtension
 {
     /**
      *
@@ -35,8 +36,8 @@ class LinkGeneratorExtension extends Twig_Extension
     public function getFunctions() 
     {
         return [
-            new \Twig_SimpleFunction('link_generator', array($this, 'linkGenerator'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('link_is_granted', array($this, 'linkIsGranted'), array('is_safe' => array('html'))),
+            new TwigFunction('link_generator', array($this, 'linkGenerator'), array('is_safe' => array('html'))),
+            new TwigFunction('link_is_granted', array($this, 'linkIsGranted'), array('is_safe' => array('html'))),
         ];
     }
     
