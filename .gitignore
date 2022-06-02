@@ -7,3 +7,5 @@ Thumbs.db
 
 # phpstorm
 .idea/*
+composer.lock
+vendor/
