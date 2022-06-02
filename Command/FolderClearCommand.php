@@ -57,8 +57,8 @@ class FolderClearCommand extends \Maxtoan\ToolsBundle\Component\Console\Command\
     {
         $this->setupConsole($input, $output);
 
-        if ($this->getContainer()->getParameter("maxtoan_tools.command.folder_clear_clear_paths")) {
-            $this->paths_to_remove = $this->getContainer()->getParameter("maxtoan_tools.command.folder_clear_clear_paths");
+        if ($this->container->getParameter("maxtoan_tools.command.folder_clear_clear_paths")) {
+            $this->paths_to_remove = $this->container->getParameter("maxtoan_tools.command.folder_clear_clear_paths");
             $this->clearPaths();
         }
     }

@@ -35,7 +35,7 @@ class BaseService implements ContainerAwareInterface
      */
     public function getBaseUrl()
     {
-        return $this->container->getParameter('kernel.root_dir');
+        return $this->container->getParameter('kernel.project_dir');
     }
 
     /**

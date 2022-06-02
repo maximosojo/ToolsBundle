@@ -72,8 +72,8 @@ EOT
         }
 
         // Truncate
-        if ($this->getContainer()->getParameter("maxtoan_tools.command.db_clear_truncate_entities")) {
-            $toTruncate = $this->getContainer()->getParameter("maxtoan_tools.command.db_clear_truncate_entities");
+        if ($this->container->getParameter("maxtoan_tools.command.db_clear_truncate_entities")) {
+            $toTruncate = $this->container->getParameter("maxtoan_tools.command.db_clear_truncate_entities");
             foreach ($toTruncate as $tableName) {
                 $this->truncate($tableName,$output,$dbPlatform,$connection);
             }
@@ -81,8 +81,8 @@ EOT
         $this->io->newLine();
         
         // Delete
-        if ($this->getContainer()->getParameter("maxtoan_tools.command.db_clear_delete_entities")) {
-            $toDelete = $this->getContainer()->getParameter("maxtoan_tools.command.db_clear_delete_entities");
+        if ($this->container->getParameter("maxtoan_tools.command.db_clear_delete_entities")) {
+            $toDelete = $this->container->getParameter("maxtoan_tools.command.db_clear_delete_entities");
             foreach ($toDelete as $className) {
                 $this->deleteRecords($className,$em,$output);
             }
