@@ -12,7 +12,7 @@
 namespace Maxtoan\ToolsBundle\DependencyInjection;
 
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Doctrine trait.
