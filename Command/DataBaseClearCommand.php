@@ -51,7 +51,7 @@ EOT
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->io = new \Symfony\Component\Console\Style\SymfonyStyle($input, $output);
 
@@ -59,8 +59,7 @@ EOT
 
         $this->io->caution("This command can not be execute in prod.");
         if(!$force){
-            $this->io->comment("Use option --force for excecute the command.");
-            return;
+            throw new RuntimeException('Use option --force for excecute the command.');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -72,8 +71,8 @@ EOT
         }
 
         // Truncate
-        if ($this->container->getParameter("maxtoan_tools.command.db_clear_truncate_entities")) {
-            $toTruncate = $this->container->getParameter("maxtoan_tools.command.db_clear_truncate_entities");
+        if ($this->getContainer()->getParameter("maxtoan_tools.command.db_clear_truncate_entities")) {
+            $toTruncate = $this->getContainer()->getParameter("maxtoan_tools.command.db_clear_truncate_entities");
             foreach ($toTruncate as $tableName) {
                 $this->truncate($tableName,$output,$dbPlatform,$connection);
             }
@@ -81,8 +80,8 @@ EOT
         $this->io->newLine();
         
         // Delete
-        if ($this->container->getParameter("maxtoan_tools.command.db_clear_delete_entities")) {
-            $toDelete = $this->container->getParameter("maxtoan_tools.command.db_clear_delete_entities");
+        if ($this->getContainer()->getParameter("maxtoan_tools.command.db_clear_delete_entities")) {
+            $toDelete = $this->getContainer()->getParameter("maxtoan_tools.command.db_clear_delete_entities");
             foreach ($toDelete as $className) {
                 $this->deleteRecords($className,$em,$output);
             }
@@ -95,6 +94,8 @@ EOT
                 $this->truncate($table->getName(),$output,$dbPlatform,$connection);
             }
         }
+
+        return 0;
     }
 
     /**

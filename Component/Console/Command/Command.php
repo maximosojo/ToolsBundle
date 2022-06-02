@@ -25,7 +25,7 @@ use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 class Command extends SymfonyCommand
-{
+{    
     use ContainerAwareTrait;
     
     /**
@@ -73,5 +73,11 @@ class Command extends SymfonyCommand
         $store = new SemaphoreStore();
         $factory = new Factory($store);
         return $factory->createLock($resource,$ttl,$autoRelease);
+    }
+
+    public function getContainer()
+    {
+        $kernel = $this->getApplication()->getKernel();
+        return $kernel->getContainer();
     }
 }
