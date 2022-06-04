@@ -34,12 +34,12 @@ trait EventDispatcherTrait
     /**
      * Disparar un evento
      * @param type $eventName
-     * @param \Symfony\Component\EventDispatcher\Event $event
+     * @param \Maxtoan\ToolsBundle\Component\EventDispatcher\GenericEvent $event
      * @return \App\Event\GenericEvent
      */
-    protected function dispatch($eventName, \Symfony\Component\EventDispatcher\Event $event = null)
+    protected function dispatch($eventName, \Maxtoan\ToolsBundle\Component\EventDispatcher\GenericEvent $event = null)
     {
-        return $this->getEventDispatcher()->dispatch($eventName, $event);
+        return $this->getEventDispatcher()->dispatch($event,$eventName);
     }
 
     /**
