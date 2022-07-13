@@ -1,7 +1,7 @@
 services:
-    maxtoan_tools.swiftmailer.adapter.orm:
+    maxtoan_tools.symfonymailer.adapter.orm:
         class: Maxtoan\ToolsBundle\Service\Mailer\Adapter\DoctrineORMAdapter
-        arguments: ["@maxtoan_tools.repository.mailer.em",{"mailer_template_class": "%maxtoan_tools.swiftmailer.mailer_template_class%", "mailer_component_class": "%maxtoan_tools.swiftmailer.mailer_component_class%" }]
-    Maxtoan\ToolsBundle\Service\Mailer\TwigSwiftMailer:
+        arguments: ["@maxtoan_tools.repository.mailer.em",{"mailer_template_class": "%maxtoan_tools.symfonymailer.mailer_template_class%", "mailer_component_class": "%maxtoan_tools.symfonymailer.mailer_component_class%" }]
+    Maxtoan\ToolsBundle\Service\Mailer\TwigSymfonyMailer:
         public: true
-        arguments: ["@mailer","@twig","@maxtoan_tools.swiftmailer.adapter.orm",{ debug_mail: "%debug_mail%", env: "%kernel.environment%",from_email: "%mailer_user%", from_name: "%from_name%",debug: "%kernel.debug%" }]
+        arguments: ["@mailer","@twig","@maxtoan_tools.symfonymailer.adapter.orm",{ debug_mail: "%debug_mail%", env: "%kernel.environment%",from_email: "%mailer_user%", from_name: "%from_name%",debug: "%kernel.debug%" }]

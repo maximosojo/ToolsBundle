@@ -54,10 +54,10 @@ class MaxtoanToolsExtension extends Extension
 
         if($config['mailer']['enable'] === true) {
             $loaderYml->load('mailer.yml');
-            $container->setParameter("maxtoan_tools.swiftmailer.mailer_template_class", $config['mailer']["mailer_template_class"]);
-            $container->setParameter("maxtoan_tools.swiftmailer.mailer_component_class", $config['mailer']["mailer_component_class"]);
-            $container->setParameter("maxtoan_tools.swiftmailer.mailer_repository_manager", $config['mailer']["mailer_repository_manager"]);
-            $idManager = $container->getParameter("maxtoan_tools.swiftmailer.mailer_repository_manager");
+            $container->setParameter("maxtoan_tools.symfonymailer.mailer_template_class", $config['mailer']["mailer_template_class"]);
+            $container->setParameter("maxtoan_tools.symfonymailer.mailer_component_class", $config['mailer']["mailer_component_class"]);
+            $container->setParameter("maxtoan_tools.symfonymailer.mailer_repository_manager", $config['mailer']["mailer_repository_manager"]);
+            $idManager = $container->getParameter("maxtoan_tools.symfonymailer.mailer_repository_manager");
             $container->setAlias("maxtoan_tools.repository.mailer.em",$idManager);
         }
 

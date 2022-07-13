@@ -2,10 +2,12 @@
 
 namespace Maxtoan\ToolsBundle\Service\Mailer;
 
-use Swift_Mailer;
-use Swift_Preferences;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Twig_Environment;
+use Twig\Environment;
 use Maxtoan\ToolsBundle\Service\Mailer\Adapter\EmailAdapterInterface;
 
 /**
@@ -13,10 +15,10 @@ use Maxtoan\ToolsBundle\Service\Mailer\Adapter\EmailAdapterInterface;
  *
  * @author Máximo Sojo <maxojo13@gmail.com>
  */
-class TwigSwiftMailer
+class TwigSymfonyMailer
 {
 	/**
-     * @var Swift_Mailer
+     * @var MailerInterface
      */
     protected $mailer;
 
@@ -30,10 +32,12 @@ class TwigSwiftMailer
      */
     protected $adapter;
 
-    public function __construct(Swift_Mailer $mailer, Twig_Environment $twig, EmailAdapterInterface $adapter, array $options = [])
+    public function __construct(MailerInterface $mailer,Environment $twig, EmailAdapterInterface $adapter, array $options = [])
     {
         $this->mailer = $mailer;
         $this->twig = $twig;
+        $this->twig->addExtension(new \Twig\Extension\StringLoaderExtension());
+
         $this->adapter = $adapter;
 
         $resolver = new OptionsResolver();
@@ -65,11 +69,11 @@ class TwigSwiftMailer
 EOF;
     }
 
-    public function email($templateName, $toEmail, $context,array $attachs = [])
+    public function email($templateName, $toEmail, $context, array $attachs = [])
     {
         $message = $this->render($templateName,$toEmail,$context,$attachs);
         foreach ($attachs as $name => $path) {
-            $message->attach(\Swift_Attachment::fromPath($path)->setFilename($name));
+            $message->attachFromPath($path,$name);
         }
         $this->send($message);
     }
@@ -84,7 +88,13 @@ EOF;
 
     private function send($message)
     {
-        $this->mailer->send($message);
+        try {
+            $r = $this->mailer->send($message);
+            var_dump($r);die;
+        } catch (TransportExceptionInterface $e) {
+            // some error prevented the email sending; display an
+            // error message or try to resend the message
+        }
     }
 
 	/**
@@ -112,14 +122,22 @@ EOF;
         $subject = $tplSubjet->renderBlock('subject', $context);
         $htmlBody = $template->render($context);
 
-        $fromEmail = array($this->options["from_email"] => $this->options["from_name"]);
-        $toEmail = (array)$toEmail;
-        $message = new \Swift_Message("");
+        $fromEmail = new Address($this->options["from_email"], $this->options["from_name"]);
+        // Message
+        $message = (new Email())
+            ->from($fromEmail)
+            ->to($toEmail)
+            ->subject($subject)
+            ->html($htmlBody);
+
+        //$mailer->send($email);
+        // Old
+        /*$message = new \Swift_Message("");
         $message
             ->setSubject($subject)
             ->setFrom($fromEmail)
             ->setTo($toEmail);
-        $message->setBody($htmlBody,'text/html');
+        $message->setBody($htmlBody,'text/html');*/
         return $message;
     }
 
