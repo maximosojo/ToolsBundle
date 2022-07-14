@@ -29,10 +29,9 @@ class ModelMessage
     const STATUS_CANCELLED = 'CANCELLED';
 
     /**
-     * @var string
      * @ORM\Id
-     * @ORM\Column(name="id", type="string", length=255)
-     * @ORM\GeneratedValue(strategy="UUID")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     protected $id;
     

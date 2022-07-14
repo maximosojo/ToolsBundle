@@ -13,11 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 trait TraitBaseORM
 {
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="string", length=36)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="UUID")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     protected $id;
     
