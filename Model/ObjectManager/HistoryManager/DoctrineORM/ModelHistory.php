@@ -34,7 +34,7 @@ abstract class ModelHistory implements HistoryInterface
     /**
      * Extra info
      * @var array
-     * @ORM\Column(name="extra",type="json_array") 
+     * @ORM\Column(name="extra",type="json") 
      */
     protected $extra;
     

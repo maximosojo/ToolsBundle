@@ -32,7 +32,7 @@ class ModelBlock extends ModelStandarMaster
     /**
      * Parametros extras
      * @var integer
-     * @ORM\Column(name="parameters",type="json_array")
+     * @ORM\Column(name="parameters",type="json")
      */
     protected $parameters;
 
