@@ -6,6 +6,7 @@ use App\Entity\M\Core\Search\Block;
 use App\Entity\M\Core\Search\Added;
 use App\Entity\M\Core\Search\Filter;
 use Maxtoan\ToolsBundle\Service\BaseService;
+use Twig\Environment;
 
 /**
  * Manejador de filtros
@@ -17,12 +18,12 @@ class SearchManager extends BaseService
     /**
      * Filtros estandares
      */
-    private $standardFilters = "MaxtoanToolsBundle:searchManager:standard.html.twig";
+    private $standardFilters = "@MaxtoanTools/searchManager/standard.html.twig";
 
     /**
      * Template para renderizar los filtros
      */
-    private $templateFilters = "MaxtoanToolsBundle:searchManager:template.html.twig";
+    private $templateFilters = "@MaxtoanTools/searchManager/template.html.twig";
     
     /**
      * @var \Twig_Environment
@@ -66,7 +67,7 @@ class SearchManager extends BaseService
     /**
      * @required
      */
-    public function setTwig(\Twig_Environment $twig)
+    public function setTwig(Environment $twig)
     {
         $this->twig = $twig;
     }
