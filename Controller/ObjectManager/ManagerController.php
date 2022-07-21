@@ -2,7 +2,7 @@
 
 namespace Maxtoan\ToolsBundle\Controller\ObjectManager;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Maxtoan\ToolsBundle\Service\ObjectManager\ObjectDataManager;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-abstract class ManagerController extends Controller
+abstract class ManagerController extends AbstractController
 {
     /**
      * Configuracion de la instancia

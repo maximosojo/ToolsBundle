@@ -227,7 +227,9 @@ class LinkGeneratorService implements ContainerAwareInterface
             $this->boot();
         }
         
-        if(preg_match('/'. \Doctrine\Common\Persistence\Proxy::MARKER .'/',$entityClass)){
+        if(class_exists("Doctrine\Common\Persistence\Proxy") && preg_match('/'. \Doctrine\Common\Persistence\Proxy::MARKER .'/',$entityClass)){
+            $entityClass = \Doctrine\Common\Util\ClassUtils::getRealClass($entityClass);
+        }else if(interface_exists("Doctrine\Persistence\Proxy") && preg_match('/'. \Doctrine\Persistence\Proxy::MARKER .'/',$entityClass)){
             $entityClass = \Doctrine\Common\Util\ClassUtils::getRealClass($entityClass);
         }
 
