@@ -33,3 +33,8 @@ services:
             - [ addEngine, ["@Maxtoan\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\TCPDFEngine"]  ]
             - [ addEngine, ["@Maxtoan\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\TCPDFNativeEngine"]  ]
             - [ addEngine, ["@Maxtoan\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\PhpSpreadsheetXLSXEngine"]  ]
+
+    Maxtoan\ToolsBundle\Controller\ObjectManager\ExporterManagerController:
+        public: true
+        calls:
+            - [ setContainer, ['@service_container']  ]

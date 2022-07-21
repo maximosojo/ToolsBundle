@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Maxtoan\ToolsBundle\Service\ObjectManager\ObjectDataManager;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Maxtoan\ToolsBundle\Service\ObjectManager\ObjectDataManagerInterface;
 
 /**
  * Base de controladores del manager
@@ -25,7 +26,7 @@ abstract class ManagerController extends AbstractController
      * @param Request $request
      * @return ObjectDataManager
      */
-    protected function getObjectDataManager(Request $request)
+    private function initialize(Request $request)
     {
         // Se resuelven las opciones
         $resolver = new OptionsResolver();
@@ -35,8 +36,6 @@ abstract class ManagerController extends AbstractController
         $resolver->setRequired(["returnUrl","objectId","objectType"]);
         $config = $resolver->resolve($request->get("_conf"));
         $this->config = $config;
-
-        return $this->container->get("maxtoan_tools.object_manager");
     }
 
     /**
@@ -44,9 +43,9 @@ abstract class ManagerController extends AbstractController
      * @param Request $request
      * @return DocumentManager
      */
-    protected function getDocumentManager(Request $request)
+    protected function getDocumentManager(Request $request, ObjectDataManagerInterface $objectDataManager)
     {
-        $objectDataManager = $this->getObjectDataManager($request);
+        $this->initialize($request);
         $documentManager = $objectDataManager->documents();
         $documentManager->configure($this->config["objectId"],$this->config["objectType"]);
         $documentManager->folder($this->config["folder"]);
@@ -58,9 +57,9 @@ abstract class ManagerController extends AbstractController
      * @param Request $request
      * @return DocumentManager
      */
-    protected function getExporterManager(Request $request)
+    protected function getExporterManager(Request $request, ObjectDataManagerInterface $objectDataManager)
     {
-        $objectDataManager = $this->getObjectDataManager($request);
+        $this->initialize($request);
         $exporterManager = $objectDataManager->exporters();
         $exporterManager->configure($this->config["objectId"],$this->config["objectType"]);
         return $exporterManager;
