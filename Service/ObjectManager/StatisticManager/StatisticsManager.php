@@ -336,7 +336,6 @@ class StatisticsManager implements ConfigureInterface
             $value = $this->getValueDay($options["day"], $foundStatisticsMonth);
             $value++;
         }
-//        var_dump($value);
 
         $this->setValueDay($foundStatisticsMonth, $options["day"], $value);
         $foundStatisticsMonth->totalize();
@@ -365,10 +364,6 @@ class StatisticsManager implements ConfigureInterface
         }
         $statisticsPropertyPath = "day" . $day;
         $value = $this->propertyAccess->getValue($foundStatistics, $statisticsPropertyPath);
-//        var_dump($foundStatistics->getId());
-//        var_dump($value);
-//        var_dump($statisticsPropertyPath);
-//        die;
         return $value;
     }
 

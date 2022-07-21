@@ -90,7 +90,6 @@ EOF;
     {
         try {
             $r = $this->mailer->send($message);
-            var_dump($r);die;
         } catch (TransportExceptionInterface $e) {
             // some error prevented the email sending; display an
             // error message or try to resend the message
@@ -130,14 +129,6 @@ EOF;
             ->subject($subject)
             ->html($htmlBody);
 
-        //$mailer->send($email);
-        // Old
-        /*$message = new \Swift_Message("");
-        $message
-            ->setSubject($subject)
-            ->setFrom($fromEmail)
-            ->setTo($toEmail);
-        $message->setBody($htmlBody,'text/html');*/
         return $message;
     }
 

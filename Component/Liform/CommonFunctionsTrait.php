@@ -30,11 +30,9 @@ trait CommonFunctionsTrait
     protected function addCommonCustom(FormInterface $form, array $schema)
     {
         $formView = $this->formView;
-//        var_dump($formView->vars);
         $formRoot = $form->getRoot();
 
         $schema["full_name"] = $formView->vars["full_name"];
-//        $schema["full_name"] = $formView->vars["name"];
         $schema = $this->addConstraints($form, $schema, $formRoot);
         $schema = $this->addDateParams($form, $schema);
         $schema = $this->addCommonConfigOptions($form, $schema);

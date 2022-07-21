@@ -562,17 +562,11 @@ class StatisticsMonth implements StatisticsMonthInterface
         $total = 0.0;
         foreach ($methods as $method) {
             $methodName = $method->getName();
-//            $class = $method->getDeclaringClass();
-           
             if(preg_match('/'.$nameMatchReal.'/i', $methodName)){
-//                var_dump($this->$methodName());
                 $total += $this->$methodName();
             }
         }
         $this->total = $total;
-//        var_dump($total);
-//        var_dump(__FILE__);
-//        die;
     }
 
     public function setUser($user){}

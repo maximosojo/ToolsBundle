@@ -363,7 +363,6 @@ abstract class BaseDataContext extends RawMinkContext implements KernelAwareCont
         }
         $valueExplode = explode("__", $value);
         if (is_array($valueExplode) && count($valueExplode) == 2) {
-//            var_dump($valueExplode[0]);
             $valueExplode[0] = str_replace("\\\\","\\", $valueExplode[0]);//Fix de clases con doble \\
             $reflection = new \ReflectionClass($valueExplode[0]);
             if (!$reflection->hasConstant($valueExplode[1])) {
