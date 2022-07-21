@@ -146,7 +146,7 @@ class CoreExtension extends AbstractExtension
     public function renderTabs(\Maxtoan\ToolsBundle\Model\Tab\Tab $tab,array $parameters = []) 
     {
         $parameters["tab"] = $tab;
-        return $this->container->get('templating')->render("MaxtoanToolsBundle:tab:tabs.html.twig", 
+        return $this->container->get('twig')->render("@MaxtoanTools/tab/tabs.html.twig", 
             $parameters
         );
     }
@@ -160,7 +160,7 @@ class CoreExtension extends AbstractExtension
     public function renderCollapse(array $parameters = []) 
     {
         $parameters["id"] = "_collapse_".sha1($parameters['title']);
-        return $this->container->get('templating')->render("MaxtoanToolsBundle:collapse:collapse.html.twig", 
+        return $this->container->get('twig')->render("@MaxtoanTools/collapse/collapse.html.twig", 
             $parameters
         );
     }
