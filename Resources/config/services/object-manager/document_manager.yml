@@ -7,7 +7,7 @@ services:
     maxtoan_tools.document_manager_disk_adapter:
         class: Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\Adapter\DiskAdapter
         arguments:
-            - { "debug": "%kernel.debug%", "base_path": "%kernel.project_dir%/../var", "documents_path": "documents","env": "%kernel.environment%" }
+            - { "debug": "%kernel.debug%", "base_path": "%kernel.project_dir%/var", "documents_path": "documents","env": "%kernel.environment%" }
     
     maxtoan_tools.document_manager.default:
         class: Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\DocumentManager
