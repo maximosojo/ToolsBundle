@@ -26,7 +26,7 @@ class SearchManager extends BaseService
     private $templateFilters = "@MaxtoanTools/searchManager/template.html.twig";
     
     /**
-     * @var \Twig_Environment
+     * @var Environment
      */
     private $twig;
     

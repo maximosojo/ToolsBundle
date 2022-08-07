@@ -3,7 +3,7 @@
 namespace Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine;
 
 use Maxtoan\ToolsBundle\Model\ObjectManager\ExporterManager\TemplateInterface;
-use Twig_Environment;
+use Twig\Environment;
 use TCPDF;
 
 /**
@@ -16,11 +16,11 @@ class TCPDFEngine extends BaseEngine
     const NAME = "TCPDF";
 
     /**
-     * @var Twig_Environment 
+     * @var Environment 
      */
     private $twig;
 
-    public function __construct(Twig_Environment $twig)
+    public function __construct(Environment $twig)
     {
         $this->twig = $twig;
     }
