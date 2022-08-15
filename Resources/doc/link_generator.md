@@ -1,4 +1,4 @@
-MaxtoanToolsBundle
+MaximosojoToolsBundle
 ========================
 
 ## Generador de enlaces
@@ -14,7 +14,7 @@ Uso y configuración:
 Habilitar el componente para su uso y puede ser registrado el color de enlaces:
 
 ``` yml
-maxtoan_tools:
+maximosojo_tools:
     link_generator:
         enable: true
         color: "#000"
@@ -38,7 +38,7 @@ Estructura de servicio:
 <?php
 // AppBundle\Service\LinkGenerator\MyLinkGeneratorItem.php;
 
-use Maxtoan\ToolsBundle\Model\LinkGenerator\LinkGeneratorItem;
+use Maximosojo\ToolsBundle\Model\LinkGenerator\LinkGeneratorItem;
 
 class MyLinkGeneratorItem extends LinkGeneratorItem
 {

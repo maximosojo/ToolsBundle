@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Component\Validator;
+namespace Maximosojo\ToolsBundle\Component\Validator;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Validator\ConstraintValidator as ConstraintValidatorBase;
-use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
-use Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;
+use Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+use Maximosojo\ToolsBundle\DependencyInjection\DoctrineTrait;
 
 /**
  * Base de validadores

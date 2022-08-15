@@ -1,11 +1,11 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\Core\Search;
+namespace Maximosojo\ToolsBundle\Service\Core\Search;
 
 use App\Entity\M\Core\Search\Block;
 use App\Entity\M\Core\Search\Added;
 use App\Entity\M\Core\Search\Filter;
-use Maxtoan\ToolsBundle\Service\BaseService;
+use Maximosojo\ToolsBundle\Service\BaseService;
 use Twig\Environment;
 
 /**
@@ -18,12 +18,12 @@ class SearchManager extends BaseService
     /**
      * Filtros estandares
      */
-    private $standardFilters = "@MaxtoanTools/searchManager/standard.html.twig";
+    private $standardFilters = "@MaximosojoTools/searchManager/standard.html.twig";
 
     /**
      * Template para renderizar los filtros
      */
-    private $templateFilters = "@MaxtoanTools/searchManager/template.html.twig";
+    private $templateFilters = "@MaximosojoTools/searchManager/template.html.twig";
     
     /**
      * @var Environment

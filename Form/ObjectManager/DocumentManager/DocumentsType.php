@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Form\ObjectManager\DocumentManager;
+namespace Maximosojo\ToolsBundle\Form\ObjectManager\DocumentManager;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

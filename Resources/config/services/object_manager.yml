@@ -4,12 +4,12 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         public: false
 
-    maxtoan_tools.object_manager.default:
-        class: Maxtoan\ToolsBundle\Service\ObjectManager\ObjectDataManager
+    maximosojo_tools.object_manager.default:
+        class: Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManager
         public: false
         calls:
-            - [ setOptions, ["%maxtoan_tools.object_manager.options%"]  ]
+            - [ setOptions, ["%maximosojo_tools.object_manager.options%"]  ]
             - [ setContainer, ['@service_container']  ]
-    Maxtoan\ToolsBundle\Service\ObjectManager\ObjectDataManagerInterface:
-        alias: maxtoan_tools.object_manager
+    Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManagerInterface:
+        alias: maximosojo_tools.object_manager
         public: false

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Service\LinkGenerator;
+namespace Maximosojo\ToolsBundle\Service\LinkGenerator;
 
 use LogicException;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -18,17 +18,17 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Exception;
 
 /**
- * Generador de links por objeto (maxtoan.service.link_generator)
+ * Generador de links por objeto (maximosojo.service.link_generator)
  *
  * @author Carlos Mendoza<inhack20@gmail.com>
  */
 class LinkGeneratorService implements ContainerAwareInterface
 {
-    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use \Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
     
     /**
      * Definicion de iconos de objetos
-     * @var \Maxtoan\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface
+     * @var \Maximosojo\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface
      */
     private $linkGeneratorItems;
     private $linkGeneratorItemsForClass = [];
@@ -130,7 +130,7 @@ class LinkGeneratorService implements ContainerAwareInterface
         $route = $entityConfig['route'];
         $routeParameters = $entityConfig['routeParameters'];
         $labelMethod = $entityConfig['labelMethod'];
-        $color = $this->container->getParameter('maxtoan_tools.service.link_generator.color');
+        $color = $this->container->getParameter('maximosojo_tools.service.link_generator.color');
 
         if($labelMethod !== null){
             $label = call_user_func_array([$entity, $labelMethod],array());
@@ -339,10 +339,10 @@ class LinkGeneratorService implements ContainerAwareInterface
     
     /**
      * Añade un item para generacion
-     * @param \Maxtoan\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface $linkGeneratorItem
-     * @return \Maxtoan\ToolsBundle\Service\LinkGenerator\LinkGeneratorService
+     * @param \Maximosojo\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface $linkGeneratorItem
+     * @return \Maximosojo\ToolsBundle\Service\LinkGenerator\LinkGeneratorService
      */
-    public function addLinkGeneratorItem(\Maxtoan\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface $linkGeneratorItem) 
+    public function addLinkGeneratorItem(\Maximosojo\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface $linkGeneratorItem) 
     {
         $linkGeneratorItem->setLinkGeneratorService($this);
         

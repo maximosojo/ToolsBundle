@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\DependencyInjection;
+namespace Maximosojo\ToolsBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

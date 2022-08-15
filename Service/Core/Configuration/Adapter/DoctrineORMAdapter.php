@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Service\Core\Configuration\Adapter;
+namespace Maximosojo\ToolsBundle\Service\Core\Configuration\Adapter;
 
-use Maxtoan\ToolsBundle\Model\Core\Configuration\ConfigurationInterface;
+use Maximosojo\ToolsBundle\Model\Core\Configuration\ConfigurationInterface;
 
 /**
  * Adaptador de doctrine2

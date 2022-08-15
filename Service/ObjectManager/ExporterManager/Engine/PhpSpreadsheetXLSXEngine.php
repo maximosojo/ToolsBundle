@@ -1,8 +1,8 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\Engine;
 
-use Maxtoan\ToolsBundle\Model\ObjectManager\ExporterManager\TemplateInterface;
+use Maximosojo\ToolsBundle\Model\ObjectManager\ExporterManager\TemplateInterface;
 use RuntimeException;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;

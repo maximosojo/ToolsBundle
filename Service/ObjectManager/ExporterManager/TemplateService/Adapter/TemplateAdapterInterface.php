@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService\Adapter;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService\Adapter;
 
 /**
  * Interface de adaptadores de plantillas

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\DependencyInjection;
+namespace Maximosojo\ToolsBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Maxtoan\ToolsBundle\Model\Paginator\Paginator;
+use Maximosojo\ToolsBundle\Model\Paginator\Paginator;
 
 /**
  * This class contains the configuration information for the bundle.
@@ -31,13 +31,13 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder('maxtoan_tools');
+        $treeBuilder = new TreeBuilder('maximosojo_tools');
 
         if (method_exists($treeBuilder, 'getRootNode')) {
             $rootNode = $treeBuilder->getRootNode();
         } else {
             // BC layer for symfony/config 4.1 and older
-            $rootNode = $treeBuilder->root('maxtoan_tools', 'array');
+            $rootNode = $treeBuilder->root('maximosojo_tools', 'array');
         }
 
         $rootNode
@@ -128,7 +128,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('prefix')->defaultValue("prefix")->end()
                         ->scalarNode('prefix_separator')->defaultValue('_')->cannotBeEmpty()->end()
                         ->scalarNode('on_delete')->defaultNull()->end()
-                        ->scalarNode('listerner_class')->defaultValue('Maxtoan\ToolsBundle\EventListener\TablePrefixListerner')->cannotBeEmpty()->end()
+                        ->scalarNode('listerner_class')->defaultValue('Maximosojo\ToolsBundle\EventListener\TablePrefixListerner')->cannotBeEmpty()->end()
                     ->end()
                 ->end()
                 ->arrayNode('jms_serializer')
@@ -151,21 +151,21 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('object_manager')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('manager')->defaultValue('maxtoan_tools.object_manager.default')->end()
+                        ->scalarNode('manager')->defaultValue('maximosojo_tools.object_manager.default')->end()
                         ->arrayNode('document_manager')
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->booleanNode('enable')->defaultFalse()->end()
-                                ->scalarNode('template')->defaultValue("MaxtoanToolsBundle:objectManager:documentManager/documents.html.twig")->end()
-                                ->scalarNode('adapter')->defaultValue("maxtoan_tools.document_manager_disk_adapter")->end()
+                                ->scalarNode('template')->defaultValue("MaximosojoToolsBundle:objectManager:documentManager/documents.html.twig")->end()
+                                ->scalarNode('adapter')->defaultValue("maximosojo_tools.document_manager_disk_adapter")->end()
                             ->end()
                         ->end()
                         ->arrayNode('exporter_manager')
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->booleanNode('enable')->defaultFalse()->end()
-                                ->scalarNode('template')->defaultValue("MaxtoanToolsBundle:objectManager:exporterManager/documents.html.twig")->end()
-                                ->scalarNode('adapter')->defaultValue("maxtoan_tools.exporter_manager_doctrine_orm_adapter")->end()
+                                ->scalarNode('template')->defaultValue("MaximosojoToolsBundle:objectManager:exporterManager/documents.html.twig")->end()
+                                ->scalarNode('adapter')->defaultValue("maximosojo_tools.exporter_manager_doctrine_orm_adapter")->end()
                                 ->arrayNode('chaines')
                                     ->prototype('array')
                                         ->children()
@@ -195,7 +195,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->booleanNode('enable')->defaultFalse()->end()
-                                ->scalarNode('adapter')->defaultValue("maxtoan_tools.statistics_manager_doctrine_orm_adapter")->end()
+                                ->scalarNode('adapter')->defaultValue("maximosojo_tools.statistics_manager_doctrine_orm_adapter")->end()
                                 ->arrayNode('object_types')
                                     ->prototype('array')
                                         ->children()

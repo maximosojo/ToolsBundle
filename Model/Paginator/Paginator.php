@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Model\Paginator;
+namespace Maximosojo\ToolsBundle\Model\Paginator;
 
 use Pagerfanta\Pagerfanta as BasePagerfanta;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Router;
  */
 class Paginator extends BasePagerfanta implements ContainerAwareInterface
 {
-    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use \Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
     
     /**
      * $route

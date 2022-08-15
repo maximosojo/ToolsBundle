@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Model\Core\Configuration;
+namespace Maximosojo\ToolsBundle\Model\Core\Configuration;
 
 /**
  * Interfaz de configuracion

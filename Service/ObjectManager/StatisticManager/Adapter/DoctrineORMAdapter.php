@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\StatisticManager\Adapter;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\StatisticManager\Adapter;
 
-use Maxtoan\ToolsBundle\Service\ObjectManager\ConfigureInterface;
-use Maxtoan\ToolsBundle\Service\ObjectManager\TraitConfigure;
+use Maximosojo\ToolsBundle\Service\ObjectManager\ConfigureInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\TraitConfigure;
 
 /**
  * Adaptador de doctrine 2
@@ -47,9 +47,9 @@ class DoctrineORMAdapter implements StatisticsAdapterInterface,ConfigureInterfac
     }
 
     /**
-     * @return \Maxtoan\ToolsBundle\Model\Configuration\Statistics\StatisticsYearInterface Description
+     * @return \Maximosojo\ToolsBundle\Model\Configuration\Statistics\StatisticsYearInterface Description
      */
-    public function newYearStatistics(\Maxtoan\ToolsBundle\Service\ObjectManager\StatisticManager\StatisticsManager $statisticsManager)
+    public function newYearStatistics(\Maximosojo\ToolsBundle\Service\ObjectManager\StatisticManager\StatisticsManager $statisticsManager)
     {
         $entity = new $this->classYearName;
         $entity
@@ -60,9 +60,9 @@ class DoctrineORMAdapter implements StatisticsAdapterInterface,ConfigureInterfac
     }
     
     /**
-     * @return \Maxtoan\ToolsBundle\Model\Configuration\Statistics\StatisticsMonthInterface Description
+     * @return \Maximosojo\ToolsBundle\Model\Configuration\Statistics\StatisticsMonthInterface Description
      */
-    public function newStatisticsMonth(\Maxtoan\ToolsBundle\Service\ObjectManager\StatisticManager\StatisticsManager $statisticsManager)
+    public function newStatisticsMonth(\Maximosojo\ToolsBundle\Service\ObjectManager\StatisticManager\StatisticsManager $statisticsManager)
     {
         $entity = new $this->classMonthName;
         $entity
@@ -94,7 +94,7 @@ class DoctrineORMAdapter implements StatisticsAdapterInterface,ConfigureInterfac
      *  
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  array  $params
-     * @return \Maxtoan\ToolsBundle\Model\Statistics\StatisticsYearInterface
+     * @return \Maximosojo\ToolsBundle\Model\Statistics\StatisticsYearInterface
      */
     public function findStatisticsYear(array $params = array())
     {
@@ -111,7 +111,7 @@ class DoctrineORMAdapter implements StatisticsAdapterInterface,ConfigureInterfac
     {
         if (isset($_SERVER['HTTP_USER_AGENT'])) {
             $userAgent = $_SERVER['HTTP_USER_AGENT'];
-        // } elseif (\Maxtoan\Common\Util\AppUtil::isCommandLineInterface()) {
+        // } elseif (\Maximosojo\Common\Util\AppUtil::isCommandLineInterface()) {
             // $userAgent = "cli-user-agent";
         }
 

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\DependencyInjection\Compiler;
+namespace Maximosojo\ToolsBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -32,7 +32,7 @@ class FactoryRepositoryPass implements CompilerPassInterface
     public function process(ContainerBuilder $container) 
     {
         $tag = "app.repository";
-        $factory = $container->findDefinition('maxtoan_tools.doctrine.repository.factory');
+        $factory = $container->findDefinition('maximosojo_tools.doctrine.repository.factory');
  
         $repositories = array();
         foreach ($container->findTaggedServiceIds($tag) as $id => $params) {

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Model\Tab;
+namespace Maximosojo\ToolsBundle\Model\Tab;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Maxtoan\ToolsBundle\Model\Tab\Tab;
+use Maximosojo\ToolsBundle\Model\Tab\Tab;
 
 /**
  * Contenido de tab
@@ -77,7 +77,7 @@ class TabContent
     /**
      * Opciones de la tab
      * @param array $options
-     * @return \Maxtoan\ToolsBundle\Model\Tab\TabContent
+     * @return \Maximosojo\ToolsBundle\Model\Tab\TabContent
      */
     public function setOptions(array $options = []) 
     {

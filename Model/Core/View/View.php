@@ -1,10 +1,10 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\Core\View;
+namespace Maximosojo\ToolsBundle\Model\Core\View;
 
-use Maxtoan\ToolsBundle\Model\Core\View\Header;
-use Maxtoan\ToolsBundle\Model\Core\View\Body;
-use Maxtoan\ToolsBundle\Model\Core\View\Footer;
+use Maximosojo\ToolsBundle\Model\Core\View\Header;
+use Maximosojo\ToolsBundle\Model\Core\View\Body;
+use Maximosojo\ToolsBundle\Model\Core\View\Footer;
 
 /**
  * View

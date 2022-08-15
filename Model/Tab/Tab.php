@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Model\Tab;
+namespace Maximosojo\ToolsBundle\Model\Tab;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -60,7 +60,7 @@ class Tab
     public function __construct(array $options = []) 
     {
         $this->tabsContent = [];
-        $this->id = md5(\Maxtoan\Common\Util\StringUtil::getId());
+        $this->id = md5(\Maximosojo\Common\Util\StringUtil::getId());
         $this->setOptions($options);
     }
     
@@ -157,8 +157,8 @@ class Tab
     
     /**
      * Add tab
-     * @param \Maxtoan\ToolsBundle\Model\Tab\TabContent $tabContent
-     * @return \Maxtoan\ToolsBundle\Model\Tab\Tab
+     * @param \Maximosojo\ToolsBundle\Model\Tab\TabContent $tabContent
+     * @return \Maximosojo\ToolsBundle\Model\Tab\Tab
      * @throws \RuntimeException
      */
     public function addTabContent(TabContent $tabContent) 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\ObjectManager\ExporterManager\DoctrineORM;
+namespace Maximosojo\ToolsBundle\Model\ObjectManager\ExporterManager\DoctrineORM;
 
 use Doctrine\ORM\Mapping as ORM;
 

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle;
+namespace Maximosojo\ToolsBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -21,11 +21,11 @@ if (!defined('TOOLS_ROOT')) {
 define('ROOT_DIR', TOOLS_ROOT . '/');
 
 /**
- * MaxtoanToolsBundle
+ * MaximosojoToolsBundle
  * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class MaxtoanToolsBundle extends Bundle
+class MaximosojoToolsBundle extends Bundle
 {
 	public function build(\Symfony\Component\DependencyInjection\ContainerBuilder $container) 
     {

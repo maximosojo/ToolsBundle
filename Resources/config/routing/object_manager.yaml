@@ -1,14 +1,14 @@
 object_manager_documents_upload:
     path: /documents/upload
     defaults:
-        _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController::uploadAction
+        _controller:  Maximosojo\ToolsBundle\Controller\ObjectManager\DocumentManagerController::uploadAction
         _format: html
     requirements: { _method: POST }
     
 object_manager_documents_delete:
     path: /documents/delete
     defaults:
-        _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController::deleteAction
+        _controller:  Maximosojo\ToolsBundle\Controller\ObjectManager\DocumentManagerController::deleteAction
         _format: html
     requirements: { _method: GET }
     options:
@@ -17,7 +17,7 @@ object_manager_documents_delete:
 object_manager_documents_download:
     path: /documents/download
     defaults:
-        _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController::downloadAction
+        _controller:  Maximosojo\ToolsBundle\Controller\ObjectManager\DocumentManagerController::downloadAction
         _format: html
     requirements: { _method: GET }
     options:
@@ -26,14 +26,14 @@ object_manager_documents_download:
 object_manager_documents_get:
     path: /documents/get
     defaults:
-        _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController::getAction
+        _controller:  Maximosojo\ToolsBundle\Controller\ObjectManager\DocumentManagerController::getAction
         _format: html
     requirements: { _method: GET }
 
 object_manager_documents_all:
     path: /documents/all
     defaults:
-        _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController::allAction
+        _controller:  Maximosojo\ToolsBundle\Controller\ObjectManager\DocumentManagerController::allAction
         _format: html
     requirements: { _method: GET }
     options:
@@ -42,7 +42,7 @@ object_manager_documents_all:
 object_manager_exporters_generate:
     path: /exporters/generate
     defaults:
-        _controller:  Maxtoan\ToolsBundle\Controller\ObjectManager\ExporterManagerController::generateAction
+        _controller:  Maximosojo\ToolsBundle\Controller\ObjectManager\ExporterManagerController::generateAction
         _format: html
     requirements: { _method: POST }
     options:

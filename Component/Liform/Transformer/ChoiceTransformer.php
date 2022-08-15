@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Component\Liform\Transformer;
+namespace Maximosojo\ToolsBundle\Component\Liform\Transformer;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\ChoiceList\View\ChoiceGroupView;
@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormView;
  */
 class ChoiceTransformer extends AbstractTransformer
 {
-    use \Maxtoan\ToolsBundle\Component\Liform\CommonFunctionsTrait;
+    use \Maximosojo\ToolsBundle\Component\Liform\CommonFunctionsTrait;
     
     /**
      * {@inheritdoc}

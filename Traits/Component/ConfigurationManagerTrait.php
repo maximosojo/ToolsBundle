@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Traits\Component;
+namespace Maximosojo\ToolsBundle\Traits\Component;
 
 /**
  * ConfigurationManagerTrait
@@ -26,6 +26,6 @@ trait ConfigurationManagerTrait
      */
     public function getConfigurationManager()
     {
-        return $this->container->get("maxtoan_tools.manager.configuration");
+        return $this->container->get("maximosojo_tools.manager.configuration");
     }
 }

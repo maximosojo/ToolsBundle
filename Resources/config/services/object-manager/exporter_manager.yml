@@ -4,37 +4,37 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         public: false
 
-    maxtoan_tools.exporter_manager_doctrine_orm_adapter:
-        class: Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Adapter\DoctrineORMAdapter
+    maximosojo_tools.exporter_manager_doctrine_orm_adapter:
+        class: Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\Adapter\DoctrineORMAdapter
         arguments: ["@doctrine.orm.default_entity_manager"]
 
-    maxtoan_tools.exporter_manager.default:
-        class: Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\ExporterManager
+    maximosojo_tools.exporter_manager.default:
+        class: Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\ExporterManager
         public: true
         calls:
             - [ setContainer, ['@service_container']  ]
 
-    Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\ExporterManagerInterface:
-        alias: maxtoan_tools.exporter_manager
+    Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\ExporterManagerInterface:
+        alias: maximosojo_tools.exporter_manager
     
     # Manejador de plantillas
-    Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\PhpSpreadsheetXLSXEngine:
+    Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\PhpSpreadsheetXLSXEngine:
         arguments: []
-    Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\TCPDFEngine:
+    Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\TCPDFEngine:
         arguments: ["@twig"]
-    Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\TCPDFNativeEngine:
+    Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\TCPDFNativeEngine:
         arguments: []
     
-    maxtoan_tools.template_service:
-        class: Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService
+    maximosojo_tools.template_service:
+        class: Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService
         public: true
         arguments: [ {"debug":"%kernel.debug%", "env": "%kernel.environment%"} ]
         calls:
-            - [ addEngine, ["@Maxtoan\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\TCPDFEngine"]  ]
-            - [ addEngine, ["@Maxtoan\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\TCPDFNativeEngine"]  ]
-            - [ addEngine, ["@Maxtoan\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\PhpSpreadsheetXLSXEngine"]  ]
+            - [ addEngine, ["@Maximosojo\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\TCPDFEngine"]  ]
+            - [ addEngine, ["@Maximosojo\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\TCPDFNativeEngine"]  ]
+            - [ addEngine, ["@Maximosojo\\ToolsBundle\\Service\\ObjectManager\\ExporterManager\\Engine\\PhpSpreadsheetXLSXEngine"]  ]
 
-    Maxtoan\ToolsBundle\Controller\ObjectManager\ExporterManagerController:
+    Maximosojo\ToolsBundle\Controller\ObjectManager\ExporterManagerController:
         public: true
         calls:
             - [ setContainer, ['@service_container']  ]

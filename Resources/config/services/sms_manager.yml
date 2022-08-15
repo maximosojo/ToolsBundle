@@ -5,18 +5,18 @@ services:
         public: false
 
   # Manejador
-  maxtoan_tools.service.sms_manager:
-      class: Maxtoan\ToolsBundle\Service\Sms\SmsManager
+  maximosojo_tools.service.sms_manager:
+      class: Maximosojo\ToolsBundle\Service\Sms\SmsManager
       public: true
-      arguments: [{ env: "%kernel.environment%", disable_delivery: "%maxtoan_tools.sms_manager.disable_delivery%", class: "%maxtoan_tools.sms_manager.message_class%" }]
+      arguments: [{ env: "%kernel.environment%", disable_delivery: "%maximosojo_tools.sms_manager.disable_delivery%", class: "%maximosojo_tools.sms_manager.message_class%" }]
       #calls: 
       #    - [ setContainer, ['@service_container'] ]
 
   # Transports
-  maxtoan_tools.service.sms_manager.transports.interconectados:
-      class: Maxtoan\ToolsBundle\Service\Sms\Transports\InterconectadosTransport
+  maximosojo_tools.service.sms_manager.transports.interconectados:
+      class: Maximosojo\ToolsBundle\Service\Sms\Transports\InterconectadosTransport
       calls: 
-          - [ setOptions, ["%maxtoan_tools.service.sms_manager.transports.interconectados.options%"]  ]
+          - [ setOptions, ["%maximosojo_tools.service.sms_manager.transports.interconectados.options%"]  ]
 
-  maxtoan_tools.service.sms_manager.transports.dummy:
-      class: Maxtoan\ToolsBundle\Service\Sms\Transports\DummyTransport
+  maximosojo_tools.service.sms_manager.transports.dummy:
+      class: Maximosojo\ToolsBundle\Service\Sms\Transports\DummyTransport

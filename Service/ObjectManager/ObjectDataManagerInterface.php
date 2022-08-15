@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager;
 
 /**
  * Interfaz para manejador de objetos

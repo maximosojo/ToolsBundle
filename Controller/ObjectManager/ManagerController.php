@@ -1,12 +1,12 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Controller\ObjectManager;
+namespace Maximosojo\ToolsBundle\Controller\ObjectManager;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Maxtoan\ToolsBundle\Service\ObjectManager\ObjectDataManager;
+use Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManager;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Maxtoan\ToolsBundle\Service\ObjectManager\ObjectDataManagerInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManagerInterface;
 
 /**
  * Base de controladores del manager

@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\Sms;
+namespace Maximosojo\ToolsBundle\Service\Sms;
 
 
 /**

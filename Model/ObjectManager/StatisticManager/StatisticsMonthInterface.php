@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Model\ObjectManager\StatisticManager;
+namespace Maximosojo\ToolsBundle\Model\ObjectManager\StatisticManager;
 
-use Maxtoan\ToolsBundle\Model\ObjectManager\BaseInterface;
+use Maximosojo\ToolsBundle\Model\ObjectManager\BaseInterface;
 
 /**
  * StatisticsMonthInterface

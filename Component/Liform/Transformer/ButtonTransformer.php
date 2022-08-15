@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Component\Liform\Transformer;
+namespace Maximosojo\ToolsBundle\Component\Liform\Transformer;
 
 use Symfony\Component\Form\FormInterface;
 use Limenius\Liform\Transformer\StringTransformer as AbstractStringTransformer;

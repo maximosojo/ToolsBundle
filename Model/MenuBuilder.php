@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Model;
+namespace Maximosojo\ToolsBundle\Model;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
@@ -26,7 +26,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 abstract class MenuBuilder implements \Symfony\Component\DependencyInjection\ContainerAwareInterface
 {
-    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use \Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 
     /**
      * Menu factory.

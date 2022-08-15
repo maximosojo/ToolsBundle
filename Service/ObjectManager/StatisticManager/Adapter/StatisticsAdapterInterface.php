@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\StatisticManager\Adapter;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\StatisticManager\Adapter;
 
 /**
  *
@@ -21,18 +21,18 @@ interface StatisticsAdapterInterface
     public function flush();
     
     /**
-     * @return \Maxtoan\ToolsBundle\Model\Configuration\Statistics\StatisticsYearInterface Description
+     * @return \Maximosojo\ToolsBundle\Model\Configuration\Statistics\StatisticsYearInterface Description
      */
-    public function newYearStatistics(\Maxtoan\ToolsBundle\Service\ObjectManager\StatisticManager\StatisticsManager $statisticsManager);
+    public function newYearStatistics(\Maximosojo\ToolsBundle\Service\ObjectManager\StatisticManager\StatisticsManager $statisticsManager);
     /**
-     * @return \Maxtoan\ToolsBundle\Model\Configuration\Statistics\StatisticsMonthInterface Description
+     * @return \Maximosojo\ToolsBundle\Model\Configuration\Statistics\StatisticsMonthInterface Description
      */
-    public function newStatisticsMonth(\Maxtoan\ToolsBundle\Service\ObjectManager\StatisticManager\StatisticsManager $statisticsManager);
+    public function newStatisticsMonth(\Maximosojo\ToolsBundle\Service\ObjectManager\StatisticManager\StatisticsManager $statisticsManager);
     
     /**
      * Busca las estadisticas de un año
      * @param array $params
-     * @return \Maxtoan\ToolsBundle\Model\Statistics\StatisticsYearInterface
+     * @return \Maximosojo\ToolsBundle\Model\Statistics\StatisticsYearInterface
      */
     public function findStatisticsYear(array $params = array());
 }

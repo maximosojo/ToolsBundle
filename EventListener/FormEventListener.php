@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the Máximo Sojo - maxtoan package.
+ * This file is part of the Máximo Sojo - maximosojo package.
  * 
- * (c) https://maxtoan.github.io/
+ * (c) https://maximosojo.github.io/
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\EventListener;
+namespace Maximosojo\ToolsBundle\EventListener;
 
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;

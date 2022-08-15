@@ -1,19 +1,19 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager;
 
 use RuntimeException;
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Adapter\ExporterAdapterInterface;
-use Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\DocumentManager;
-use Maxtoan\ToolsBundle\Model\ObjectManager\ExporterManager\ChainModel;
-use Maxtoan\ToolsBundle\Service\ObjectManager\TraitConfigure;
-use Maxtoan\ToolsBundle\Form\ObjectManager\ExporterManager\DocumentsType;
+use Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\Adapter\ExporterAdapterInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\DocumentManager\DocumentManager;
+use Maximosojo\ToolsBundle\Model\ObjectManager\ExporterManager\ChainModel;
+use Maximosojo\ToolsBundle\Service\ObjectManager\TraitConfigure;
+use Maximosojo\ToolsBundle\Form\ObjectManager\ExporterManager\DocumentsType;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Form\FormInterface;
-use Maxtoan\ToolsBundle\Service\ObjectManager\ConfigureInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\ConfigureInterface;
 
 /**
  * Servicio para generar y exportar documentos PDF, XLS, DOC, TXT de los modulos
@@ -160,7 +160,7 @@ class ExporterManager implements ConfigureInterface
             unset($options["fileName"]);
         }
 
-        $templateService = $this->container->get('maxtoan_tools.template_service');
+        $templateService = $this->container->get('maximosojo_tools.template_service');
         $pathFileOut = $templateService->compile($modelDocument->getId(),$options["data"]);
         
         if(empty($fileName)){

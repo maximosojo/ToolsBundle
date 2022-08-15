@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\Mailer\Adapter;
+namespace Maximosojo\ToolsBundle\Service\Mailer\Adapter;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\OptionsResolver\OptionsResolver;

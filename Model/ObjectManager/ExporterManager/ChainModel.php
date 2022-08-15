@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\ObjectManager\ExporterManager;
+namespace Maximosojo\ToolsBundle\Model\ObjectManager\ExporterManager;
 
 use RuntimeException;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\ObjectManager\HistoryManager\DoctrineORM;
+namespace Maximosojo\ToolsBundle\Model\ObjectManager\HistoryManager\DoctrineORM;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use Maxtoan\ToolsBundle\Model\ObjectManager\HistoryManager\HistoryInterface;
+use Maximosojo\ToolsBundle\Model\ObjectManager\HistoryManager\HistoryInterface;
 use App\Entity\M\User;
 
 /**
@@ -15,7 +15,7 @@ use App\Entity\M\User;
  */
 abstract class ModelHistory implements HistoryInterface
 {
-    use \Maxtoan\ToolsBundle\Traits\ObjectManager\TraitBaseORM;
+    use \Maximosojo\ToolsBundle\Traits\ObjectManager\TraitBaseORM;
     
     /**
      * Nombre del evento

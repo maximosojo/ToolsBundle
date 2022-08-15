@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\ObjectManager;
+namespace Maximosojo\ToolsBundle\Model\ObjectManager;
 
 use DateTime;
 

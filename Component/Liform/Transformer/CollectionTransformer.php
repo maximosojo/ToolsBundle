@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Component\Liform\Transformer;
+namespace Maximosojo\ToolsBundle\Component\Liform\Transformer;
 
 use Limenius\Liform\Exception\TransformerException;
 use Limenius\Liform\ResolverInterface;
@@ -14,7 +14,7 @@ use Limenius\Liform\Transformer\ArrayTransformer;
  */
 class CollectionTransformer extends ArrayTransformer
 {
-    use \Maxtoan\ToolsBundle\Component\Liform\CommonFunctionsTrait;
+    use \Maximosojo\ToolsBundle\Component\Liform\CommonFunctionsTrait;
 
     /**
      * {@inheritdoc}

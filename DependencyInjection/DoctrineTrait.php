@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the Máximo Sojo - maxtoan package.
+ * This file is part of the Máximo Sojo - maximosojo package.
  * 
- * (c) https://maxtoan.github.io/
+ * (c) https://maximosojo.github.io/
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\DependencyInjection;
+namespace Maximosojo\ToolsBundle\DependencyInjection;
 
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
@@ -65,7 +65,7 @@ trait DoctrineTrait
 
     /**
      * Retorna el repositorio principal
-     * @return \Maxtoan\ToolsBundle\Model\Base\EntityRepository
+     * @return \Maximosojo\ToolsBundle\Model\Base\EntityRepository
      */
     protected function getRepository($repository = null)
     {
@@ -80,7 +80,7 @@ trait DoctrineTrait
 
     /**
      * Debe retornar la clase principal que se esta manejando
-     * @throws \Maxtoan\ToolsBundle\Exception\NotImplementedException
+     * @throws \Maximosojo\ToolsBundle\Exception\NotImplementedException
      */
     protected function getClass()
     {

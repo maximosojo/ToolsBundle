@@ -1,11 +1,11 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\ObjectManager\ExporterManager\DoctrineORM;
+namespace Maximosojo\ToolsBundle\Model\ObjectManager\ExporterManager\DoctrineORM;
 
 use Doctrine\ORM\Mapping as ORM;
-use Maxtoan\ToolsBundle\Traits\Basic\NameTrait;
-use Maxtoan\ToolsBundle\Traits\Basic\DescriptionTrait;
-use Maxtoan\ToolsBundle\Traits\IdentifiableTrait;
+use Maximosojo\ToolsBundle\Traits\Basic\NameTrait;
+use Maximosojo\ToolsBundle\Traits\Basic\DescriptionTrait;
+use Maximosojo\ToolsBundle\Traits\IdentifiableTrait;
 
 /**
  * Modelo de variables

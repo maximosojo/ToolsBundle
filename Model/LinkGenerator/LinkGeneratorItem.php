@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Model\LinkGenerator;
+namespace Maximosojo\ToolsBundle\Model\LinkGenerator;
 
-use Maxtoan\ToolsBundle\Service\LinkGenerator\LinkGeneratorService;
-use Maxtoan\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface;
+use Maximosojo\ToolsBundle\Service\LinkGenerator\LinkGeneratorService;
+use Maximosojo\ToolsBundle\Interfaces\LinkGenerator\LinkGeneratorInterface;
 
 /**
  * Base de item de generador de link

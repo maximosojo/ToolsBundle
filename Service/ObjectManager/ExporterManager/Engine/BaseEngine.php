@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\Engine;
 
 /**
  * Base de motor

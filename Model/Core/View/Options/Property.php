@@ -1,8 +1,8 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\Core\View\Options;
+namespace Maximosojo\ToolsBundle\Model\Core\View\Options;
 
-use Maxtoan\ToolsBundle\Model\Core\View\Options\Attr;
+use Maximosojo\ToolsBundle\Model\Core\View\Options\Attr;
 
 /**
  * Property

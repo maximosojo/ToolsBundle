@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Component\Liform\Transformer;
+namespace Maximosojo\ToolsBundle\Component\Liform\Transformer;
 
 use Limenius\Liform\FormUtil;
 use Limenius\Liform\ResolverInterface;
@@ -23,7 +23,7 @@ class CompoundTransformer extends AbstractCompoundTransformer
 
     /**
      * Convierten las validaciones en validaciones compatible
-     * @var \Maxtoan\ToolsBundle\Component\Liform\SymfonyConstraintsParser
+     * @var \Maximosojo\ToolsBundle\Component\Liform\SymfonyConstraintsParser
      */
     private $constraintsParsers;
 
@@ -166,10 +166,10 @@ class CompoundTransformer extends AbstractCompoundTransformer
     }
 
     /**
-     * @param \Maxtoan\ToolsBundle\Component\Liform\SymfonyConstraintsParser $constraintsParsers
+     * @param \Maximosojo\ToolsBundle\Component\Liform\SymfonyConstraintsParser $constraintsParsers
      * @return $this
      */
-    public function setConstraintsParsers(\Maxtoan\ToolsBundle\Component\Liform\SymfonyConstraintsParser $constraintsParsers)
+    public function setConstraintsParsers(\Maximosojo\ToolsBundle\Component\Liform\SymfonyConstraintsParser $constraintsParsers)
     {
         $this->constraintsParsers = $constraintsParsers;
         return $this;

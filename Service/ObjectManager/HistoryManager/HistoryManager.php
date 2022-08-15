@@ -1,12 +1,12 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\HistoryManager;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\HistoryManager;
 
-use Maxtoan\ToolsBundle\Service\ObjectManager\HistoryManager\Adapter\HistoryAdapterInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\HistoryManager\Adapter\HistoryAdapterInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Maxtoan\ToolsBundle\Service\ObjectManager\TraitConfigure;
-use Maxtoan\ToolsBundle\Service\ObjectManager\HistoryManager\HistoryInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\TraitConfigure;
+use Maximosojo\ToolsBundle\Service\ObjectManager\HistoryManager\HistoryInterface;
 
 /**
  * Administrador del historial

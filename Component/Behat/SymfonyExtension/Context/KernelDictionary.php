@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Maxtoan\ToolsBundle\Component\Behat\SymfonyExtension\Context;
+namespace Maximosojo\ToolsBundle\Component\Behat\SymfonyExtension\Context;
 
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;

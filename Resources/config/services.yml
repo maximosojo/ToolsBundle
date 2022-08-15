@@ -1,36 +1,36 @@
 services:
 # Extension tools para breadcrumb
-  maxtoan_tools.core.extension:
-      class: Maxtoan\ToolsBundle\Twig\Extension\CoreExtension
+  maximosojo_tools.core.extension:
+      class: Maximosojo\ToolsBundle\Twig\Extension\CoreExtension
       tags:
           - { name: twig.extension}      
       calls: 
           - [setContainer, ['@service_container']]
           
 # Secuence generator
-  maxtoan_tools.sequence_generator:
-      class: Maxtoan\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService
+  maximosojo_tools.sequence_generator:
+      class: Maximosojo\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService
       calls: 
           - [setContainer, ['@service_container']]
           
 # Repository Factory
-  maxtoan_tools.doctrine.repository.factory:
-        class: Maxtoan\ToolsBundle\ORM\Factory
+  maximosojo_tools.doctrine.repository.factory:
+        class: Maximosojo\ToolsBundle\ORM\Factory
         arguments:
             - []
             - '@service_container'
-            - '@maxtoan_tools.doctrine.repository.factory.default'
+            - '@maximosojo_tools.doctrine.repository.factory.default'
 
-  maxtoan_tools.doctrine.repository.factory.default:
+  maximosojo_tools.doctrine.repository.factory.default:
       class: Doctrine\ORM\Repository\DefaultRepositoryFactory
 
   # Manejador de tabs
-  maxtoan_tools.manager.tabs:
-      class: Maxtoan\ToolsBundle\Service\Tabs\TabsManager
+  maximosojo_tools.manager.tabs:
+      class: Maximosojo\ToolsBundle\Service\Tabs\TabsManager
       arguments: ["@request_stack"]
       calls: 
           - [setContainer, ['@service_container']]
 
   configuration.adapter.orm:
-      class: Maxtoan\ToolsBundle\Service\Core\Configuration\Adapter\DoctrineORMAdapter
+      class: Maximosojo\ToolsBundle\Service\Core\Configuration\Adapter\DoctrineORMAdapter
       arguments: ["@doctrine.orm.entity_manager", "App\\Entity\\M\\Core\\Configuration"]

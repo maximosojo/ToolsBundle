@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\Mailer\Adapter;
+namespace Maximosojo\ToolsBundle\Service\Mailer\Adapter;
 
 /**
  *
@@ -10,7 +10,7 @@ interface EmailAdapterInterface
 {    
     /**
      * 
-     * @param \Maxtoan\ToolsBundle\Interfaces\Email\TemplateInterface $id
+     * @param \Maximosojo\ToolsBundle\Interfaces\Email\TemplateInterface $id
      */
     public function find($id);
     
@@ -29,12 +29,12 @@ interface EmailAdapterInterface
     public function createEmailQueue();
     
     /**
-     * @return \Maxtoan\ToolsBundle\Interfaces\Email\ComponentInterface
+     * @return \Maximosojo\ToolsBundle\Interfaces\Email\ComponentInterface
      */
     public function createComponent();
     
     /**
-     * @return \Maxtoan\ToolsBundle\Interfaces\Email\ComponentInterface
+     * @return \Maximosojo\ToolsBundle\Interfaces\Email\ComponentInterface
      */
     public function createEmailTemplate();
 }

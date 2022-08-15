@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\HistoryManager;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\HistoryManager;
 
 /**
  * Interfaz para manejador de historiales

@@ -1,9 +1,9 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\DocumentManager;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\Adapter\DocumentAdapterInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\DocumentManager\Adapter\DocumentAdapterInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use RuntimeException;
 use SplFileInfo;

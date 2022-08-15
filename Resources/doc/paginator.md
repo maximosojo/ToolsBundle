@@ -1,4 +1,4 @@
-MaxtoanToolsBundle
+MaximosojoToolsBundle
 ========================
 
 ## Paginator
@@ -27,7 +27,7 @@ Puede configurar el tipo de retorno que desea del paginador:
 3. dataTables
 
 ``` yml
-maxtoan_tools:
+maximosojo_tools:
     paginator:
         format_array: standard #default, standard ó dataTables
 
@@ -41,7 +41,7 @@ Los repositorios que desea usar para paginar se deben extender del base:
 <?php
 // AppBundle/Repository/MyRepository.php
 
-class MyRepository extends Maxtoan\ToolsBundle\Repository\EntityRepository
+class MyRepository extends Maximosojo\ToolsBundle\Repository\EntityRepository
 {
 
 }

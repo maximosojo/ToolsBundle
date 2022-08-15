@@ -1,9 +1,9 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\Sms;
+namespace Maximosojo\ToolsBundle\Service\Sms;
 
 use Psr\Log\LoggerAwareInterface;
-use Maxtoan\ToolsBundle\Model\Sms\ModelMessage;
+use Maximosojo\ToolsBundle\Model\Sms\ModelMessage;
 
 /**
  * Capa de transporte

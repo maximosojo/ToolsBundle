@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Component\Console\Command;
+namespace Maximosojo\ToolsBundle\Component\Console\Command;
 
 use Psr\Log\LogLevel;
 use Symfony\Component\Console\Logger\ConsoleLogger;
@@ -17,7 +17,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Lock\Factory;
 use Symfony\Component\Lock\Store\SemaphoreStore;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
-use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+use Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 
 /**
  * Command

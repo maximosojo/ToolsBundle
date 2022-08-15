@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager;
 
 /**
  * Interfaz para manejador de exportables

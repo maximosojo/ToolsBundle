@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Twig\Extension;
+namespace Maximosojo\ToolsBundle\Twig\Extension;
 
-use Maxtoan\Common\Util\StringUtil;
-use Maxtoan\ToolsBundle\Service\ObjectManager\ObjectDataManager;
-use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+use Maximosojo\Common\Util\StringUtil;
+use Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManager;
+use Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use Twig\TwigFilter;
@@ -139,14 +139,14 @@ class CoreExtension extends AbstractExtension
     /**
      * Render base tabs
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  \Maxtoan\ToolsBundle\Model\Tab\Tab
+     * @param  \Maximosojo\ToolsBundle\Model\Tab\Tab
      * @param  array
      * @return Tabs
      */
-    public function renderTabs(\Maxtoan\ToolsBundle\Model\Tab\Tab $tab,array $parameters = []) 
+    public function renderTabs(\Maximosojo\ToolsBundle\Model\Tab\Tab $tab,array $parameters = []) 
     {
         $parameters["tab"] = $tab;
-        return $this->container->get('twig')->render("@MaxtoanTools/tab/tabs.html.twig", 
+        return $this->container->get('twig')->render("@MaximosojoTools/tab/tabs.html.twig", 
             $parameters
         );
     }
@@ -160,7 +160,7 @@ class CoreExtension extends AbstractExtension
     public function renderCollapse(array $parameters = []) 
     {
         $parameters["id"] = "_collapse_".sha1($parameters['title']);
-        return $this->container->get('twig')->render("@MaxtoanTools/collapse/collapse.html.twig", 
+        return $this->container->get('twig')->render("@MaximosojoTools/collapse/collapse.html.twig", 
             $parameters
         );
     }
@@ -172,7 +172,7 @@ class CoreExtension extends AbstractExtension
      */
     public function renderFilesGenerated($entity) 
     {
-        $objectDataManager = $this->container->get("maxtoan_tools.object_manager");
+        $objectDataManager = $this->container->get("maximosojo_tools.object_manager");
         return $objectDataManager->exporters()->renderFiles($entity);
     }
 
@@ -197,6 +197,6 @@ class CoreExtension extends AbstractExtension
      */
     public function getName() 
     {
-        return 'maxtoan_core_extension';
+        return 'maximosojo_core_extension';
     }
 }

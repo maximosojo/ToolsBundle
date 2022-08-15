@@ -1,8 +1,8 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Twig\Extension;
+namespace Maximosojo\ToolsBundle\Twig\Extension;
 
-use Maxtoan\ToolsBundle\Service\Core\Search\SearchManager;
+use Maximosojo\ToolsBundle\Service\Core\Search\SearchManager;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

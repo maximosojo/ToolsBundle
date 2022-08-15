@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\Adapter;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\DocumentManager\Adapter;
 
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -17,7 +17,7 @@ use SplFileInfo;
  */
 class DiskAdapter implements DocumentAdapterInterface
 {
-    use \Maxtoan\ToolsBundle\Service\ObjectManager\TraitConfigure;
+    use \Maximosojo\ToolsBundle\Service\ObjectManager\TraitConfigure;
     
     /**
      * Opciones de configuracion

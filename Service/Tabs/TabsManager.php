@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Service\Tabs;
+namespace Maximosojo\ToolsBundle\Service\Tabs;
 
 use Symfony\Component\HttpFoundation\RequestStack;
-use Maxtoan\ToolsBundle\Model\Tab\Tab;
-use Maxtoan\ToolsBundle\Model\Tab\TabContent;
+use Maximosojo\ToolsBundle\Model\Tab\Tab;
+use Maximosojo\ToolsBundle\Model\Tab\TabContent;
 
 /**
- * Servicio generador de tabs (maxtoan.manager.tabs)
+ * Servicio generador de tabs (maximosojo.manager.tabs)
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class TabsManager extends \Maxtoan\ToolsBundle\Service\BaseService 
+class TabsManager extends \Maximosojo\ToolsBundle\Service\BaseService 
 {
     /**
      * $tab

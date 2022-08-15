@@ -1,11 +1,11 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\Core\Search;
+namespace Maximosojo\ToolsBundle\Model\Core\Search;
 
 use Doctrine\ORM\Mapping as ORM;
-use Maxtoan\ToolsBundle\Traits\EnableableTrait;
-use Maxtoan\ToolsBundle\Traits\Basic\DescriptionTrait;
-use Maxtoan\ToolsBundle\Model\ModelStandarMaster;
+use Maximosojo\ToolsBundle\Traits\EnableableTrait;
+use Maximosojo\ToolsBundle\Traits\Basic\DescriptionTrait;
+use Maximosojo\ToolsBundle\Model\ModelStandarMaster;
 
 /**
  * Bloque de filtros

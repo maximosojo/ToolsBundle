@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model;
+namespace Maximosojo\ToolsBundle\Model;
 
 /**
  * Modelo base estandar
@@ -8,7 +8,7 @@ namespace Maxtoan\ToolsBundle\Model;
  */
 abstract class ModelStandarMaster
 {
-	use \Maxtoan\ToolsBundle\Traits\IdentifiableTrait;
-	use \Maxtoan\ToolsBundle\Traits\TimestampableUTCTrait;
-	use \Maxtoan\ToolsBundle\Traits\SoftDeleteableTrait;
+	use \Maximosojo\ToolsBundle\Traits\IdentifiableTrait;
+	use \Maximosojo\ToolsBundle\Traits\TimestampableUTCTrait;
+	use \Maximosojo\ToolsBundle\Traits\SoftDeleteableTrait;
 }

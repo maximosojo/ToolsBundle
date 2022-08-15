@@ -1,8 +1,8 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\Mailer\ORM;
+namespace Maximosojo\ToolsBundle\Model\Mailer\ORM;
 
-use Maxtoan\ToolsBundle\ORM\EntityRepository;
+use Maximosojo\ToolsBundle\ORM\EntityRepository;
 
 /**
  * Description of EmailRepository

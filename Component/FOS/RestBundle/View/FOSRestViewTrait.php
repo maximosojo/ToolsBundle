@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Máximo Sojo - maxtoan package.
+ * This file is part of the Máximo Sojo - maximosojo package.
  * 
  * (c) https://maximosojo.github.io/
  * 
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Component\FOS\RestBundle\View;
+namespace Maximosojo\ToolsBundle\Component\FOS\RestBundle\View;
 
 use FOS\RestBundle\View\View;
 
@@ -29,7 +29,7 @@ trait FOSRestViewTrait
      * @param int   $statusCode
      * @param array $headers
      *
-     * @return \Maxtoan\ToolsBundle\Component\FOS\RestBundle\View\View
+     * @return \Maximosojo\ToolsBundle\Component\FOS\RestBundle\View\View
      */
     protected function view($data = null, $statusCode = null, array $headers = array())
     {

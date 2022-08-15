@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\ORM\DBAL\Migrations;
+namespace Maximosojo\ToolsBundle\ORM\DBAL\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration as BaseAbstractMigration;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -22,8 +22,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 abstract class AbstractMigration extends BaseAbstractMigration implements ContainerAwareInterface
 {
-    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
-    use \Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;    
+    use \Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use \Maximosojo\ToolsBundle\DependencyInjection\DoctrineTrait;    
     
     /**
      * Shortcut to return the Doctrine Registry service.

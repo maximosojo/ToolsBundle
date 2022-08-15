@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Component\Liform\Transformer;
+namespace Maximosojo\ToolsBundle\Component\Liform\Transformer;
 
 use Symfony\Component\Form\FormInterface;
 use Limenius\Liform\Transformer\AbstractTransformer;
@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormView;
  */
 class Select2EntityTransformer extends AbstractTransformer
 {
-    use \Maxtoan\ToolsBundle\Component\Liform\CommonFunctionsTrait;
+    use \Maximosojo\ToolsBundle\Component\Liform\CommonFunctionsTrait;
     
     /**
      * {@inheritdoc}

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\DependencyInjection\Compiler;
+namespace Maximosojo\ToolsBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -27,7 +27,7 @@ class ConfigurationPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $debug = $container->getParameter('kernel.debug');
-        $configurationManagerClass = "Maxtoan\ToolsBundle\Service\Core\Configuration\ConfigurationManager";
+        $configurationManagerClass = "Maximosojo\ToolsBundle\Service\Core\Configuration\ConfigurationManager";
         $configurationManager = new Definition($configurationManagerClass, [
             new Reference("configuration.adapter.orm"), [
                 "add_default_wrapper" => true,
@@ -36,11 +36,11 @@ class ConfigurationPass implements CompilerPassInterface
         ]);
         $configurationManager->setPublic(true);
         
-        $configurationManagerNameService = "maxtoan_tools.manager.configuration";
+        $configurationManagerNameService = "maximosojo_tools.manager.configuration";
         $container->setDefinition($configurationManagerNameService, $configurationManager);
-        $container->setParameter('maxtoan_tools.configuration_manager.name', $configurationManagerNameService);
+        $container->setParameter('maximosojo_tools.configuration_manager.name', $configurationManagerNameService);
 
-        $manager = $container->getDefinition($container->getParameter("maxtoan_tools.configuration_manager.name"));
+        $manager = $container->getDefinition($container->getParameter("maximosojo_tools.configuration_manager.name"));
         $tags = $container->findTaggedServiceIds('configuration.wrapper');
         foreach ($tags as $id => $params) {
             $definition = $container->findDefinition($id);
@@ -48,19 +48,19 @@ class ConfigurationPass implements CompilerPassInterface
         }
 
         // Registra manejador de objetos
-        $config = $container->getParameter("maxtoan_tools.object_manager.options");
+        $config = $container->getParameter("maximosojo_tools.object_manager.options");
 
         // Manejador de estadísticas
-        if ($container->getParameter('maxtoan_tools.object_manager.statistic.enable') === true) {
-            $statistic = $container->getParameter("maxtoan_tools.object_manager.statistic");
+        if ($container->getParameter('maximosojo_tools.object_manager.statistic.enable') === true) {
+            $statistic = $container->getParameter("maximosojo_tools.object_manager.statistic");
             $idStatisticManagerAdapter = $statistic["adapter"];
             if ($idStatisticManagerAdapter && $container->hasDefinition($idStatisticManagerAdapter)) {
                 $adapterDefinition = $container->findDefinition($idStatisticManagerAdapter);
-                $statisticManagerDefinition = $container->findDefinition("maxtoan_tools.statistics_manager.default");
+                $statisticManagerDefinition = $container->findDefinition("maximosojo_tools.statistics_manager.default");
                 $statisticManagerDefinition->addArgument($adapterDefinition);                
             }
 
-            $statisticManager = $container->getDefinition("maxtoan_tools.statistics_manager.default"); 
+            $statisticManager = $container->getDefinition("maximosojo_tools.statistics_manager.default"); 
             foreach ($statistic["object_types"] as $param) {
                 if ($param["adapter"]) {
                     $statisticManager->addMethodCall("addAdapter", [$container->getDefinition($param["adapter"]),$param["objectType"]]);
@@ -72,28 +72,28 @@ class ConfigurationPass implements CompilerPassInterface
         }
 
         // Manejador de Historial
-        if ($container->getParameter('maxtoan_tools.object_manager.history.enable') === true) {
-            $history = $container->getParameter("maxtoan_tools.object_manager.history");
+        if ($container->getParameter('maximosojo_tools.object_manager.history.enable') === true) {
+            $history = $container->getParameter("maximosojo_tools.object_manager.history");
             $idHistoryManagerAdapter = $history["adapter"];
             if ($idHistoryManagerAdapter && $container->hasDefinition($idHistoryManagerAdapter)) {
                 $adapterDefinition = $container->findDefinition($idHistoryManagerAdapter);
-                $historyManagerDefinition = $container->findDefinition("maxtoan_tools.history_manager.default");
+                $historyManagerDefinition = $container->findDefinition("maximosojo_tools.history_manager.default");
                 $historyManagerDefinition->addArgument($adapterDefinition);
             }
         }
 
         // Manejador de documentos
-        if ($container->getParameter('maxtoan_tools.object_manager.document.enable') === true) {
+        if ($container->getParameter('maximosojo_tools.object_manager.document.enable') === true) {
             // Manejador de documentos
             $adapterDefinition = $container->findDefinition($config["document_manager"]["adapter"]);
-            $documentManager = $container->findDefinition("maxtoan_tools.document_manager.default");
+            $documentManager = $container->findDefinition("maximosojo_tools.document_manager.default");
             $documentManager->addArgument($adapterDefinition);
         }
 
         // Manejador de exportaciones
-        if ($container->getParameter('maxtoan_tools.object_manager.exporter.enable') === true) {
+        if ($container->getParameter('maximosojo_tools.object_manager.exporter.enable') === true) {
             $adapterDefinition = $container->findDefinition($config["exporter_manager"]["adapter"]);
-            $exporterManager = $container->getDefinition("maxtoan_tools.exporter_manager.default");
+            $exporterManager = $container->getDefinition("maximosojo_tools.exporter_manager.default");
             $exporterManager->addArgument($documentManager);
             $exporterManager->addArgument($config["exporter_manager"]);
             $exporterManager->addMethodCall("setAdapter", array($adapterDefinition));
@@ -104,7 +104,7 @@ class ConfigurationPass implements CompilerPassInterface
             }
 
             // Registra adaptador en el servicio de plantillas
-            $templateService = $container->getDefinition("maxtoan_tools.template_service");
+            $templateService = $container->getDefinition("maximosojo_tools.template_service");
             $adapters = $container->findTaggedServiceIds("exporter.template.adapter");
             foreach ($adapters as $id => $adapter) {
                 $templateService->addMethodCall("addAdapter", [$container->getDefinition($id)]);
@@ -112,30 +112,30 @@ class ConfigurationPass implements CompilerPassInterface
         }
 
         // Manejador de mensajes
-        if ($container->getParameter('maxtoan_tools.sms_manager.enable') === true) {
+        if ($container->getParameter('maximosojo_tools.sms_manager.enable') === true) {
             // Manejador de sms
-            $smsManager = $container->getDefinition("maxtoan_tools.service.sms_manager");
+            $smsManager = $container->getDefinition("maximosojo_tools.service.sms_manager");
             // Inicia transporter de interconectados
             $optionsTransportsInterconectados = [];
-            $container->setParameter("maxtoan_tools.service.sms_manager.transports.interconectados.options", []);
-            $optionsTransportsInterconectados["enabled"] = isset($_ENV["MAXTOAN_TOOLS_SMS_INTERCONECTADOS_HOST"],$_ENV["MAXTOAN_TOOLS_SMS_INTERCONECTADOS_USER"],$_ENV["MAXTOAN_TOOLS_SMS_INTERCONECTADOS_PASSWORD"]);
+            $container->setParameter("maximosojo_tools.service.sms_manager.transports.interconectados.options", []);
+            $optionsTransportsInterconectados["enabled"] = isset($_ENV["MAXIMOSOJO_TOOLS_SMS_INTERCONECTADOS_HOST"],$_ENV["MAXIMOSOJO_TOOLS_SMS_INTERCONECTADOS_USER"],$_ENV["MAXIMOSOJO_TOOLS_SMS_INTERCONECTADOS_PASSWORD"]);
             // Interconectados
             if ($optionsTransportsInterconectados["enabled"] === true) {
-                $optionsTransportsInterconectados["host"] = $_ENV["MAXTOAN_TOOLS_SMS_INTERCONECTADOS_HOST"];
-                $optionsTransportsInterconectados["user"] = $_ENV["MAXTOAN_TOOLS_SMS_INTERCONECTADOS_USER"];
-                $optionsTransportsInterconectados["password"] = $_ENV["MAXTOAN_TOOLS_SMS_INTERCONECTADOS_PASSWORD"];
-                $container->setParameter("maxtoan_tools.service.sms_manager.transports.interconectados.options", $optionsTransportsInterconectados);
+                $optionsTransportsInterconectados["host"] = $_ENV["MAXIMOSOJO_TOOLS_SMS_INTERCONECTADOS_HOST"];
+                $optionsTransportsInterconectados["user"] = $_ENV["MAXIMOSOJO_TOOLS_SMS_INTERCONECTADOS_USER"];
+                $optionsTransportsInterconectados["password"] = $_ENV["MAXIMOSOJO_TOOLS_SMS_INTERCONECTADOS_PASSWORD"];
+                $container->setParameter("maximosojo_tools.service.sms_manager.transports.interconectados.options", $optionsTransportsInterconectados);
                 // Transport
-                $smsManager->addMethodCall("addTransport", [$container->getDefinition("maxtoan_tools.service.sms_manager.transports.interconectados")]);
+                $smsManager->addMethodCall("addTransport", [$container->getDefinition("maximosojo_tools.service.sms_manager.transports.interconectados")]);
             }
 
             // Inicia transporter de dummy
             $optionsTransportsDummy = [];
-            $optionsTransportsDummy["enabled"] = isset($_ENV["MAXTOAN_TOOLS_SMS_DUMMY_ENABLE"]);
+            $optionsTransportsDummy["enabled"] = isset($_ENV["MAXIMOSOJO_TOOLS_SMS_DUMMY_ENABLE"]);
             // Dummy
             if ($optionsTransportsDummy["enabled"] === true) {
                 // Transport
-                $smsManager->addMethodCall("addTransport", [$container->getDefinition("maxtoan_tools.service.sms_manager.transports.dummy")]);
+                $smsManager->addMethodCall("addTransport", [$container->getDefinition("maximosojo_tools.service.sms_manager.transports.dummy")]);
             }
         }
     }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Traits;
+namespace Maximosojo\ToolsBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 

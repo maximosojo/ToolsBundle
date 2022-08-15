@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Controller;
+namespace Maximosojo\ToolsBundle\Controller;
 
-use Maxtoan\ToolsBundle\Component\HttpFoundation\JsonResponse;
+use Maximosojo\ToolsBundle\Component\HttpFoundation\JsonResponse;
 
 /**
  * Controlador con funciones base
@@ -31,7 +31,7 @@ trait ControllerTrait
      * @param type $data
      * @param type $status
      * @param type $headers
-     * @return \Maxtoan\ToolsBundle\Component\HttpFoundation\JsonResponse
+     * @return \Maximosojo\ToolsBundle\Component\HttpFoundation\JsonResponse
      */
     protected function newJsonResponse($data = null, $status = 200, $headers = array()) 
     {
@@ -43,13 +43,13 @@ trait ControllerTrait
      * @param type $data
      * @param type $status
      * @param type $headers
-     * @return \Maxtoan\ToolsBundle\Component\HttpFoundation\JsonResponse
+     * @return \Maximosojo\ToolsBundle\Component\HttpFoundation\JsonResponse
      * @deprecated
      */
     protected function myJsonResponse($data = null, $status = 200, $headers = array()) 
     {
         if (!$this->jsonResponse) {
-            $this->jsonResponse = new \Maxtoan\ToolsBundle\Component\HttpFoundation\JsonResponse($data, $status, $headers);
+            $this->jsonResponse = new \Maximosojo\ToolsBundle\Component\HttpFoundation\JsonResponse($data, $status, $headers);
         }
 
         return $this->jsonResponse;

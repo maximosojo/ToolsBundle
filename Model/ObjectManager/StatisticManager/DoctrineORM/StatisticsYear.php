@@ -1,10 +1,10 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\ObjectManager\StatisticManager\DoctrineORM;
+namespace Maximosojo\ToolsBundle\Model\ObjectManager\StatisticManager\DoctrineORM;
 
 use Doctrine\ORM\Mapping as ORM;
-use Maxtoan\ToolsBundle\Model\ObjectManager\StatisticManager\StatisticsMonthInterface;
-use Maxtoan\ToolsBundle\Model\ObjectManager\StatisticManager\StatisticsYearInterface;
+use Maximosojo\ToolsBundle\Model\ObjectManager\StatisticManager\StatisticsMonthInterface;
+use Maximosojo\ToolsBundle\Model\ObjectManager\StatisticManager\StatisticsYearInterface;
 
 /**
  * Estadistica de un año
@@ -117,7 +117,7 @@ class StatisticsYear implements StatisticsYearInterface
      */
     protected $object;
 
-    use \Maxtoan\ToolsBundle\Traits\ObjectManager\TraitBaseORM;
+    use \Maximosojo\ToolsBundle\Traits\ObjectManager\TraitBaseORM;
 
     public function __construct() 
     {

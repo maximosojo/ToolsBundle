@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\Core\Configuration;
+namespace Maximosojo\ToolsBundle\Model\Core\Configuration;
 
 /**
  * Model de general
@@ -30,7 +30,7 @@ abstract class ConfigurationWrapper implements WrapperInterface
         throw new \Exception("Not implement", 1);
     }
 
-    public function setManager(\Maxtoan\ToolsBundle\Service\Core\Configuration\ConfigurationManager $manager)
+    public function setManager(\Maximosojo\ToolsBundle\Service\Core\Configuration\ConfigurationManager $manager)
     {
         $this->manager = $manager;
         return $this;

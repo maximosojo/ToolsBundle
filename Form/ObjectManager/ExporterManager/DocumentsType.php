@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Form\ObjectManager\ExporterManager;
+namespace Maximosojo\ToolsBundle\Form\ObjectManager\ExporterManager;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

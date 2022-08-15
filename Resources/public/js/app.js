@@ -1,6 +1,6 @@
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -10,7 +10,7 @@
 
 'use strict';
 
-var app = angular.module('maxtoan_tools', ['ngTable'])
+var app = angular.module('maximosojo_tools', ['ngTable'])
 
 .directive('select2', function() {
     return {

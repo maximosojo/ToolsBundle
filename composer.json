@@ -1,6 +1,5 @@
 {
-  "name": "maxtoan/tools-bundle",
-  "type": "symfony-bundle",
+  "name": "maximosojo/tools-bundle",
   "description": "Bundle Symfony",
   "keywords": ["breadcrumb", "breadcrumb api", "bundle tools", "link generator", "tabs"],
   "homepage": "https://maximosojo.github.io/tools-bundle",
@@ -21,6 +20,6 @@
       "friendsofsymfony/rest-bundle": "^3.1@dev"
   },
   "autoload": {
-      "psr-4": { "Maxtoan\\ToolsBundle\\": "" }
+      "psr-4": { "Maximosojo\\ToolsBundle\\": "" }
   }
 }

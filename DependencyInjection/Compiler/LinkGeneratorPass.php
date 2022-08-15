@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\DependencyInjection\Compiler;
+namespace Maximosojo\ToolsBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -23,11 +23,11 @@ class LinkGeneratorPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container) 
     {
-        if($container->getParameter('maxtoan_tools.service.link_generator.enable') === false){
+        if($container->getParameter('maximosojo_tools.service.link_generator.enable') === false){
             return;
         }
         
-        $definition = $container->getDefinition('maxtoan_tools.service.link_generator');
+        $definition = $container->getDefinition('maximosojo_tools.service.link_generator');
         $tags = $container->findTaggedServiceIds('link_generator.item');
         
         foreach ($tags as $id => $attributes) {

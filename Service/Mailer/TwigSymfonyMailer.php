@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\Mailer;
+namespace Maximosojo\ToolsBundle\Service\Mailer;
 
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -8,7 +8,7 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Twig\Environment;
-use Maxtoan\ToolsBundle\Service\Mailer\Adapter\EmailAdapterInterface;
+use Maximosojo\ToolsBundle\Service\Mailer\Adapter\EmailAdapterInterface;
 
 /**
  * Servicio para enviar correo con una plantilla twig

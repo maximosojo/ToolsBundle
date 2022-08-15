@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Controller;
+namespace Maximosojo\ToolsBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as RouteSensio;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,8 +17,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;
-use Maxtoan\ToolsBundle\Traits\Component\EventDispatcherTrait;
+use Maximosojo\ToolsBundle\DependencyInjection\DoctrineTrait;
+use Maximosojo\ToolsBundle\Traits\Component\EventDispatcherTrait;
 
 /**
  * Controlador base
@@ -97,7 +97,7 @@ class BaseController extends AbstractFOSRestController
     
     /**
      * Construye el una variable para expandir campos dinamicamente al serializar
-     * @param \Maxtoan\ToolsBundle\Controller\Request $request
+     * @param \Maximosojo\ToolsBundle\Controller\Request $request
      * @param array $defaults
      * @return type
      */

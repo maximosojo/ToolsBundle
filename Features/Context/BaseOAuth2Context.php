@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the Máximo Sojo - maxtoan package.
+ * This file is part of the Máximo Sojo - maximosojo package.
  * 
- * (c) https://maxtoan.github.io/
+ * (c) https://maximosojo.github.io/
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Features\Context;
+namespace Maximosojo\ToolsBundle\Features\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
@@ -21,8 +21,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpKernel\Config\FileLocator;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Maxtoan\ToolsBundle\Features\Context\BaseDataContext;
-use Maxtoan\ToolsBundle\Features\Context\TraitContext;
+use Maximosojo\ToolsBundle\Features\Context\BaseDataContext;
+use Maximosojo\ToolsBundle\Features\Context\TraitContext;
 
 /**
  * Base para peticiones oauth2

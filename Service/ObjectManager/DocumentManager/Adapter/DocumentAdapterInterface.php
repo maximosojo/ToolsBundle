@@ -1,8 +1,8 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\Adapter;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\DocumentManager\Adapter;
 
-use Maxtoan\ToolsBundle\Service\ObjectManager\ConfigureInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\ConfigureInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use SplFileInfo;
 

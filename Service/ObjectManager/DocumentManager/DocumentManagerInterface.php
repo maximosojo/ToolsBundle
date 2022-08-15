@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\DocumentManager;
 
 /**
  * Interfaz para manejador de documentos

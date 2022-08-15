@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Adapter;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\Adapter;
 
 /**
  *

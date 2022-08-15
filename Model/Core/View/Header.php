@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\Core\View;
+namespace Maximosojo\ToolsBundle\Model\Core\View;
 
 /**
  * Header

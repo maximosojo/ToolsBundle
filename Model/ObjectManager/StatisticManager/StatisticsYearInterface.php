@@ -1,10 +1,10 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\ObjectManager\StatisticManager;
+namespace Maximosojo\ToolsBundle\Model\ObjectManager\StatisticManager;
 
-use Maxtoan\ToolsBundle\Model\ObjectManager\StatisticManager\StatisticsMonthInterface;
-use Maxtoan\ToolsBundle\Model\ObjectManager\StatisticManager\StatisticsYearInterface;
-use Maxtoan\ToolsBundle\Model\ObjectManager\BaseInterface;
+use Maximosojo\ToolsBundle\Model\ObjectManager\StatisticManager\StatisticsMonthInterface;
+use Maximosojo\ToolsBundle\Model\ObjectManager\StatisticManager\StatisticsYearInterface;
+use Maximosojo\ToolsBundle\Model\ObjectManager\BaseInterface;
 
 /**
  * StatisticsYearInterface

@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Component\JMS\Serializer\Handler;
+namespace Maximosojo\ToolsBundle\Component\JMS\Serializer\Handler;
 
 use JMS\Serializer\Context;
 use JMS\Serializer\JsonDeserializationVisitor;

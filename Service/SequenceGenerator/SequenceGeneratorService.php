@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Service\SequenceGenerator;
+namespace Maximosojo\ToolsBundle\Service\SequenceGenerator;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 
@@ -18,7 +18,7 @@ use Doctrine\Bundle\DoctrineBundle\Registry;
  *
  * @author Carlos Mendoza <inhack20@tecnocreaciones.com>
  */
-class SequenceGeneratorService extends \Maxtoan\ToolsBundle\Service\BaseService
+class SequenceGeneratorService extends \Maximosojo\ToolsBundle\Service\BaseService
 {
     private $sequenceGenerator;
 

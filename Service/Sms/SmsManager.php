@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Service\Sms;
+namespace Maximosojo\ToolsBundle\Service\Sms;
 
-use Maxtoan\ToolsBundle\Model\Sms\ModelMessage;
-use Maxtoan\ToolsBundle\Service\BaseService;
-use Maxtoan\Common\Util\DateUtil;
-use Maxtoan\Common\Util\StringUtil;
-use Maxtoan\Common\Util\UserUtil;
+use Maximosojo\ToolsBundle\Model\Sms\ModelMessage;
+use Maximosojo\ToolsBundle\Service\BaseService;
+use Maximosojo\Common\Util\DateUtil;
+use Maximosojo\Common\Util\StringUtil;
+use Maximosojo\Common\Util\UserUtil;
 use DateTime;
 
 /**
@@ -97,7 +97,7 @@ class SmsManager extends BaseService implements SmsManagerInterface
     /**
      * 
      * @param type $name
-     * @return \Maxtoan\ToolsBundle\Service\Sms\TransportInterface
+     * @return \Maximosojo\ToolsBundle\Service\Sms\TransportInterface
      * @throws \InvalidArgumentException
      */
     public function getTransport($name = null)

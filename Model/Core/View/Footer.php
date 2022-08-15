@@ -1,8 +1,8 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\Core\View;
+namespace Maximosojo\ToolsBundle\Model\Core\View;
 
-use Maxtoan\ToolsBundle\Model\Core\View\Options\Row;
+use Maximosojo\ToolsBundle\Model\Core\View\Options\Row;
 
 /**
  * Footer

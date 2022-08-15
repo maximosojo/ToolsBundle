@@ -1,8 +1,8 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\ObjectManager\HistoryManager;
+namespace Maximosojo\ToolsBundle\Model\ObjectManager\HistoryManager;
 
-use Maxtoan\ToolsBundle\Model\ObjectManager\BaseInterface;
+use Maximosojo\ToolsBundle\Model\ObjectManager\BaseInterface;
 
 /**
  * Intefaz de historial

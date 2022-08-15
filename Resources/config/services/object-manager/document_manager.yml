@@ -4,19 +4,19 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         public: false
 
-    maxtoan_tools.document_manager_disk_adapter:
-        class: Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\Adapter\DiskAdapter
+    maximosojo_tools.document_manager_disk_adapter:
+        class: Maximosojo\ToolsBundle\Service\ObjectManager\DocumentManager\Adapter\DiskAdapter
         arguments:
             - { "debug": "%kernel.debug%", "base_path": "%kernel.project_dir%/var", "documents_path": "documents","env": "%kernel.environment%" }
     
-    maxtoan_tools.document_manager.default:
-        class: Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\DocumentManager
+    maximosojo_tools.document_manager.default:
+        class: Maximosojo\ToolsBundle\Service\ObjectManager\DocumentManager\DocumentManager
         public: true
         
-    Maxtoan\ToolsBundle\Service\ObjectManager\DocumentManager\DocumentManagerInterface:
-        alias: maxtoan_tools.document_manager
+    Maximosojo\ToolsBundle\Service\ObjectManager\DocumentManager\DocumentManagerInterface:
+        alias: maximosojo_tools.document_manager
 
-    Maxtoan\ToolsBundle\Controller\ObjectManager\DocumentManagerController:
+    Maximosojo\ToolsBundle\Controller\ObjectManager\DocumentManagerController:
         public: true
         calls:
             - [ setContainer, ['@service_container']  ]

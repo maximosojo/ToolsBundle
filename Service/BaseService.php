@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Service;
+namespace Maximosojo\ToolsBundle\Service;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
-use Maxtoan\ToolsBundle\DependencyInjection\DoctrineTrait;
-use Maxtoan\ToolsBundle\Traits\Component\ErrorTrait;
+use Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+use Maximosojo\ToolsBundle\DependencyInjection\DoctrineTrait;
+use Maximosojo\ToolsBundle\Traits\Component\ErrorTrait;
 
 /**
  * Servicio base con implementación de funciones genericas compartidas

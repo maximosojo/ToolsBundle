@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\StatisticManager;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\StatisticManager;
 
 /**
  * Interfaz para manejador de estadísticas

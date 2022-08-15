@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Traits\ObjectManager;
+namespace Maximosojo\ToolsBundle\Traits\ObjectManager;
 
-use Maxtoan\ToolsBundle\Service\ObjectManager\ObjectDataManagerInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManagerInterface;
 
 /**
  * Trait de manejador de documentos

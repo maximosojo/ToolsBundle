@@ -1,12 +1,12 @@
-MaxtoanToolsBundle
+MaximosojoToolsBundle
 ========================
 
-MaxtoanToolsBundle desarrollado para Symfony 2.+, 3.+, 4.+, proporciona un marco flexible de utilidades para la gestión de proyectos que apunta a manejar tareas comunes como repositorios, paginadores, utils en general.
+MaximosojoToolsBundle desarrollado para Symfony 2.+, 3.+, 4.+, proporciona un marco flexible de utilidades para la gestión de proyectos que apunta a manejar tareas comunes como repositorios, paginadores, utils en general.
 
 ## Instalación
 
 ``` bash
-$ composer require maxtoan/tools-bundle
+$ composer require maximosojo/tools-bundle
 ```
 Las instrucciones de instalación y confirguración se encuentran en la [Documentación](#documentation).
 

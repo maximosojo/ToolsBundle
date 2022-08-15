@@ -1,10 +1,10 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+use Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 
 /**
  * Administrador de datos de un objeto (documentos,notas,historial)
@@ -44,7 +44,7 @@ class ObjectDataManager implements ObjectDataManagerInterface
      */
     public function documents()
     {
-        return $this->container->get("maxtoan_tools.document_manager.default");
+        return $this->container->get("maximosojo_tools.document_manager.default");
     }
 
     /**
@@ -53,7 +53,7 @@ class ObjectDataManager implements ObjectDataManagerInterface
      */
     public function exporters()
     {
-        return $this->container->get("maxtoan_tools.exporter_manager.default");
+        return $this->container->get("maximosojo_tools.exporter_manager.default");
     }
 
     /**
@@ -62,7 +62,7 @@ class ObjectDataManager implements ObjectDataManagerInterface
      */
     public function statistics()
     {
-        return $this->container->get("maxtoan_tools.statistics_manager.default");
+        return $this->container->get("maximosojo_tools.statistics_manager.default");
     }
 
     /**
@@ -71,6 +71,6 @@ class ObjectDataManager implements ObjectDataManagerInterface
      */
     public function histories()
     {
-        return $this->container->get("maxtoan_tools.history_manager.default");
+        return $this->container->get("maximosojo_tools.history_manager.default");
     }
 }

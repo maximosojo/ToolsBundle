@@ -1,24 +1,24 @@
 <?php
 
 /*
- * This file is part of the Máximo Sojo - maxtoan package.
+ * This file is part of the Máximo Sojo - maximosojo package.
  * 
- * (c) https://maxtoan.github.io/
+ * (c) https://maximosojo.github.io/
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Features\Context;
+namespace Maximosojo\ToolsBundle\Features\Context;
 
 use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Behat\Tester\Exception\PendingException;
-use Maxtoan\ToolsBundle\Component\Behat\SymfonyExtension\Context\KernelDictionary;
-use Maxtoan\ToolsBundle\Component\Behat\SymfonyExtension\Context\KernelAwareContext;
+use Maximosojo\ToolsBundle\Component\Behat\SymfonyExtension\Context\KernelDictionary;
+use Maximosojo\ToolsBundle\Component\Behat\SymfonyExtension\Context\KernelAwareContext;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+use Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 use LogicException;
 use Exception;
 use FOS\UserBundle\Model\UserInterface;

@@ -1,28 +1,28 @@
 <?php
 
 /*
- * This file is part of the Máximo Sojo - maxtoan package.
+ * This file is part of the Máximo Sojo - maximosojo package.
  * 
- * (c) https://maxtoan.github.io/common
+ * (c) https://maximosojo.github.io/common
  * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Command;
+namespace Maximosojo\ToolsBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use Maxtoan\Common\Filesystem\Folder;
+use Maximosojo\Common\Filesystem\Folder;
 
 /**
  * FolderClearCommand
  * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class FolderClearCommand extends \Maxtoan\ToolsBundle\Component\Console\Command\Command
+class FolderClearCommand extends \Maximosojo\ToolsBundle\Component\Console\Command\Command
 {
 	/* @var InputInterface $output */
     protected $input;
@@ -57,8 +57,8 @@ class FolderClearCommand extends \Maxtoan\ToolsBundle\Component\Console\Command\
     {
         $this->setupConsole($input, $output);
 
-        if ($this->getContainer()->getParameter("maxtoan_tools.command.folder_clear_clear_paths")) {
-            $this->paths_to_remove = $this->getContainer()->getParameter("maxtoan_tools.command.folder_clear_clear_paths");
+        if ($this->getContainer()->getParameter("maximosojo_tools.command.folder_clear_clear_paths")) {
+            $this->paths_to_remove = $this->getContainer()->getParameter("maximosojo_tools.command.folder_clear_clear_paths");
             $this->clearPaths();
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Traits\ObjectManager;
+namespace Maximosojo\ToolsBundle\Traits\ObjectManager;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;

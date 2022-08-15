@@ -1,8 +1,8 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\Engine;
 
-use Maxtoan\ToolsBundle\Model\ObjectManager\ExporterManager\TemplateInterface;
+use Maximosojo\ToolsBundle\Model\ObjectManager\ExporterManager\TemplateInterface;
 use Twig\Environment;
 use TCPDF;
 
@@ -32,7 +32,7 @@ class TCPDFEngine extends BaseEngine
 
         // set document information
         $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('Maxtoan ToolsBundle');
+        $pdf->SetAuthor('Maximosojo ToolsBundle');
 //        $pdf->SetTitle('TCPDF Example 001');
 //        $pdf->SetSubject('TCPDF Tutorial');
 //        $pdf->SetKeywords('TCPDF, PDF, example, test, guide');

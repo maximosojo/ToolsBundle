@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Component\JMS\Serializer\Metadata\Driver;
+namespace Maximosojo\ToolsBundle\Component\JMS\Serializer\Metadata\Driver;
 
 use JMS\Serializer\Metadata\Driver\YamlDriver as JMSYamlDriver;
 

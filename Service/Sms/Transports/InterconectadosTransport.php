@@ -1,10 +1,10 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\Sms\Transports;
+namespace Maximosojo\ToolsBundle\Service\Sms\Transports;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Maxtoan\ToolsBundle\Model\Sms\ModelMessage;
-use Maxtoan\ToolsBundle\Service\Sms\BaseTransport;
+use Maximosojo\ToolsBundle\Model\Sms\ModelMessage;
+use Maximosojo\ToolsBundle\Service\Sms\BaseTransport;
 
 /**
  * Interconectados (https://www.interconectados.net)

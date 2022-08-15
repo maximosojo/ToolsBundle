@@ -5,26 +5,26 @@ services:
         public: false
 
     liform.symfony_constraints_parser:
-        class: Maxtoan\ToolsBundle\Component\Liform\SymfonyConstraintsParser
+        class: Maximosojo\ToolsBundle\Component\Liform\SymfonyConstraintsParser
     
     liform.transformer.array:
-        class: Maxtoan\ToolsBundle\Component\Liform\Transformer\CollectionTransformer
+        class: Maximosojo\ToolsBundle\Component\Liform\Transformer\CollectionTransformer
         arguments: ["@translator","@liform.guesser.validator","@liform.resolver"]
         tags:
             - { name: liform.transformer, form_type: collection, widget: collection }
     
     liform.transformer.boolean:
-        class: Maxtoan\ToolsBundle\Component\Liform\Transformer\BooleanTransformer
+        class: Maximosojo\ToolsBundle\Component\Liform\Transformer\BooleanTransformer
         tags:
             - { name: liform.transformer, form_type: checkbox, widget: checkbox }
     
     liform.transformer.choice:
-        class: Maxtoan\ToolsBundle\Component\Liform\Transformer\ChoiceTransformer
+        class: Maximosojo\ToolsBundle\Component\Liform\Transformer\ChoiceTransformer
         tags:
             - { name: liform.transformer, form_type: choice, widget: choice }
     
     liform.transformer.string:
-        class: Maxtoan\ToolsBundle\Component\Liform\Transformer\StringTransformer
+        class: Maximosojo\ToolsBundle\Component\Liform\Transformer\StringTransformer
         tags:
             - { name: liform.transformer, form_type: text, widget: text }
             - { name: liform.transformer, form_type: url, widget: url }
@@ -39,7 +39,7 @@ services:
             - { name: liform.transformer, form_type: datetime, widget: datetime }
     
     liform.transformer.compound:
-        class: Maxtoan\ToolsBundle\Component\Liform\Transformer\CompoundTransformer
+        class: Maximosojo\ToolsBundle\Component\Liform\Transformer\CompoundTransformer
         arguments: ["@translator","@liform.guesser.validator","@liform.resolver"]
         tags:
             - { name: liform.transformer, form_type: compound}
@@ -47,13 +47,13 @@ services:
             - [ setConstraintsParsers, ["@liform.symfony_constraints_parser"]  ]
     
     liform.transformer.tetranz_select2entity:
-        class: Maxtoan\ToolsBundle\Component\Liform\Transformer\Select2EntityTransformer
+        class: Maximosojo\ToolsBundle\Component\Liform\Transformer\Select2EntityTransformer
         autowire: true
         tags:
             - { name: liform.transformer, form_type: tetranz_select2entity, widget: select2entity }
     
     liform.transformer.readonly:
-        class: Maxtoan\ToolsBundle\Component\Liform\Transformer\ReadOnlyTransformer
+        class: Maximosojo\ToolsBundle\Component\Liform\Transformer\ReadOnlyTransformer
         autowire: true
         tags:
             - { name: liform.transformer, form_type: readonly, widget: readonly }

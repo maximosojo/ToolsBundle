@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Service\Core\Configuration;
+namespace Maximosojo\ToolsBundle\Service\Core\Configuration;
 
 use App\Entity\M\Core\Configuration;
-use Maxtoan\ToolsBundle\Service\BaseService;
-use Maxtoan\ToolsBundle\Model\Core\Configuration\DefaultConfigurationWrapper;
+use Maximosojo\ToolsBundle\Service\BaseService;
+use Maximosojo\ToolsBundle\Model\Core\Configuration\DefaultConfigurationWrapper;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ConfigurationManager extends BaseService
 {
     /**
-     * @var \Maxtoan\ToolsBundle\Model\Core\Configuration\ConfigurationWrapper
+     * @var \Maximosojo\ToolsBundle\Model\Core\Configuration\ConfigurationWrapper
      */
     private $configurationsWrapper = null;
 
@@ -49,11 +49,11 @@ class ConfigurationManager extends BaseService
 
     /**
      * Añade un grupo de configuracion
-     * @param \Maxtoan\ToolsBundle\Model\Core\Configuration\ConfigurationWrapper $configuration
-     * @return \Maxtoan\ToolsBundle\Model\Core\Configuration\ConfigurationWrapper
+     * @param \Maximosojo\ToolsBundle\Model\Core\Configuration\ConfigurationWrapper $configuration
+     * @return \Maximosojo\ToolsBundle\Model\Core\Configuration\ConfigurationWrapper
      * @throws \RuntimeException
      */
-    public function addWrapper(\Maxtoan\ToolsBundle\Model\Core\Configuration\ConfigurationWrapper $configuration) 
+    public function addWrapper(\Maximosojo\ToolsBundle\Model\Core\Configuration\ConfigurationWrapper $configuration) 
     {
         $name = strtoupper($configuration->getName());
         if($this->hasWrapper($name)){
@@ -67,7 +67,7 @@ class ConfigurationManager extends BaseService
     /**
      * Retorna el wrapper de una configuracion
      * @param type $name
-     * @return \Maxtoan\ToolsBundle\Model\Core\Configuration\ConfigurationWrapper
+     * @return \Maximosojo\ToolsBundle\Model\Core\Configuration\ConfigurationWrapper
      * @throws \RuntimeException
      */
     public function getWrapper($name)

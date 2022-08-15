@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Maxtoan Tools package.
+ * This file is part of the Maximosojo Tools package.
  * 
  * (c) https://maximosojo.github.io/tools-bundle
  * 
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Traits\Component;
+namespace Maximosojo\ToolsBundle\Traits\Component;
 
 /**
  * EventDispatcherTrait
@@ -28,16 +28,16 @@ trait EventDispatcherTrait
      */
     public function newGenericEvent($entity)
     {
-        return new \Maxtoan\ToolsBundle\Component\EventDispatcher\GenericEvent($entity);        
+        return new \Maximosojo\ToolsBundle\Component\EventDispatcher\GenericEvent($entity);        
     }
     
     /**
      * Disparar un evento
      * @param type $eventName
-     * @param \Maxtoan\ToolsBundle\Component\EventDispatcher\GenericEvent $event
+     * @param \Maximosojo\ToolsBundle\Component\EventDispatcher\GenericEvent $event
      * @return \App\Event\GenericEvent
      */
-    protected function dispatch($eventName, \Maxtoan\ToolsBundle\Component\EventDispatcher\GenericEvent $event = null)
+    protected function dispatch($eventName, \Maximosojo\ToolsBundle\Component\EventDispatcher\GenericEvent $event = null)
     {
         return $this->getEventDispatcher()->dispatch($event,$eventName);
     }

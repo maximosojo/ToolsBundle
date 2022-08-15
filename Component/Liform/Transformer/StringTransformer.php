@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Component\Liform\Transformer;
+namespace Maximosojo\ToolsBundle\Component\Liform\Transformer;
 
 use Symfony\Component\Form\FormInterface;
 use Limenius\Liform\Transformer\StringTransformer as AbstractStringTransformer;
@@ -19,7 +19,7 @@ use Limenius\Liform\Transformer\StringTransformer as AbstractStringTransformer;
  */
 class StringTransformer extends AbstractStringTransformer
 {
-    use \Maxtoan\ToolsBundle\Component\Liform\CommonFunctionsTrait;
+    use \Maximosojo\ToolsBundle\Component\Liform\CommonFunctionsTrait;
     
     /**
      * {@inheritdoc}

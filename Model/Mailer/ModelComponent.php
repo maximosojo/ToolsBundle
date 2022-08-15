@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\Mailer;
+namespace Maximosojo\ToolsBundle\Model\Mailer;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -115,11 +115,11 @@ class ModelComponent
     /**
      * Add basis
      *
-     * @param \Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface $basis
+     * @param \Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface $basis
      *
      * @return Component
      */
-    public function addBase(\Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface $basis)
+    public function addBase(\Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface $basis)
     {
         $basis->setBase($this);
         $this->bases[] = $basis;
@@ -130,9 +130,9 @@ class ModelComponent
     /**
      * Remove basis
      *
-     * @param \Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface $basis
+     * @param \Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface $basis
      */
-    public function removeBase(\Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface $basis)
+    public function removeBase(\Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface $basis)
     {
         $this->bases->removeElement($basis);
     }
@@ -150,11 +150,11 @@ class ModelComponent
     /**
      * Add header
      *
-     * @param \Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface $header
+     * @param \Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface $header
      *
      * @return Component
      */
-    public function addHeader(\Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface $header)
+    public function addHeader(\Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface $header)
     {
         $header->setHeader($this);
         $this->headers[] = $header;
@@ -165,9 +165,9 @@ class ModelComponent
     /**
      * Remove header
      *
-     * @param \Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface $header
+     * @param \Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface $header
      */
-    public function removeHeader(\Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface $header)
+    public function removeHeader(\Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface $header)
     {
         $this->headers->removeElement($header);
     }
@@ -185,11 +185,11 @@ class ModelComponent
     /**
      * Add body
      *
-     * @param \Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface $body
+     * @param \Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface $body
      *
      * @return Component
      */
-    public function addBody(\Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface $body)
+    public function addBody(\Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface $body)
     {
         $body->setBody($this);
         $this->bodys[] = $body;
@@ -200,9 +200,9 @@ class ModelComponent
     /**
      * Remove body
      *
-     * @param \Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface $body
+     * @param \Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface $body
      */
-    public function removeBody(\Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface $body)
+    public function removeBody(\Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface $body)
     {
         $this->bodys->removeElement($body);
     }
@@ -220,11 +220,11 @@ class ModelComponent
     /**
      * Add footer
      *
-     * @param \Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface $footer
+     * @param \Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface $footer
      *
      * @return Component
      */
-    public function addFooter(\Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface $footer)
+    public function addFooter(\Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface $footer)
     {
         $footer->setFooter($this);
         $this->footers[] = $footer;
@@ -235,9 +235,9 @@ class ModelComponent
     /**
      * Remove footer
      *
-     * @param \Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface $footer
+     * @param \Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface $footer
      */
-    public function removeFooter(\Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface $footer)
+    public function removeFooter(\Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface $footer)
     {
         $this->footers->removeElement($footer);
     }

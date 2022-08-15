@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Model\SequenceGenerator;
+namespace Maximosojo\ToolsBundle\Model\SequenceGenerator;
 
 use LogicException;
 use Doctrine\Common\Util\ClassUtils;
-use Maxtoan\ToolsBundle\Interfaces\SequenceGenerator\ItemReferenceInterface;
-use Maxtoan\ToolsBundle\Interfaces\SequenceGenerator\SequenceGeneratorInterface;
+use Maximosojo\ToolsBundle\Interfaces\SequenceGenerator\ItemReferenceInterface;
+use Maximosojo\ToolsBundle\Interfaces\SequenceGenerator\SequenceGeneratorInterface;
 
 /**
  * Base del generador de secuencias
@@ -25,7 +25,7 @@ abstract class SequenceGenerator implements SequenceGeneratorInterface
 {
     /**
      * Instancia del generador de secuencias
-     * @var \Maxtoan\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService
+     * @var \Maximosojo\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService
      */
     protected $sequenceGenerator;
     
@@ -81,9 +81,9 @@ abstract class SequenceGenerator implements SequenceGeneratorInterface
     
     /**
      * Establece el generador de secuencia
-     * @param \Maxtoan\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService $sequenceGenerator
+     * @param \Maximosojo\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService $sequenceGenerator
      */
-    function setSequenceGenerator(\Maxtoan\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService $sequenceGenerator) 
+    function setSequenceGenerator(\Maximosojo\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService $sequenceGenerator) 
     {
         $this->sequenceGenerator = $sequenceGenerator;
     }

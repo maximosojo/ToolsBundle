@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\Core\Configuration;
+namespace Maximosojo\ToolsBundle\Model\Core\Configuration;
 
 /**
  * Configuracion wraper por defecto para guardar valores generales

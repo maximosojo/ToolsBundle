@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\ORM;
+namespace Maximosojo\ToolsBundle\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Maxtoan\ToolsBundle\Model\Paginator\Paginator;
+use Maximosojo\ToolsBundle\Model\Paginator\Paginator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -26,7 +26,7 @@ use Pagerfanta\Adapter\ArrayAdapter;
  */
 class EntityRepository extends \Doctrine\ORM\EntityRepository implements ContainerAwareInterface
 {   
-    use \Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use \Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
     
     /**
      * @param QueryBuilder $queryBuilder
@@ -100,11 +100,11 @@ class EntityRepository extends \Doctrine\ORM\EntityRepository implements Contain
     /**
      * @param type $qb
      * @param type $criteria
-     * @return \Maxtoan\ToolsBundle\Repository\BaseRepository
+     * @return \Maximosojo\ToolsBundle\Repository\BaseRepository
      */
     protected function createSearchQueryBuilder($qb, $criteria,array $orderBy = []) 
     {
-        return new \Maxtoan\ToolsBundle\ORM\Query\SearchQueryBuilder($qb, $criteria, $this->getAlies(),$orderBy);
+        return new \Maximosojo\ToolsBundle\ORM\Query\SearchQueryBuilder($qb, $criteria, $this->getAlies(),$orderBy);
     }
     
     /**

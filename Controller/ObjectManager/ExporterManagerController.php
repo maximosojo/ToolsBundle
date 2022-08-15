@@ -1,13 +1,13 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Controller\ObjectManager;
+namespace Maximosojo\ToolsBundle\Controller\ObjectManager;
 
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use FOS\RestBundle\Util\Codes;
-use Maxtoan\ToolsBundle\Form\ObjectManager\ExporterManager\DocumentsType;
-use Maxtoan\ToolsBundle\Component\HttpFoundation\JsonResponse;
+use Maximosojo\ToolsBundle\Form\ObjectManager\ExporterManager\DocumentsType;
+use Maximosojo\ToolsBundle\Component\HttpFoundation\JsonResponse;
 
 /**
  * Controlador para exportar los documentos

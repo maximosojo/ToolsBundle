@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maxtoan\ToolsBundle\Interfaces\SequenceGenerator;
+namespace Maximosojo\ToolsBundle\Interfaces\SequenceGenerator;
 
 /**
  * Interfaz para establecer referencia a objetos

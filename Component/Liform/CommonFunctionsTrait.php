@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Component\Liform;
+namespace Maximosojo\ToolsBundle\Component\Liform;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;

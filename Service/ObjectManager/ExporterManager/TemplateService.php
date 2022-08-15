@@ -1,12 +1,12 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager;
 
 use RuntimeException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Maxtoan\ToolsBundle\Model\ObjectManager\ExporterManager\TemplateInterface;
-use Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService\Adapter\TemplateAdapterInterface;
-use Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\EngineInterface;
+use Maximosojo\ToolsBundle\Model\ObjectManager\ExporterManager\TemplateInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService\Adapter\TemplateAdapterInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\Engine\EngineInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
@@ -57,7 +57,7 @@ class TemplateService
     
     /**
      * Añade un adaptador
-     * @param \Maxtoan\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService\Adapter\TemplateAdapterInterface $adapter
+     * @param \Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService\Adapter\TemplateAdapterInterface $adapter
      * @throws RuntimeException
      */
     public function addAdapter(TemplateAdapterInterface $adapter)

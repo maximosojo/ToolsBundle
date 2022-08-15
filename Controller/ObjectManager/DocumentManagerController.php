@@ -1,12 +1,12 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Controller\ObjectManager;
+namespace Maximosojo\ToolsBundle\Controller\ObjectManager;
 
 use Symfony\Component\HttpFoundation\Request;
-use Maxtoan\ToolsBundle\Form\ObjectManager\DocumentManager\DocumentsType;
+use Maximosojo\ToolsBundle\Form\ObjectManager\DocumentManager\DocumentsType;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Maxtoan\ToolsBundle\Service\ObjectManager\ObjectDataManagerInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManagerInterface;
 
 /**
  * Controlador de manejador de documentos

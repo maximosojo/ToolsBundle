@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Component\Liform;
+namespace Maximosojo\ToolsBundle\Component\Liform;
 
 /**
  * Convertir validacion a una compatible

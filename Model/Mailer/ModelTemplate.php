@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\Mailer;
+namespace Maximosojo\ToolsBundle\Model\Mailer;
 
 use Doctrine\ORM\Mapping as ORM;
 

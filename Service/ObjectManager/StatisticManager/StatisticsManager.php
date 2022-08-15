@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\StatisticManager;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\StatisticManager;
 
 use DateTime;
 use InvalidArgumentException;
@@ -8,10 +8,10 @@ use RuntimeException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
-use Maxtoan\ToolsBundle\Service\ObjectManager\ConfigureInterface;
-use Maxtoan\ToolsBundle\Service\ObjectManager\StatisticManager\Adapter\StatisticsAdapterInterface;
-use Maxtoan\ToolsBundle\Model\ObjectManager\StatisticManager\StatisticsMonthInterface;
-use Maxtoan\ToolsBundle\Service\ObjectManager\TraitConfigure;
+use Maximosojo\ToolsBundle\Service\ObjectManager\ConfigureInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\StatisticManager\Adapter\StatisticsAdapterInterface;
+use Maximosojo\ToolsBundle\Model\ObjectManager\StatisticManager\StatisticsMonthInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\TraitConfigure;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 /**
@@ -276,7 +276,7 @@ class StatisticsManager implements ConfigureInterface
      * Retorna las estadisticas de un año
      * @param type $year
      * @param type $month
-     * @return \Maxtoan\ToolsBundle\Model\Statistics\StatisticsYearInterface
+     * @return \Maximosojo\ToolsBundle\Model\Statistics\StatisticsYearInterface
      */
     private function findStatisticsYear($year)
     {
@@ -298,7 +298,7 @@ class StatisticsManager implements ConfigureInterface
      * Cuenta uno a las estadisticas de un objeto por el año, mes y dia<br/>
      * <b>$value: Puede incrementar +20, restar -15 o colocar un valor fijo 5</b>
      * @param array $options [year,month,day,value] 
-     * @return \Maxtoan\ToolsBundle\Model\Statistics\StatisticsMonthInterface
+     * @return \Maximosojo\ToolsBundle\Model\Statistics\StatisticsMonthInterface
      */
     public function countStatisticsMonth(array $options = [])
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Component\Liform\Constraints;
+namespace Maximosojo\ToolsBundle\Component\Liform\Constraints;
 
 use ReflectionClass;
 

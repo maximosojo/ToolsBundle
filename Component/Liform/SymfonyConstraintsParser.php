@@ -1,13 +1,13 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Component\Liform;
+namespace Maximosojo\ToolsBundle\Component\Liform;
 
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Regex;
-use Maxtoan\ToolsBundle\Component\Liform\Constraints as Constraints;
+use Maximosojo\ToolsBundle\Component\Liform\Constraints as Constraints;
 use RuntimeException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -73,7 +73,7 @@ class SymfonyConstraintsParser implements ConstraintsParserInterface
     /**
      * Traduce las propiedades
      * @param array $mappedInfo
-     * @param \Maxtoan\ToolsBundle\Component\Liform\Constraints\Constraint $destination
+     * @param \Maximosojo\ToolsBundle\Component\Liform\Constraints\Constraint $destination
      */
     private function transProperties(array $mappedInfo,Constraints\Constraint $destination)
     {

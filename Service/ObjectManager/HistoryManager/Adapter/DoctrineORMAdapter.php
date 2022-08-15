@@ -1,11 +1,11 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\HistoryManager\Adapter;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\HistoryManager\Adapter;
 
-use Maxtoan\ToolsBundle\Service\ObjectManager\HistoryManager\HistoryInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\HistoryManager\HistoryInterface;
 use Doctrine\ORM\EntityManager;
 use Pagerfanta\Adapter\DoctrineORMAdapter as Adapter;
-use Maxtoan\ToolsBundle\Model\Paginator\Paginator;
+use Maximosojo\ToolsBundle\Model\Paginator\Paginator;
 use Sinergi\BrowserDetector\Browser;
 use Sinergi\BrowserDetector\Os;
 
@@ -16,7 +16,7 @@ use Sinergi\BrowserDetector\Os;
  */
 class DoctrineORMAdapter implements HistoryAdapterInterface
 {
-    use \Maxtoan\ToolsBundle\Service\ObjectManager\TraitConfigure;
+    use \Maximosojo\ToolsBundle\Service\ObjectManager\TraitConfigure;
     
     /**
      * @var string
@@ -117,7 +117,7 @@ class DoctrineORMAdapter implements HistoryAdapterInterface
     {
         if (isset($_SERVER['HTTP_USER_AGENT'])) {
             $userAgent = $_SERVER['HTTP_USER_AGENT'];
-        // } elseif (\Maxtoan\Common\Util\AppUtil::isCommandLineInterface()) {
+        // } elseif (\Maximosojo\Common\Util\AppUtil::isCommandLineInterface()) {
             // $userAgent = "cli-user-agent";
         }
 

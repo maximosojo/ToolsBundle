@@ -1,13 +1,13 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Model\Core\Search;
+namespace Maximosojo\ToolsBundle\Model\Core\Search;
 
 use Doctrine\ORM\Mapping as ORM;
-use Maxtoan\ToolsBundle\Traits\TraitRef;
-use Maxtoan\ToolsBundle\Interfaces\SequenceGenerator\ItemReferenceInterface;
-use Maxtoan\ToolsBundle\Traits\EnableableTrait;
-use Maxtoan\ToolsBundle\Traits\Basic\DescriptionTrait;
-use Maxtoan\ToolsBundle\Model\ModelStandarMaster;
+use Maximosojo\ToolsBundle\Traits\TraitRef;
+use Maximosojo\ToolsBundle\Interfaces\SequenceGenerator\ItemReferenceInterface;
+use Maximosojo\ToolsBundle\Traits\EnableableTrait;
+use Maximosojo\ToolsBundle\Traits\Basic\DescriptionTrait;
+use Maximosojo\ToolsBundle\Model\ModelStandarMaster;
 
 /**
  * Modelo de grupo de filtro

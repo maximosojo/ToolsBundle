@@ -1,9 +1,9 @@
 <?php
 
-namespace Maxtoan\ToolsBundle\Service\ObjectManager\HistoryManager\Adapter;
+namespace Maximosojo\ToolsBundle\Service\ObjectManager\HistoryManager\Adapter;
 
-use Maxtoan\ToolsBundle\Service\ObjectManager\HistoryManager\HistoryInterface;
-use Maxtoan\ToolsBundle\Service\ObjectManager\ConfigureInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\HistoryManager\HistoryInterface;
+use Maximosojo\ToolsBundle\Service\ObjectManager\ConfigureInterface;
 
 /**
  *

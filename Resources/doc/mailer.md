@@ -1,4 +1,4 @@
-MaxtoanToolsBundle
+MaximosojoToolsBundle
 ========================
 
 ## Mailer
@@ -11,7 +11,7 @@ Configuración del componente:
 El componente debe ser habilitado y a su vez puede registrar el prefijo deseado para sus tablas:
 
 ``` yml
-maxtoan_tools:
+maximosojo_tools:
     mailer:
         enable: true
         mailer_component_class: App\Entity\M\Master\Email\Component
@@ -27,8 +27,8 @@ maxtoan_tools:
 namespace App\Entity\M\Master\Email;
 
 use Doctrine\ORM\Mapping as ORM;
-use Maxtoan\ToolsBundle\Model\Mailer\ModelTemplate;
-use Maxtoan\ToolsBundle\Interfaces\Mailer\TemplateInterface;
+use Maximosojo\ToolsBundle\Model\Mailer\ModelTemplate;
+use Maximosojo\ToolsBundle\Interfaces\Mailer\TemplateInterface;
 
 /**
  * Plantilla de correo electronico
@@ -76,7 +76,7 @@ class Template extends ModelTemplate implements TemplateInterface
 namespace App\Entity\M\Master\Email;
 
 use Doctrine\ORM\Mapping as ORM;
-use Maxtoan\ToolsBundle\Model\Mailer\ModelComponent;
+use Maximosojo\ToolsBundle\Model\Mailer\ModelComponent;
 
 /**
  * Componente de correo
