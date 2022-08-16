@@ -20,7 +20,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 trait TranslatorTrait
 {
-    private $translator;
+    protected $translator;
 
     /**
      * Traducción

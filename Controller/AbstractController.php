@@ -17,6 +17,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as BaseAbstractController;
 use Maximosojo\ToolsBundle\DependencyInjection\DoctrineTrait;
 use Maximosojo\ToolsBundle\Traits\Component\EventDispatcherTrait;
+use Maximosojo\ToolsBundle\Traits\Component\TranslatorTrait;
 
 /**
  * Controlador base
@@ -28,6 +29,7 @@ abstract class AbstractController extends BaseAbstractController
     use ControllerTrait;
     use DoctrineTrait;
     use EventDispatcherTrait;
+    use TranslatorTrait;
 
     /**
      * Tipo error

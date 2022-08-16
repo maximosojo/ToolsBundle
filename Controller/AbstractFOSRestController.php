@@ -18,6 +18,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController as BaseAbstractFOSRestCo
 use Maximosojo\ToolsBundle\DependencyInjection\DoctrineTrait;
 use Maximosojo\ToolsBundle\Traits\Component\EventDispatcherTrait;
 use Maximosojo\ToolsBundle\Traits\Component\FOSRestViewTrait;
+use Maximosojo\ToolsBundle\Traits\Component\TranslatorTrait;
 
 /**
  * Controlador base
@@ -30,6 +31,7 @@ abstract class AbstractFOSRestController extends BaseAbstractFOSRestController
     use DoctrineTrait;
     use EventDispatcherTrait;
     use FOSRestViewTrait;
+    use TranslatorTrait;
     
     /**
      * Tipo error

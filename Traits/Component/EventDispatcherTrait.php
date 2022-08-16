@@ -17,7 +17,7 @@ namespace Maximosojo\ToolsBundle\Traits\Component;
  */
 trait EventDispatcherTrait 
 {
-    private $dispatcher;
+    protected $dispatcher;
     
     /**
      * GenericEvent
