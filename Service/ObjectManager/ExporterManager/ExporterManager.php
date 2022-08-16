@@ -59,7 +59,7 @@ class ExporterManager implements ConfigureInterface
         $resolver = new OptionsResolver();
         $resolver->setDefaults([
             "debug" => false,
-            "enable" => false,
+            "enabled" => false,
             "template" => "",
             "adapter" => "",
             "chaines" => []
@@ -201,7 +201,7 @@ class ExporterManager implements ConfigureInterface
     public function generateWithSource($name,array $options = [],$overwrite = false)
     {
         if(!$this->adapter){
-            throw new RuntimeException(sprintf("The adapter must be set for enable this feature."));
+            throw new RuntimeException(sprintf("The adapter must be set for enabled this feature."));
         }
 
         $resolver = new OptionsResolver();

@@ -1,0 +1,24 @@
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false
+
+    # Manejador
+    maximosojo_tools.notifier.texter_manager:
+        class: Maximosojo\ToolsBundle\Service\Notifier\TexterManager
+        public: true
+        arguments: [{ env: "%kernel.environment%", class: "%maximosojo_tools.notifier.texter.class%" }]
+
+    # Transports
+
+    # Dummy
+    maximosojo_tools.notifier.texter_manager.transports.dummy:
+        class: Maximosojo\ToolsBundle\Service\Notifier\Texter\Transports\DummyTransport
+    # Interconectados
+    maximosojo_tools.notifier.texter_manager.transports.interconectados:
+        class: Maximosojo\ToolsBundle\Service\Notifier\Texter\Transports\InterconectadosTransport
+        calls: 
+            - [ setOptions, ["%maximosojo_tools.notifier.texter_manager.transports.interconectados.options%"]  ]
+
+    

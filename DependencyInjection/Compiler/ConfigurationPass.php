@@ -51,7 +51,7 @@ class ConfigurationPass implements CompilerPassInterface
         $config = $container->getParameter("maximosojo_tools.object_manager.options");
 
         // Manejador de estadísticas
-        if ($container->getParameter('maximosojo_tools.object_manager.statistic.enable') === true) {
+        if ($container->getParameter('maximosojo_tools.object_manager.statistic.enabled') === true) {
             $statistic = $container->getParameter("maximosojo_tools.object_manager.statistic");
             $idStatisticManagerAdapter = $statistic["adapter"];
             if ($idStatisticManagerAdapter && $container->hasDefinition($idStatisticManagerAdapter)) {
@@ -72,7 +72,7 @@ class ConfigurationPass implements CompilerPassInterface
         }
 
         // Manejador de Historial
-        if ($container->getParameter('maximosojo_tools.object_manager.history.enable') === true) {
+        if ($container->getParameter('maximosojo_tools.object_manager.history.enabled') === true) {
             $history = $container->getParameter("maximosojo_tools.object_manager.history");
             $idHistoryManagerAdapter = $history["adapter"];
             if ($idHistoryManagerAdapter && $container->hasDefinition($idHistoryManagerAdapter)) {
@@ -83,7 +83,7 @@ class ConfigurationPass implements CompilerPassInterface
         }
 
         // Manejador de documentos
-        if ($container->getParameter('maximosojo_tools.object_manager.document.enable') === true) {
+        if ($container->getParameter('maximosojo_tools.object_manager.document.enabled') === true) {
             // Manejador de documentos
             $adapterDefinition = $container->findDefinition($config["document_manager"]["adapter"]);
             $documentManager = $container->findDefinition("maximosojo_tools.document_manager.default");
@@ -91,7 +91,7 @@ class ConfigurationPass implements CompilerPassInterface
         }
 
         // Manejador de exportaciones
-        if ($container->getParameter('maximosojo_tools.object_manager.exporter.enable') === true) {
+        if ($container->getParameter('maximosojo_tools.object_manager.exporter.enabled') === true) {
             $adapterDefinition = $container->findDefinition($config["exporter_manager"]["adapter"]);
             $exporterManager = $container->getDefinition("maximosojo_tools.exporter_manager.default");
             $exporterManager->addArgument($documentManager);
@@ -112,30 +112,28 @@ class ConfigurationPass implements CompilerPassInterface
         }
 
         // Manejador de mensajes
-        if ($container->getParameter('maximosojo_tools.sms_manager.enable') === true) {
-            // Manejador de sms
-            $smsManager = $container->getDefinition("maximosojo_tools.service.sms_manager");
-            // Inicia transporter de interconectados
-            $optionsTransportsInterconectados = [];
-            $container->setParameter("maximosojo_tools.service.sms_manager.transports.interconectados.options", []);
-            $optionsTransportsInterconectados["enabled"] = isset($_ENV["MAXIMOSOJO_TOOLS_SMS_INTERCONECTADOS_HOST"],$_ENV["MAXIMOSOJO_TOOLS_SMS_INTERCONECTADOS_USER"],$_ENV["MAXIMOSOJO_TOOLS_SMS_INTERCONECTADOS_PASSWORD"]);
+        if ($container->getParameter('maximosojo_tools.notifier.texter.enabled') === true) {
+            $transports = $container->getParameter('maximosojo_tools.notifier.texter.transports');
+            // Manejador de notificaciones texter
+            $texterManager = $container->getDefinition("maximosojo_tools.notifier.texter_manager");
+
             // Interconectados
-            if ($optionsTransportsInterconectados["enabled"] === true) {
-                $optionsTransportsInterconectados["host"] = $_ENV["MAXIMOSOJO_TOOLS_SMS_INTERCONECTADOS_HOST"];
-                $optionsTransportsInterconectados["user"] = $_ENV["MAXIMOSOJO_TOOLS_SMS_INTERCONECTADOS_USER"];
-                $optionsTransportsInterconectados["password"] = $_ENV["MAXIMOSOJO_TOOLS_SMS_INTERCONECTADOS_PASSWORD"];
-                $container->setParameter("maximosojo_tools.service.sms_manager.transports.interconectados.options", $optionsTransportsInterconectados);
+            if ($transports["interconectados"]["enabled"] === true) {
+                // DSN
+                $dsn = explode(":",$transports["interconectados"]["dsn"]);
+                $options = [
+                    "user" => $dsn[0],
+                    "password" => $dsn[0]
+                ];
+                $container->setParameter("maximosojo_tools.notifier.texter_manager.transports.interconectados.options", $options);
                 // Transport
-                $smsManager->addMethodCall("addTransport", [$container->getDefinition("maximosojo_tools.service.sms_manager.transports.interconectados")]);
+                $texterManager->addMethodCall("addTransport", [$container->getDefinition("maximosojo_tools.notifier.texter_manager.transports.interconectados")]);
             }
 
-            // Inicia transporter de dummy
-            $optionsTransportsDummy = [];
-            $optionsTransportsDummy["enabled"] = isset($_ENV["MAXIMOSOJO_TOOLS_SMS_DUMMY_ENABLE"]);
             // Dummy
-            if ($optionsTransportsDummy["enabled"] === true) {
+            if ($transports["dummy"]["enabled"] === true) {
                 // Transport
-                $smsManager->addMethodCall("addTransport", [$container->getDefinition("maximosojo_tools.service.sms_manager.transports.dummy")]);
+                $texterManager->addMethodCall("addTransport", [$container->getDefinition("maximosojo_tools.notifier.texter_manager.transports.dummy")]);
             }
         }
     }

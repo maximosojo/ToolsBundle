@@ -23,7 +23,7 @@ class LinkGeneratorPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container) 
     {
-        if($container->getParameter('maximosojo_tools.service.link_generator.enable') === false){
+        if($container->getParameter('maximosojo_tools.service.link_generator.enabled') === false){
             return;
         }
         

@@ -1,9 +1,9 @@
 <?php
 
-namespace Maximosojo\ToolsBundle\Service\Sms\Transports;
+namespace Maximosojo\ToolsBundle\Service\Notifier\Texter\Transports;
 
-use Maximosojo\ToolsBundle\Model\Sms\ModelMessage;
-use Maximosojo\ToolsBundle\Service\Sms\BaseTransport;
+use Maximosojo\ToolsBundle\Model\Notifier\Texter\ModelMessage;
+use Maximosojo\ToolsBundle\Service\Notifier\Texter\BaseTransport;
 
 /**
  * Mensajes dummy

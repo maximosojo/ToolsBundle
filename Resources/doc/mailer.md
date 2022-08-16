@@ -13,7 +13,7 @@ El componente debe ser habilitado y a su vez puede registrar el prefijo deseado 
 ``` yml
 maximosojo_tools:
     mailer:
-        enable: true
+        enabled: true
         mailer_component_class: App\Entity\M\Master\Email\Component
         mailer_template_class: App\Entity\M\Master\Email\Template
 

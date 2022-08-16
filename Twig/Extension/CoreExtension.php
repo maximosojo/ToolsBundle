@@ -11,7 +11,7 @@
 
 namespace Maximosojo\ToolsBundle\Twig\Extension;
 
-use Maximosojo\Common\Util\StringUtil;
+use Maxtoan\Common\Util\StringUtil;
 use Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManager;
 use Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 use Twig\Extension\AbstractExtension;

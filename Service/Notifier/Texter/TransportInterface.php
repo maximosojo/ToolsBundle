@@ -1,9 +1,9 @@
 <?php
 
-namespace Maximosojo\ToolsBundle\Service\Sms;
+namespace Maximosojo\ToolsBundle\Service\Notifier\Texter;
 
 use Psr\Log\LoggerAwareInterface;
-use Maximosojo\ToolsBundle\Model\Sms\ModelMessage;
+use Maximosojo\ToolsBundle\Model\Notifier\Texter\ModelMessage;
 
 /**
  * Capa de transporte

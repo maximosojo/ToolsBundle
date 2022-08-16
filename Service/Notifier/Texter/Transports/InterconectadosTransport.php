@@ -1,10 +1,10 @@
 <?php
 
-namespace Maximosojo\ToolsBundle\Service\Sms\Transports;
+namespace Maximosojo\ToolsBundle\Service\Notifier\Texter\Transports;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Maximosojo\ToolsBundle\Model\Sms\ModelMessage;
-use Maximosojo\ToolsBundle\Service\Sms\BaseTransport;
+use Maximosojo\ToolsBundle\Model\Notifier\Texter\ModelMessage;
+use Maximosojo\ToolsBundle\Service\Notifier\Texter\BaseTransport;
 
 /**
  * Interconectados (https://www.interconectados.net)
@@ -20,8 +20,6 @@ class InterconectadosTransport extends BaseTransport
 
     private $enabled;
 
-    private $host;
-
     private $user;
 
     private $password;
@@ -34,7 +32,6 @@ class InterconectadosTransport extends BaseTransport
             'timeout' => 10.00,
             'priority' => 50,
             'enabled' => false,
-            'host' => null,
             'user' => null,
             'password' => null
         ]);
@@ -44,7 +41,6 @@ class InterconectadosTransport extends BaseTransport
         $this->timeout = $options["timeout"];
         $this->priority = $options["priority"];
         $this->enabled = $options["enabled"];
-        $this->host = $options["host"];
         $this->user = $options["user"];
         $this->password = $options["password"];
     }
@@ -57,7 +53,7 @@ class InterconectadosTransport extends BaseTransport
         $phoneNro = '0' . substr($recipient, 2, strlen($recipient));
         foreach ($contents as $content) {
             $this->logPre($phoneNro,$content);
-            $callTo = sprintf('%s?phonenumber=%s&Text=%s&user=%s&password=%s', $this->host, $phoneNro, urlencode($content), $this->user, $this->password);
+            $callTo = sprintf('https://www.interconectados.net/api2/?phonenumber=%s&Text=%s&user=%s&password=%s', $phoneNro, urlencode($content), $this->user, $this->password);
             $client = new \GuzzleHttp\Client();
             $messageSend = false;
             try {

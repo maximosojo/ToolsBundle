@@ -42,17 +42,17 @@ class MaximosojoToolsExtension extends Extension
         }
         
 
-        if($config['link_generator']['enable'] === true) {
+        if($config['link_generator']['enabled'] === true) {
             $loaderYml->load('link_generator.yml');
             $container->setParameter('maximosojo_tools.service.link_generator.color', $config['link_generator']['color']); 
         }
 
-        if($config['search_manager']['enable'] === true) {
+        if($config['search_manager']['enabled'] === true) {
             $loaderYml->load('services/search_manager.yml');
             $container->setParameter('maximosojo_tools.service.search_manager.icons.clean', $config['search_manager']['icons']['clean']); 
         }
 
-        if($config['mailer']['enable'] === true) {
+        if($config['mailer']['enabled'] === true) {
             $loaderYml->load('mailer.yml');
             $container->setParameter("maximosojo_tools.symfonymailer.mailer_template_class", $config['mailer']["mailer_template_class"]);
             $container->setParameter("maximosojo_tools.symfonymailer.mailer_component_class", $config['mailer']["mailer_component_class"]);
@@ -61,14 +61,16 @@ class MaximosojoToolsExtension extends Extension
             $container->setAlias("maximosojo_tools.repository.mailer.em",$idManager);
         }
 
-        $container->setParameter("maximosojo_tools.sms_manager.enable", $config['sms_manager']["enable"]);
-        if($config['sms_manager']['enable'] === true) {
-            $loaderYml->load('services/sms_manager.yml');
-            $container->setParameter("maximosojo_tools.sms_manager.message_class", $config['sms_manager']["message_class"]);
-            $container->setParameter("maximosojo_tools.sms_manager.disable_delivery", $config['sms_manager']["disable_delivery"]);
+        // Notifier
+        if($config['notifier']['texter']['enabled'] === true) {
+            $loaderYml->load('services/notifier/texter_manager.yml');
+            $container->setParameter("maximosojo_tools.notifier.texter.enabled", $config['notifier']['texter']['enabled']);
+            $container->setParameter("maximosojo_tools.notifier.texter.class", $config['notifier']['texter']["class"]);
+            $container->setParameter("maximosojo_tools.notifier.texter.transports", $config['notifier']['texter']["transports"]);
         }
 
-        if($config['table_prefix']['enable'] === true) {
+        // Table prefix
+        if($config['table_prefix']['enabled'] === true) {
             $tablePrefix = $config['table_prefix']['prefix'].$config['table_prefix']['prefix_separator'];
             $tableNameLowercase = $config['table_prefix']['name_lowercase'];
             $tablePrefixListerner = new Definition($config['table_prefix']['listerner_class']);
@@ -98,35 +100,35 @@ class MaximosojoToolsExtension extends Extension
             }
         }
         
-        $container->setParameter('maximosojo_tools.service.link_generator.enable', $config['link_generator']['enable']);
+        $container->setParameter('maximosojo_tools.service.link_generator.enabled', $config['link_generator']['enabled']);
         $container->setParameter('maximosojo_tools.loading.color', $config['loading']['color']);
 
-        if($config['jms_serializer']['enable'] === true) {
+        if($config['jms_serializer']['enabled'] === true) {
             $loaderYml->load('jms_serializer.yml');
         }
 
         // Manejador de estadisticas habilitado
-        $container->setParameter('maximosojo_tools.object_manager.statistic.enable',$config['object_manager']['statistics_manager']['enable']);
-        if($config['object_manager']['statistics_manager']['enable'] === true){
+        $container->setParameter('maximosojo_tools.object_manager.statistic.enabled',$config['object_manager']['statistics_manager']['enabled']);
+        if($config['object_manager']['statistics_manager']['enabled'] === true){
             $loaderYml->load('services/object-manager/statistics_manager.yml');
             $container->setParameter('maximosojo_tools.object_manager.statistic',$config['object_manager']['statistics_manager']);
             $container->setParameter('maximosojo_tools.object_manager.history',$config['object_manager']['history_manager']);
         }
 
         // Manejador de configuraciones habilitado
-        $container->setParameter('maximosojo_tools.object_manager.history.enable',$config['object_manager']['history_manager']['enable']);
-        if($config['object_manager']['history_manager']['enable'] === true){
+        $container->setParameter('maximosojo_tools.object_manager.history.enabled',$config['object_manager']['history_manager']['enabled']);
+        if($config['object_manager']['history_manager']['enabled'] === true){
             $loaderYml->load('services/object-manager/history_manager.yml');
             $container->setParameter('maximosojo_tools.object_manager.history',$config['object_manager']['history_manager']);
         }
 
-        $container->setParameter('maximosojo_tools.object_manager.document.enable',$config['object_manager']['document_manager']['enable']);
-        if($config['object_manager']['document_manager']['enable'] === true){
+        $container->setParameter('maximosojo_tools.object_manager.document.enabled',$config['object_manager']['document_manager']['enabled']);
+        if($config['object_manager']['document_manager']['enabled'] === true){
             $loaderYml->load('services/object-manager/document_manager.yml');
         }
 
-        $container->setParameter('maximosojo_tools.object_manager.exporter.enable',$config['object_manager']['exporter_manager']['enable']);
-        if($config['object_manager']['exporter_manager']['enable'] === true){
+        $container->setParameter('maximosojo_tools.object_manager.exporter.enabled',$config['object_manager']['exporter_manager']['enabled']);
+        if($config['object_manager']['exporter_manager']['enabled'] === true){
             $loaderYml->load('services/object-manager/exporter_manager.yml');
         }
         
@@ -138,7 +140,7 @@ class MaximosojoToolsExtension extends Extension
 
         // Revisa los componentes
         if(($componentsConfig = $config['component']) !== null) {
-            if ($componentsConfig["liform"]["enable"] === true) {
+            if ($componentsConfig["liform"]["enabled"] === true) {
                 $loaderYml->load('services/component/liform/transformers.yml');   
             }
         }

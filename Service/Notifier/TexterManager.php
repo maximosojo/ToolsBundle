@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Maximosojo\ToolsBundle\Service\Sms;
+namespace Maximosojo\ToolsBundle\Service\Notifier;
 
-use Maximosojo\ToolsBundle\Model\Sms\ModelMessage;
+use Maximosojo\ToolsBundle\Service\Notifier\Texter\TransportInterface;
+use Maximosojo\ToolsBundle\Model\Notifier\Texter\ModelMessage;
 use Maximosojo\ToolsBundle\Service\BaseService;
-use Maximosojo\Common\Util\DateUtil;
-use Maximosojo\Common\Util\StringUtil;
-use Maximosojo\Common\Util\UserUtil;
+use Maxtoan\Common\Util\DateUtil;
+use Maxtoan\Common\Util\StringUtil;
+use Maxtoan\Common\Util\UserUtil;
 use DateTime;
 
 /**
  * Servicio para enviar mensajes de texto
  *
- * @author Carlos Mendoza <inhack20@gmail.com>
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class SmsManager extends BaseService implements SmsManagerInterface
+class TexterManager extends BaseService implements TexterManagerInterface
 {
     /**
      * @var Message
@@ -37,8 +37,6 @@ class SmsManager extends BaseService implements SmsManagerInterface
 
     private $options;
 
-    private $disableDelivery;
-    
     private $forbiddenChars = array("'","\\","\"",'"');
 
     private $logger;
@@ -49,8 +47,7 @@ class SmsManager extends BaseService implements SmsManagerInterface
         
         $resolver = new \Symfony\Component\OptionsResolver\OptionsResolver();
         $resolver->setDefaults([
-            "class" => false,
-            "disable_delivery" => false
+            "class" => false
         ]);
         $resolver->setRequired("env","class");
         $options = $resolver->resolve($options);
@@ -58,7 +55,6 @@ class SmsManager extends BaseService implements SmsManagerInterface
 
         $this->class = $options["class"];
         $this->environment = $options["env"];
-        $this->disableDelivery = $options["disable_delivery"];
 
         $this->init();
     }

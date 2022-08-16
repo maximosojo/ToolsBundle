@@ -117,7 +117,7 @@ class DoctrineORMAdapter implements HistoryAdapterInterface
     {
         if (isset($_SERVER['HTTP_USER_AGENT'])) {
             $userAgent = $_SERVER['HTTP_USER_AGENT'];
-        // } elseif (\Maximosojo\Common\Util\AppUtil::isCommandLineInterface()) {
+        // } elseif (\Maxtoan\Common\Util\AppUtil::isCommandLineInterface()) {
             // $userAgent = "cli-user-agent";
         }
 

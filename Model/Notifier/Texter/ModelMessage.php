@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maximosojo\ToolsBundle\Model\Sms;
+namespace Maximosojo\ToolsBundle\Model\Notifier\Texter;
 
 use Doctrine\ORM\Mapping as ORM;
 

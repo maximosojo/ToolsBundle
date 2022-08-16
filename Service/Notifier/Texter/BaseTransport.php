@@ -1,6 +1,6 @@
 <?php
 
-namespace Maximosojo\ToolsBundle\Service\Sms;
+namespace Maximosojo\ToolsBundle\Service\Notifier\Texter;
 
 /**
  * Base de transporte sms

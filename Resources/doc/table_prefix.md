@@ -13,7 +13,7 @@ El componente debe ser habilitado y a su vez puede registrar el prefijo deseado 
 ``` yml
 maximosojo_tools:
     table_prefix:
-        enable: true
+        enabled: true
         prefix: "prefix"
 
 ```

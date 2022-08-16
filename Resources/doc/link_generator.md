@@ -16,7 +16,7 @@ Habilitar el componente para su uso y puede ser registrado el color de enlaces:
 ``` yml
 maximosojo_tools:
     link_generator:
-        enable: true
+        enabled: true
         color: "#000"
 
 ```

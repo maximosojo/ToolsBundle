@@ -1,6 +1,6 @@
 <?php
 
-namespace Maximosojo\ToolsBundle\Service\Sms;
+namespace Maximosojo\ToolsBundle\Service\Notifier;
 
 
 /**
@@ -8,7 +8,7 @@ namespace Maximosojo\ToolsBundle\Service\Sms;
  *
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-interface SmsManagerInterface
+interface TexterManagerInterface
 {
     /**
      * Envío de mensaje
