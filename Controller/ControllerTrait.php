@@ -58,5 +58,15 @@ trait ControllerTrait
         }
         $em = $this->getDoctrine()->getManager();
         $em->getFilters()->disable($filter);
-    }   
+    }
+
+    /**
+     * Returns true if the request is a JsonHttpRequest.
+     * @return boolean
+     */
+    protected function isJsonHttpRequest()
+    {
+        $request = $this->container->get('request_stack')->getCurrentRequest();
+        return 'json' == $request->getRequestFormat();
+    }
 }

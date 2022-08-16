@@ -8,7 +8,7 @@ namespace Maximosojo\ToolsBundle\Model;
  */
 abstract class ModelStandarMaster
 {
-	use \Maximosojo\ToolsBundle\Traits\IdentifiableTrait;
-	use \Maximosojo\ToolsBundle\Traits\TimestampableUTCTrait;
-	use \Maximosojo\ToolsBundle\Traits\SoftDeleteableTrait;
+	use \Maximosojo\ToolsBundle\Traits\ORM\IdentifiableTrait;
+	use \Maximosojo\ToolsBundle\Traits\ORM\TimestampableUTCTrait;
+	use \Maximosojo\ToolsBundle\Traits\ORM\SoftDeleteableTrait;
 }

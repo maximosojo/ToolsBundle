@@ -3,8 +3,8 @@
 namespace Maximosojo\ToolsBundle\Model\Core\Search;
 
 use Doctrine\ORM\Mapping as ORM;
-use Maximosojo\ToolsBundle\Traits\EnableableTrait;
-use Maximosojo\ToolsBundle\Traits\TraitRef;
+use Maximosojo\ToolsBundle\Traits\ORM\EnableableTrait;
+use Maximosojo\ToolsBundle\Traits\ORM\TraitRef;
 use Maximosojo\ToolsBundle\Interfaces\SequenceGenerator\ItemReferenceInterface;
 use Maximosojo\ToolsBundle\Model\ModelStandarMaster;
 

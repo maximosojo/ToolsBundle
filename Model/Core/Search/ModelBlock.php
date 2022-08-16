@@ -3,8 +3,8 @@
 namespace Maximosojo\ToolsBundle\Model\Core\Search;
 
 use Doctrine\ORM\Mapping as ORM;
-use Maximosojo\ToolsBundle\Traits\EnableableTrait;
-use Maximosojo\ToolsBundle\Traits\Basic\DescriptionTrait;
+use Maximosojo\ToolsBundle\Traits\ORM\EnableableTrait;
+use Maximosojo\ToolsBundle\Traits\ORM\Basic\DescriptionTrait;
 use Maximosojo\ToolsBundle\Model\ModelStandarMaster;
 
 /**

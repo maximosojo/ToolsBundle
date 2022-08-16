@@ -43,7 +43,7 @@ class OwnerFilter extends SQLFilter
         
         $traits = $targetEntity->reflClass->getTraits();
         // Check if the entity implements the LocalAware interface
-        if (!isset($traits["Maximosojo\ToolsBundle\Traits\OwnerTrait"]) && !$targetEntity->reflClass->hasMethod("getOwner")) {
+        if (!isset($traits["Maximosojo\ToolsBundle\Traits\ORM\OwnerTrait"]) && !$targetEntity->reflClass->hasMethod("getOwner")) {
             return "";
         }
         

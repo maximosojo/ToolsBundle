@@ -3,9 +3,9 @@
 namespace Maximosojo\ToolsBundle\Model\ObjectManager\ExporterManager\DoctrineORM;
 
 use Doctrine\ORM\Mapping as ORM;
-use Maximosojo\ToolsBundle\Traits\Basic\NameTrait;
-use Maximosojo\ToolsBundle\Traits\Basic\DescriptionTrait;
-use Maximosojo\ToolsBundle\Traits\IdentifiableTrait;
+use Maximosojo\ToolsBundle\Traits\ORM\Basic\NameTrait;
+use Maximosojo\ToolsBundle\Traits\ORM\Basic\DescriptionTrait;
+use Maximosojo\ToolsBundle\Traits\ORM\IdentifiableTrait;
 
 /**
  * Modelo de variables

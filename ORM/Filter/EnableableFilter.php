@@ -41,7 +41,7 @@ class EnableableFilter extends SQLFilter
         
         $traits = $targetEntity->reflClass->getTraits();
         // Check if the entity implements the LocalAware interface
-        if (!isset($traits["Maximosojo\ToolsBundle\Traits\EnableableTrait"]) && !$targetEntity->reflClass->hasMethod("getEnabled")) {
+        if (!isset($traits["Maximosojo\ToolsBundle\Traits\ORM\EnableableTrait"]) && !$targetEntity->reflClass->hasMethod("getEnabled")) {
             return "";
         }
 

@@ -14,21 +14,23 @@ namespace Maximosojo\ToolsBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as BaseAbstractController;
+use FOS\RestBundle\Controller\AbstractFOSRestController as BaseAbstractFOSRestController;
 use Maximosojo\ToolsBundle\DependencyInjection\DoctrineTrait;
 use Maximosojo\ToolsBundle\Traits\Component\EventDispatcherTrait;
+use Maximosojo\ToolsBundle\Traits\Component\FOSRestViewTrait;
 
 /**
  * Controlador base
  *
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-abstract class AbstractController extends BaseAbstractController
+abstract class AbstractFOSRestController extends BaseAbstractFOSRestController
 {
     use ControllerTrait;
     use DoctrineTrait;
     use EventDispatcherTrait;
-
+    use FOSRestViewTrait;
+    
     /**
      * Tipo error
      */
@@ -53,4 +55,5 @@ abstract class AbstractController extends BaseAbstractController
      * Tipo depuración
      */
     public const TYPE_DEBUG = "debug";
+    
 }
