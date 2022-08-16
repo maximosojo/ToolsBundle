@@ -205,7 +205,7 @@ class SmsManager extends BaseService implements SmsManagerInterface
         $sms->setEnvironment($this->environment);
         $sms->setStatus(ModelMessage::STATUS_READY);
         $sms->setRetries(0);
-        $this->emSave($sms);
+        $this->doPersist($sms);
 
         return $sms;
     }
@@ -281,8 +281,8 @@ class SmsManager extends BaseService implements SmsManagerInterface
 
         $message->addTransportHistory($rs);
         
-        $this->emSave($message,false);
-        $this->emFlush();
+        $this->doPersist($message,false);
+        $this->doFlush();
         
         return $result;
     }

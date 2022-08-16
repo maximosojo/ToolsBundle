@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maximosojo\ToolsBundle\Traits;
+namespace Maximosojo\ToolsBundle\Traits\ORM;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -27,12 +27,12 @@ trait TraitRef
      */
     protected $ref;
     
-    function getRef() 
+    public function getRef() 
     {
         return $this->ref;
     }
 
-    function setRef($ref) 
+    public function setRef($ref) 
     {
         $this->ref = $ref;
         

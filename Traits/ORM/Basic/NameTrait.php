@@ -9,45 +9,44 @@
  * file that was distributed with this source code.
  */
 
-namespace Maximosojo\ToolsBundle\Traits\Basic;
+namespace Maximosojo\ToolsBundle\Traits\ORM\Basic;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Trair de nombre
- * 
+ * Add Name behavior to an entity.
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-trait DescriptionTrait
+trait NameTrait 
 {
     /**
-     * Description
+     * Nombre
      * @var string
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string")
      */
-    protected $description;
+    protected $name;    
 
     /**
-     * Set description
+     * Set name
      *
-     * @param string $description
+     * @param string $name
      *
-     * @return Shortcut
+     * @return Type
      */
-    public function setDescription($description)
+    public function setName($name)
     {
-        $this->description = $description;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get name
      *
      * @return string
      */
-    public function getDescription()
+    public function getName()
     {
-        return $this->description;
+        return $this->name;
     }
 }

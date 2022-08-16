@@ -22,12 +22,6 @@ use Doctrine\Persistence\ManagerRegistry;
 trait DoctrineTrait
 {
     /**
-     * Entity Manager
-     * @var Doctrine Entity Manager
-     */
-    private $em;
-
-    /**
      * Bandera para permitir una transaccion simultanea
      * @var type 
      */
@@ -50,26 +44,12 @@ trait DoctrineTrait
     }
 
     /**
-     * Manegador de doctrine
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @return EntityManager
-     */
-    protected function getEntityManager()
-    {
-        if (!$this->em) {
-            $this->em = $this->getDoctrine()->getManager();
-        }
-
-        return $this->em;
-    }
-
-    /**
      * Retorna el repositorio principal
      * @return \Maximosojo\ToolsBundle\Model\Base\EntityRepository
      */
     protected function getRepository($repository = null)
     {
-        $em = $this->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         if (!$repository) {
             $repository = $this->getClass();
@@ -132,7 +112,7 @@ trait DoctrineTrait
             throw new \LogicException("No puede iniciar la transaccion dos veces. Realize el commit de la anterior");
         }
 
-        $this->getEntityManager()->getConnection()->beginTransaction();
+        $this->getDoctrine()->getManager()->getConnection()->beginTransaction();
 
         $this->isBeginTransaction = true;
     }
@@ -148,7 +128,7 @@ trait DoctrineTrait
             throw new \LogicException("No hay ninguna transaccion iniciada, primero debe iniciarla.");
         }
 
-        $em = $this->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->flush();
         $em->getConnection()->commit();
         
@@ -167,7 +147,7 @@ trait DoctrineTrait
             return;
         }
 
-        $this->getEntityManager()->getConnection()->rollback();
+        $this->getDoctrine()->getManager()->getConnection()->rollback();
         
         $this->isBeginTransaction = false;
     }
@@ -179,9 +159,9 @@ trait DoctrineTrait
      * @param  boolean
      * @return Entity
      */
-    protected function emSave($entity, $andFlush = true)
+    protected function doPersist($entity, $andFlush = true)
     {
-        $em = $this->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         try {
             $em->persist($entity);
@@ -200,9 +180,9 @@ trait DoctrineTrait
      * @param  boolean
      * @return Entity
      */
-    protected function emRemove($entity = null, $andFlush = true)
+    protected function doRemove($entity = null, $andFlush = true)
     {
-        $em = $this->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         try {
             if ($entity !== null) {
@@ -221,9 +201,9 @@ trait DoctrineTrait
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return [type]
      */
-    protected function emFlush()
+    protected function doFlush()
     {
-        $em = $this->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         try {
             $em->flush();            
@@ -239,17 +219,19 @@ trait DoctrineTrait
      */
     protected function findQueryBuilderForClass($class, array $method = [])
     {
-        $em = $this->getEntityManager();        
+        $em = $this->getDoctrine()->getManager();        
         $alias = "c";
         $qb = $em->createQueryBuilder()
                 ->select($alias)
                 ->from($class, $alias);
+
         foreach ($method as $key => $value) {
             $qb
                 ->andWhere(sprintf("%s.%s = :%s",$alias,$key,$key))
                 ->setParameter($key, $value)
             ;
         }
+
         return $qb->getQuery()->getOneOrNullResult();
     }
 
@@ -260,30 +242,31 @@ trait DoctrineTrait
      */
     protected function findQueryBuilder($class)
     {
-        $em = $this->getEntityManager();        
+        $em = $this->getDoctrine()->getManager();        
         $alias = "c";
         $qb = $em->createQueryBuilder()
                 ->select($alias)
                 ->from($class, $alias);
+
         return $qb;
     }
 
-    protected function emClear()
+    protected function doClear()
     {
-        $em = $this->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->clear();
     }
 
     /**
      * Repara el error:
      * A new entity was found through the relationship 'App\Entity\Example#property' that was not configured to cascade persist operations for entity: Data entity example.. To solve this issue: Either explicitly call EntityManager#persist() on this unknown entity or configure cascade persist  this association in the mapping for example ManyToOne(..,cascade={"persist"})
-     * Importante: Usar con la variable para que funcione "$object = $this->emMerge($object);"
+     * Importante: Usar con la variable para que funcione "$object = $this->doMerge($object);"
      * @param type $entity
      * @return type
      */
-    protected function emMerge($entity)
+    protected function doMerge($entity)
     {
-        $em = $this->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $entity = $em->merge($entity);
         return $entity;
     }

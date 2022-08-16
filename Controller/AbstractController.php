@@ -11,12 +11,10 @@
 
 namespace Maximosojo\ToolsBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as RouteSensio;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as BaseAbstractController;
 use Maximosojo\ToolsBundle\DependencyInjection\DoctrineTrait;
 use Maximosojo\ToolsBundle\Traits\Component\EventDispatcherTrait;
 
@@ -25,64 +23,36 @@ use Maximosojo\ToolsBundle\Traits\Component\EventDispatcherTrait;
  *
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class BaseController extends AbstractFOSRestController
+class AbstractController extends BaseAbstractController
 {
     use ControllerTrait;
     use DoctrineTrait;
     use EventDispatcherTrait;
 
     /**
-     * $translator
-     * @var Translator
-     */
-    private $translator;
-
-    public function __construct(TranslatorInterface $translator)
-    {
-        $this->translator = $translator;
-    }
-
-    /**
      * Tipo error
      */
-    const TYPE_DANGER = "error";
+    public const TYPE_DANGER = "error";
     
     /**
      * Tipo éxito
      */
-    const TYPE_SUCCESS = "success";
+    public const TYPE_SUCCESS = "success";
     
     /**
      * Tipo alerta
      */
-    const TYPE_WARNING = "warning";
+    public const TYPE_WARNING = "warning";
     
     /**
      * Tipo información
      */
-    const TYPE_INFO = "info";
+    public const TYPE_INFO = "info";
 
     /**
      * Tipo depuración
      */
-    const TYPE_DEBUG = "debug";
-    
-    /**
-     * Respuestas json mejoradas
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  string  $message
-     * @param  integer $code 
-     * @return JsonResponse
-     * @deprecated
-     */
-    public function jsonResponse($message, $code = 200) 
-    {
-        $result = [
-            'result' => $message
-        ];
-        
-        return new JsonResponse($result, $code);
-    }
+    public const TYPE_DEBUG = "debug";
 
     /**
      * Añade los campos a expandir a una vista
@@ -138,17 +108,4 @@ class BaseController extends AbstractFOSRestController
         $request = $this->container->get('request_stack')->getCurrentRequest();
         return 'json' == $request->getRequestFormat();
     }
-
-    /**
-     * Traducción
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  String
-     * @param  array
-     * @param  string
-     * @return Translation
-     */
-    protected function trans($id,array $parameters = array(), $domain = "")
-    {
-        return $this->translator->trans($id, $parameters, $domain);
-    }   
 }

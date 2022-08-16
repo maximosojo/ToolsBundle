@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Maximosojo\ToolsBundle\Traits\Basic;
+namespace Maximosojo\ToolsBundle\Traits\ORM\Basic;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -56,6 +56,7 @@ trait ExtraDataTrait
     public function setExtras(array $extra)
     {
         $this->extraData = $extra;
+
         return $this;
     }
     
@@ -72,6 +73,7 @@ trait ExtraDataTrait
         if(isset($this->extraData[$key])){
             $default = $this->extraData[$key];
         }
+        
         return $default;
     }
 }

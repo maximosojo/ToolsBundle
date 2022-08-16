@@ -9,44 +9,45 @@
  * file that was distributed with this source code.
  */
 
-namespace Maximosojo\ToolsBundle\Traits\Basic;
+namespace Maximosojo\ToolsBundle\Traits\ORM\Basic;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Add Status behavior to an entity.
+ * Trair de nombre
+ * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-trait StatusTrait 
+trait DescriptionTrait
 {
     /**
-     * Status
+     * Description
      * @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $status;    
+    protected $description;
 
     /**
-     * Set status
+     * Set description
      *
-     * @param string $status
+     * @param string $description
      *
-     * @return Type
+     * @return Shortcut
      */
-    public function setStatus($status)
+    public function setDescription($description)
     {
-        $this->status = $status;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get status
+     * Get description
      *
      * @return string
      */
-    public function getStatus()
+    public function getDescription()
     {
-        return $this->status;
+        return $this->description;
     }
 }
