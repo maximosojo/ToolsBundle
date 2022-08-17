@@ -62,9 +62,10 @@ class MaximosojoToolsExtension extends Extension
         }
 
         // Notifier
-        if($config['notifier']['texter']['enabled'] === true) {
+        $enabled = $config['notifier']['texter']['enabled'];
+        $container->setParameter("maximosojo_tools.notifier.texter.enabled", $enabled);
+        if($enabled === true) {
             $loaderYml->load('services/notifier/texter_manager.yml');
-            $container->setParameter("maximosojo_tools.notifier.texter.enabled", $config['notifier']['texter']['enabled']);
             $container->setParameter("maximosojo_tools.notifier.texter.class", $config['notifier']['texter']["class"]);
             $container->setParameter("maximosojo_tools.notifier.texter.transports", $config['notifier']['texter']["transports"]);
         }
