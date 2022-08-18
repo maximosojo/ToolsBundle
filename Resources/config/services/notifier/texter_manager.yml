@@ -20,5 +20,10 @@ services:
         class: Maximosojo\ToolsBundle\Service\Notifier\Texter\Transports\InterconectadosTransport
         calls: 
             - [ setOptions, ["%maximosojo_tools.notifier.texter_manager.transports.interconectados.options%"]  ]
+    # Twilio
+    maximosojo_tools.notifier.texter_manager.transports.twilio:
+        class: Maximosojo\ToolsBundle\Service\Notifier\Texter\Transports\TwilioTransport
+        calls: 
+            - [ setOptions, ["%maximosojo_tools.notifier.texter_manager.transports.twilio.options%"]  ]
 
     

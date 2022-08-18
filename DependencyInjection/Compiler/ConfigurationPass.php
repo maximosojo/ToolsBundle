@@ -122,12 +122,29 @@ class ConfigurationPass implements CompilerPassInterface
                 // DSN
                 $dsn = explode(":",$transports["interconectados"]["dsn"]);
                 $options = [
+                    "enabled" => true,
                     "user" => $dsn[0],
-                    "password" => $dsn[0]
+                    "password" => $dsn[1]
                 ];
                 $container->setParameter("maximosojo_tools.notifier.texter_manager.transports.interconectados.options", $options);
                 // Transport
                 $texterManager->addMethodCall("addTransport", [$container->getDefinition("maximosojo_tools.notifier.texter_manager.transports.interconectados")]);
+            }
+
+            // Twilio
+            if ($transports["twilio"]["enabled"] === true) {
+                // DSN
+                $dsn = explode(":",$transports["twilio"]["dsn"]);
+                
+                $options = [
+                    "enabled" => true,
+                    "sid" => $dsn[0],
+                    "token" => $dsn[1],
+                    "number" => $dsn[2]
+                ];
+                $container->setParameter("maximosojo_tools.notifier.texter_manager.transports.twilio.options", $options);
+                // Transport
+                $texterManager->addMethodCall("addTransport", [$container->getDefinition("maximosojo_tools.notifier.texter_manager.transports.twilio")]);
             }
 
             // Dummy
