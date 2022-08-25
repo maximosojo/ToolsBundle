@@ -54,10 +54,10 @@ class TwilioTransport extends BaseTransport
     public function send(ModelMessage $message)
     {
         $messageSend = false;
-        $from = $message->getRecipient();
+        $recipient = $message->getRecipient();
         $contents = $this->parseContent($message->getContent());
         foreach ($contents as $content) {
-            $this->logPre($from,$content);
+            $this->logPre($recipient,$content);
             // Use the client to do fun stuff like send text messages!
             $client = new Client($this->sid, $this->token);
             $messageSend = false;
@@ -65,10 +65,10 @@ class TwilioTransport extends BaseTransport
                 // Use the client to do fun stuff like send text messages!
                 $response = $client->messages->create(
                     // the number you'd like to send the message to
-                    $this->number,
+                    $recipient,
                     [
                         // A Twilio phone number you purchased at twilio.com/console
-                        'from' => $from,
+                        'from' => $this->number,
                         // the body of the text message you'd like to send
                         'body' => $content
                     ]
