@@ -74,9 +74,9 @@ class TwilioTransport extends BaseTransport
                     ]
                 );
 
-                if($response->getStatusCode() == 200){
+                // if($response->getStatusCode() == 200){
                     $messageSend = true;
-                }
+                // }
                 
                 $this->logPost($messageSend);
                 $this->logResponse($body);
