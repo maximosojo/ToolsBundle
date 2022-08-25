@@ -65,9 +65,15 @@ class MaximosojoToolsExtension extends Extension
         $enabled = $config['notifier']['texter']['enabled'];
         $container->setParameter("maximosojo_tools.notifier.texter.enabled", $enabled);
         if($enabled === true) {
+            $transports = $config['notifier']['texter']["transports"];
             $loaderYml->load('services/notifier/texter_manager.yml');
             $container->setParameter("maximosojo_tools.notifier.texter.class", $config['notifier']['texter']["class"]);
-            $container->setParameter("maximosojo_tools.notifier.texter.transports", $config['notifier']['texter']["transports"]);
+            $container->setParameter("maximosojo_tools.notifier.texter.transports", $transports);
+            // Dummy
+            $container->setParameter("maximosojo_tools.notifier.texter.transports.dummy.enabled", $transports["dummy"]["enabled"]);
+            // Twilio
+            $container->setParameter("maximosojo_tools.notifier.texter.transports.twilio.enabled", $transports["twilio"]["enabled"]);
+            $container->setParameter("maximosojo_tools.notifier.texter.transports.twilio.dsn", $transports["twilio"]["dsn"]);
         }
 
         // Table prefix

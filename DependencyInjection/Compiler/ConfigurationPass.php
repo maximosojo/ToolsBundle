@@ -132,10 +132,12 @@ class ConfigurationPass implements CompilerPassInterface
             }
 
             // Twilio
-            if ($transports["twilio"]["enabled"] === true) {
+            if ($container->getParameter("maximosojo_tools.notifier.texter.transports.twilio.enabled") === true) {
                 // DSN
-                $dsn = explode(":",$transports["twilio"]["dsn"]);
-                
+                // $container->getParameter("maximosojo_tools.notifier.texter.transports.twilio.dsn");
+                // $container->resolveEnvPlaceholders($container->getParameter("maximosojo_tools.notifier.texter.transports.twilio.dsn"));
+                // $dsn = explode(":",$container->getParameter("maximosojo_tools.notifier.texter.transports.twilio.dsn"));
+                $dsn = explode(":",getenv("MAXIMOSOJO_TOOLS_NOTIFIER_TEXTER_TWILIO_DSN"));
                 $options = [
                     "enabled" => true,
                     "sid" => $dsn[0],
@@ -148,7 +150,7 @@ class ConfigurationPass implements CompilerPassInterface
             }
 
             // Dummy
-            if ($transports["dummy"]["enabled"] === true) {
+            if ($container->getParameter("maximosojo_tools.notifier.texter.transports.dummy.enabled") === true) {
                 // Transport
                 $texterManager->addMethodCall("addTransport", [$container->getDefinition("maximosojo_tools.notifier.texter_manager.transports.dummy")]);
             }
