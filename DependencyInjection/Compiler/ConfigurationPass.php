@@ -137,7 +137,7 @@ class ConfigurationPass implements CompilerPassInterface
                 // $container->getParameter("maximosojo_tools.notifier.texter.transports.twilio.dsn");
                 // $container->resolveEnvPlaceholders($container->getParameter("maximosojo_tools.notifier.texter.transports.twilio.dsn"));
                 // $dsn = explode(":",$container->getParameter("maximosojo_tools.notifier.texter.transports.twilio.dsn"));
-                $dsn = explode(":",getenv("MAXIMOSOJO_TOOLS_NOTIFIER_TEXTER_TWILIO_DSN"));
+                $dsn = explode(":",$_ENV["MAXIMOSOJO_TOOLS_NOTIFIER_TEXTER_TWILIO_DSN"]);
                 $options = [
                     "enabled" => true,
                     "sid" => $dsn[0],
