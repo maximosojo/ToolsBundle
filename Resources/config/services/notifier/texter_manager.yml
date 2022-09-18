@@ -15,15 +15,18 @@ services:
     # Dummy
     maximosojo_tools.notifier.texter_manager.transports.dummy:
         class: Maximosojo\ToolsBundle\Service\Notifier\Texter\Transports\DummyTransport
+        public: true
     # Interconectados
     maximosojo_tools.notifier.texter_manager.transports.interconectados:
         class: Maximosojo\ToolsBundle\Service\Notifier\Texter\Transports\InterconectadosTransport
-        calls: 
-            - [ setOptions, ["%maximosojo_tools.notifier.texter_manager.transports.interconectados.options%"]  ]
+        public: true
+        #calls: 
+        #    - [ setOptions, ["%maximosojo_tools.notifier.texter_manager.transports.interconectados.options%"]  ]
     # Twilio
     maximosojo_tools.notifier.texter_manager.transports.twilio:
         class: Maximosojo\ToolsBundle\Service\Notifier\Texter\Transports\TwilioTransport
-        calls: 
-            - [ setOptions, ["%maximosojo_tools.notifier.texter_manager.transports.twilio.options%"]  ]
+        public: true
+        #calls: 
+        #    - [ setOptions, ["%maximosojo_tools.notifier.texter_manager.transports.twilio.options%"]  ]
 
     

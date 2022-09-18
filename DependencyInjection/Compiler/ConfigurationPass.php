@@ -116,7 +116,8 @@ class ConfigurationPass implements CompilerPassInterface
             $transports = $container->getParameter('maximosojo_tools.notifier.texter.transports');
             // Manejador de notificaciones texter
             $texterManager = $container->getDefinition("maximosojo_tools.notifier.texter_manager");
-
+            // Inicia opciones
+            $container->setParameter("maximosojo_tools.notifier.texter_manager.transports.twilio.options", []);
             // Interconectados
             if ($transports["interconectados"]["enabled"] === true) {
                 // DSN
@@ -126,17 +127,16 @@ class ConfigurationPass implements CompilerPassInterface
                     "user" => $dsn[0],
                     "password" => $dsn[1]
                 ];
-                $container->setParameter("maximosojo_tools.notifier.texter_manager.transports.interconectados.options", $options);
+                
+                $interconectadosTransport = $container->getDefinition("maximosojo_tools.notifier.texter_manager.transports.interconectados");
+                $interconectadosTransport->setOptions($options);
                 // Transport
-                $texterManager->addMethodCall("addTransport", [$container->getDefinition("maximosojo_tools.notifier.texter_manager.transports.interconectados")]);
+                $texterManager->addMethodCall("addTransport", [$interconectadosTransport]);
             }
 
             // Twilio
             if ($container->getParameter("maximosojo_tools.notifier.texter.transports.twilio.enabled") === true) {
                 // DSN
-                // $container->getParameter("maximosojo_tools.notifier.texter.transports.twilio.dsn");
-                // $container->resolveEnvPlaceholders($container->getParameter("maximosojo_tools.notifier.texter.transports.twilio.dsn"));
-                // $dsn = explode(":",$container->getParameter("maximosojo_tools.notifier.texter.transports.twilio.dsn"));
                 $dsn = explode(":",$_ENV["MAXIMOSOJO_TOOLS_NOTIFIER_TEXTER_TWILIO_DSN"]);
                 $options = [
                     "enabled" => true,
@@ -144,9 +144,11 @@ class ConfigurationPass implements CompilerPassInterface
                     "token" => $dsn[1],
                     "number" => $dsn[2]
                 ];
-                $container->setParameter("maximosojo_tools.notifier.texter_manager.transports.twilio.options", $options);
+
+                $twilioTransport = $container->getDefinition("maximosojo_tools.notifier.texter_manager.transports.twilio");
+                $twilioTransport->setOptions($options);
                 // Transport
-                $texterManager->addMethodCall("addTransport", [$container->getDefinition("maximosojo_tools.notifier.texter_manager.transports.twilio")]);
+                $texterManager->addMethodCall("addTransport", [$twilioTransport]);
             }
 
             // Dummy

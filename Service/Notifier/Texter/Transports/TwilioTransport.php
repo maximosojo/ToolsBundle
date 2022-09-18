@@ -79,7 +79,7 @@ class TwilioTransport extends BaseTransport
                 // }
                 
                 $this->logPost($messageSend);
-                $this->logResponse($body);
+                // $this->logResponse($body);
             } catch (HttpException $e) {
                 // $error = (string) $e->getMessage();
                 // $message->setErrorMessage($error);
