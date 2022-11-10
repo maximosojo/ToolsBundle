@@ -11,8 +11,7 @@
 
 namespace Maximosojo\ToolsBundle\Features\Context;
 
-use Behat\Gherkin\Node\TableNode;
-use Behat\MinkExtension\Context\RawMinkContext;
+use Behat\Behat\Context\Context;
 use Behat\Behat\Tester\Exception\PendingException;
 use Maximosojo\ToolsBundle\Component\Behat\SymfonyExtension\Context\KernelDictionary;
 use Maximosojo\ToolsBundle\Component\Behat\SymfonyExtension\Context\KernelAwareContext;
@@ -33,7 +32,7 @@ if(class_exists("PHPUnit\Exception")){
  *
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-abstract class BaseDataContext extends RawMinkContext implements KernelAwareContext
+abstract class BaseDataContext extends Context implements KernelAwareContext
 {
     use KernelDictionary;
     use ContainerAwareTrait;

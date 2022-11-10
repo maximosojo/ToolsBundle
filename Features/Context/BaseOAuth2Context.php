@@ -12,11 +12,9 @@
 namespace Maximosojo\ToolsBundle\Features\Context;
 
 use Behat\Behat\Context\Context;
-use Behat\Gherkin\Node\TableNode;
 use Exception;
 use LogicException;
 use Symfony\Component\HttpFoundation\Response;
-use Behat\Gherkin\Node\PyStringNode;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpKernel\Config\FileLocator;
