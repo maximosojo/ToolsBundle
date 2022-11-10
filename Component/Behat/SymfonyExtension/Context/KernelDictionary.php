@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 trait KernelDictionary
 {
-    private $kernel;
+    protected $kernel;
 
     /**
      * Sets Kernel instance.

@@ -15,12 +15,12 @@ use Behat\Behat\Context\Context;
 use Behat\Behat\Tester\Exception\PendingException;
 use Maximosojo\ToolsBundle\Component\Behat\SymfonyExtension\Context\KernelDictionary;
 use Maximosojo\ToolsBundle\Component\Behat\SymfonyExtension\Context\KernelAwareContext;
+use Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+use FOS\UserBundle\Model\UserInterface;
 use LogicException;
 use Exception;
-use FOS\UserBundle\Model\UserInterface;
 
 if(class_exists("PHPUnit\Exception")){
     $reflection = new \ReflectionClass("PHPUnit\Exception");
@@ -32,7 +32,7 @@ if(class_exists("PHPUnit\Exception")){
  *
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-abstract class BaseDataContext extends Context implements KernelAwareContext
+abstract class BaseDataContext implements Context, KernelAwareContext
 {
     use KernelDictionary;
     use ContainerAwareTrait;
@@ -97,14 +97,9 @@ abstract class BaseDataContext extends Context implements KernelAwareContext
      */
     protected $parseParameterCallBack;
 
-    /**
-     * Initializes context.
-     */
     public function __construct()
     {
-        $this->parameters = [
-            "token_url" => "/oauth/v2/token",
-        ];
+        $this->requestBody = [];
     }
 
     public function setParameters($parameters)
@@ -622,66 +617,6 @@ abstract class BaseDataContext extends Context implements KernelAwareContext
     }
 
     /**
-     * Realiza una peticion a la API Rest
-     * @When I request :fullUrl
-     */
-    public function iRequest($fullUrl, array $parameters = null, array $files = null,array $options = [])
-    {
-        $resolver = new OptionsResolver();
-        $resolver->setDefaults([
-            "clear_request" => true,
-        ]);
-        $options = $resolver->resolve($options);
-        $explode = explode(" ", $fullUrl);
-        $method = $explode[0];
-        $url = $explode[1];
-        if ($parameters === null) {
-            $parameters = $this->getRequestBody();
-        }
-        if ($files === null) {
-            $files = $this->requestFiles;
-        }
-        if ($parameters === null) {
-            $parameters = [];
-        }
-        if ($files === null) {
-            $files = [];
-        }
-        
-        $this->getClient()->request($method, $url, $parameters, $files);
-        $this->response = $this->getClient()->getResponse();
-        if($options["clear_request"] === true){
-            $this->initRequest();
-        }
-        $contentType = (string) $this->response->headers->get('Content-type');
-        if ($this->response->getStatusCode() != 404 && !empty($contentType) && $contentType !== 'application/json') {
-            throw new \Exception(sprintf("Content-type must be application/json received '%s' \n%s", $contentType, $this->echoLastResponse()));
-        }
-        $content = $this->response->getContent();
-        $this->data = [];
-        if ($content) {
-            $this->data = json_decode($this->response->getContent(), true);
-            $this->lastErrorJson = json_last_error();
-            if ($this->response->getStatusCode() != 404 && $this->lastErrorJson != JSON_ERROR_NONE) {
-                throw new \Exception(sprintf("Error parsing response JSON " . "\n\n %s", $this->echoLastResponse()));
-            }
-        }
-        if (isset($this->data["id"])) {
-            $this->setScenarioParameter("%lastId%", $this->data["id"]);
-        }
-        $this->setScenarioParameter("request",$this->data);
-        $this->restartKernel();
-    }
-
-    /**
-     * @Then echo last response
-     */
-    public function echoLastResponse()
-    {
-        $this->printDebug(sprintf("Request:\n %s \n\n Response:\n %s", json_encode($this->lastRequestBody, JSON_PRETTY_PRINT, 10), $this->response->getContent()));
-    }
-
-    /**
      * Prints beautified debug string.
      *
      * @param string $string debug string
@@ -760,18 +695,6 @@ abstract class BaseDataContext extends Context implements KernelAwareContext
     }
 
     /**
-     * @Then the response status code is :httpStatus
-     */
-    public function theResponseStatusCodeIs($httpStatus)
-    {
-        if ((string) $this->response->getStatusCode() !== (string) $httpStatus) {
-            throw new \Exception(sprintf("HTTP code does not match %s (actual: %s)\n\n %s", $httpStatus, $this->response->getStatusCode(), $this->echoLastResponse()));
-        }
-        
-        return true;
-    }
-
-    /**
      * Limia una tabla de la base de datos
      * @example Given a clear entity "App\Entity\EntityName" table
      * @Given a clear entity :className table
@@ -789,100 +712,6 @@ abstract class BaseDataContext extends Context implements KernelAwareContext
         $query->execute();
         $em->flush();
         $em->clear();
-    }
-
-    /**
-     * Verifica que exista un mensaje de error
-     * @example And the response has a errors property and contains "Invalid username or password."
-     * @Then the response has a errors property and contains :message
-     */
-    public function theResponseHasAErrorsPropertyAndContains($message)
-    {
-        $message = $this->parseParameter($message, [], "validators");
-        $errors = $this->getPropertyValue("errors");
-
-        $found = false;
-        if (is_array($errors['errors'])) {
-            foreach ($errors['errors'] as $error) {
-                if ($error === $message) {
-                    $found = true;
-                    break;
-                }
-            }
-        } else {
-            throw new Exception(sprintf("The error property no contains error message. '%s' \n \n %s", $message, var_export($errors['errors'], true), $this->echoLastResponse()));
-        }
-        if ($found === false) {
-            throw new Exception(sprintf("The error response no contains error message '%s', response with '%s'", $message, implode(",", $errors['errors'])));
-        }
-    }
-
-    /**
-     * Verifica que una propiedad x contiene un error
-     * @example And the response has a errors in property "message" and contains "Invalid username or password."
-     * @Then the response in property :propertyName and contains :message
-     */
-    public function theResponseInPropertyAndContains($propertyName, $message)
-    {
-        $properties = explode(".", $propertyName);
-        $property = $this->getPropertyValue($propertyName);        
-        $message = $this->parseParameter($message, [], 'validators');        
-        if ($property === $message) {
-            $found = true;
-        } else {
-            throw new Exception(sprintf("The error property contains error message '%s', response with '%s'", $propertyName, implode(", ", $property)));
-        }
-    }
-
-    /**
-     * Verifica que una propiedad x contiene un error
-     * @example And the response has a errors in property "username_password" and contains "Invalid username or password."
-     * @Then the response has a errors in property :propertyName and contains :message
-     */
-    public function theResponseHasAErrorsInPropertyAndContains($propertyName, $message = null,$negate = false)
-    {
-        $properties = explode(".", $propertyName);
-        $errors = $this->getPropertyValue("errors");
-        $children = $errors["children"];
-        if (count($properties) > 1) {
-            $data = $children;
-            foreach ($properties as $property) {
-                if (isset($data[$property]) && isset($data[$property]["children"])) {
-                    $data = $data[$property]["children"];
-                }
-                if (isset($data[$property]) && isset($data[$property]["errors"])) {
-                    $children = $data;
-                    $propertyName = $property;
-                    break;
-                }
-            }
-        }        
-        if (!isset($children[$propertyName])) {
-            throw new Exception(sprintf("The response no contains error property '%s' \n Available are %s", $propertyName, implode(", ", array_keys($children))));
-        }
-        $message = $this->parseParameter($message, [], 'validators');
-        if (isset($children[$propertyName]["errors"])) {
-            if ($message === null) {
-                if (count($children[$propertyName]["errors"]) == 0) {
-                    throw new Exception(sprintf("The error property no contains errors in '%s', response with '%s'", $propertyName, var_export($errors, true)));
-                }
-            } else {
-                $found = false;
-                foreach ($children[$propertyName]["errors"] as $error) {
-                    if ($error === $message) {
-                        $found = true;
-                        break;
-                    }
-                }
-                if ($negate === false && $found === false) {
-                    throw new Exception(sprintf("The error property no contains error message '%s', response with '%s'", $propertyName, implode(", ", $children[$propertyName]["errors"])));
-                }else if ($negate === true && $found === true) {
-                    throw new Exception(sprintf("The error property contains error message '%s', response with '%s'", $propertyName, implode(", ", $children[$propertyName]["errors"])));
-                }
-            }
-        } else {
-            throw new Exception(sprintf("The error property no contains errors '%s', response with '%s'", $propertyName, var_export($errors, true)));
-        }
     }
 
     /**
