@@ -57,3 +57,6 @@ services:
         autowire: true
         tags:
             - { name: liform.transformer, form_type: readonly, widget: readonly }
+
+    Maximosojo\ToolsBundle\Service\DynamicBuilder\DynamicBuilderManager:
+        autowire: true
