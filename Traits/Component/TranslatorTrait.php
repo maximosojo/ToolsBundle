@@ -30,7 +30,7 @@ trait TranslatorTrait
      * @param  string
      * @return Translation
      */
-    public function trans($id,array $parameters = array(), $domain = "")
+    public function trans($id,array $parameters = array(), $domain = "messages")
     {
         return $this->translator->trans($id, $parameters, $domain);
     }
