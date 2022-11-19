@@ -3,6 +3,7 @@
 namespace Maximosojo\ToolsBundle\Service\DynamicBuilder\Widget;
 
 use JMS\Serializer\Annotation as JMS;
+use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\IconTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\TitleTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\SubTitleTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\UriActionTrait;
@@ -15,6 +16,7 @@ use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\UriActionTrait;
  */
 class CardWidget extends BaseWidget
 {
+    use IconTrait;
     use TitleTrait;
     use SubTitleTrait;
     use UriActionTrait;

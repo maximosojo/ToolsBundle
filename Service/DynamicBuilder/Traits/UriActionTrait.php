@@ -18,6 +18,14 @@ trait UriActionTrait
      * @JMS\SerializedName("uri_action")
      */
     protected $uriAction;
+
+    /**
+     * ICONO de la pagina a cargar al tocar el elemento
+     * @var string|null
+     * @JMS\Expose
+     * @JMS\SerializedName("uri_icon")
+     */
+    protected $uriIcon;
     
     public function getUriAction(): ?string
     {
@@ -27,6 +35,18 @@ trait UriActionTrait
     public function setUriAction(?string $uriAction)
     {
         $this->uriAction = $uriAction;
+
+        return $this;
+    }
+
+    public function getUriIcon(): ?string
+    {
+        return $this->uriIcon;
+    }
+
+    public function setUriIcon(?string $uriIcon)
+    {
+        $this->uriIcon = $uriIcon;
 
         return $this;
     }

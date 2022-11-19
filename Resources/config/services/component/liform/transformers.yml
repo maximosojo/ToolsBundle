@@ -58,5 +58,10 @@ services:
         tags:
             - { name: liform.transformer, form_type: readonly, widget: readonly }
 
+    liform.transformer.button:
+        class: Maximosojo\ToolsBundle\Component\Liform\Transformer\ButtonTransformer
+        tags:
+            - { name: liform.transformer, form_type: button, widget: button }
+
     Maximosojo\ToolsBundle\Service\DynamicBuilder\DynamicBuilderManager:
         autowire: true
