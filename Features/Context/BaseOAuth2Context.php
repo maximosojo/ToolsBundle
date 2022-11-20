@@ -22,6 +22,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Maximosojo\ToolsBundle\Features\Context\BaseDataContext;
 use Maximosojo\ToolsBundle\Features\Context\TraitContext;
 use Behat\Gherkin\Node\PyStringNode;
+use Behat\Gherkin\Node\TableNode;
 
 /**
  * Base para peticiones oauth2
@@ -491,6 +492,28 @@ abstract class BaseOAuth2Context implements Context
             }
         }
     }
+
+    /**
+     * @When I send a access token request
+     */
+    public function iMakeAAccessTokenRequest()
+    {
+        $url = $this->parameters['token_url'];
+        $body = $this->dataContext->getRequestBody();
+        
+        $this->dataContext->getClient()->request("POST", $url, $body);
+        $this->response = $this->dataContext->getClient()->getResponse();
+        $contentType = (string) $this->response->headers->get('Content-type');
+        $this->initRequest();
+        if ($contentType !== 'application/json') {
+            throw new \Exception(sprintf("Content-type must be application/json %s", $this->echoLastResponse()));
+        }
+        $this->data = json_decode($this->response->getContent(), true);
+        $this->lastErrorJson = json_last_error();
+        if ($this->lastErrorJson != JSON_ERROR_NONE) {
+            throw new \Exception(sprintf("Error parsing response JSON " . "\n\n %s", $this->echoLastResponse()));
+        }
+    }
     
     /**
      * Prints beautified debug string.
@@ -601,6 +624,41 @@ abstract class BaseOAuth2Context implements Context
             }
         } else {
             throw new Exception(sprintf("The error property no contains errors '%s', response with '%s'", $propertyName, var_export($errors, true)));
+        }
+    }
+
+    /**
+     * @Given the response has a :propertyName property and it is equals :propertyValue
+     */
+    public function theResponseHasAPropertyAndItIsEquals($propertyName, $propertyValue)
+    {
+        if ($this->dataContext->isScenarioParameter($propertyValue)) {
+            $propertyValue = $this->dataContext->getScenarioParameter($propertyValue);
+        }
+        $propertyValue = $this->dataContext->parseParameter($propertyValue);
+        $value = $this->theResponseHasAProperty($propertyName);
+        if ($value == $propertyValue) {
+            return;
+        }
+        throw new \Exception(sprintf("Given %s value is not %s is equals to '%s'\n\n %s", $propertyName, $propertyValue, $value, $this->echoLastResponse()));
+    }
+
+    /**
+     * Verifica que la ultima respuesta tenga una propiedad
+     * @Then the response has a :propertyName property
+     */
+    public function theResponseHasAProperty($propertyName)
+    {
+        if ((isset($this->parameters['recommended'][$propertyName]) && !$this->parameters['recommended'][$propertyName])) {
+            return;
+        }
+        if ((isset($this->parameters['optional'][$propertyName]) && !$this->parameters['optional'][$propertyName])) {
+            return;
+        }
+        try {
+            return $this->getPropertyValue($propertyName);
+        } catch (\LogicException $e) {
+            throw new \Exception(sprintf("%s\n\n %s", $e->getMessage(), $this->echoLastResponse()));
         }
     }
 }
