@@ -21,6 +21,7 @@ use Symfony\Component\HttpKernel\Config\FileLocator;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Maximosojo\ToolsBundle\Features\Context\BaseDataContext;
 use Maximosojo\ToolsBundle\Features\Context\TraitContext;
+use Behat\Gherkin\Node\PyStringNode;
 
 /**
  * Base para peticiones oauth2
@@ -50,6 +51,12 @@ abstract class BaseOAuth2Context implements Context
      * @var array
      */
     protected $requestHeaders;
+
+    /**
+     * Respuesta de la ultima peticion http
+     * @var array
+     */
+    protected $data;
 
     /**
      *
@@ -177,7 +184,7 @@ abstract class BaseOAuth2Context implements Context
      */
     public function getPropertyValue($propertyName)
     {
-        return $this->getValue($propertyName, $this->dataContext->getData());
+        return $this->getValue($propertyName, $this->data);
     }
 
     /**
@@ -255,6 +262,27 @@ abstract class BaseOAuth2Context implements Context
         $this->dataContext->initRequestBody();
         $this->requestFiles = [];
         $this->requestHeaders = [];
+    }
+
+    /**
+     * Agrega data tipo json al siguiente request
+     * @Given I add the request data:
+     */
+    public function iAddTheRequestData(PyStringNode $string,$andSave = false)
+    {
+        $parameters = json_decode((string) $string, true);
+        if ($parameters === null) {
+            throw new \Exception(sprintf("Json invalid: %s, %s", json_last_error_msg(), json_last_error()));
+        }
+        $this->dataContext->replaceParameters($parameters);
+        foreach ($parameters as $key => $row) {
+            $this->dataContext->setRequestBody($key, $row);
+        }
+        if($andSave === true){
+            $this->lastRequestBodySave = $parameters;
+        }else{
+            $this->lastRequestBodySave = null;
+        }
     }
 
     /**
@@ -489,7 +517,7 @@ abstract class BaseOAuth2Context implements Context
      */
     public function theResponseHasAErrorsPropertyAndContains($message)
     {
-        $message = $this->parseParameter($message, [], "validators");
+        $message = $this->dataContext->parseParameter($message, [], "validators");
         $errors = $this->getPropertyValue("errors");
 
         $found = false;
@@ -517,7 +545,7 @@ abstract class BaseOAuth2Context implements Context
     {
         $properties = explode(".", $propertyName);
         $property = $this->getPropertyValue($propertyName);        
-        $message = $this->parseParameter($message, [], 'validators');        
+        $message = $this->dataContext->parseParameter($message, [], 'validators');        
         if ($property === $message) {
             $found = true;
         } else {
@@ -551,7 +579,7 @@ abstract class BaseOAuth2Context implements Context
         if (!isset($children[$propertyName])) {
             throw new Exception(sprintf("The response no contains error property '%s' \n Available are %s", $propertyName, implode(", ", array_keys($children))));
         }
-        $message = $this->parseParameter($message, [], 'validators');
+        $message = $this->dataContext->parseParameter($message, [], 'validators');
         if (isset($children[$propertyName]["errors"])) {
             if ($message === null) {
                 if (count($children[$propertyName]["errors"]) == 0) {

@@ -123,42 +123,6 @@ class AbstractMinkContext extends MinkContext
             $this->dataContext->getClient()->setServerParameter("HTTP_AUTHORIZATION", sprintf("Bearer %s", $token));
             $this->dataContext->setCurrentUser($this->dataContext->findUser($username));
         }
-    }    
-
-    /**
-     * Agrega data tipo json al siguiente request
-     * @Given I add the request data:
-     */
-    public function iAddTheRequestData(PyStringNode $string,$andSave = false)
-    {
-        $parameters = json_decode((string) $string, true);
-        if ($parameters === null) {
-            throw new \Exception(sprintf("Json invalid: %s, %s", json_last_error_msg(), json_last_error()));
-        }
-        $this->dataContext->replaceParameters($parameters);
-        foreach ($parameters as $key => $row) {
-            $this->dataContext->setRequestBody($key, $row);
-        }
-        if($andSave === true){
-            $this->lastRequestBodySave = $parameters;
-        }else{
-            $this->lastRequestBodySave = null;
-        }
-    }    
-
-    /**
-     * Agrego parametros al request
-     * @When I add the request parameters:
-     */
-    public function iAddTheRequestParameters(TableNode $parameters)
-    {
-        if ($parameters !== null) {
-            foreach ($parameters->getRowsHash() as $key => $row) {
-                $row = trim($row);
-                $row = $this->dataContext->parseParameter($row);
-                $this->dataContext->setRequestBody($key, $row);
-            }
-        }
     }
 
     /**
