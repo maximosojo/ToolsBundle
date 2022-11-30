@@ -112,11 +112,11 @@ abstract class BaseOAuth2Context implements Context
         $this->dataContext->setRequestBody("username", $username);
         $this->dataContext->setRequestBody("password", $password);
 
-        $this->dataContext->iMakeAAccessTokenRequest();
+        $this->iMakeAAccessTokenRequest();
         if ($usePassword === null) {
-            $this->dataContext->theResponseStatusCodeIs("200");
+            $this->theResponseStatusCodeIs("200");
         }
-        if ((string) $this->dataContext->getResponse()->getStatusCode() === "200") {
+        if ((string) $this->response->getStatusCode() === "200") {
             $token = $this->getPropertyValue("access_token");
             $this->dataContext->getClient()->setServerParameter("HTTP_AUTHORIZATION", sprintf("Bearer %s", $token));
             $user = $this->dataContext->findUser($username);
@@ -124,7 +124,7 @@ abstract class BaseOAuth2Context implements Context
             $this->dataContext->setCurrentUser($user);
             
             $this->dataContext->flush();
-            $qb = $this->dataContext->findQueryBuilder(\App\Entity\M\Auth\AccessToken::class,"at");
+            $qb = $this->dataContext->findQueryBuilder(\App\Entity\M\OAuth\AccessToken::class,"at");
             $qb
                 ->andWhere("at.token = :token")
                 ->setParameter("token",$token)
@@ -142,7 +142,7 @@ abstract class BaseOAuth2Context implements Context
     public function thePaginatorMustContainElements($fullUrl, $elements)
     {
         $this->iRequest($fullUrl);
-        $this->dataContext->theResponseStatusCodeIs(Response::HTTP_OK);
+        $this->theResponseStatusCodeIs(Response::HTTP_OK);
         $this->theResponseIsAPaginator();
         $this->theResponseHasAPropertyAndContainsValues("data", $elements);
     }
@@ -331,8 +331,8 @@ abstract class BaseOAuth2Context implements Context
         $this->iCreateOAuth2Request();
         $this->dataContext->setRequestBody('grant_type', 'client_credentials');
         $this->iAddResourceOwnerCredentials();
-        $this->dataContext->iMakeAAccessTokenRequest();
-        $this->dataContext->theResponseStatusCodeIs('200');
+        $this->iMakeAAccessTokenRequest();
+        $this->theResponseStatusCodeIs('200');
         $this->theResponseHasTheOAuth2Format();
         $this->dataContext->getClient()->setServerParameter("HTTP_AUTHORIZATION", sprintf("Bearer %s", $this->getPropertyValue("access_token")));
     }
@@ -344,8 +344,8 @@ abstract class BaseOAuth2Context implements Context
     {
         $this->iCreateOAuth2Request();
         $this->dataContext->setRequestBody('grant_type', 'urn:client_apps');
-        $this->dataContext->iMakeAAccessTokenRequest();
-        $this->dataContext->theResponseStatusCodeIs('200');
+        $this->iMakeAAccessTokenRequest();
+        $this->theResponseStatusCodeIs('200');
         $this->theResponseHasTheOAuth2Format();
         $this->dataContext->getClient()->setServerParameter("HTTP_AUTHORIZATION", sprintf("Bearer %s", $this->getPropertyValue("access_token")));
     }
@@ -358,8 +358,8 @@ abstract class BaseOAuth2Context implements Context
         $this->iCreateOAuth2Request();
         $this->dataContext->setRequestBody('grant_type', 'password');
         $this->iAddResourceOwnerCredentials();
-        $this->dataContext->iMakeAAccessTokenRequest();
-        $this->dataContext->theResponseStatusCodeIs('200');
+        $this->iMakeAAccessTokenRequest();
+        $this->theResponseStatusCodeIs('200');
         $this->theResponseHasTheOAuth2Format();
         $this->dataContext->getClient()->setServerParameter("HTTP_AUTHORIZATION", sprintf("Bearer %s", $this->getPropertyValue("access_token")));
     }
@@ -397,7 +397,7 @@ abstract class BaseOAuth2Context implements Context
     public function iMakeAAccessTokenRequestWithGivenRefreshToken()
     {
         $this->dataContext->setRequestBody('refresh_token', $this->refreshToken);
-        $this->dataContext->iMakeAAccessTokenRequest();
+        $this->iMakeAAccessTokenRequest();
     }
     
     /**
