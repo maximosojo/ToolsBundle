@@ -37,6 +37,7 @@ services:
             - { name: liform.transformer, form_type: email, widget: email }
             - { name: liform.transformer, form_type: date, widget: date }
             - { name: liform.transformer, form_type: datetime, widget: datetime }
+            - { name: liform.transformer, form_type: file, widget: file }
     
     liform.transformer.compound:
         class: Maximosojo\ToolsBundle\Component\Liform\Transformer\CompoundTransformer
