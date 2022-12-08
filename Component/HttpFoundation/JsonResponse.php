@@ -108,10 +108,21 @@ class JsonResponse extends JsonResponseBase
     /**
      * Refresca paginador
      * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @deprecated
      */
     public function setRefreshPaginator($key = true) 
     {
         $this->extraData["refresh_paginator"] = $key;
+        $this->setData($this->originalData);
+    }
+
+    /**
+     * Refresca según la llave
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     */
+    public function setRefresh($key = true) 
+    {
+        $this->extraData["refresh"] = $key;
         $this->setData($this->originalData);
     }
 
