@@ -1,0 +1,44 @@
+{% set route = app.request.attributes.get('_route') %}
+{% set routeParameters = app.request.attributes.get('_route_params') %}
+{% set parameters = routeParameters|merge(app.request.query.all) %}
+
+{% set firstUrl = "#" %}
+{% set nextUrl = "#" %}
+{% if paginator.links.next is defined %}
+    {% set nextUrl = paginator.links.next.href %}
+{% endif %}
+
+{% if paginator.links.first is defined %}
+    {% set firstUrl = paginator.links.first.href %}
+{% endif %}
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="{{firstUrl|raw}}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+        
+        {% for i in 1..paginator.meta.totalPages %}
+            <li class="page-item">
+                {% set class = "active" %}
+                {% set path = "#" %}
+                {% if i != paginator.meta.currentPage %}
+                    {% set class = "" %}
+                    {% set path = path(route,parameters|merge({page: i})) %}
+                {% endif %}
+
+                <a class="page-link {{class}}" href="{{path}}">{{i}}</a>
+            </li>
+        {% endfor %}
+
+        <li class="page-item">
+            <a class="page-link" href="{{nextUrl|raw}}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</nav>

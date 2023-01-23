@@ -1,0 +1,22 @@
+{% set route = app.request.attributes.get('_route') %}
+{% set routeParameters = app.request.attributes.get('_route_params') %}
+{% set parameters = routeParameters|merge(app.request.query.all) %}
+
+{% set data = [10,25,50,100] %}
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+        {% for row in data %}
+            {% set class = "" %}
+            {% set path = "#" %}
+            {% if row != paginator.meta.maxPerPage %}
+                {% set class = "active" %}
+                {% set path = path(route,parameters|merge({
+                    maxPerPage: row,
+                    page: null
+                })) %}
+            {% endif %}
+
+            <a href="{{path}}" class="btn btn-primary {{class}}">{{row}}</a>
+        {% endfor %}
+    </div>
+</div>

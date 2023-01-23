@@ -1,5 +1,5 @@
 services:
-# Extension tools para breadcrumb
+  # Extension tools para breadcrumb
   maximosojo_tools.core.extension:
       class: Maximosojo\ToolsBundle\Twig\Extension\CoreExtension
       tags:
@@ -7,13 +7,13 @@ services:
       calls: 
           - [setContainer, ['@service_container']]
           
-# Secuence generator
+  # Secuence generator
   maximosojo_tools.sequence_generator:
       class: Maximosojo\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService
       calls: 
           - [setContainer, ['@service_container']]
           
-# Repository Factory
+  # Repository Factory
   maximosojo_tools.doctrine.repository.factory:
         class: Maximosojo\ToolsBundle\ORM\Factory
         arguments:
@@ -34,3 +34,11 @@ services:
   configuration.adapter.orm:
       class: Maximosojo\ToolsBundle\Service\Core\Configuration\Adapter\DoctrineORMAdapter
       arguments: ["@doctrine.orm.entity_manager", "App\\Entity\\M\\Core\\Configuration"]
+
+  # Manejador de paginador
+  maximosojo_tools.twig.extension_paginator:
+      class: Maximosojo\ToolsBundle\Twig\Extension\PaginatorExtension
+      tags:
+          - { name: twig.extension}
+      calls: 
+          - [setContainer, ['@service_container']]

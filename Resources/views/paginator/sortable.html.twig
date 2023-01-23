@@ -1,0 +1,35 @@
+{% set route = app.request.attributes.get('_route') %}
+{% set routeParameters = app.request.attributes.get('_route_params') %}
+{% set parameters = routeParameters|merge(app.request.query.all) %}
+
+<style>
+    th.sortable {
+        cursor: pointer;
+    }
+    th/*.sortable*/ .sort-indicator {
+        padding-right: 18px;
+        position: relative;
+    }
+    th/*.sortable*/ .sort-indicator:after, th/*.sortable*/ .sort-indicator:before {
+        content: "";
+        border-color: #000 transparent;
+        border-style: solid;
+        border-width: 0 4px 4px;
+        visibility: visible;
+        right: 5px;
+        top: 50%;
+        position: absolute;
+        opacity: .3;
+        margin-top: -4px;
+    }
+    th/*.sortable*/ .sort-indicator:before {
+        margin-top: 2px;
+        border: 4px solid transparent;
+        border-top-color: #000;
+        border-bottom: none;
+    }
+</style>
+
+<a href="{{ path(route,parameters|merge({sorting: {(key):direction}})) }}">
+    <span class="sort-indicator">{{title}}</span>
+</a>
