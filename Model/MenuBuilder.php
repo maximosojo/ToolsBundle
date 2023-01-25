@@ -18,6 +18,9 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+use Maximosojo\ToolsBundle\Traits\Component\TranslatorTrait;
+use Maximosojo\ToolsBundle\Component\Routing\Generator\UrlGeneratorTrait;
 
 /**
  * Abstract menu builder.
@@ -26,7 +29,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 abstract class MenuBuilder implements \Symfony\Component\DependencyInjection\ContainerAwareInterface
 {
-    use \Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+    use ContainerAwareTrait;
+    use TranslatorTrait;
+    use UrlGeneratorTrait;
 
     /**
      * Menu factory.
@@ -48,37 +53,6 @@ abstract class MenuBuilder implements \Symfony\Component\DependencyInjection\Con
     }
 
     /**
-     * Translate label.
-     *
-     * @param string $label
-     * @param array  $parameters
-     *
-     * @return string
-     */
-    protected function trans($id,array $parameters = array(), $domain = 'titles')
-    {
-        return $this->container->get('translator')->trans($id, $parameters, $domain);
-    }
-
-    /**
-     * Generates a URL from the given parameters.
-     *
-     * @param string $route         The name of the route
-     * @param array  $parameters    An array of parameters
-     * @param int    $referenceType The type of reference (one of the constants in UrlGeneratorInterface)
-     *
-     * @return string The generated URL
-     *
-     * @see UrlGeneratorInterface
-     *
-     * @final since version 3.4
-     */
-    protected function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
-    {
-        return $this->container->get('router')->generate($route, $parameters, $referenceType);
-    }
-
-    /**
      * Checks if the attributes are granted against the current authentication token and optionally supplied subject.
      *
      * @param mixed $attributes The attributes
@@ -97,15 +71,5 @@ abstract class MenuBuilder implements \Symfony\Component\DependencyInjection\Con
         }
 
         return $this->container->get('security.authorization_checker')->isGranted($attributes, $subject);
-    }
-
-    /**
-     * Consulta de container
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @return ContainerInterface
-     */
-    public function getContainer()
-    {
-        return $this->container;
     }
 }
