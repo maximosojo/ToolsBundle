@@ -81,7 +81,7 @@ trait EntityRepositoryTrait
      */
     protected function createSearchQueryBuilder($qb, $criteria,array $orderBy = []) 
     {
-        return new \Maximosojo\ToolsBundle\ORM\Query\SearchQueryBuilder($qb, $criteria, $this->getAlies(),$orderBy);
+        return new \Maximosojo\ToolsBundle\ORM\Query\SearchQueryBuilder($qb, $criteria, $this->getAlias(),$orderBy);
     }
     
     /**
@@ -145,7 +145,7 @@ trait EntityRepositoryTrait
     protected function getPropertyName($name)
     {
         if (false === strpos($name, '.')) {
-            return $this->getAlies().'.'.$name;
+            return $this->getAlias().'.'.$name;
         }
 
         return $name;

@@ -25,5 +25,5 @@ interface DataFixtureInterface
     /**
      * Nombre del fixture
      */
-    public function getAlies();    
+    public function getAlias();    
 }

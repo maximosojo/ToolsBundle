@@ -61,7 +61,7 @@ class SearchQueryBuilder
     {
         if(($description = $this->criteria->remove('description')) != null){
             $this->qb
-                ->andWhere($this->qb->expr()->like($this->getAlies().'.description', $this->qb->expr()->literal("%$description%")));
+                ->andWhere($this->qb->expr()->like($this->getAlias().'.description', $this->qb->expr()->literal("%$description%")));
         }
 
         return $this;
@@ -78,7 +78,7 @@ class SearchQueryBuilder
             if(is_string($key)){
                 $fieldToNormalize = $key;
             }
-            $normalizeField = $this->normalizeField($this->getAlies(),$fieldToNormalize);
+            $normalizeField = $this->normalizeField($this->getAlias(),$fieldToNormalize);
             $stringValue = $this->criteria->remove($field);
             if(is_array($stringValue)){
                 $valueField = $stringValue;
@@ -103,7 +103,7 @@ class SearchQueryBuilder
     public function addFieldEquals(array $fields)
     {
         foreach ($fields as $field){
-            $normalizeField = $this->normalizeField($this->getAlies(),$field);
+            $normalizeField = $this->normalizeField($this->getAlias(),$field);
             $valueField = $this->criteria->remove($field);
             if($valueField !== null){
                 $this->qb->andWhere(sprintf("%s = %s",$normalizeField,$this->qb->expr()->literal($valueField)));
@@ -136,7 +136,7 @@ class SearchQueryBuilder
             if(is_string($key)){
                 $fieldValue = $key;
             }
-            $normalizeField = $this->normalizeField($this->getAlies(),$field);            
+            $normalizeField = $this->normalizeField($this->getAlias(),$field);            
             $valueField = $this->criteria->remove($fieldValue);
             if($defaultValueField !== null){
                 $valueField = $defaultValueField;
@@ -200,7 +200,7 @@ class SearchQueryBuilder
             $fieldTo = $field."_to";
             $valueFieldFrom = $this->criteria->remove($fieldFrom);
             $valuefieldTo = $this->criteria->remove($fieldTo);
-            $normalizeField = $this->normalizeField($this->getAlies(),$field);
+            $normalizeField = $this->normalizeField($this->getAlias(),$field);
             if($valueFieldFrom != null){
                 $this->qb
                     ->andWhere(sprintf("%s >= :%s",$normalizeField,$fieldFrom))
@@ -229,7 +229,7 @@ class SearchQueryBuilder
         $completeDateTo = " 23:59:59";
 
         foreach ($fieldDates as $fieldDate) {
-            $fieldDateNormalize = $this->normalizeField($this->getAlies(), $fieldDate);
+            $fieldDateNormalize = $this->normalizeField($this->getAlias(), $fieldDate);
             $fieldDateDayFrom = $this->criteria->remove("day_from_".$fieldDate);
             $fieldDateMonthFrom = $this->criteria->remove("month_from_".$fieldDate);
             $fieldDateYearFrom = $this->criteria->remove("year_from_".$fieldDate);
@@ -325,14 +325,14 @@ class SearchQueryBuilder
                 
                 $fieldDateValue = sprintf("%s/%s/%s",$fieldDateDay,$fieldDateMonth,$fieldDateYear);
                 $dateTime = \DateTime::createFromFormat("d/m/Y", $fieldDateValue);
-                $this->qb->andWhere($this->qb->expr()->like($this->getAlies().".".$fieldDate,$this->qb->expr()->literal("%".$dateTime->format("Y-m-d")."%")));
+                $this->qb->andWhere($this->qb->expr()->like($this->getAlias().".".$fieldDate,$this->qb->expr()->literal("%".$dateTime->format("Y-m-d")."%")));
             }else{                
                 if($fieldDateDay !== null){
                     $fieldDateDay = str_pad($fieldDateDay, 2,"0",STR_PAD_LEFT);
                     $this->qb
                         ->andWhere(
                             $this->qb->expr()->like(
-                                $this->getAlies().".".$fieldDate,$this->qb->expr()->literal("%-%-".$fieldDateDay)
+                                $this->getAlias().".".$fieldDate,$this->qb->expr()->literal("%-%-".$fieldDateDay)
                                              )
                                 );
                 }
@@ -341,7 +341,7 @@ class SearchQueryBuilder
                     $this->qb
                         ->andWhere(
                             $this->qb->expr()->like(
-                                $this->getAlies().".".$fieldDate,$this->qb->expr()->literal("%-".$fieldDateMonth."-%")
+                                $this->getAlias().".".$fieldDate,$this->qb->expr()->literal("%-".$fieldDateMonth."-%")
                                              )
                                 );
                 }
@@ -349,7 +349,7 @@ class SearchQueryBuilder
                     $this->qb
                         ->andWhere(
                             $this->qb->expr()->like(
-                                $this->getAlies().".".$fieldDate,$this->qb->expr()->literal($fieldDateYear."-%-%")
+                                $this->getAlias().".".$fieldDate,$this->qb->expr()->literal($fieldDateYear."-%-%")
                                              )
                                 );
                 }
@@ -396,13 +396,13 @@ class SearchQueryBuilder
             if($valueFiled !== "DESC" && $valueFiled !== "ASC"){
                 continue;
             }
-            $fieldNormalize = $this->normalizeField($this->getAlies(), $field);
+            $fieldNormalize = $this->normalizeField($this->getAlias(), $field);
             $this->qb->addOrderBy($fieldNormalize, $valueFiled);
         }
 
         if($orderByCount == 0 && count($default) > 0){
             foreach ($default as $field => $order) {
-                $fieldNormalize = $this->normalizeField($this->getAlies(), $field);
+                $fieldNormalize = $this->normalizeField($this->getAlias(), $field);
                 $this->qb->addOrderBy($fieldNormalize, $order);
             }
         }
@@ -444,7 +444,7 @@ class SearchQueryBuilder
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return string
      */
-    private function getAlies()
+    private function getAlias()
     {
         return $this->alies;
     }

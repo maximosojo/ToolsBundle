@@ -43,7 +43,7 @@ class EntityRepository extends \Doctrine\ORM\EntityRepository implements Contain
                     $data = $column['name'];
                     $value = $column['search']['value'];
                     if($data != "" && $value != ""){
-                        $field = sprintf("%s.%s",  $this->getAlies(),$data);
+                        $field = sprintf("%s.%s",  $this->getAlias(),$data);
                         $orx->add($queryBuilder->expr()->like($field, $queryBuilder->expr()->literal("%".$value."%")));
                     }
                 }
@@ -104,7 +104,7 @@ class EntityRepository extends \Doctrine\ORM\EntityRepository implements Contain
      */
     protected function createSearchQueryBuilder($qb, $criteria,array $orderBy = []) 
     {
-        return new \Maximosojo\ToolsBundle\ORM\Query\SearchQueryBuilder($qb, $criteria, $this->getAlies(),$orderBy);
+        return new \Maximosojo\ToolsBundle\ORM\Query\SearchQueryBuilder($qb, $criteria, $this->getAlias(),$orderBy);
     }
     
     /**
@@ -168,7 +168,7 @@ class EntityRepository extends \Doctrine\ORM\EntityRepository implements Contain
     protected function getPropertyName($name)
     {
         if (false === strpos($name, '.')) {
-            return $this->getAlies().'.'.$name;
+            return $this->getAlias().'.'.$name;
         }
 
         return $name;
@@ -179,10 +179,10 @@ class EntityRepository extends \Doctrine\ORM\EntityRepository implements Contain
      */
     protected function getQueryBuilder()
     {
-        return $this->createQueryBuilder($this->getAlies());
+        return $this->createQueryBuilder($this->getAlias());
     }
     
-    public function getAlies()
+    public function getAlias()
     {
         return "e";
     }
