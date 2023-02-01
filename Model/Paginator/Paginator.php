@@ -19,10 +19,19 @@ use Symfony\Component\Routing\Router;
 /**
  * Pagerfanta base para serialización
  */
-class Paginator extends BasePagerfanta implements ContainerAwareInterface
+class Paginator extends BasePagerfanta
 {
+    /**
+     * @deprecated
+     */
     use \Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
-    
+
+    /**
+     * $router
+     * @var $router
+     */
+    protected $router;
+
     /**
      * $route
      * @var $route
@@ -186,7 +195,12 @@ class Paginator extends BasePagerfanta implements ContainerAwareInterface
      */
     protected function generateUrl($route,array $parameters)
     {
-        return $this->container->get('router')->generate($route, $parameters, Router::ABSOLUTE_URL);
+        $route = "";
+        if ($this->container) {
+            $route = $this->container->get('router')->generate($route, $parameters, Router::ABSOLUTE_URL);
+        }
+
+        return $route;
     }
     
     /**
@@ -262,5 +276,10 @@ class Paginator extends BasePagerfanta implements ContainerAwareInterface
             $this->setMaxPerPage($maxPerPage);
             $this->setCurrentPage($page);
         }        
+    }
+
+    public function setRouter($router)
+    {
+        $this->router = $router;
     }
 }

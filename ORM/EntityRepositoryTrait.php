@@ -28,29 +28,11 @@ trait EntityRepositoryTrait
      * @return Paginator
      */
     public function getPaginator(QueryBuilder $queryBuilder)
-    {   
-        $request = $this->container->get('request_stack')->getCurrentRequest();
-        if($request){
-            $columns = $request->get("columns");
-            if($this->getFormatPaginator() == Paginator::FORMAT_ARRAY_DATA_TABLES && $columns !== null){
-                $orx = $queryBuilder->expr()->andX();
-                foreach ($columns as $column) {
-                    $data = $column['name'];
-                    $value = $column['search']['value'];
-                    if($data != "" && $value != ""){
-                        $field = sprintf("%s.%s",  $this->getAlies(),$data);
-                        $orx->add($queryBuilder->expr()->like($field, $queryBuilder->expr()->literal("%".$value."%")));
-                    }
-                }
-                if($orx->count() > 0){
-                    $queryBuilder->andWhere($orx);
-                }
-            }
-        }
-        
+    {        
+        $request = $this->requestStack->getCurrentRequest();
         $pagerfanta = new Paginator(new DoctrineORMAdapter($queryBuilder));
         $pagerfanta->setDefaultFormat($this->getFormatPaginator());
-        $pagerfanta->setContainer($this->container);
+        // $pagerfanta->setRouter($this->router);
         if($request){
             $pagerfanta->setRequest($request);
         }
@@ -68,7 +50,7 @@ trait EntityRepositoryTrait
         $request = $this->container->get('request_stack')->getCurrentRequest();        
         $pagerfanta = new Paginator(new ArrayAdapter($queryBuilder->getQuery()->getScalarResult()));
         $pagerfanta->setDefaultFormat($this->getFormatPaginator());
-        $pagerfanta->setContainer($this->container);
+        //$pagerfanta->setContainer($this->container);
         $pagerfanta->setRequest($request);
         return $pagerfanta;
     }

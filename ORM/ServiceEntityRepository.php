@@ -12,19 +12,28 @@
 namespace Maximosojo\ToolsBundle\ORM;
 
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Maximosojo\ToolsBundle\ORM\EntityRepositoryTrait;
-use Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository as MasterServiceEntityRepository;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Service Entity Repository
  *
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class ServiceEntityRepository extends \Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository implements ContainerAwareInterface
+class ServiceEntityRepository extends MasterServiceEntityRepository
 {
-    use ContainerAwareTrait;
+    protected $requestStack;
+
+    /**
+     * @required
+     */
+    public function setRequestStack(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
+
     use EntityRepositoryTrait;
 
     /**

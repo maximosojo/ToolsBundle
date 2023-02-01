@@ -2,10 +2,11 @@
 
 namespace Maximosojo\ToolsBundle\Twig\Extension;
 
+use Twig\Environment;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
-use Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * PaginatorExtension
@@ -14,7 +15,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PaginatorExtension extends AbstractExtension 
 {
-    use ContainerAwareTrait;
+    private $twig;
+
+    private $requestStack;
+
+    public function __construct(Environment $twig, RequestStack $requestStack)
+    {
+        $this->twig = $twig;
+        $this->requestStack = $requestStack;
+    }
 
     public function getName() 
     {
@@ -80,7 +89,7 @@ class PaginatorExtension extends AbstractExtension
         $paginator = $resolver->resolve($paginator);
 
         $direction = "desc";
-        $request = $this->container->get('request_stack')->getCurrentRequest();
+        $request = $this->requestStack->getCurrentRequest();
         foreach ($request->get('sorting', []) as $key => $value) {
             $direction = 'asc' === \strtolower($value) ? 'desc' : 'asc';
         }
@@ -103,6 +112,6 @@ class PaginatorExtension extends AbstractExtension
      */
     private function render($template,$parameters)
     {
-        return $this->container->get('twig')->render($template,$parameters);
+        return $this->twig->render($template,$parameters);
     }
 }

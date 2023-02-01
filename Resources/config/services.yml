@@ -13,17 +13,6 @@ services:
       calls: 
           - [setContainer, ['@service_container']]
           
-  # Repository Factory
-  maximosojo_tools.doctrine.repository.factory:
-        class: Maximosojo\ToolsBundle\ORM\Factory
-        arguments:
-            - []
-            - '@service_container'
-            - '@maximosojo_tools.doctrine.repository.factory.default'
-
-  maximosojo_tools.doctrine.repository.factory.default:
-      class: Doctrine\ORM\Repository\DefaultRepositoryFactory
-
   # Manejador de tabs
   maximosojo_tools.manager.tabs:
       class: Maximosojo\ToolsBundle\Service\Tabs\TabsManager
@@ -38,7 +27,6 @@ services:
   # Manejador de paginador
   maximosojo_tools.twig.extension_paginator:
       class: Maximosojo\ToolsBundle\Twig\Extension\PaginatorExtension
+      arguments: ["@twig","@request_stack"]
       tags:
-          - { name: twig.extension}
-      calls: 
-          - [setContainer, ['@service_container']]
+          - { name: twig.extension }
