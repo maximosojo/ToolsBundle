@@ -43,7 +43,7 @@ class JsonResponse extends JsonResponseBase
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  array
      */
-    public function setData($data = array()) 
+    public function setData(mixed $data = array()): static
     {
         $this->originalData = $data;
         if(count($this->extraData) > 0){

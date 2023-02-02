@@ -18,6 +18,7 @@ use Maximosojo\ToolsBundle\Component\Behat\SymfonyExtension\Context\KernelAwareC
 use Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\HttpFoundation\Session\Session;
 use FOS\UserBundle\Model\UserInterface;
 use LogicException;
 use Exception;
@@ -896,7 +897,7 @@ abstract class BaseDataContext implements Context, KernelAwareContext
         $this->currentUser = $currentUser;
         if($this->client !== null){
             $container = $this->client->getContainer();
-            $session = $this->client->getContainer()->get('session');
+            $session = $this->client->getContainer()->get("Symfony\Component\HttpFoundation\Session\Session");
             /** @var $loginManager \FOS\UserBundle\Security\LoginManager */
             $loginManager = $container->get('FOS\UserBundle\Security\LoginManager');//fos_user.security.login_manager
             $firewallName = $container->getParameter('fos_user.firewall_name');
@@ -913,7 +914,6 @@ abstract class BaseDataContext implements Context, KernelAwareContext
                 $loginManager->loginUser($firewallName, $currentUser);
                 $token = new \Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken(
                     $currentUser,
-                    $currentUser->getPassword(),
                     $firewallContext,
                     $currentUser->getRoles()
                 );

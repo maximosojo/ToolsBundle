@@ -78,6 +78,12 @@ abstract class BaseOAuth2Context implements Context
      */
     protected $accessor;
 
+    /**
+     * User
+     * @var string 
+     */
+    protected $accessTokenClass;
+
     public function __construct(FileLocator $fileLocator)
     {
         $this->fileLocator = $fileLocator;
@@ -124,12 +130,12 @@ abstract class BaseOAuth2Context implements Context
             $this->dataContext->setCurrentUser($user);
             
             $this->dataContext->flush();
-            $qb = $this->dataContext->findQueryBuilder(\App\Entity\M\OAuth\AccessToken::class,"at");
+            /*$qb = $this->dataContext->findQueryBuilder($this->accessTokenClass,"at");
             $qb
                 ->andWhere("at.token = :token")
                 ->setParameter("token",$token)
                 ;
-            $t = $qb->getQuery()->getOneOrNullResult();
+            $t = $qb->getQuery()->getOneOrNullResult();*/
             // assertNotNull($t,  sprintf("El token de acceso '%s' no existe en la base de datos.",$token));
         }
     }
@@ -505,7 +511,7 @@ abstract class BaseOAuth2Context implements Context
         $this->response = $this->dataContext->getClient()->getResponse();
         $contentType = (string) $this->response->headers->get('Content-type');
         $this->initRequest();
-        if ($contentType !== 'application/json') {
+        if ($contentType !== 'application/json' && $contentType !== 'application/json; charset=UTF-8') {
             throw new \Exception(sprintf("Content-type must be application/json %s", $this->echoLastResponse()));
         }
         $this->data = json_decode($this->response->getContent(), true);
