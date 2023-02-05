@@ -505,7 +505,7 @@ abstract class BaseDataContext implements Context, KernelAwareContext
      *
      * @see UrlGeneratorInterface
      */
-    protected function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH) 
+    public function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH) 
     {
         return $this->container->get('router')->generate($route, $parameters, $referenceType);
     }
@@ -946,7 +946,6 @@ abstract class BaseDataContext implements Context, KernelAwareContext
     public function findOneElement($class, UserInterface $user = null)
     {
         $em = $this->getDoctrine()->getManager();
-        $em->getFilters()->enable("enableable");
         $alias = "o";
         $qb = $em->createQueryBuilder()
                 ->select($alias)

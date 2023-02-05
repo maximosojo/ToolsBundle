@@ -427,6 +427,22 @@ abstract class BaseOAuth2Context implements Context
     }
 
     /**
+     * Realizar una solicitud generando url
+     * @When I request to path :route with parameters :routeParameters
+     */
+    public function iRequestToPathParameters($route, $routeParameters, $method = "GET")
+    {
+        $parameters = [];
+        foreach (json_decode($routeParameters, true) as $key => $value) {
+            $parameters[$key] = $this->dataContext->getScenarioParameter($value);
+        }
+
+        $fullUrl = sprintf("%s %s",$method,$this->dataContext->generateUrl($route,$parameters));
+        
+        $this->iRequest($fullUrl);
+    }
+
+    /**
      * Realiza una peticion a la API Rest
      * @When I request :fullUrl
      */
