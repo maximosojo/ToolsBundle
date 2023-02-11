@@ -50,8 +50,9 @@ trait CommonFunctionsTrait
     protected function addFromAttr(FormInterface $form, array $schema)
     {
         if ($attr = $form->getConfig()->getOption('attr')) {
+            // Unset
             $options = [
-                "help_auto_hide", "icon"
+                "icon"
             ];
             foreach ($options as $option) {
                 if (isset($attr[$option])) {
@@ -59,6 +60,18 @@ trait CommonFunctionsTrait
                     unset($schema['attr'][$option]);
                 }
             }
+
+            // Transalate
+            $translationDomain = $form->getConfig()->getOption('translation_domain');
+            $options = [
+                "placeholder"
+            ];
+            foreach ($options as $option) {
+                if (isset($attr[$option])) {
+                    $schema['attr'][$option] = $this->translator->trans($schema['attr'][$option], [], $translationDomain);
+                }
+            }
+
             if (count($schema['attr']) == 0) {
                 unset($schema['attr']);
             }
@@ -260,6 +273,27 @@ trait CommonFunctionsTrait
             if (isset($attr['help'])) {
                 $schema['attr']['help'] = $this->translator->trans($attr['help'], [], $translationDomain);
             }
+        }
+
+        return $schema;
+    }
+
+    /**
+     * @param FormInterface $form
+     * @param array         $schema
+     *
+     * @return array
+     */
+    protected function addLabel(FormInterface $form, array $schema)
+    {
+        $translationDomain = $form->getConfig()->getOption('translation_domain');
+        $label = $form->getConfig()->getOption('label');
+        if ($label) {
+            if ($label) {
+                $schema['title'] = $this->translator->trans($label, [], $translationDomain);
+            } else {
+                $schema['title'] = $this->translator->trans($form->getName(), [], $translationDomain);
+            }    
         }
 
         return $schema;
