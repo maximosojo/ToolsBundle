@@ -7,7 +7,7 @@ use JMS\Serializer\Annotation as JMS;
 /**
  * URI de la pagina a cargar al tocar el elemento
  *
- * @author Máximo Sojo <mxsojo13@gmail.com>
+ * @author Máximo Sojo <maxsojo13@gmail.com>
  */
 trait UriActionTrait
 {
