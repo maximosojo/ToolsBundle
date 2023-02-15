@@ -151,4 +151,15 @@ class JsonResponse extends JsonResponseBase
         $this->extraData["reload_content"] = true;
         $this->setData($this->originalData);
     }
+
+    /**
+     * Redirección a pagina anterior
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  String
+     */
+    public function setBackRedirect() 
+    {
+        $this->extraData["back_redirect"] = true;
+        $this->setData($this->originalData);
+    }
 }

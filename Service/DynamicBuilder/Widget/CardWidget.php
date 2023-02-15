@@ -7,6 +7,7 @@ use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\IconTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\TitleTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\SubTitleTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\UriActionTrait;
+use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\UriActionInterface;
 
 /**
  * Widget para titulos de paginas
@@ -14,7 +15,7 @@ use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\UriActionTrait;
  * @author Máximo Sojo <mxsojo13@gmail.com>
  * @JMS\ExclusionPolicy("ALL");
  */
-class CardWidget extends BaseWidget
+class CardWidget extends BaseWidget implements UriActionInterface
 {
     use IconTrait;
     use TitleTrait;
@@ -24,5 +25,6 @@ class CardWidget extends BaseWidget
 	public function __construct()
 	{
         parent::__construct("card");
+        $this->uriTarget = self::TYPE_TARGET_PUSH_NAMED;
     }
 }
