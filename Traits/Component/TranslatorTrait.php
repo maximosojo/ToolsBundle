@@ -25,7 +25,7 @@ trait TranslatorTrait
     /**
      * Traducción
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  String
+     * @param  string
      * @param  array
      * @param  string
      * @return Translation

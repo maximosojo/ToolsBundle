@@ -31,9 +31,9 @@ trait StatusTrait
      *
      * @param string $status
      *
-     * @return Type
+     * @return string
      */
-    public function setStatus($status)
+    public function setStatus(string $status): self
     {
         $this->status = $status;
 
@@ -45,7 +45,7 @@ trait StatusTrait
      *
      * @return string
      */
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->status;
     }

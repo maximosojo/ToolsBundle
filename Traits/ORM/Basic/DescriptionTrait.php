@@ -32,9 +32,9 @@ trait DescriptionTrait
      *
      * @param string $description
      *
-     * @return Shortcut
+     * @return string
      */
-    public function setDescription($description)
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -46,7 +46,7 @@ trait DescriptionTrait
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }

@@ -7,6 +7,7 @@ use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * PaginatorExtension
@@ -44,9 +45,9 @@ class PaginatorExtension extends AbstractExtension
      *
      * @param   $key
      *
-     * @return  View | Template
+     * @return  Response
      */
-    public function paginatorMaxPerPageRender($paginator)
+    public function paginatorMaxPerPageRender($paginator): Response
     {
         $resolver = new OptionsResolver();
         $resolver->setRequired(["links","meta","data"]);
@@ -62,9 +63,9 @@ class PaginatorExtension extends AbstractExtension
      *
      * @param   $key
      *
-     * @return  View | Template
+     * @return  Response | Template
      */
-    public function paginatorPaginationRender($paginator)
+    public function paginatorPaginationRender($paginator): Response
     {
         $resolver = new OptionsResolver();
         $resolver->setRequired(["links","meta","data"]);
@@ -80,9 +81,9 @@ class PaginatorExtension extends AbstractExtension
      *
      * @param   $key
      *
-     * @return  View | Template
+     * @return  Response | Template
      */
-    public function paginatorSortableRender($paginator, string $title, $key)
+    public function paginatorSortableRender($paginator, string $title, $key): Response
     {
         $resolver = new OptionsResolver();
         $resolver->setRequired(["links","meta","data"]);
@@ -108,9 +109,9 @@ class PaginatorExtension extends AbstractExtension
      * @param   $template
      * @param   $parameters
      *
-     * @return  View
+     * @return  Response
      */
-    private function render($template,$parameters)
+    private function render($template,$parameters): Response
     {
         return $this->twig->render($template,$parameters);
     }

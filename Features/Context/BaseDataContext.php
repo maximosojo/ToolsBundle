@@ -257,8 +257,8 @@ abstract class BaseDataContext implements Context, KernelAwareContext
      * Registro de escenario
      *  
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  String $key
-     * @param  String $value
+     * @param  string $key
+     * @param  string $value
      */
     public function setScenarioParameter($key, $value) 
     {

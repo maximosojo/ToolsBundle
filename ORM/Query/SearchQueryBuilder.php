@@ -33,7 +33,7 @@ class SearchQueryBuilder
 
     /**
      * $alies
-     * @var String
+     * @var string
      */
     private $alies;
 

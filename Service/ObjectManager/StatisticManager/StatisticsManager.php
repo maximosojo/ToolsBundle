@@ -382,7 +382,7 @@ class StatisticsManager implements ConfigureInterface
     /**
      * Registra una nueva estadistica
      * 
-     * @param  String $year
+     * @param  string $year
      * @return YearStatistics
      */
     private function newYearStatistics($year = null)
@@ -447,7 +447,7 @@ class StatisticsManager implements ConfigureInterface
      * Registro de objeto a usar en las llamadas futuras
      * @author Máximo Sojo <maxsojo13@gmail.com>
      * @author Carlos Mendoza <inhack20@gmail.com>
-     * @param  String $object
+     * @param  string $object
      */
     public function setObject($object = null)
     {

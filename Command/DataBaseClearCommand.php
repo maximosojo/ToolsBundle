@@ -101,9 +101,9 @@ EOT
     /**
      * Delete records
      * @author Carlos Mendoza <inhack20@gmail.com>
-     * @param  String
+     * @param  string
      * @param  DoctrineManager
-     * @param  String
+     * @param  string
      * @return Records
      */
     private function deleteRecords($className,$em,$output) 
@@ -136,10 +136,10 @@ EOT
     /**
      * Truncate
      * @author Carlos Mendoza <inhack20@gmail.com>
-     * @param  String
-     * @param  String
+     * @param  string
+     * @param  string
      * @param  \Doctrine\DBAL\Platforms\MySqlPlatform
-     * @param  String
+     * @param  string
      */
     private function truncate($tableName,$output,\Doctrine\DBAL\Platforms\MySqlPlatform $dbPlatform,$connection) 
     {
@@ -151,10 +151,10 @@ EOT
     /**
      * Drop
      * @author Carlos Mendoza <inhack20@gmail.com>
-     * @param  String
-     * @param  String
+     * @param  string
+     * @param  string
      * @param  \Doctrine\DBAL\Platforms\MySqlPlatform
-     * @param  String
+     * @param  string
      */
     private function drop($tableName,$output,\Doctrine\DBAL\Platforms\MySqlPlatform $dbPlatform,$connection) 
     {

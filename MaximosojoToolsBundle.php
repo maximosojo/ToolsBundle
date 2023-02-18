@@ -30,7 +30,6 @@ class MaximosojoToolsBundle extends Bundle
 	public function build(\Symfony\Component\DependencyInjection\ContainerBuilder $container) 
     {
         parent::build($container);
-        //Agrega repositorios como servicios e inyecta contenedor de dependencias
         $container->addCompilerPass(new DependencyInjection\Compiler\LinkGeneratorPass());
         $container->addCompilerPass(new DependencyInjection\Compiler\ConfigurationPass());
     }

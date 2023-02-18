@@ -34,7 +34,7 @@ class TablePrefixListerner implements \Doctrine\Common\EventSubscriber
 
     /**
      * $config
-     * @var String
+     * @var string
      */
     private $config;
             

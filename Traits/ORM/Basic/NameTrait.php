@@ -31,9 +31,9 @@ trait NameTrait
      *
      * @param string $name
      *
-     * @return Type
+     * @return string
      */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -45,7 +45,7 @@ trait NameTrait
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

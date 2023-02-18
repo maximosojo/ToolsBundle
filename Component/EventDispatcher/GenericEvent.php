@@ -95,7 +95,7 @@ class GenericEvent extends GenericEventBase
     /**
      * Obtener parametros
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  String
+     * @param  string
      * @return Parameters
      */
     public function getParameter($key,$default = null) 

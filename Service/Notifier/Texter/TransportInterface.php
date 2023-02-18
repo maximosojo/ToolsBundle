@@ -32,7 +32,7 @@ interface TransportInterface extends LoggerAwareInterface
     /**
      * Nombre para manejo
      *
-     * @return  String
+     * @return  string
      */
     public static function getName();
 }

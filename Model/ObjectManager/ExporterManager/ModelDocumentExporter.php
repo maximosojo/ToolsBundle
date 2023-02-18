@@ -13,7 +13,7 @@ class ModelDocumentExporter
 {   
     /**
      * $id
-     * @var String
+     * @var string
      */
     private $id;
 

@@ -31,12 +31,12 @@ trait ExtraDataTrait
     /**
      * setExtraData
      *
-     * @param   String $key
-     * @param   String $value
+     * @param   string $key
+     * @param   string $value
      *
      * @return  ExtraData
      */
-    public function setExtraData($key,$value)
+    public function setExtraData($key,$value): self
     {
         if(!is_array($this->extraData)){
             $this->extraData = [];
@@ -51,9 +51,9 @@ trait ExtraDataTrait
      *
      * @param   array  $extra
      *
-     * @return  ExtraData
+     * @return  self
      */
-    public function setExtras(array $extra)
+    public function setExtras(array $extra): self
     {
         $this->extraData = $extra;
 
@@ -63,10 +63,10 @@ trait ExtraDataTrait
     /**
      * getExtraData
      *
-     * @param   String  $key
-     * @param   String  $default
+     * @param   string  $key
+     * @param   string  $default
      *
-     * @return  String
+     * @return  string
      */
     public function getExtraData($key,$default = null)
     {

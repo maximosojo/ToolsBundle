@@ -52,7 +52,7 @@ trait EnableableTrait
      * @param boolean $enabled
      * @return $this
      */
-    public function setEnabled($enabled)
+    public function setEnabled($enabled): self
     {
         $this->enabled = (boolean)$enabled;
         

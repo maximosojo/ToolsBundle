@@ -3,7 +3,6 @@
 namespace Maximosojo\ToolsBundle\Model\ObjectManager\StatisticManager;
 
 use Maximosojo\ToolsBundle\Model\ObjectManager\StatisticManager\StatisticsMonthInterface;
-use Maximosojo\ToolsBundle\Model\ObjectManager\StatisticManager\StatisticsYearInterface;
 use Maximosojo\ToolsBundle\Model\ObjectManager\BaseInterface;
 
 /**

@@ -53,8 +53,8 @@ abstract class BaseTransport implements TransportInterface
      * Se da formato a mensajes de texto separando si exceden límite de caracteres
      * Formato: Aplica (n/n) según sea el caso
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  String $content
-     * @return String
+     * @param  string $content
+     * @return string
      */
     protected function parseContent($content)
     {

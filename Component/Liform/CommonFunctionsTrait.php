@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 trait CommonFunctionsTrait
 {
-
     /**
      * @var ValidatorInterface
      */

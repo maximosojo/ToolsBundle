@@ -22,13 +22,13 @@ class JsonResponse extends JsonResponseBase
 {   
     /**
      * $originalData
-     * @var String
+     * @var string
      */
     protected $originalData;
 
     /**
      * $extraData
-     * @var String
+     * @var string
      */
     protected $extraData;
     
@@ -56,8 +56,8 @@ class JsonResponse extends JsonResponseBase
     /**
      * Mensaje flash
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  String
-     * @param  String
+     * @param  string
+     * @param  string
      */
     public function setFlash($type, $message) 
     {
@@ -76,7 +76,7 @@ class JsonResponse extends JsonResponseBase
     /**
      * Redirección
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  String
+     * @param  string
      */
     public function setRedirect($url) 
     {
@@ -87,7 +87,7 @@ class JsonResponse extends JsonResponseBase
     /**
      * Redirección
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  String
+     * @param  string
      */
     public function setForceRedirect($url) 
     {
@@ -129,7 +129,7 @@ class JsonResponse extends JsonResponseBase
     /**
      * Abrir popUP
      *  
-     * @param  String $url
+     * @param  string $url
      * @param  array  $parameters
      */
     public function setOpenPopUp($url,array $parameters = []) 
@@ -155,7 +155,7 @@ class JsonResponse extends JsonResponseBase
     /**
      * Redirección a pagina anterior
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  String
+     * @param  string
      */
     public function setBackRedirect() 
     {
