@@ -14,7 +14,7 @@
         {% set endPage = currentPage + 4 %}
     {% endif %}
 
-    {% if currentPage != 1 %}
+    {% if currentPage != 1 and currentPage > 4 %}
         {% set startPage = endPage - 4 %}
     {% endif %}
 

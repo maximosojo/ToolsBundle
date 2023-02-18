@@ -47,7 +47,7 @@ class PaginatorExtension extends AbstractExtension
      *
      * @return  Response
      */
-    public function paginatorMaxPerPageRender($paginator): Response
+    public function paginatorMaxPerPageRender($paginator)
     {
         $resolver = new OptionsResolver();
         $resolver->setRequired(["links","meta","data"]);
@@ -65,7 +65,7 @@ class PaginatorExtension extends AbstractExtension
      *
      * @return  Response | Template
      */
-    public function paginatorPaginationRender($paginator): Response
+    public function paginatorPaginationRender($paginator)
     {
         $resolver = new OptionsResolver();
         $resolver->setRequired(["links","meta","data"]);
@@ -83,7 +83,7 @@ class PaginatorExtension extends AbstractExtension
      *
      * @return  Response | Template
      */
-    public function paginatorSortableRender($paginator, string $title, $key): Response
+    public function paginatorSortableRender($paginator, string $title, $key)
     {
         $resolver = new OptionsResolver();
         $resolver->setRequired(["links","meta","data"]);
@@ -111,7 +111,7 @@ class PaginatorExtension extends AbstractExtension
      *
      * @return  Response
      */
-    private function render($template,$parameters): Response
+    private function render($template,$parameters)
     {
         return $this->twig->render($template,$parameters);
     }

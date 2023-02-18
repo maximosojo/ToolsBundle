@@ -4,6 +4,7 @@ namespace Maximosojo\ToolsBundle\Service\DynamicBuilder\Widget;
 
 use Limenius\Liform\Liform;
 use JMS\Serializer\Annotation as JMS;
+use Maximosojo\ToolsBundle\Service\DynamicBuilder\Widget\BaseWidget;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\DataTrait;
 
 /**
