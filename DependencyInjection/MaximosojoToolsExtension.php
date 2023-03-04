@@ -47,11 +47,6 @@ class MaximosojoToolsExtension extends Extension
             $container->setParameter('maximosojo_tools.service.link_generator.color', $config['link_generator']['color']); 
         }
 
-        if($config['search_manager']['enabled'] === true) {
-            $loaderYml->load('services/search_manager.yml');
-            $container->setParameter('maximosojo_tools.service.search_manager.icons.clean', $config['search_manager']['icons']['clean']); 
-        }
-
         if($config['mailer']['enabled'] === true) {
             $loaderYml->load('mailer.yml');
             $container->setParameter("maximosojo_tools.symfonymailer.mailer_template_class", $config['mailer']["mailer_template_class"]);
@@ -151,5 +146,14 @@ class MaximosojoToolsExtension extends Extension
                 $loaderYml->load('services/component/liform/transformers.yml');   
             }
         }
+
+        // Manejador de opciones
+        if($config['option_manager']['enable'] === true){
+            $loaderYml->load('services/option_manager.yml');
+            $container->setParameter('maximosojo_tools.option_manager.class', \Maximosojo\ToolsBundle\Entity\Option::class);
+            $container->setParameter('maximosojo_tools.option_manager.options', $config['option_manager']);
+        }
+
+        $container->setParameter('maximosojo_tools.option_manager.enable', $config['option_manager']['enable']);
     }
 }

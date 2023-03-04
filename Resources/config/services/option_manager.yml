@@ -1,0 +1,39 @@
+parameters:
+    option_manager.cache.disk.password: "1dl965yg73f.5fl9$2bbf1eb4fd587h2fl"
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false
+
+    # ORM
+    maximosojo_tools.option_manager.adapter.orm:
+        class:     Maximosojo\ToolsBundle\Service\OptionManager\Adapter\DoctrineORMAdapter
+        arguments: ["@doctrine.orm.entity_manager", "%maximosojo_tools.option_manager.class%"]
+    # Cache
+    maximosojo_tools.option_manager.cache.disk:
+        class: Maximosojo\ToolsBundle\Service\OptionManager\Cache\DiskStore
+        arguments:
+            - { "debug": "%kernel.debug%", "cache_dir": "%kernel.cache_dir%","password": "%option_manager.cache.disk.password%" }
+    maximosojo_tools.option_manager.cache.none:
+        class: Maximosojo\ToolsBundle\Service\OptionManager\Cache\NoneStored
+    # Wrapper
+    maximosojo_tools.option_manager.wrapper.default:
+        class: Maximosojo\ToolsBundle\Service\OptionManager\Wrapper\DefaultWrapper
+        tags:
+            - { name: option_manager.wrapper }
+    # Manager
+    maximosojo_tools.option_manager.default:
+        class: Maximosojo\ToolsBundle\Service\OptionManager\OptionManager
+        arguments: ["@maximosojo_tools.option_manager.adapter.orm", "@maximosojo_tools.option_manager.cache.disk"]
+    
+    Maximosojo\ToolsBundle\Service\OptionManager\OptionManagerInterface:
+        alias: maximosojo_tools.option_manager.default
+        public: true
+
+    # Extension
+    maximosojo_tools.twig.extension_option_manager:
+        class: Maximosojo\ToolsBundle\Twig\Extension\OptionManagerExtension
+        arguments: ["@maximosojo_tools.option_manager.default"]
+        tags:
+            - { name: twig.extension }

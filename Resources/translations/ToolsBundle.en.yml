@@ -3,12 +3,3 @@ paginator:
             currentPage: 'Page'
             totalPages: 'from'
             totalResults: 'Total Results'
-search_manager:
-        filter:
-            label: "Clean"
-            clean: "Clean"
-            clean_all: "Clean all"
-            select:
-                empty: "Please select..."
-            input:
-                placeholder: "Filter by "

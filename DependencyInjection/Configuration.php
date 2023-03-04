@@ -11,7 +11,6 @@
 
 namespace Maximosojo\ToolsBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Maximosojo\ToolsBundle\Model\Paginator\Paginator;
@@ -91,18 +90,6 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('color')->defaultValue("#000")->end()
                     ->end()
                 ->end()
-                ->arrayNode('search_manager')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->booleanNode('enabled')->defaultFalse()->end()
-                        ->arrayNode('icons')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('clean')->defaultValue("ico ico-trash")->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
                 ->arrayNode('mailer')
                     ->addDefaultsIfNotSet()
                     ->children()
@@ -175,6 +162,16 @@ class Configuration implements ConfigurationInterface
                                 ->booleanNode('enabled')->defaultFalse()->end()
                             ->end()
                         ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('option_manager')
+                        ->addDefaultsIfNotSet()
+                        ->children()
+                            ->booleanNode('enable')->defaultFalse()->end()
+                            ->booleanNode('debug')->end()
+                            ->scalarNode('manager')->defaultValue('maximosojo_tools.option_manager.default')->cannotBeEmpty()->end()
+                            ->scalarNode('adapter')->defaultValue('maximosojo_tools.option_manager.adapter.orm')->cannotBeEmpty()->end()
+                            ->scalarNode('cache')->defaultValue('maximosojo_tools.option_manager.cache.disk')->cannotBeEmpty()->end()
                     ->end()
                 ->end()
                 ->arrayNode('object_manager')

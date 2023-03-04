@@ -26,27 +26,6 @@ class ConfigurationPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $debug = $container->getParameter('kernel.debug');
-        $configurationManagerClass = "Maximosojo\ToolsBundle\Service\Core\Configuration\ConfigurationManager";
-        $configurationManager = new Definition($configurationManagerClass, [
-            new Reference("configuration.adapter.orm"), [
-                "add_default_wrapper" => true,
-                "debug" => $debug,
-            ]
-        ]);
-        $configurationManager->setPublic(true);
-        
-        $configurationManagerNameService = "maximosojo_tools.manager.configuration";
-        $container->setDefinition($configurationManagerNameService, $configurationManager);
-        $container->setParameter('maximosojo_tools.configuration_manager.name', $configurationManagerNameService);
-
-        $manager = $container->getDefinition($container->getParameter("maximosojo_tools.configuration_manager.name"));
-        $tags = $container->findTaggedServiceIds('configuration.wrapper');
-        foreach ($tags as $id => $params) {
-            $definition = $container->findDefinition($id);
-            $manager->addMethodCall("addWrapper", array($definition));
-        }
-
         // Registra manejador de objetos
         $config = $container->getParameter("maximosojo_tools.object_manager.options");
 
@@ -155,6 +134,17 @@ class ConfigurationPass implements CompilerPassInterface
             if ($container->getParameter("maximosojo_tools.notifier.texter.transports.dummy.enabled") === true) {
                 // Transport
                 $texterManager->addMethodCall("addTransport", [$container->getDefinition("maximosojo_tools.notifier.texter_manager.transports.dummy")]);
+            }
+        }
+
+        // Manejador de opciones
+        if ($container->getParameter('maximosojo_tools.option_manager.enable') === true) {
+            $config = $container->getParameter("maximosojo_tools.option_manager.options");
+            $optionManager = $container->getDefinition("maximosojo_tools.option_manager.default");
+            $tags = $container->findTaggedServiceIds('option_manager.wrapper');
+            foreach ($tags as $id => $params) {
+                $definition = $container->findDefinition($id);
+                $optionManager->addMethodCall("addWrapper", array($definition));
             }
         }
     }

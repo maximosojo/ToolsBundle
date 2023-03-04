@@ -20,10 +20,6 @@ services:
       calls: 
           - [setContainer, ['@service_container']]
 
-  configuration.adapter.orm:
-      class: Maximosojo\ToolsBundle\Service\Core\Configuration\Adapter\DoctrineORMAdapter
-      arguments: ["@doctrine.orm.entity_manager", "App\\Entity\\M\\Core\\Configuration"]
-
   # Manejador de paginador
   maximosojo_tools.twig.extension_paginator:
       class: Maximosojo\ToolsBundle\Twig\Extension\PaginatorExtension

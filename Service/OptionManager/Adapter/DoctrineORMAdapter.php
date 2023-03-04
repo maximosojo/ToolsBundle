@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Maximosojo\ToolsBundle\Service\Core\Configuration\Adapter;
+namespace Maximosojo\ToolsBundle\Service\OptionManager\Adapter;
 
-use Maximosojo\ToolsBundle\Model\Core\Configuration\ConfigurationInterface;
+use Maximosojo\ToolsBundle\Service\OptionManager\OptionInterface;
 
 /**
  * Adaptador de doctrine2
  *
  * @author Carlos Mendoza <inhack20@gmail.com>
  */
-class DoctrineORMAdapter implements ConfigurationAdapterInterface
+class DoctrineORMAdapter implements OptionAdapterInterface
 {
     /**
      * Manejador de entidades
@@ -28,22 +28,26 @@ class DoctrineORMAdapter implements ConfigurationAdapterInterface
     
     protected $className;
     
-    public function __construct(\Doctrine\ORM\EntityManager $em,$className) {
+    public function __construct(\Doctrine\ORM\EntityManager $em,$className)
+    {
         $this->em = $em;
         $this->className = $className;
     }
     
-    public function createNew() {
+    public function createNew()
+    {
         return new $this->className();
     }
 
-    public function find($key) {
+    public function find($key)
+    {
         return $this->em->getRepository($this->className)->findOneBy([
             "key" => $key,
         ]);
     }
 
-    public function findAll() {
+    public function findAll()
+    {
         $r = [];
         try {
             $r = $this->em->getRepository($this->className)->findAll();
@@ -56,7 +60,7 @@ class DoctrineORMAdapter implements ConfigurationAdapterInterface
         return $r;
     }
 
-    public function persist(ConfigurationInterface $configuration)
+    public function persist(OptionInterface $configuration)
     {
         $this->em->persist($configuration);
         return true;

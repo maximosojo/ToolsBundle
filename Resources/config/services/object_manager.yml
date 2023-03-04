@@ -6,10 +6,8 @@ services:
 
     maximosojo_tools.object_manager.default:
         class: Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManager
-        public: false
         calls:
             - [ setOptions, ["%maximosojo_tools.object_manager.options%"]  ]
             - [ setContainer, ['@service_container']  ]
     Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManagerInterface:
         alias: maximosojo_tools.object_manager
-        public: false
