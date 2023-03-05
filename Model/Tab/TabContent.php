@@ -12,62 +12,38 @@
 namespace Maximosojo\ToolsBundle\Model\Tab;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Maximosojo\ToolsBundle\Model\Tab\Tab;
 
 /**
  * Contenido de tab
- * 
- * @author Carlos Mendoza <inhack20@gmail.com>
+ *
+ * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class TabContent 
+class TabContent
 {
-    /**
-     * $id
-     * @var string
-     */
+    const TAB = "_tbx";
+
     private $id;
 
-    /**
-     * $url
-     * @var string
-     */
-    private $url;
-
-    /**
-     * $icon
-     * @var string
-     */
     private $icon;
 
-    /**
-     * $name
-     * @var string
-     */
-    private $name;
-
-    /**
-     * $order
-     * @var string
-     */
-    private $order;
-
-    /**
-     * $options
-     * @var array
-     */
     private $options;
 
     /**
-     * $tab
-     * @var object
+     * @var Tab
      */
-    private $tab;
+    private $tabRoot;
 
     /**
-     * $active
-     * @var boolean
+     * ¿Activa?
+     * @var booelan
      */
     private $active = false;
+
+    /**
+     * Parametros globables puede ser un callable que retorne un array o un array
+     * @var mixed 
+     */
+    private $viewParameters;
     
     public function __construct(array $options = []) 
     {
@@ -77,15 +53,17 @@ class TabContent
     /**
      * Opciones de la tab
      * @param array $options
-     * @return \Maximosojo\ToolsBundle\Model\Tab\TabContent
+     * @return \Atechnologies\ToolsBundle\Model\Core\Tab\TabContent
      */
     public function setOptions(array $options = []) 
     {
         $resolver = new OptionsResolver();
         $resolver->setDefaults([
-            "add_content_div" => true,
+            "url" => null,
+            "title" => null,
+            "icon" => null,
         ]);
-        $resolver->setRequired(["url"]);
+        $resolver->setRequired(["url","template"]);
         $this->options = $resolver->resolve($options);
         
         return $this;
@@ -98,32 +76,24 @@ class TabContent
      */
     public function getOption($name) 
     {
-        return $this->options[$name];
+        $value = $this->options[$name];
+        if($value === null && $name === "url"){
+            $value = $this->tabRoot->getRootUrl();
+        }
+        return $value;
     }
     
     /**
      * getUrl
-     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return url
      */
     public function getUrl() 
     {
-        return $this->url;
-    }
-
-    /**
-     * getName
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @return [type]
-     */
-    public function getName() 
-    {
-        return $this->name;
+        return $this->options["url"];
     }
 
     /**
      * getOrder
-     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return order
      */
     public function getOrder()
@@ -132,44 +102,17 @@ class TabContent
     }
 
     /**
-     * setUrl
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  url
-     */
-    public function setUrl($url) 
-    {
-        $this->url = $url;
-        
-        return $this;
-    }
-
-    /**
-     * setName
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  name
-     */
-    public function setName($name) 
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
      * setOrder
-     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  order
      */
     public function setOrder($order) 
     {
         $this->order = $order;
-
         return $this;
     }
 
     /**
      * getId
-     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return id
      */
     public function getId()
@@ -179,19 +122,16 @@ class TabContent
 
     /**
      * setId
-     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @param  id
      */
     public function setId($id) 
     {
         $this->id = $id;
-
         return $this;
     }
     
     /**
      * getActive
-     * @author Máximo Sojo <maxsojo13@gmail.com>
      * @return active
      */
     public function getActive() 
@@ -199,68 +139,72 @@ class TabContent
         return $this->active;
     }
     
-    /**
-     * setActive
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  boolean
-     */
-    public function setActive($active,$recursive = false) 
+    public function isActive() 
     {
-        if ($recursive) {
-            foreach ($this->tab->getTabsContent() as $tab) {
-                $tab->setActive(false);
-            }
-        }
-
-        $this->active = $active;
-
-        return $this;
+        return $this->active;
     }
     
     /**
-     * geticon
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @return icon
+     * setActive
+     * @param  [type]
      */
-    public function getIcon()
+    public function setActive($active) 
     {
-        return $this->icon;
+        $this->active = $active;
+        return $this;
     }
 
     /**
-     * seticon
-     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * setIcon
      * @param  icon
      */
     public function setIcon($icon) 
     {
-        $this->icon = $icon;
+        $this->options["icon"] = $icon;
 
         return $this;
     }
 
     /**
-     * getTab
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @return tab
+     * getIcon
+     * @return icon
      */
-    public function getTab()
+    public function getIcon() 
     {
-        return $this->tab;
+        return $this->options["icon"];
+    }
+    
+    public function getTitle() {
+        return $this->options["title"];
     }
 
-    /**
-     * settab
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  tab
-     */
-    public function setTab(Tab $tab) 
+    public function setTitle($title) {
+        $this->options["title"] = $title;
+        return $this;
+    }
+    
+    public function setTabRoot(Tab $tabRoot)
     {
-        $this->tab = $tab;
+        $this->tabRoot = $tabRoot;
+        return $this;
+    }
+    
+    public function getViewParameters()
+    {
+        return $this->viewParameters;
+    }
+
+    public function setViewParameters($viewParameters)
+    {
+        if(!is_callable($viewParameters) && !is_array($viewParameters)){
+            throw new RuntimeException(sprintf("viewParameters debe ser array o callable pero se dio %s", gettype($viewParameters)));
+        }
+        
+        $this->viewParameters = $viewParameters;
 
         return $this;
     }
-
+                
     /**
      * Representacion de la tab en arary
      * @return array
@@ -269,10 +213,9 @@ class TabContent
     {
         $data = [
             "id" => $this->id,
-            "name" => $this->name,
-            "url" => $this->url,
-            "icon" => $this->icon,
+            "title" => $this->options["title"],
             "active" => $this->active,
+            "icon" => $this->options["icon"],
             "options" => $this->options,
         ];
 

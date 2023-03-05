@@ -1,28 +1,30 @@
 services:
-  # Extension tools para breadcrumb
-  maximosojo_tools.core.extension:
-      class: Maximosojo\ToolsBundle\Twig\Extension\CoreExtension
-      tags:
-          - { name: twig.extension}      
-      calls: 
-          - [setContainer, ['@service_container']]
+    # Extension tools para breadcrumb
+    maximosojo_tools.core.extension:
+        class: Maximosojo\ToolsBundle\Twig\Extension\CoreExtension
+        tags:
+            - { name: twig.extension}      
+        calls: 
+            - [setContainer, ['@service_container']]
           
-  # Secuence generator
-  maximosojo_tools.sequence_generator:
-      class: Maximosojo\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService
-      calls: 
-          - [setContainer, ['@service_container']]
+    # Secuence generator
+    maximosojo_tools.sequence_generator:
+        class: Maximosojo\ToolsBundle\Service\SequenceGenerator\SequenceGeneratorService
+        calls: 
+            - [setContainer, ['@service_container']]
           
-  # Manejador de tabs
-  maximosojo_tools.manager.tabs:
-      class: Maximosojo\ToolsBundle\Service\Tabs\TabsManager
-      arguments: ["@request_stack"]
-      calls: 
-          - [setContainer, ['@service_container']]
+    # Manejador de tabs
+    maximosojo_tools.manager.tabs:
+        class: Maximosojo\ToolsBundle\Service\Tabs\TabsManager
+        arguments: ["@request_stack","@twig"]
+    
+    Maximosojo\ToolsBundle\Service\Tabs\TabsManagerInterface:
+        alias: maximosojo_tools.manager.tabs
+        public: true
 
-  # Manejador de paginador
-  maximosojo_tools.twig.extension_paginator:
-      class: Maximosojo\ToolsBundle\Twig\Extension\PaginatorExtension
-      arguments: ["@twig","@request_stack"]
-      tags:
-          - { name: twig.extension }
+    # Manejador de paginador
+    maximosojo_tools.twig.extension_paginator:
+        class: Maximosojo\ToolsBundle\Twig\Extension\PaginatorExtension
+        arguments: ["@twig","@request_stack"]
+        tags:
+            - { name: twig.extension }
