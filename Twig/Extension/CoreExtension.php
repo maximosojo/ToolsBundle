@@ -33,6 +33,7 @@ class CoreExtension extends AbstractExtension
     public function getFunctions() 
     {
        return array(
+            new TwigFunction('uniqueId', array($this, 'uniqueId'),array('is_safe' => ['html'])),
             new TwigFunction('str_padleft', array($this, 'strpadleft')),
             new TwigFunction('get_parameter', array($this, 'getParameter')),
             new TwigFunction('render_tabs', array($this, 'renderTabs'),array('is_safe' => ['html'])),
@@ -57,6 +58,17 @@ class CoreExtension extends AbstractExtension
         );
     }
 
+    public function uniqueId()
+    {
+        return sprintf("%s%s",$this->strRandom(),$this->strRandom());
+    }
+
+    private function strRandom($length = 16)
+    {
+        $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        return substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
+    }
+    
     /**
      * Add the str_pad left php function
      *
