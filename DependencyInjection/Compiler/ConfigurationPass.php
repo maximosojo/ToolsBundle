@@ -32,12 +32,12 @@ class ConfigurationPass implements CompilerPassInterface
         // Manejador de estadísticas
         if ($container->getParameter('maximosojo_tools.object_manager.statistic.enabled') === true) {
             $statistic = $container->getParameter("maximosojo_tools.object_manager.statistic");
-            $idStatisticManagerAdapter = $statistic["adapter"];
+            /*$idStatisticManagerAdapter = $statistic["adapter"];
             if ($idStatisticManagerAdapter && $container->hasDefinition($idStatisticManagerAdapter)) {
                 $adapterDefinition = $container->findDefinition($idStatisticManagerAdapter);
                 $statisticManagerDefinition = $container->findDefinition("maximosojo_tools.statistics_manager.default");
                 $statisticManagerDefinition->addArgument($adapterDefinition);                
-            }
+            }*/
 
             $statisticManager = $container->getDefinition("maximosojo_tools.statistics_manager.default"); 
             foreach ($statistic["object_types"] as $param) {

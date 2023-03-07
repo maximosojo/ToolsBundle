@@ -3,12 +3,12 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         public: false
-        
+    
     maximosojo_tools.statistics_manager.default:
         class: Maximosojo\ToolsBundle\Service\ObjectManager\StatisticManager\StatisticsManager
-        public: true
         calls:
             - [ setContainer, ['@service_container']  ]
 
-    Maximosojo\ToolsBundle\Service\ObjectManager\StatisticsManager\StatisticsManagerInterface:
-        alias: maximosojo_tools.statistics_manager
+    Maximosojo\ToolsBundle\Service\ObjectManager\StatisticManager\StatisticsManagerInterface:
+        alias: maximosojo_tools.statistics_manager.default
+        public: true

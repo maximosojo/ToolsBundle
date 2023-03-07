@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
  * @author Carlos Mendoza <inhack20@gmail.com>
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class StatisticsManager implements ConfigureInterface
+class StatisticsManager implements ConfigureInterface, StatisticsManagerInterface
 {
     use TraitConfigure;
     use ContainerAwareTrait;
