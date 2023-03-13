@@ -5,7 +5,7 @@ namespace Maximosojo\ToolsBundle\Model\ObjectManager\HistoryManager\DoctrineORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Maximosojo\ToolsBundle\Model\ObjectManager\HistoryManager\HistoryInterface;
-use App\Entity\M\User;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Modelo de historial
@@ -165,9 +165,12 @@ abstract class ModelHistory implements HistoryInterface
 
     public function setUser($user)
     {
-        if($user instanceof User){
+        $this->user = $user;
+        // UserInterface
+        if($user instanceof UserInterface){
             $this->user = $user->getId();
         }
+
         return $this;
     }
 }
