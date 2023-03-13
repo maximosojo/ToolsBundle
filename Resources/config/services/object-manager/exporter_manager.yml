@@ -2,7 +2,6 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        public: false
 
     maximosojo_tools.exporter_manager_doctrine_orm_adapter:
         class: Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\Adapter\DoctrineORMAdapter

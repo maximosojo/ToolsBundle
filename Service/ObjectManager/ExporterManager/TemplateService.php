@@ -28,6 +28,12 @@ class TemplateService
      * @var AdapterInterface
      */
     private $adapters;
+
+    /**
+     * Adaptador para buscar las plantillas
+     * @var AdapterInterface
+     */
+    private $adapter;
     
     public function __construct(array $options = [])
     {
@@ -60,7 +66,7 @@ class TemplateService
      * @param \Maximosojo\ToolsBundle\Service\ObjectManager\ExporterManager\TemplateService\Adapter\TemplateAdapterInterface $adapter
      * @throws RuntimeException
      */
-    public function addAdapter(TemplateAdapterInterface $adapter)
+    public function setAdapter(TemplateAdapterInterface $adapter)
     {
         $this->adapter = $adapter;
     }

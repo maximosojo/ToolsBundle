@@ -86,7 +86,7 @@ class ConfigurationPass implements CompilerPassInterface
             $templateService = $container->getDefinition("maximosojo_tools.template_service");
             $adapters = $container->findTaggedServiceIds("exporter.template.adapter");
             foreach ($adapters as $id => $adapter) {
-                $templateService->addMethodCall("addAdapter", [$container->getDefinition($id)]);
+                $templateService->addMethodCall("setAdapter", [$container->getDefinition($id)]);
             }
         }
 

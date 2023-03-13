@@ -5,6 +5,7 @@ namespace Maximosojo\ToolsBundle\Service\ObjectManager;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
+use Maximosojo\ToolsBundle\Service\ObjectManager\StatisticManager\StatisticsManagerInterface;
 
 /**
  * Administrador de datos de un objeto (documentos,notas,historial)
@@ -20,6 +21,8 @@ class ObjectDataManager implements ObjectDataManagerInterface
      * @var array
      */
     private $options;
+
+    protected $statisticsManager;
     
     public function setOptions($options)
     {
@@ -62,7 +65,19 @@ class ObjectDataManager implements ObjectDataManagerInterface
      */
     public function statistics()
     {
-        return $this->container->get("maximosojo_tools.statistics_manager.default");
+        return $this->statisticsManager;
+    }
+
+    /**
+     * StatisticsManagerInterface
+     *
+     * @author  Máximo Sojo <maxsojo13@gmail.com>
+     *
+     * @required
+     */
+    public function setStatisticsManager(StatisticsManagerInterface $statisticsManager)
+    {
+        $this->statisticsManager = $statisticsManager;
     }
 
     /**

@@ -2,12 +2,13 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        public: false
-
+        
     maximosojo_tools.object_manager.default:
         class: Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManager
         calls:
             - [ setOptions, ["%maximosojo_tools.object_manager.options%"]  ]
             - [ setContainer, ['@service_container']  ]
+
     Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManagerInterface:
-        alias: maximosojo_tools.object_manager
+        alias: maximosojo_tools.object_manager.default
+        public: false
