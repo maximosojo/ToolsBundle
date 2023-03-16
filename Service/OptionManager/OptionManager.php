@@ -178,7 +178,7 @@ class OptionManager implements OptionManagerInterface
             $this->warmUp();
             $isWarmUp = true;
         }else{
-            $this->cache->save($key, $wrapperName);
+            $this->cache->save($key, $wrapperName, $value);
         }
 
         if($success === true && $clearCache){
