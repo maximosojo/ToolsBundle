@@ -12,6 +12,10 @@
     
     {% if totalPages > 3 %}
         {% set endPage = currentPage + 4 %}
+        {% if endPage > totalPages %}
+            {% set endPage = totalPages %}
+        {% endif %}
+
     {% endif %}
 
     {% if currentPage != 1 and currentPage > 4 %}
