@@ -75,4 +75,9 @@ abstract class BaseTransport implements TransportInterface
 
         return $message;
     }
+
+    public function setOptions(array $options = array())
+    {
+        
+    }
 }
