@@ -92,6 +92,27 @@ class DocumentManagerController extends ManagerController
         return $response;
     }
 
+    /**
+     * Visualizar un documento
+     *
+     * @param   Request  $request
+     * @return  BinaryFileResponse $response
+     */
+    public function viewAction(Request $request, ObjectDataManagerInterface $objectDataManager)
+    {
+        $fileName = $request->get("filename");
+
+        // ObjectDataManager
+        $documentManager = $this->getDocumentManager($request,$objectDataManager);
+        $disposition = $request->get("disposition",ResponseHeaderBag::DISPOSITION_INLINE);
+        $file = $documentManager->get($fileName);
+        
+        // BinaryFileResponse
+        $response = new \Symfony\Component\HttpFoundation\BinaryFileResponse($file);
+        $response->setContentDisposition($disposition);
+        return $response;
+    }
+
     public function allAction(Request $request, ObjectDataManagerInterface $objectDataManager)
     {
         $arrayFile = [];

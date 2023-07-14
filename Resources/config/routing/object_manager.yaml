@@ -30,6 +30,13 @@ object_manager_documents_get:
         _format: html
     requirements: { _method: GET }
 
+object_manager_documents_view:
+    path: /documents/view
+    defaults:
+        _controller:  Maximosojo\ToolsBundle\Controller\ObjectManager\DocumentManagerController::viewAction
+        _format: html
+    requirements: { _method: GET }
+
 object_manager_documents_all:
     path: /documents/all
     defaults:
