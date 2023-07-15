@@ -245,6 +245,39 @@ class StatisticsManager implements ConfigureInterface, StatisticsManagerInterfac
     }
 
     /**
+     * Obtiene un resumen del mes
+     * @param array $options
+     * @return array
+     */
+    public function getSummaryMonth(array $options = [])
+    {
+        $now = new DateTime();
+        $resolver = new OptionsResolver();
+        $defaults = [
+            "year" => (int) $now->format("Y"),
+            "month" => (int) $now->format("m"),
+        ];
+        $resolver->setDefaults($defaults);
+        foreach ($defaults as $option => $value) {
+            $resolver->setAllowedTypes($option, "int");
+        }
+        $options = $resolver->resolve($options);
+
+        $summary = [];
+
+        $days = cal_days_in_month(CAL_GREGORIAN, $options["month"], $options["year"]);
+
+        for ($day = 1; $day <= $days; $day++) {
+            $summary[$day] = $this->getTotalDay([
+                "year" => $options["year"],
+                "month" => $options["month"],
+                "day" => $day,
+            ]);
+        }
+        return $summary;
+    }
+
+    /**
      * Retorna las estadisticas de un mes por el año
      * @param array $options [year,month]
      * @return int

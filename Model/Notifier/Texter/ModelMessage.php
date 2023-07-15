@@ -107,7 +107,7 @@ class ModelMessage
     /**
      * @var string
      *
-     * @ORM\Column(name="transport_history", type="array")
+     * @ORM\Column(name="transport_history", type="json")
      */
     protected $transportHistory;
     
