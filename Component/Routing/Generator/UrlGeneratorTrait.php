@@ -33,7 +33,7 @@ trait UrlGeneratorTrait
      *
      * @final since version 3.4
      */
-    protected function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
+    protected function generateUrl(string $route, array $parameters = [], int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH): string
     {
         return $this->container->get('router')->generate($route, $parameters, $referenceType);
     }
