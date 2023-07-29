@@ -33,7 +33,8 @@ class InterconectadosTransport extends BaseTransport
             'priority' => 50,
             'enabled' => false,
             'user' => null,
-            'password' => null
+            'password' => null,
+            "extraData" => []
         ]);
 
         $options = $resolver->resolve($options);

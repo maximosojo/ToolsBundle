@@ -38,7 +38,8 @@ class TwilioTransport extends BaseTransport
             'enabled' => false,
             'sid' => null,
             'token' => null,
-            'number' => null
+            'number' => null,
+            "extraData" => []
         ]);
 
         $options = $resolver->resolve($options);
