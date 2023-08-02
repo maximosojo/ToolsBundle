@@ -12,6 +12,7 @@
 namespace Maximosojo\ToolsBundle\Model\Notifier\Texter;
 
 use Doctrine\ORM\Mapping as ORM;
+use Maximosojo\ToolsBundle\Traits\ORM\Basic\ExtraDataTrait;
 
 /**
  * Modelo mensajes
@@ -118,9 +119,12 @@ class ModelMessage
      */
     protected $retries;
 
+    use ExtraDataTrait;
+
     public function __construct()
     {
         $this->transportHistory = [];
+        $this->extraData = [];
     }
 
     public function getId()

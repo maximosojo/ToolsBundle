@@ -47,12 +47,13 @@ class MaximosojoToolsExtension extends Extension
             $container->setParameter('maximosojo_tools.service.link_generator.color', $config['link_generator']['color']); 
         }
 
-        if($config['mailer']['enabled'] === true) {
+        if($config['notifier']['mailer']['enabled'] === true) {
             $loaderYml->load('mailer.yml');
-            $container->setParameter("maximosojo_tools.symfonymailer.mailer_template_class", $config['mailer']["mailer_template_class"]);
-            $container->setParameter("maximosojo_tools.symfonymailer.mailer_component_class", $config['mailer']["mailer_component_class"]);
-            $container->setParameter("maximosojo_tools.symfonymailer.mailer_repository_manager", $config['mailer']["mailer_repository_manager"]);
-            $idManager = $container->getParameter("maximosojo_tools.symfonymailer.mailer_repository_manager");
+            $container->setParameter("maximosojo_tools.notifier.mailer.template_class", $config['notifier']['mailer']["template_class"]);
+            $container->setParameter("maximosojo_tools.notifier.mailer.component_class", $config['notifier']['mailer']["component_class"]);
+            $container->setParameter("maximosojo_tools.notifier.mailer.queue_class", $config['notifier']['mailer']["queue_class"]);
+            $container->setParameter("maximosojo_tools.notifier.mailer.repository_manager", $config['notifier']['mailer']["repository_manager"]);
+            $idManager = $container->getParameter("maximosojo_tools.notifier.mailer.repository_manager");
             $container->setAlias("maximosojo_tools.repository.mailer.em",$idManager);
         }
 

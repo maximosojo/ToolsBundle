@@ -14,8 +14,9 @@ El componente debe ser habilitado y a su vez puede registrar el prefijo deseado 
 maximosojo_tools:
     mailer:
         enabled: true
-        mailer_component_class: App\Entity\M\Master\Email\Component
-        mailer_template_class: App\Entity\M\Master\Email\Template
+        component_class: App\Entity\M\Master\Email\Component
+        template_class: App\Entity\M\Master\Email\Template
+        queue_class: App\Entity\M\Master\Email\Queue
 
 ```
 

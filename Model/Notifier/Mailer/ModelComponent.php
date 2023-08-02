@@ -1,6 +1,6 @@
 <?php
 
-namespace Maximosojo\ToolsBundle\Model\Mailer;
+namespace Maximosojo\ToolsBundle\Model\Notifier\Mailer;
 
 use Doctrine\ORM\Mapping as ORM;
 

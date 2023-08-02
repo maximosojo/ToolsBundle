@@ -1,6 +1,6 @@
 <?php
 
-namespace Maximosojo\ToolsBundle\Service\Mailer\Adapter;
+namespace Maximosojo\ToolsBundle\Service\Notifier\Mailer\Adapter;
 
 /**
  *

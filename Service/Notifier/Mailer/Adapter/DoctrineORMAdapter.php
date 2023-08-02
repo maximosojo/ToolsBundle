@@ -1,6 +1,6 @@
 <?php
 
-namespace Maximosojo\ToolsBundle\Service\Mailer\Adapter;
+namespace Maximosojo\ToolsBundle\Service\Notifier\Mailer\Adapter;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,8 +25,9 @@ class DoctrineORMAdapter implements EmailAdapterInterface
         $resolver = new OptionsResolver();
         
         $resolver->setRequired([
-            "mailer_template_class", 
-            "mailer_component_class",
+            "template_class", 
+            "component_class",
+            "queue_class"
         ]);
         $resolver->setDefaults([
             "connection" => null,
@@ -36,12 +37,12 @@ class DoctrineORMAdapter implements EmailAdapterInterface
 
     public function createEmailQueue()
     {
-        return new $this->options["mailer_queue_class"]();
+        return new $this->options["queue_class"]();
     }
 
     public function find($id)
     {
-        return $this->em->find($this->options["mailer_template_class"], $id);
+        return $this->em->find($this->options["template_class"], $id);
     }
 
     public function flush()
@@ -57,12 +58,12 @@ class DoctrineORMAdapter implements EmailAdapterInterface
 
     public function createComponent()
     {
-        return new $this->options["mailer_component_class"]();
+        return new $this->options["component_class"]();
     }
     
     public function createEmailTemplate()
     {
-        return new $this->options["mailer_template_class"]();
+        return new $this->options["template_class"]();
     }
 
     public function remove($entity)

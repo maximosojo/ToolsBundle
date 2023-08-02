@@ -1,6 +1,6 @@
 <?php
 
-namespace Maximosojo\ToolsBundle\Model\Mailer\ORM;
+namespace Maximosojo\ToolsBundle\Model\Notifier\Mailer\ORM;
 
 use Maximosojo\ToolsBundle\ORM\EntityRepository;
 

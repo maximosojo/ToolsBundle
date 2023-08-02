@@ -1,6 +1,6 @@
 <?php
 
-namespace Maximosojo\ToolsBundle\Service\Mailer;
+namespace Maximosojo\ToolsBundle\Service\Notifier;
 
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -8,14 +8,15 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Twig\Environment;
-use Maximosojo\ToolsBundle\Service\Mailer\Adapter\EmailAdapterInterface;
+use Maximosojo\ToolsBundle\Service\Notifier\Mailer\Adapter\EmailAdapterInterface;
+use Maximosojo\ToolsBundle\Model\Notifier\Mailer\ModelQueueInterface;
 
 /**
  * Servicio para enviar correo con una plantilla twig
  *
  * @author Máximo Sojo <maxojo13@gmail.com>
  */
-class TwigSymfonyMailer
+class MailerManager
 {
 	/**
      * @var MailerInterface
@@ -69,16 +70,83 @@ class TwigSymfonyMailer
 EOF;
     }
 
-    public function email($templateName, $toEmail, $context, array $attachs = [])
+    /**
+     * Genera un email y lo guarda en base de datos para enviar luego
+     *
+     * @param   string $templateName
+     * @param   string | array $toEmail
+     * @param   array $context
+     * @param   array  $attachs
+     * @param   array  $extras
+     *
+     * @return  []
+     */
+    public function onEmailQueue(string $templateName, $toEmail, array $context, array $attachs = [], array $extras = []): ModelQueueInterface
     {
-        $message = $this->render($templateName,$toEmail,$context,$attachs);
-        foreach ($attachs as $name => $path) {
-            $message->attachFromPath($path,$name);
+        $email = $this->render($templateName,$toEmail,$context,$attachs);
+        
+        if ($email) {
+            $email->setAttachs($attachs);
+            $email->setExtras($extras);
+            $email->setEnvironment($this->options["env"]);
+            $this->adapter->persist($email);
+            $this->adapter->flush();
         }
-        $this->send($message);
+
+        return $email === null ? false : $email;
     }
 
-    private function render($templateName, $toEmail, $context,array $attachs = [])
+    /**
+     * Envia un email guardado en base de datos
+     *
+     * @param   ModelQueueInterface  $emailQueue
+     * @param   array                $attachs
+     *
+     * @return  bool
+     */
+    public function onSendEmailQueue(ModelQueueInterface $emailQueue = null, array $attachs = []): bool
+    {
+        $success = true;
+
+        // Message
+        $fromEmail = null;
+        foreach ($emailQueue->getFromEmail() as $address => $name) {
+            $fromEmail = new Address($address,$name);
+        }
+        
+        // Prepare message
+        foreach ($emailQueue->getToEmail() as $to) {
+            $message = (new Email())
+                ->from($fromEmail)
+                ->to($to)
+                ->subject($emailQueue->getSubject())
+                ->html($emailQueue->getBody())
+                ;
+            
+            $this->send($message);
+        }
+
+        return $success;
+    }
+
+    /**
+     * Envia un email sin guardar en base de datos
+     *
+     * @param   string $templateName
+     * @param   string $toEmail
+     * @param   array  $context
+     * @param   array  $attachs
+     * @param   array  $extras
+     *
+     * @return  bool
+     */
+    public function onSendEmail(string $templateName, $toEmail, array $context, array $attachs = [], array $extras = []): bool
+    {
+        $email = $this->render($templateName,$toEmail,$context,$attachs);
+        return $this->onSendEmailQueue($email,$attachs);
+    }
+
+    private function render(string $templateName, $toEmail, array $context,array $attachs = []): ModelQueueInterface
     {
         $context = $this->buildDocumentContext($templateName, $context, $toEmail, $attachs);
     	$template = $this->twig->createTemplate($this->templateSource);
@@ -101,13 +169,17 @@ EOF;
      * @param type $templateName
      * @param type $context
      * @param type $toEmail
-     * @return EmailQueueInterface
+     * @return ModelQueueInterface
      */
-    private function buildEmail($templateName, $toEmail, $context)
+    private function buildEmail($templateName, $toEmail, array $context)
     {
         $context['toEmail'] = $toEmail;   
         $context['appName'] = $this->options["from_name"];
         
+        if(!is_array($toEmail)){
+            $toEmail = [$toEmail];
+        }
+
         if($templateName instanceof \Twig_Template){
             $template = $templateName;            
         }elseif((class_exists("Twig\TemplateWrapper") && $templateName instanceof \Twig\TemplateWrapper) ||
@@ -121,18 +193,21 @@ EOF;
         $subject = $tplSubjet->renderBlock('subject', $context);
         $htmlBody = $template->render($context);
 
-        $fromEmail = new Address($this->options["from_email"], $this->options["from_name"]);
-        // Message
-        $message = (new Email())
-            ->from($fromEmail)
-            ->to($toEmail)
-            ->subject($subject)
-            ->html($htmlBody);
+        $fromEmail = array($this->options["from_email"] => $this->options["from_name"]);
 
-        return $message;
+        $email = $this->adapter->createEmailQueue();
+        $email
+                ->setStatus(ModelQueueInterface::STATUS_NOT_SENT)
+                ->setSubject($subject)
+                ->setFromEmail($fromEmail)
+                ->setToEmail($toEmail)
+        ;
+        $email->setBody($htmlBody);
+        
+        return $email;
     }
 
-    private function buildDocumentContext($id,$context,$toEmail,array $attachs = [])
+    private function buildDocumentContext($id,array $context)
     {
         $idExp = explode("/",$id);
         if(count($idExp) > 0){
