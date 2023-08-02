@@ -114,7 +114,7 @@ EOF;
             $fromEmail = new Address($address,$name);
         }
         
-        // Prepare message
+        // Prepare and send message
         foreach ($emailQueue->getToEmail() as $to) {
             $message = (new Email())
                 ->from($fromEmail)
@@ -125,6 +125,10 @@ EOF;
             
             $this->send($message);
         }
+
+        // Update queue
+        // TODO: Validar respuesta transport
+        $emailQueue->onSendSuccessAt();
 
         return $success;
     }
@@ -201,6 +205,7 @@ EOF;
                 ->setSubject($subject)
                 ->setFromEmail($fromEmail)
                 ->setToEmail($toEmail)
+                ->onCreatedAt()
         ;
         $email->setBody($htmlBody);
         

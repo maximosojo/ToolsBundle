@@ -69,6 +69,20 @@ class ModelQueue implements ModelQueueInterface
      */
     protected $attachs;
 
+    /**
+     * @var \DateTime $sentAt
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     */
+    protected $createdAt;
+
+    /**
+     * @var \DateTime $sendAt
+     *
+     * @ORM\Column(name="send_at", type="datetime", nullable=true)
+     */
+    protected $sendAt;
+
     use ExtraDataTrait;
 
     public function __construct()
@@ -157,6 +171,60 @@ class ModelQueue implements ModelQueueInterface
     {
         $this->attachs = $attachs;
 
+        return $this;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function onCreatedAt()
+    {
+        $this->createdAt = new \DateTime();
+
+        return $this;
+    }
+
+    public function getSendAt()
+    {
+        return $this->sendAt;
+    }
+
+    public function setSendAt(\DateTime $sendAt)
+    {
+        $this->sendAt = $sendAt;
+
+        return $this;
+    }
+
+    public function onSendAt()
+    {
+        $this->sendAt = new \DateTime();
+
+        return $this;
+    }
+
+    public function onSendSuccessAt()
+    {
+        $this->onSendAt();
+        $this->status = self::STATUS_SENT;
+        
+        return $this;
+    }
+
+    public function onSendErrorAt()
+    {
+        $this->onSendAt();
+        $this->status = self::STATUS_FAIL;
+        
         return $this;
     }
 }
