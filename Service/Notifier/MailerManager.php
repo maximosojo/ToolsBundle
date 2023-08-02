@@ -106,29 +106,36 @@ EOF;
      */
     public function onSendEmailQueue(ModelQueueInterface $emailQueue = null, array $attachs = []): bool
     {
-        $success = true;
+        $success = false;
 
-        // Message
-        $fromEmail = null;
-        foreach ($emailQueue->getFromEmail() as $address => $name) {
-            $fromEmail = new Address($address,$name);
-        }
-        
-        // Prepare and send message
-        foreach ($emailQueue->getToEmail() as $to) {
-            $message = (new Email())
-                ->from($fromEmail)
-                ->to($to)
-                ->subject($emailQueue->getSubject())
-                ->html($emailQueue->getBody())
-                ;
+        try {
+            // Message
+            $fromEmail = null;
+            foreach ($emailQueue->getFromEmail() as $address => $name) {
+                $fromEmail = new Address($address,$name);
+            }
             
-            $this->send($message);
-        }
+            // Prepare and send message
+            foreach ($emailQueue->getToEmail() as $to) {
+                $message = (new Email())
+                    ->from($fromEmail)
+                    ->to($to)
+                    ->subject($emailQueue->getSubject())
+                    ->html($emailQueue->getBody())
+                    ;
+                
+                $this->send($message);
+            }
 
-        // Update queue
-        // TODO: Validar respuesta transport
-        $emailQueue->onSendSuccessAt();
+            $success = true;
+
+            // Mark success
+            $emailQueue->onSendSuccessAt();
+        } catch (\Exception $exc) {
+            // Mark error
+            $emailQueue->onSendErrorAt();
+            // throw $exc;
+        }
 
         return $success;
     }
