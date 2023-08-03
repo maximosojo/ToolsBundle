@@ -1,19 +1,17 @@
 <?php
 
-namespace Maximosojo\ToolsBundle\Model\Notifier\Mailer;
+namespace Maximosojo\ToolsBundle\Model\Notifier\Texter;
 
 /**
- * ModelQueueInterface
+ * ModelMessageInterface
  * 
- * @author Carlos Mendoza <inhack20@gmail.com>
+ * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-interface ModelQueueInterface
+interface ModelMessageInterface
 {
     const STATUS_FAILED = 'failed';
     const STATUS_READY = 'ready';
     const STATUS_PROCESSING = 'processing';
     const STATUS_COMPLETED = 'completed';
     const STATUS_CANCELLED = 'cancelled';
-    
-    const ATTACH_DOCUMENTS = "attach_documents";
 }

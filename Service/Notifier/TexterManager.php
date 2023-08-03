@@ -18,6 +18,7 @@ use Maxtoan\Common\Util\DateUtil;
 use Maxtoan\Common\Util\StringUtil;
 use Maxtoan\Common\Util\UserUtil;
 use DateTime;
+use Maximosojo\ToolsBundle\Model\Notifier\Texter\ModelMessageInterface;
 
 /**
  * Servicio para enviar mensajes de texto
@@ -128,20 +129,13 @@ class TexterManager extends BaseService implements TexterManagerInterface
         return $this->getTransport($name) !== null;
     }
 
-    /**
-     * Envia un mensaje de texto
-     * @param integer $phoneNro Numero de teléfono del destinatario en formato internacional (584129876543)
-     * @param string $message Contenido del mensaje a enviar
-     * @param integer $priority Prioridad del mensaje
-     * @return boolean
-     */
-    public function send($phoneNro = null, $messageText = null, array $options = array())
+    public function onSmsQueue($phoneNro = null, $messageText = null, array $options = array())
     {
         if(empty($phoneNro) || empty($messageText)){
             //Se ignora mensaje sin numero o contenido
             return;
         }
-        
+
         $resolver = new \Symfony\Component\OptionsResolver\OptionsResolver();
         $resolver->setDefaults([
             "priority" => 50,
@@ -152,9 +146,7 @@ class TexterManager extends BaseService implements TexterManagerInterface
         $resolver->setAllowedTypes("priority", "integer");
         $resolver->setAllowedTypes("shippingDate", ["null", \DateTime::class]);
         $options = $resolver->resolve($options);
-
-        $messageSend = false;
-        $originalNro = $phoneNro;
+        
         $phoneNro = StringUtil::clean($phoneNro,"/[^0-9]/");
         if($options["sentBy"] !== null){
             $phoneNro = UserUtil::formatPhoneNumber($options["sentBy"], $phoneNro);
@@ -168,6 +160,19 @@ class TexterManager extends BaseService implements TexterManagerInterface
         // Se registra en la base de datos
         $message = $this->newMessage($phoneNro, $messageText, $options["priority"], $options["sentBy"], $options["shippingDate"]);
         $message->setPriority(101);
+    }
+
+    /**
+     * Envia un mensaje de texto
+     * @param integer $phoneNro Numero de teléfono del destinatario en formato internacional (584129876543)
+     * @param string $message Contenido del mensaje a enviar
+     * @param integer $priority Prioridad del mensaje
+     * @return boolean
+     */
+    public function onSendSmsQueue(ModelMessageInterface $message, array $options = array()): bool
+    {
+        $messageSend = false;
+
         // Se intenta con todos los transportes
         for($i=0;$i < count($this->transports) ; $i++){
             $messageSend = $this->handleSend($message);
@@ -261,7 +266,7 @@ class TexterManager extends BaseService implements TexterManagerInterface
         $result = $lastTransport->send($message);
         $rs = array("transport"=>$lastTransport->getName());
         if ($result === true) {
-            $message->setStatus(ModelMessage::STATUS_COMPLETE);
+            $message->setStatus(ModelMessage::STATUS_COMPLETED);
             $message->setSentAt(new \DateTime());
             $message->setErrorMessage('');
         } else {

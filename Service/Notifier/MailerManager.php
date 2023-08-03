@@ -208,7 +208,7 @@ EOF;
 
         $email = $this->adapter->createEmailQueue();
         $email
-                ->setStatus(ModelQueueInterface::STATUS_NOT_SENT)
+                ->setStatus(ModelQueueInterface::STATUS_READY)
                 ->setSubject($subject)
                 ->setFromEmail($fromEmail)
                 ->setToEmail($toEmail)

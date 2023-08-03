@@ -13,5 +13,5 @@ interface TexterManagerInterface
     /**
      * Envío de mensaje
      */
-    public function send($phoneNro = null, $messageText = null, array $options = array());
+    public function onSmsQueue($phoneNro = null, $messageText = null, array $options = array());
 }

@@ -1,16 +1,16 @@
 <?php
 
-namespace Maximosojo\ToolsBundle\Model\Notifier\Mailer;
+namespace Maximosojo\ToolsBundle\Model\Notifier\Texter;
 
 use Maximosojo\ToolsBundle\ORM\EntityRepository;
-use Maximosojo\ToolsBundle\Model\Notifier\Mailer\ModelQueue;
+use Maximosojo\ToolsBundle\Model\Notifier\Texter\ModelMessage;
 
 /**
- * Repositorio de cola de email
+ * Repositorio de cola de mensajes
  *
- * @author Carlos Mendoza <inhack20@gmail.com>
+ * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class ModelQueueRepository extends EntityRepository
+class ModelMessageRepository extends EntityRepository
 {
     /**
      * Retorna un paginador con los correos pendientes por construir y enviar
@@ -26,7 +26,7 @@ class ModelQueueRepository extends EntityRepository
         $qb
            ->andWhere($a.".status = :status")
            ->andWhere($a.".environment = :environment")
-           ->setParameter("status",ModelQueue::STATUS_READY)
+           ->setParameter("status",ModelMessage::STATUS_READY)
            ->setParameter("environment",$environment)
            ;
 
@@ -35,6 +35,6 @@ class ModelQueueRepository extends EntityRepository
     
     public function getAlias()
     {
-        return "eq";
+        return "sq";
     }
 }

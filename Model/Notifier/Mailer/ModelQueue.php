@@ -215,7 +215,7 @@ class ModelQueue implements ModelQueueInterface
     public function onSendSuccessAt()
     {
         $this->onSendAt();
-        $this->status = self::STATUS_SENT;
+        $this->status = self::STATUS_COMPLETED;
         
         return $this;
     }
@@ -223,7 +223,7 @@ class ModelQueue implements ModelQueueInterface
     public function onSendErrorAt()
     {
         $this->onSendAt();
-        $this->status = self::STATUS_FAIL;
+        $this->status = self::STATUS_FAILED;
         
         return $this;
     }

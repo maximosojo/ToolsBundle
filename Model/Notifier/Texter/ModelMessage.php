@@ -20,15 +20,8 @@ use Maximosojo\ToolsBundle\Traits\ORM\Basic\ExtraDataTrait;
  * @author Máximo Sojo <maxsojo13@gmail.com>
  * @ORM\MappedSuperclass()
  */
-class ModelMessage
+class ModelMessage implements ModelMessageInterface
 {
-    // Estatus
-    const STATUS_FAILED = 'FAILED';
-    const STATUS_READY = 'READY';
-    const STATUS_PROCESSING = 'PROCESSING';
-    const STATUS_COMPLETE = 'COMPLETE';
-    const STATUS_CANCELLED = 'CANCELLED';
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
