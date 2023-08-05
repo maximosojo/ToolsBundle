@@ -142,6 +142,7 @@ class TexterManager extends BaseService implements TexterManagerInterface
             "sentBy" => null,
             "shippingDate" => null,
             "category" => "default",
+            "extraData" => []
         ]);
         $resolver->setAllowedTypes("priority", "integer");
         $resolver->setAllowedTypes("shippingDate", ["null", \DateTime::class]);
@@ -158,8 +159,14 @@ class TexterManager extends BaseService implements TexterManagerInterface
         }
 
         // Se registra en la base de datos
-        $message = $this->newMessage($phoneNro, $messageText, $options["priority"], $options["sentBy"], $options["shippingDate"]);
+        $message = $this->newMessage($phoneNro, $messageText, [
+            "extraData" => $options["extraData"],
+            "priority" => $options["priority"],
+            "sentBy" => $options["sentBy"]
+        ]);
         $message->setPriority(101);
+
+        return $message;
     }
 
     /**
@@ -185,11 +192,22 @@ class TexterManager extends BaseService implements TexterManagerInterface
         return $messageSend;
     }
 
-    private function newMessage($recipient, $content, $priority = 50, $sentBy = null, \DateTime $shippingDate = null)
+    private function newMessage($recipient, $content, array $options = array())
     {
-        if ($shippingDate === null) {
-            $shippingDate = new \DateTime();
-        }
+        $resolver = new \Symfony\Component\OptionsResolver\OptionsResolver();
+        $resolver->setDefaults([
+            "priority" => 50,
+            "sentBy" => null,
+            "extraData" => []
+        ]);
+        $resolver->setAllowedTypes("priority", "integer");
+        $options = $resolver->resolve($options);
+        $priority = $options["priority"];
+        $sentBy = $options["sentBy"];
+        $extraData = $options["extraData"];
+
+        $shippingDate = new \DateTime();
+
         $content = StringUtil::clearSpecialChars($content,"",$this->forbiddenChars);
         $content = $this->parseContent($content);
         $sms = new $this->class;
@@ -198,6 +216,7 @@ class TexterManager extends BaseService implements TexterManagerInterface
                 ->setContent($content)
                 ->setPriority($priority)
                 ->setShippingDate($shippingDate)
+                ->setExtras($extraData)
         ;
         if ($sentBy != null) {
             $sms->setSentBy($sentBy);
