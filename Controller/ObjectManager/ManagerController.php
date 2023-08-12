@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManager;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManagerInterface;
+use Maximosojo\ToolsBundle\Traits\Component\EventDispatcherTrait;
 
 /**
  * Base de controladores del manager
@@ -15,6 +16,8 @@ use Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManagerInterface;
  */
 abstract class ManagerController extends AbstractController
 {
+    use EventDispatcherTrait;
+    
     /**
      * Configuracion de la instancia
      * @var array

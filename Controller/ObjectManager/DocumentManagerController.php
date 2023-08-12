@@ -7,6 +7,7 @@ use Maximosojo\ToolsBundle\Form\ObjectManager\DocumentManager\DocumentsType;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManagerInterface;
+use Maximosojo\ToolsBundle\MaximosojoToolsEvents;
 
 /**
  * Controlador de manejador de documentos
@@ -31,10 +32,11 @@ class DocumentManagerController extends ManagerController
             $documents = $form->get("documents")->getData();
             $comments = $form->get("comments")->getData();
             foreach ($documents as $document) {
-                $documentManager->upload($document,[
+                $file = $documentManager->upload($document,[
                     "comments" => $comments,
                     "name" => $request->get("name")
                 ]);
+                $this->dispatch(MaximosojoToolsEvents::DOCUMENT_MANAGER_UPLOAD,$this->newGenericEvent($file));
             }
         }
         
@@ -50,6 +52,8 @@ class DocumentManagerController extends ManagerController
     public function deleteAction(Request $request, ObjectDataManagerInterface $objectDataManager)
     {
         $documentManager = $this->getDocumentManager($request,$objectDataManager);
+        $file = $documentManager->get($request->get("filename"));
+        $this->dispatch(MaximosojoToolsEvents::DOCUMENT_MANAGER_DELETE,$this->newGenericEvent($file));
         $documentManager->delete($request->get("filename"));
         $referer = $request->headers->get('referer');
         return new RedirectResponse($referer);
@@ -65,6 +69,9 @@ class DocumentManagerController extends ManagerController
     {
         $documentManager = $this->getDocumentManager($request,$objectDataManager);
         $file = $documentManager->get($request->get("filename"));
+
+        $this->dispatch(MaximosojoToolsEvents::DOCUMENT_MANAGER_DOWNLOAD,$this->newGenericEvent($file));
+
         $response = new \Symfony\Component\HttpFoundation\BinaryFileResponse($file);
         $response = new \Symfony\Component\HttpFoundation\BinaryFileResponse($file->getRealPath());
         $response->setContentDisposition(\Symfony\Component\HttpFoundation\ResponseHeaderBag::DISPOSITION_ATTACHMENT);
