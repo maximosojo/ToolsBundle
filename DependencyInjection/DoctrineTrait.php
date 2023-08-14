@@ -27,6 +27,22 @@ trait DoctrineTrait
      */
     private $isBeginTransaction = false;
 
+    private $entityManager;
+
+    /**
+     * entityManager
+     * @required
+     */
+    public function setEntityManager(\Doctrine\ORM\EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    protected function getEntityManager()
+    {
+        return $this->entityManager;
+    }
+
     /**
      * Shortcut to return the Doctrine Registry service.
      *
@@ -49,7 +65,7 @@ trait DoctrineTrait
      */
     protected function getRepository($repository = null)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getEntityManager();
         
         if (!$repository) {
             $repository = $this->getClass();
@@ -112,7 +128,7 @@ trait DoctrineTrait
             throw new \LogicException("No puede iniciar la transaccion dos veces. Realize el commit de la anterior");
         }
 
-        $this->getDoctrine()->getManager()->getConnection()->beginTransaction();
+        $this->getEntityManager()->getConnection()->beginTransaction();
 
         $this->isBeginTransaction = true;
     }
@@ -128,7 +144,7 @@ trait DoctrineTrait
             throw new \LogicException("No hay ninguna transaccion iniciada, primero debe iniciarla.");
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getEntityManager();
         $em->flush();
         $em->getConnection()->commit();
         
@@ -147,7 +163,7 @@ trait DoctrineTrait
             return;
         }
 
-        $this->getDoctrine()->getManager()->getConnection()->rollback();
+        $this->getEntityManager()->getConnection()->rollback();
         
         $this->isBeginTransaction = false;
     }
@@ -161,7 +177,7 @@ trait DoctrineTrait
      */
     protected function doPersist($entity, $andFlush = true)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getEntityManager();
         
         try {
             $em->persist($entity);
@@ -182,7 +198,7 @@ trait DoctrineTrait
      */
     protected function doRemove($entity = null, $andFlush = true)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getEntityManager();
 
         try {
             if ($entity !== null) {
@@ -203,7 +219,7 @@ trait DoctrineTrait
      */
     protected function doFlush()
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getEntityManager();
 
         try {
             $em->flush();            
@@ -219,7 +235,7 @@ trait DoctrineTrait
      */
     protected function findQueryBuilderForClass($class, array $method = [])
     {
-        $em = $this->getDoctrine()->getManager();        
+        $em = $this->getEntityManager();        
         $alias = "c";
         $qb = $em->createQueryBuilder()
                 ->select($alias)
@@ -242,7 +258,7 @@ trait DoctrineTrait
      */
     protected function findQueryBuilder($class)
     {
-        $em = $this->getDoctrine()->getManager();        
+        $em = $this->getEntityManager();        
         $alias = "c";
         $qb = $em->createQueryBuilder()
                 ->select($alias)
@@ -253,7 +269,7 @@ trait DoctrineTrait
 
     protected function doClear()
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getEntityManager();
         $em->clear();
     }
 
@@ -266,7 +282,7 @@ trait DoctrineTrait
      */
     protected function doMerge($entity)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getEntityManager();
         $entity = $em->merge($entity);
         return $entity;
     }
