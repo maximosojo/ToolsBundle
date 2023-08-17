@@ -83,6 +83,13 @@ class ModelQueue implements ModelQueueInterface
      */
     protected $sendAt;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="retries", type="integer")
+     */
+    protected $retries = 0;
+
     use ExtraDataTrait;
 
     public function __construct()
@@ -225,6 +232,18 @@ class ModelQueue implements ModelQueueInterface
         $this->onSendAt();
         $this->status = self::STATUS_FAILED;
         
+        return $this;
+    }
+
+    public function getRetries()
+    {
+        return $this->retries;
+    }
+
+    public function setRetries($retries)
+    {
+        $this->retries = $retries;
+
         return $this;
     }
 }
