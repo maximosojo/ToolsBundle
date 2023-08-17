@@ -48,7 +48,7 @@ class MaximosojoToolsExtension extends Extension
         }
 
         if($config['notifier']['mailer']['enabled'] === true) {
-            $loaderYml->load('mailer.yml');
+            $loaderYml->load('services/notifier/mailer_manager.yml');
             $container->setParameter("maximosojo_tools.notifier.mailer.template_class", $config['notifier']['mailer']["template_class"]);
             $container->setParameter("maximosojo_tools.notifier.mailer.component_class", $config['notifier']['mailer']["component_class"]);
             $container->setParameter("maximosojo_tools.notifier.mailer.queue_class", $config['notifier']['mailer']["queue_class"]);

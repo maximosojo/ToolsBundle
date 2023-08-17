@@ -4,11 +4,16 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         public: false
 
+    # Adaptador
+    maximosojo_tools.notifier.texter_manager.adapter.orm:
+        class: Maximosojo\ToolsBundle\Service\Notifier\Texter\Adapter\DoctrineORMAdapter
+        arguments: ["@maximosojo_tools.repository.mailer.em",{"queue_class": "%maximosojo_tools.notifier.texter.class%" }]
+
     # Manejador
     maximosojo_tools.notifier.texter_manager:
         class: Maximosojo\ToolsBundle\Service\Notifier\TexterManager
         public: true
-        arguments: [{ env: "%kernel.environment%", class: "%maximosojo_tools.notifier.texter.class%" }]
+        arguments: [{ env: "%kernel.environment%", adapter: "@maximosojo_tools.notifier.texter_manager.adapter.orm" }]
 
     # Transports
 

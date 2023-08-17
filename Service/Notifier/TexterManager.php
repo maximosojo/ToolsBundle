@@ -30,7 +30,7 @@ class TexterManager extends BaseService implements TexterManagerInterface
     /**
      * @var Message
      */
-    private $class;
+    private $adapter;
     
     private $isInit = false;
 
@@ -47,14 +47,11 @@ class TexterManager extends BaseService implements TexterManagerInterface
         $this->transports = [];
         
         $resolver = new \Symfony\Component\OptionsResolver\OptionsResolver();
-        $resolver->setDefaults([
-            "class" => false
-        ]);
-        $resolver->setRequired("env","class");
+        $resolver->setRequired(["env","adapter"]);
         $options = $resolver->resolve($options);
         $this->options = $options;
 
-        $this->class = $options["class"];
+        $this->adapter = $options["adapter"];
         $this->environment = $options["env"];
 
         $this->init();
@@ -210,7 +207,7 @@ class TexterManager extends BaseService implements TexterManagerInterface
 
         $content = StringUtil::clearSpecialChars($content,"",$this->forbiddenChars);
         $content = $this->parseContent($content);
-        $sms = new $this->class;
+        $sms = $this->adapter->createSmsQueue();
         $sms
                 ->setRecipient($recipient)
                 ->setContent($content)
@@ -225,7 +222,8 @@ class TexterManager extends BaseService implements TexterManagerInterface
         $sms->setEnvironment($this->environment);
         $sms->setStatus(ModelMessage::STATUS_READY);
         $sms->setRetries(0);
-        $this->doPersist($sms);
+        $this->adapter->persist($sms);
+        // $this->adapter->flush();
 
         return $sms;
     }

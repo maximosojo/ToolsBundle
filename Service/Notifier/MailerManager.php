@@ -90,7 +90,7 @@ EOF;
             $email->setExtras($extras);
             $email->setEnvironment($this->options["env"]);
             $this->adapter->persist($email);
-            $this->adapter->flush();
+            // $this->adapter->flush();
         }
 
         return $email === null ? false : $email;
