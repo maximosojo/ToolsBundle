@@ -212,6 +212,7 @@ EOF;
                 ->setSubject($subject)
                 ->setFromEmail($fromEmail)
                 ->setToEmail($toEmail)
+                ->setRetries(0)
                 ->onCreatedAt()
         ;
         $email->setBody($htmlBody);

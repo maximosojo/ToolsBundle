@@ -256,4 +256,12 @@ class ModelMessage implements ModelMessageInterface
         $this->sentBy = $sentBy;
         return $this;
     }
+
+    public function onSendErrorAt()
+    {
+        $this->retries = $this->retries + 1;
+        $this->status = self::STATUS_FAILED;
+        
+        return $this;
+    }
 }

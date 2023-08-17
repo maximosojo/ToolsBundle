@@ -299,8 +299,8 @@ class TexterManager extends BaseService implements TexterManagerInterface
 
         $message->addTransportHistory($rs);
         
-        $this->doPersist($message,false);
-        $this->doFlush();
+        $this->adapter->persist($message);
+        // $this->adapter->flush();
         
         return $result;
     }

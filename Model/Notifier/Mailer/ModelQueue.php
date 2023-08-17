@@ -97,6 +97,11 @@ class ModelQueue implements ModelQueueInterface
         $this->extraData = [];
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function getSubject()
     {
         return $this->subject;
@@ -229,7 +234,7 @@ class ModelQueue implements ModelQueueInterface
 
     public function onSendErrorAt()
     {
-        $this->onSendAt();
+        $this->retries = $this->retries + 1;
         $this->status = self::STATUS_FAILED;
         
         return $this;
