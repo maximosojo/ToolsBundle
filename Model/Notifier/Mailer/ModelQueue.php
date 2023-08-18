@@ -23,14 +23,14 @@ class ModelQueue implements ModelQueueInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="subject", type="text")
+     * @ORM\Column(name="subject", type="string", length=255)
      */
     protected $subject;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="from_email", type="json", length=255)
+     * @ORM\Column(name="from_email", type="json")
      */
     protected $fromEmail;
     
@@ -44,7 +44,7 @@ class ModelQueue implements ModelQueueInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="text")
+     * @ORM\Column(name="body", type="text", nullable=true)
      */
     protected $body;
     
@@ -58,7 +58,7 @@ class ModelQueue implements ModelQueueInterface
     /**
      * @var string $environment
      *
-     * @ORM\Column(name="environment", type="string", nullable=true)
+     * @ORM\Column(name="environment", type="string", nullable=true, length=100)
      */
     protected $environment;
     
