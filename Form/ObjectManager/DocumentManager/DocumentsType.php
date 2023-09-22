@@ -24,6 +24,7 @@ class DocumentsType extends AbstractType
         $builder                
                 ->add('documents',FileType::class, [
                     'label' => false,
+                    'required' => true,
                     'multiple' => true,
                 ])
                 ->add('comments',TextType::class, [
