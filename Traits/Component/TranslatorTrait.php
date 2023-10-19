@@ -28,7 +28,7 @@ trait TranslatorTrait
      * @param  string
      * @param  array
      * @param  string
-     * @return Translation
+     * @return string
      */
     public function trans($id,array $parameters = array(), $domain = "messages")
     {
