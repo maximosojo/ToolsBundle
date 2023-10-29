@@ -21,4 +21,6 @@ final class MaximosojoToolsEvents
     public const DOCUMENT_MANAGER_DELETE = 'maximosojo_tools.document_manager.delete';
 
     public const DOCUMENT_MANAGER_DOWNLOAD = 'maximosojo_tools.document_manager.download';
+
+    public const DOCUMENT_MANAGER_VIEW = 'maximosojo_tools.document_manager.view';
 }

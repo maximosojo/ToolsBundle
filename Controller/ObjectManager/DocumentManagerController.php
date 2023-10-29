@@ -113,6 +113,8 @@ class DocumentManagerController extends ManagerController
         $documentManager = $this->getDocumentManager($request,$objectDataManager);
         $disposition = $request->get("disposition",ResponseHeaderBag::DISPOSITION_INLINE);
         $file = $documentManager->get($fileName);
+
+        $this->dispatch(MaximosojoToolsEvents::DOCUMENT_MANAGER_VIEW,$this->newGenericEvent($file));
         
         // BinaryFileResponse
         $response = new \Symfony\Component\HttpFoundation\BinaryFileResponse($file);
