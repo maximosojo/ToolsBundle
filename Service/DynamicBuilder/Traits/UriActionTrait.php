@@ -3,6 +3,7 @@
 namespace Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits;
 
 use JMS\Serializer\Annotation as JMS;
+use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\UriActionInterface;
 
 /**
  * URI de la pagina a cargar al tocar el elemento
@@ -43,6 +44,14 @@ trait UriActionTrait
      */
     protected $uriTarget;
 
+    /**
+     * TYPE de la pagina a cargar al tocar el elemento
+     * @var string|null
+     * @JMS\Expose
+     * @JMS\SerializedName("uri_action_type")
+     */
+    protected $uriActionType = UriActionInterface::TYPE_ACTION_ANCLA;
+
     public function setUriAction(?string $uriAction)
     {
         $this->uriAction = $uriAction;
@@ -67,6 +76,13 @@ trait UriActionTrait
     public function setUriTarget($uriTarget)
     {
         $this->uriTarget = $uriTarget;
+
+        return $this;
+    }
+
+    public function setUriActionType($uriActiontype)
+    {
+        $this->uriActiontype = $uriActiontype;
 
         return $this;
     }
