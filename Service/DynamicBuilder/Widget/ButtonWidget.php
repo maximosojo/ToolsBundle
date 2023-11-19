@@ -6,6 +6,7 @@ use JMS\Serializer\Annotation as JMS;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Widget\BaseWidget;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\TitleTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\UriActionTrait;
+use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\AttrTrait;
 
 /**
  * Widget para botones
@@ -20,7 +21,8 @@ class ButtonWidget extends BaseWidget
 	public const TYPE_SUBMIT = "submit";
 
     use TitleTrait;
-	use UriActionTrait;
+    use UriActionTrait;
+	use AttrTrait;
     
 	/**
      * Elemento tipo [button,submit]
