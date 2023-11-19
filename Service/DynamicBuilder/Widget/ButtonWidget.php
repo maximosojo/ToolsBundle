@@ -6,7 +6,6 @@ use JMS\Serializer\Annotation as JMS;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Widget\BaseWidget;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\TitleTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\UriActionTrait;
-use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\UriActionInterface;
 
 /**
  * Widget para botones
@@ -14,7 +13,7 @@ use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\UriActionInterface;
  * @author Máximo Sojo <mxsojo13@gmail.com>
  * @JMS\ExclusionPolicy("ALL");
  */
-class ButtonWidget extends BaseWidget implements UriActionInterface
+class ButtonWidget extends BaseWidget
 {
     // Tipos de botones
 	public const TYPE_BUTTON = "button";
@@ -42,7 +41,6 @@ class ButtonWidget extends BaseWidget implements UriActionInterface
 	public function __construct()
 	{
         parent::__construct("button");
-        $this->uriTarget = self::TYPE_TARGET_PUSH_NAMED;
     }
 
     public function setType($type)

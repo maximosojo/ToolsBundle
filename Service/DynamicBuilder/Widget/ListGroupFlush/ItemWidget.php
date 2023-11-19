@@ -7,7 +7,6 @@ use Maximosojo\ToolsBundle\Service\DynamicBuilder\Widget\BaseWidget;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\TitleTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\SubTitleTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\UriActionTrait;
-use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\UriActionInterface;
 
 /**
  * Widget para columnas
@@ -15,7 +14,7 @@ use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\UriActionInterface;
  * @author Máximo Sojo <mxsojo13@gmail.com>
  * @JMS\ExclusionPolicy("ALL");
  */
-class ItemWidget extends BaseWidget implements UriActionInterface
+class ItemWidget extends BaseWidget
 {
     use TitleTrait;
     use SubTitleTrait;

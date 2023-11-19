@@ -25,9 +25,9 @@ interface UriActionInterface
     public const TYPE_ACTION_ANCLA = "type_action_ancla";
     public const TYPE_ACTION_DROPDOWN = "type_action_dropdown";
     
-    public function setUriAction(?string $uriAction);
-    public function setUriIcon(?string $uriIcon);
-    public function setUriTitle(?string $uriTitle);
-    public function setUriTarget($uriTarget);
-    public function setUriActionType($uriActionType);
+    // public function setUriAction(?string $uriAction);
+    public function setIcon(?string $icon);
+    public function setTitle(?string $title);
+    public function setTarget($target);
+    public function setActionType($actionType);
 }
