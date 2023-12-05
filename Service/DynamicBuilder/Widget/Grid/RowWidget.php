@@ -5,6 +5,7 @@ namespace Maximosojo\ToolsBundle\Service\DynamicBuilder\Widget\Grid;
 use JMS\Serializer\Annotation as JMS;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Widget\BaseWidget;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\ChildrenTrait;
+use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\AttrTrait;
 
 /**
  * Widget para filas
@@ -15,6 +16,7 @@ use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\ChildrenTrait;
 class RowWidget extends BaseWidget
 {
 	use ChildrenTrait;
+	use AttrTrait;
 
 	public function __construct()
 	{
