@@ -53,6 +53,18 @@ class DoctrineORMAdapter implements HistoryAdapterInterface
         $entity->setMobile(true);
         $entity->setBrowserVersion($browser->getVersion());
         $entity->setCreatedAt(new \DateTime());
+
+        // IP
+        $ip = isset($SERVER["HTTP_X_FORWARDED_FOR"]) ? $SERVER["HTTP_X_FORWARDED_FOR"] : null;
+        if($ip === null && isset($SERVER["REMOTE_ADDR"])){
+            $ip = $SERVER["REMOTE_ADDR"];
+        }
+        if(empty($ip)){
+            $ip = "127.0.0.1";
+        }
+
+        $entity->setCreatedFromIp($ip);
+
         $this->em->persist($entity);
         return $this->em->flush();
     }
