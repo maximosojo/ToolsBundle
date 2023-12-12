@@ -55,9 +55,9 @@ class DoctrineORMAdapter implements HistoryAdapterInterface
         $entity->setCreatedAt(new \DateTime());
 
         // IP
-        $ip = isset($SERVER["HTTP_X_FORWARDED_FOR"]) ? $SERVER["HTTP_X_FORWARDED_FOR"] : null;
-        if($ip === null && isset($SERVER["REMOTE_ADDR"])){
-            $ip = $SERVER["REMOTE_ADDR"];
+        $ip = isset($_SERVER["HTTP_X_FORWARDED_FOR"]) ? $_SERVER["HTTP_X_FORWARDED_FOR"] : null;
+        if($ip === null && isset($_SERVER["REMOTE_ADDR"])){
+            $ip = $_SERVER["REMOTE_ADDR"];
         }
         if(empty($ip)){
             $ip = "127.0.0.1";
