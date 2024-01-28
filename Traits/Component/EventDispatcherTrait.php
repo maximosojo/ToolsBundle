@@ -11,6 +11,9 @@
 
 namespace Maximosojo\ToolsBundle\Traits\Component;
 
+use Maximosojo\ToolsBundle\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
 /**
  * EventDispatcherTrait
  * @author Máximo Sojo <maxsojo13@gmail.com>
@@ -23,23 +26,23 @@ trait EventDispatcherTrait
      * GenericEvent
      *  
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  Entity
+     * @param  object
      * @return GenericEvent
      */
     public function newGenericEvent($entity)
     {
-        return new \Maximosojo\ToolsBundle\Component\EventDispatcher\GenericEvent($entity);        
+        return new GenericEvent($entity);        
     }
     
     /**
      * Disparar un evento
-     * @param type $eventName
-     * @param \Maximosojo\ToolsBundle\Component\EventDispatcher\GenericEvent $event
+     * @param string $eventName
+     * @param GenericEvent $event
      * @return \App\Event\GenericEvent
      */
-    protected function dispatch($eventName, \Maximosojo\ToolsBundle\Component\EventDispatcher\GenericEvent $event = null)
+    protected function dispatch(string $eventName, GenericEvent $event = null)
     {
-        return $this->getEventDispatcher()->dispatch($event,$eventName);
+        return $this->dispatcher->dispatch($event,$eventName);
     }
 
     /**
@@ -52,14 +55,14 @@ trait EventDispatcherTrait
     }
 
     /**
-     * getEventDispatcher
+     * setEventDispatcher
      *  
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  \Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher
+     * @param  EventDispatcherInterface $dispatcher
      * @return EventDispatcherInterface
      * @required
      */
-    public function setEventDispatcher(\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher)
+    public function setEventDispatcher(EventDispatcherInterface $dispatcher)
     {
         $this->dispatcher = $dispatcher;
     }
