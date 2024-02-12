@@ -11,7 +11,8 @@
 
 namespace Maximosojo\ToolsBundle\Twig\Extension;
 
-use Maxtoan\Common\Util\StringUtil;
+use Maximosojo\ToolsBundle\Service\MathUtil;
+use Maximosojo\ToolsBundle\Service\DateUtil;
 use Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManager;
 use Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 use Twig\Extension\AbstractExtension;
@@ -52,9 +53,10 @@ class CoreExtension extends AbstractExtension
     public function getFilters() 
     {
         return array(
-            new TwigFilter('myNumberFormat', array($this, 'myNumberFormat')),
-            new TwigFilter('myFormatDateTime', array($this, 'myFormatDateTime')),
-            new TwigFilter('myFormatDate', array($this, 'myFormatDate'))
+            new TwigFilter('my_number_format', array($this, 'myNumberFormat')),
+            new TwigFilter('my_format_date', array($this, 'myFormatDate')),
+            new TwigFilter('my_format_date_time', array($this, 'myFormatDateTime')),
+            new TwigFilter('json_decode', array($this, 'jsonDecode')),
         );
     }
 
@@ -101,29 +103,7 @@ class CoreExtension extends AbstractExtension
      */
     public function myNumberFormat($value, $decimals = 2) 
     {
-        return StringUtil::numberFormat($value, $decimals, ',', '.');
-    }
-
-    /**
-     * Formateo de fecha en formato DateTime
-     *  
-     * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  $myFormatDate [Fecha a formatear]
-     * @param  string $format       [Formato esperado]
-     * @return DateTime
-     */
-    public function myFormatDateTime($myFormatDate, $format = "d-m-Y h:i a") 
-    {
-        $dateFormated = "";
-        if ($myFormatDate instanceof \DateTime) {
-            // Si existe la configuración le agregamos timezone
-            if (isset($_ENV['APP_DEFAULT_TIMEZONE'])) {
-                $myFormatDate->setTimeZone(new \DateTimeZone($_ENV['APP_DEFAULT_TIMEZONE']));
-            }
-            $dateFormated = $myFormatDate->format($format);
-        }
-
-        return $dateFormated;
+        return MathUtil::numberFormat($value, $decimals, ',', '.');
     }
 
     /**
@@ -136,16 +116,42 @@ class CoreExtension extends AbstractExtension
      */
     public function myFormatDate($myFormatDate, $format = "d-m-Y") 
     {
-        $dateFormated = "";
-        if ($myFormatDate instanceof \DateTime) {
-            // Si existe la configuración le agregamos timezone
-            if (isset($_ENV['APP_DEFAULT_TIMEZONE'])) {
-                $myFormatDate->setTimeZone(new \DateTimeZone($_ENV['APP_DEFAULT_TIMEZONE']));
-            }
-            $dateFormated = $myFormatDate->format($format);
+        $dateFormated = null;
+
+        if($date instanceof \DateTime){
+            $options = [
+                "default_time_zone" => $_ENV['APP_DEFAULT_TIMEZONE']
+            ];
+            $dateFormated = DateUtil::formatDate($date,$options);
         }
-        
+
         return $dateFormated;
+    }
+
+    /**
+     * Formateo de fecha en formato DateTime
+     *  
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  $myFormatDate [Fecha a formatear]
+     * @param  string $format       [Formato esperado]
+     * @return DateTime
+     */
+    public function myFormatDateTime($myFormatDate, $format = "d-m-Y h:i a") 
+    {
+        $dateFormated = null;
+        if($date instanceof \DateTime){
+            $options = [
+                "default_time_zone" => $_ENV['APP_DEFAULT_TIMEZONE']
+            ];
+            $dateFormated = DateUtil::formatDatetime($date,$options);
+        }
+
+        return $dateFormated;
+    }
+
+    public function jsonDecode(string $json)
+    {
+        return json_decode($json, true);
     }
 
     /**
