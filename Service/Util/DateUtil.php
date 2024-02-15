@@ -11,6 +11,8 @@
 
 namespace Maximosojo\ToolsBundle\Service\Util;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 /**
  * Util basico fechas
  * 
@@ -66,5 +68,61 @@ class DateUtil
             $date->setDate($date->format("Y"), $date->format("m"), $day);
         }
         return $date;
+    }
+
+    /**
+     * Formato de fecha
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  \DateTime
+     * @param  string
+     * @return string
+     */
+    public static function formatDate(\DateTime $date = null, array $options = array()) 
+    {
+        $resolver = new OptionsResolver();
+        $resolver->setDefaults([
+            "default_time_zone" => true,
+            "format" => "d/m/Y"
+        ]);
+        $options = $resolver->resolve($options);
+
+        $dateFormated = "";
+
+        if ($date instanceof \DateTime) {
+            if ($options["default_time_zone"] == true) {
+                $date->setTimeZone(new \DateTimeZone($_ENV['APP_DEFAULT_TIMEZONE'])); 
+            }
+    
+            $dateFormated = $date->format($options["format"]);    
+        }
+        
+        return $dateFormated;
+    }
+
+    /**
+     * Formato de fecha
+     * @author Máximo Sojo <maxsojo13@gmail.com>
+     * @param  \DateTime
+     * @param  string
+     * @return string
+     */
+    public static function formatDateTime(\DateTime $date, array $options = array()) 
+    {
+        $resolver = new OptionsResolver();
+        $resolver->setDefaults([
+            "default_time_zone" => true,
+            "format" => "d/m/Y h:i A"
+        ]);
+        $options = $resolver->resolve($options);
+
+        $dateFormated = "";
+        
+        if ($options["default_time_zone"] == true) {
+            $date->setTimeZone(new \DateTimeZone($_ENV['APP_DEFAULT_TIMEZONE'])); 
+        }
+
+        $dateFormated = $date->format($options["format"]);
+        
+        return $dateFormated;
     }
 }

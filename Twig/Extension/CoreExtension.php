@@ -114,12 +114,13 @@ class CoreExtension extends AbstractExtension
      * @param  string $format       [Formato esperado]
      * @return Date
      */
-    public function myFormatDate($myFormatDate, $format = "d-m-Y") 
+    public function myFormatDate($myFormatDate, $format = "d/m/Y") 
     {
         $dateFormated = null;
 
         if($date instanceof \DateTime){
             $options = [
+                "format" => $format,
                 "default_time_zone" => $_ENV['APP_DEFAULT_TIMEZONE']
             ];
             $dateFormated = DateUtil::formatDate($date,$options);
@@ -136,11 +137,12 @@ class CoreExtension extends AbstractExtension
      * @param  string $format       [Formato esperado]
      * @return DateTime
      */
-    public function myFormatDateTime($myFormatDate, $format = "d-m-Y h:i a") 
+    public function myFormatDateTime($myFormatDate, $format = "d/m/Y h:i a") 
     {
         $dateFormated = null;
         if($date instanceof \DateTime){
             $options = [
+                "format" => $format,
                 "default_time_zone" => $_ENV['APP_DEFAULT_TIMEZONE']
             ];
             $dateFormated = DateUtil::formatDatetime($date,$options);
