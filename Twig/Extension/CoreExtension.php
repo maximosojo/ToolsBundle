@@ -11,8 +11,8 @@
 
 namespace Maximosojo\ToolsBundle\Twig\Extension;
 
-use Maximosojo\ToolsBundle\Service\MathUtil;
-use Maximosojo\ToolsBundle\Service\DateUtil;
+use Maximosojo\ToolsBundle\Service\Util\MathUtil;
+use Maximosojo\ToolsBundle\Service\Util\DateUtil;
 use Maximosojo\ToolsBundle\Service\ObjectManager\ObjectDataManager;
 use Maximosojo\ToolsBundle\DependencyInjection\ContainerAwareTrait;
 use Twig\Extension\AbstractExtension;
@@ -110,11 +110,11 @@ class CoreExtension extends AbstractExtension
      * Formateo de fecha
      *  
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  $myFormatDate [Fecha a formatear]
+     * @param  \DateTime $date [Fecha a formatear]
      * @param  string $format       [Formato esperado]
-     * @return Date
+     * @return string
      */
-    public function myFormatDate($myFormatDate, $format = "d/m/Y") 
+    public function myFormatDate($date, $format = "d/m/Y") 
     {
         $dateFormated = null;
 
@@ -133,11 +133,11 @@ class CoreExtension extends AbstractExtension
      * Formateo de fecha en formato DateTime
      *  
      * @author Máximo Sojo <maxsojo13@gmail.com>
-     * @param  $myFormatDate [Fecha a formatear]
+     * @param  \DateTime $date [Fecha a formatear]
      * @param  string $format       [Formato esperado]
-     * @return DateTime
+     * @return string
      */
-    public function myFormatDateTime($myFormatDate, $format = "d/m/Y h:i a") 
+    public function myFormatDateTime($date, $format = "d/m/Y h:i a") 
     {
         $dateFormated = null;
         if($date instanceof \DateTime){
