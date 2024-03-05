@@ -117,14 +117,20 @@ EOF;
             
             // Prepare and send message
             foreach ($emailQueue->getToEmail() as $to) {
-                $message = (new Email())
+                $email = (new Email());
+                $email
                     ->from($fromEmail)
                     ->to($to)
                     ->subject($emailQueue->getSubject())
                     ->html($emailQueue->getBody())
-                    ;
-                
-                $this->send($message);
+                ;
+
+                // Attachments
+                foreach ($attachs as $name => $path) {
+                    $email->attachFromPath($path,$name);
+                }
+
+                $this->send($email);
             }
 
             $success = true;
