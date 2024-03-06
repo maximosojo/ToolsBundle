@@ -168,7 +168,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('option_manager')
                         ->addDefaultsIfNotSet()
                         ->children()
-                            ->booleanNode('enable')->defaultFalse()->end()
+                            ->booleanNode('enabled')->defaultFalse()->end()
                             ->booleanNode('debug')->end()
                             ->scalarNode('manager')->defaultValue('maximosojo_tools.option_manager.default')->cannotBeEmpty()->end()
                             ->scalarNode('adapter')->defaultValue('maximosojo_tools.option_manager.adapter.orm')->cannotBeEmpty()->end()

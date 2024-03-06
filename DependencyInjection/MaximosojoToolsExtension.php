@@ -149,12 +149,12 @@ class MaximosojoToolsExtension extends Extension
         }
 
         // Manejador de opciones
-        if($config['option_manager']['enable'] === true){
+        if($config['option_manager']['enabled'] === true){
             $loaderYml->load('services/option_manager.yml');
             $container->setParameter('maximosojo_tools.option_manager.class', \Maximosojo\ToolsBundle\Entity\Option::class);
             $container->setParameter('maximosojo_tools.option_manager.options', $config['option_manager']);
         }
 
-        $container->setParameter('maximosojo_tools.option_manager.enable', $config['option_manager']['enable']);
+        $container->setParameter('maximosojo_tools.option_manager.enabled', $config['option_manager']['enabled']);
     }
 }

@@ -138,7 +138,7 @@ class ConfigurationPass implements CompilerPassInterface
         }
 
         // Manejador de opciones
-        if ($container->getParameter('maximosojo_tools.option_manager.enable') === true) {
+        if ($container->getParameter('maximosojo_tools.option_manager.enabled') === true) {
             $config = $container->getParameter("maximosojo_tools.option_manager.options");
             $optionManager = $container->getDefinition("maximosojo_tools.option_manager.default");
             $tags = $container->findTaggedServiceIds('option_manager.wrapper');
