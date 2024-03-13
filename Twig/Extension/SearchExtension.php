@@ -2,15 +2,17 @@
 
 namespace Maxtoan\ToolsBundle\Twig\Extension;
 
-use Twig_SimpleFunction;
 use Maxtoan\ToolsBundle\Service\Core\Search\SearchManager;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
+use Twig\TwigFilter;
 
 /**
  * Extension para filtros
  *
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class SearchExtension extends \Twig_Extension 
+class SearchExtension extends AbstractExtension
 {
     /**
      * @var SearchManager
@@ -22,7 +24,7 @@ class SearchExtension extends \Twig_Extension
     public function getFunctions() 
     {
         return array(
-            new Twig_SimpleFunction('renderFilterArea', array($this, 'renderFilterArea'),array('is_safe' => array('html'))),
+            new TwigFunction('renderFilterArea', array($this, 'renderFilterArea'),array('is_safe' => array('html'))),
         );
     }
     /**

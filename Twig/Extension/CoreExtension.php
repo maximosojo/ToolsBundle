@@ -14,13 +14,15 @@ namespace Maxtoan\ToolsBundle\Twig\Extension;
 use Maxtoan\Common\Util\StringUtil;
 use Maxtoan\ToolsBundle\Service\ObjectManager\ObjectDataManager;
 use Maxtoan\ToolsBundle\DependencyInjection\ContainerAwareTrait;
-
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
+use Twig\TwigFilter;
 /**
  * Extension generic applications
  * 
  * @author Máximo Sojo <maxsojo13@gmail.com>
  */
-class CoreExtension extends \Twig_Extension 
+class CoreExtension extends AbstractExtension
 {    
     use ContainerAwareTrait;
     
@@ -30,12 +32,12 @@ class CoreExtension extends \Twig_Extension
     public function getFunctions() 
     {
        return array(
-            new \Twig_SimpleFunction('str_padleft', array($this, 'strpadleft')),
-            new \Twig_SimpleFunction('get_parameter', array($this, 'getParameter')),
-            new \Twig_SimpleFunction('render_tabs', array($this, 'renderTabs'),array('is_safe' => ['html'])),
-            new \Twig_SimpleFunction('render_collapse', array($this, 'renderCollapse'),array('is_safe' => ['html'])),
-            new \Twig_SimpleFunction('render_files_generated', array($this, 'renderFilesGenerated'),array('is_safe' => ['html'])),
-            new \Twig_SimpleFunction('staticCall', array($this, 'staticCall'))
+            new TwigFunction('str_padleft', array($this, 'strpadleft')),
+            new TwigFunction('get_parameter', array($this, 'getParameter')),
+            new TwigFunction('render_tabs', array($this, 'renderTabs'),array('is_safe' => ['html'])),
+            new TwigFunction('render_collapse', array($this, 'renderCollapse'),array('is_safe' => ['html'])),
+            new TwigFunction('render_files_generated', array($this, 'renderFilesGenerated'),array('is_safe' => ['html'])),
+            new TwigFunction('staticCall', array($this, 'staticCall'))
         );
     }
     
@@ -48,9 +50,9 @@ class CoreExtension extends \Twig_Extension
     public function getFilters() 
     {
         return array(
-            new \Twig_SimpleFilter('myNumberFormat', array($this, 'myNumberFormat')),
-            new \Twig_SimpleFilter('myFormatDateTime', array($this, 'myFormatDateTime')),
-            new \Twig_SimpleFilter('myFormatDate', array($this, 'myFormatDate'))
+            new TwigFilter('myNumberFormat', array($this, 'myNumberFormat')),
+            new TwigFilter('myFormatDateTime', array($this, 'myFormatDateTime')),
+            new TwigFilter('myFormatDate', array($this, 'myFormatDate'))
         );
     }
 

@@ -24,7 +24,7 @@ trait ExtraDataTrait
     /**
      * Informacion extra
      * @var string
-     * @ORM\Column(name="extra_data",type="json_array")
+     * @ORM\Column(name="extra_data",type="json")
      */
     protected $extraData;
     
