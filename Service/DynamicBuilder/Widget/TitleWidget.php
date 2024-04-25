@@ -5,6 +5,8 @@ namespace Maximosojo\ToolsBundle\Service\DynamicBuilder\Widget;
 use JMS\Serializer\Annotation as JMS;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Widget\BaseWidget;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\TitleTrait;
+use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\TextAlignTrait;
+use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\FontSizeTrait;
 
 /**
  * Widget para titulos de paginas
@@ -14,7 +16,9 @@ use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\TitleTrait;
  */
 class TitleWidget extends BaseWidget
 {
-	use TitleTrait;
+    use TitleTrait;
+    use TextAlignTrait;
+	use FontSizeTrait;
 
 	public function __construct()
 	{
