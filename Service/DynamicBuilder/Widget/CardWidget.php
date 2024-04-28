@@ -8,6 +8,8 @@ use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\IconTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\TitleTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\SubTitleTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\UriActionTrait;
+use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\PaddingTrait;
+use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\MarginTrait;
 
 /**
  * Widget para titulos de paginas
@@ -21,6 +23,8 @@ class CardWidget extends BaseWidget
     use TitleTrait;
     use SubTitleTrait;
     use UriActionTrait;
+    use PaddingTrait;
+    use MarginTrait;
 
 	public function __construct()
 	{

@@ -8,6 +8,7 @@ use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\TitleTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\UriActionTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\AttrTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\PaddingTrait;
+use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\MarginTrait;
 
 /**
  * Widget para botones
@@ -25,6 +26,7 @@ class ButtonWidget extends BaseWidget
     use UriActionTrait;
 	use AttrTrait;
 	use PaddingTrait;
+	use MarginTrait;
     
 	/**
      * Elemento tipo [button,submit]
