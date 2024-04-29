@@ -584,6 +584,7 @@ abstract class BaseDataContext implements Context, KernelAwareContext
     {
         $this->client = $this->getKernel()->getContainer()->get('test.client');
         $client = $this->client;
+        $client->setServerParameter('HTTP_HOST', "localhost:8000" );
         return $client;
     }
 
