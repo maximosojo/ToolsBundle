@@ -7,6 +7,7 @@ use Maximosojo\ToolsBundle\Service\DynamicBuilder\Widget\BaseWidget;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\SubTitleTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\TextAlignTrait;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\FontSizeTrait;
+use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\MarginTrait;
 
 /**
  * Widget para titulos de paginas
@@ -19,6 +20,7 @@ class SubTitleWidget extends BaseWidget
     use SubTitleTrait;
     use TextAlignTrait;
 	use FontSizeTrait;
+    use MarginTrait;
 
 	public function __construct()
 	{
