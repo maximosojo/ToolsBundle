@@ -19,7 +19,14 @@ trait AttrTrait
      */
     protected $attr;
     
-    public function setAttr(?array $attr)
+    public function setAttr($key, $value)
+    {
+        $this->attr[$key] = $value;
+
+        return $this;
+    }
+
+    public function setAttrs(?array $attr)
     {
         $this->attr = $attr;
 

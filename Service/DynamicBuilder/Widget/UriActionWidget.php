@@ -4,6 +4,7 @@ namespace Maximosojo\ToolsBundle\Service\DynamicBuilder\Widget;
 
 use JMS\Serializer\Annotation as JMS;
 use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\UriActionInterface;
+use Maximosojo\ToolsBundle\Service\DynamicBuilder\Traits\AttrTrait;
 
 /**
  * Widget para botones
@@ -60,6 +61,8 @@ class UriActionWidget extends BaseWidget implements UriActionInterface
      * @JMS\SerializedName("action_type")
      */
     protected $actionType = UriActionInterface::TYPE_ACTION_ANCLA;
+
+    use AttrTrait;
 
 	public function __construct(?string $path = null, ?string $icon = null)
 	{
