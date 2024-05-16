@@ -42,6 +42,14 @@ class ButtonWidget extends BaseWidget
      */
     protected $disabled = false;
 
+    /**
+     * Elemento tipo selected
+     * @var boolean|null
+     * @JMS\Expose
+     * @JMS\SerializedName("selected")
+     */
+    protected $selected = false;
+
 	public function __construct()
 	{
         parent::__construct("button");
@@ -57,6 +65,13 @@ class ButtonWidget extends BaseWidget
     public function setDisabled($disabled)
     {
         $this->disabled = $disabled;
+
+        return $this;
+    }
+
+    public function setSelected($selected)
+    {
+        $this->selected = $selected;
 
         return $this;
     }
