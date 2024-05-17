@@ -71,6 +71,13 @@ trait CommonFunctionsTrait
                 }
             }
 
+            if(isset($attr["extras"])){
+                foreach ($attr["extras"] as $key => $extra) {
+                    $schema[$key] = $extra;
+                }
+                unset($schema['attr']["extras"]);
+            }
+
             if (count($schema['attr']) == 0) {
                 unset($schema['attr']);
             }
