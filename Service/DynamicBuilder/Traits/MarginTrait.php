@@ -16,7 +16,7 @@ trait MarginTrait
      * @JMS\Expose
      * @JMS\SerializedName("margin_top")
      */
-    protected $marginTop = 0.0;
+    protected $marginTop;
 
     /**
      * Elemento tipo marginBottom
@@ -24,7 +24,7 @@ trait MarginTrait
      * @JMS\Expose
      * @JMS\SerializedName("margin_bottom")
      */
-    protected $marginBottom = 0.0;
+    protected $marginBottom;
 
     /**
      * Elemento tipo marginLeft
@@ -32,7 +32,7 @@ trait MarginTrait
      * @JMS\Expose
      * @JMS\SerializedName("margin_left")
      */
-    protected $marginLeft = 0.0;
+    protected $marginLeft;
 
     /**
      * Elemento tipo marginRight
@@ -40,7 +40,7 @@ trait MarginTrait
      * @JMS\Expose
      * @JMS\SerializedName("margin_right")
      */
-    protected $marginRight = 0.0;
+    protected $marginRight;
 
     public function setMarginTop($marginTop)
     {

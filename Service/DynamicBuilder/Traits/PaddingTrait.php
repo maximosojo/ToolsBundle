@@ -16,7 +16,7 @@ trait PaddingTrait
      * @JMS\Expose
      * @JMS\SerializedName("padding_top")
      */
-    protected $paddingTop = 0.0;
+    protected $paddingTop;
 
     /**
      * Elemento tipo paddingBottom
@@ -24,7 +24,7 @@ trait PaddingTrait
      * @JMS\Expose
      * @JMS\SerializedName("padding_bottom")
      */
-    protected $paddingBottom = 0.0;
+    protected $paddingBottom;
 
     /**
      * Elemento tipo paddingLeft
@@ -32,7 +32,7 @@ trait PaddingTrait
      * @JMS\Expose
      * @JMS\SerializedName("padding_left")
      */
-    protected $paddingLeft = 0.0;
+    protected $paddingLeft;
 
     /**
      * Elemento tipo paddingRight
@@ -40,7 +40,7 @@ trait PaddingTrait
      * @JMS\Expose
      * @JMS\SerializedName("padding_right")
      */
-    protected $paddingRight = 0.0;
+    protected $paddingRight;
 
     public function setPaddingTop($paddingTop)
     {
