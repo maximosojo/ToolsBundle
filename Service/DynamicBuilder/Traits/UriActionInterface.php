@@ -20,14 +20,8 @@ interface UriActionInterface
 	// Tipos de target
     public const TYPE_TARGET_PUSH_NAMED = "push_named";
     public const TYPE_TARGET_PUSH_REPLACE_NAMED = "push_replace_named";
-
-    // Tipos de acción
-    public const TYPE_ACTION_ANCLA = "type_action_ancla";
-    public const TYPE_ACTION_DROPDOWN = "type_action_dropdown";
     
-    // public function setUriAction(?string $uriAction);
     public function setIcon(?string $icon);
     public function setTitle(?string $title);
     public function setTarget($target);
-    public function setActionType($actionType);
 }

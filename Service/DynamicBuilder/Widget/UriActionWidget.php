@@ -54,19 +54,10 @@ class UriActionWidget extends BaseWidget implements UriActionInterface
      */
     protected $target;
 
-    /**
-     * TYPE de la pagina a cargar al tocar el elemento
-     * @var string|null
-     * @JMS\Expose
-     * @JMS\SerializedName("action_type")
-     */
-    protected $actionType = UriActionInterface::TYPE_ACTION_ANCLA;
-
     use AttrTrait;
 
 	public function __construct(?string $path = null, ?string $icon = null)
 	{
-        parent::__construct("uri_action");
         $this->path = $path;
         $this->icon = $icon;
         $this->uriTarget = self::TYPE_TARGET_PUSH_NAMED;
@@ -103,13 +94,6 @@ class UriActionWidget extends BaseWidget implements UriActionInterface
     public function setTarget($target)
     {
         $this->target = $target;
-
-        return $this;
-    }
-
-    public function setActionType($actiontype)
-    {
-        $this->actiontype = $actiontype;
 
         return $this;
     }
