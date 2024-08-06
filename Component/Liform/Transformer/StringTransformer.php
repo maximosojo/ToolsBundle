@@ -24,7 +24,7 @@ class StringTransformer extends AbstractStringTransformer
     /**
      * {@inheritdoc}
      */
-    public function transform(FormInterface $form, array $extensions = [], $widget = null)
+    public function transform(FormInterface $form, array $extensions = [], $widget = null): array
     {
         $this->initCommonCustom($form);
         $schema = ['type' => 'string'];
@@ -66,7 +66,7 @@ class StringTransformer extends AbstractStringTransformer
      *
      * @return array
      */
-    protected function addWidget(FormInterface $form, array $schema, $configWidget)
+    protected function addWidget(FormInterface $form, array $schema, $configWidget): array
     {
         $schema = parent::addWidget($form, $schema, $configWidget);
         if ($attr = $form->getConfig()->getOption('attr')) {

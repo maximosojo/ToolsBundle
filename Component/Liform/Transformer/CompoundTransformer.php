@@ -15,7 +15,8 @@ use Exception;
  */
 class CompoundTransformer extends AbstractCompoundTransformer
 {
-
+    use \Maximosojo\ToolsBundle\Component\Liform\CommonFunctionsTrait;
+    
     /**
      * @var \Symfony\Component\Validator\Validator\ValidatorInterface
      */
@@ -42,7 +43,7 @@ class CompoundTransformer extends AbstractCompoundTransformer
     /**
      * {@inheritdoc}
      */
-    public function transform(FormInterface $form, array $extensions = [], $widget = null)
+    public function transform(FormInterface $form, array $extensions = [], $widget = null): array
     {
         $schema = parent::transform($form, $extensions, $widget);
         $properties = $schema["properties"];

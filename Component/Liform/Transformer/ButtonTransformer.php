@@ -12,10 +12,12 @@ use Limenius\Liform\Transformer\StringTransformer as AbstractStringTransformer;
  */
 class ButtonTransformer extends AbstractStringTransformer
 {
+    use \Maximosojo\ToolsBundle\Component\Liform\CommonFunctionsTrait;
+    
     /**
      * {@inheritdoc}
      */
-    public function transform(FormInterface $form, array $extensions = [], $widget = null)
+    public function transform(FormInterface $form, array $extensions = [], $widget = null): array
     {
         $schema = ['type' => 'string'];
         $schema = $this->addCommonSpecs($form, $schema, $extensions, $widget);

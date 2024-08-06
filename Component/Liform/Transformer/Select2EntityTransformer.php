@@ -3,7 +3,7 @@
 namespace Maximosojo\ToolsBundle\Component\Liform\Transformer;
 
 use Symfony\Component\Form\FormInterface;
-use Limenius\Liform\Transformer\AbstractTransformer;
+use Maximosojo\ToolsBundle\Component\Liform\AbstractTransformer;
 use Symfony\Component\Form\FormView;
 
 
@@ -19,7 +19,7 @@ class Select2EntityTransformer extends AbstractTransformer
     /**
      * {@inheritdoc}
      */
-    public function transform(FormInterface $form, array $extensions = [], $widget = null)
+    public function transform(FormInterface $form, array $extensions = [], ?string $widget = null): array
     {
         $this->initCommonCustom($form);
         $formView = $this->formView;

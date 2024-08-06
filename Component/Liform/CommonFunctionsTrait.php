@@ -290,7 +290,7 @@ trait CommonFunctionsTrait
      *
      * @return array
      */
-    protected function addLabel(FormInterface $form, array $schema)
+    protected function addLabel(FormInterface $form, array $schema): array
     {
         $translationDomain = $form->getConfig()->getOption('translation_domain');
         $label = $form->getConfig()->getOption('label');
@@ -303,5 +303,10 @@ trait CommonFunctionsTrait
         }
 
         return $schema;
+    }
+
+    public function isRequired(FormInterface $form): bool
+    {
+        return $form->getConfig()->getOption('required')??false;
     }
 }

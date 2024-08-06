@@ -4,6 +4,9 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         public: false
 
+    Maximosojo\ToolsBundle\Component\Liform\AbstractTransformer:
+        arguments: ["@translator","@liform.guesser.validator"]
+
     liform.symfony_constraints_parser:
         class: Maximosojo\ToolsBundle\Component\Liform\SymfonyConstraintsParser
     
@@ -42,6 +45,7 @@ services:
     
     liform.transformer.compound:
         class: Maximosojo\ToolsBundle\Component\Liform\Transformer\CompoundTransformer
+        # parent: Maximosojo\ToolsBundle\Component\Liform\AbstractTransformer
         arguments: ["@translator","@liform.guesser.validator","@liform.resolver"]
         tags:
             - { name: liform.transformer, form_type: compound}

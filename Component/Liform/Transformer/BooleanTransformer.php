@@ -12,7 +12,7 @@
 namespace Maximosojo\ToolsBundle\Component\Liform\Transformer;
 
 use Symfony\Component\Form\FormInterface;
-use Limenius\Liform\Transformer\AbstractTransformer;
+use Maximosojo\ToolsBundle\Component\Liform\AbstractTransformer;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>
@@ -24,7 +24,7 @@ class BooleanTransformer extends AbstractTransformer
     /**
      * {@inheritdoc}
      */
-    public function transform(FormInterface $form, array $extensions = [], $widget = null)
+    public function transform(FormInterface $form, array $extensions = [], ?string $widget = null): array
     {
         $this->initCommonCustom($form);
         $schema = ['type' => 'boolean'];
