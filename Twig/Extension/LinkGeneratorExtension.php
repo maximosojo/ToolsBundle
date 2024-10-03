@@ -37,6 +37,7 @@ class LinkGeneratorExtension extends AbstractExtension
     {
         return [
             new TwigFunction('link_generator', array($this, 'linkGenerator'), array('is_safe' => array('html'))),
+            new TwigFunction('link_generator_url', array($this, 'linkGeneratorUrl'), array('is_safe' => array('html'))),
             new TwigFunction('link_is_granted', array($this, 'linkIsGranted'), array('is_safe' => array('html'))),
         ];
     }
@@ -54,6 +55,21 @@ class LinkGeneratorExtension extends AbstractExtension
         }
         
         return $this->linkGeneratorService->generate($entity, $type, $parameters);
+    }
+
+    /**
+     * Genera un link completo para mostrar el objeto desde url
+     * @param Entity $entity
+     * @param LinkGeneratorService $type
+     * @return LinkGeneratorService
+     */
+    function linkGeneratorUrl($entity, $type = LinkGeneratorService::TYPE_LINK_DEFAULT, array $parameters = array()) 
+    {
+        if($entity === null){
+            return "";
+        }
+        
+        return $this->linkGeneratorService->generateOnlyUrl($entity, $type, $parameters);
     }
 
     /**
