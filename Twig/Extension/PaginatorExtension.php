@@ -91,7 +91,7 @@ class PaginatorExtension extends AbstractExtension
 
         $direction = "desc";
         $request = $this->requestStack->getCurrentRequest();
-        foreach ($request->get('sorting', []) as $key => $value) {
+        foreach ($request->get('sorting', []) as $value) {
             $direction = 'asc' === \strtolower($value) ? 'desc' : 'asc';
         }
 
