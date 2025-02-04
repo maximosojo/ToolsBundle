@@ -18,5 +18,5 @@ services:
 
     Maximosojo\ToolsBundle\Controller\ObjectManager\DocumentManagerController:
         public: true
-        calls:
-            - [ setContainer, ['@service_container']  ]
+        # calls:
+        #     - [ setContainer, ['@service_container']  ]

@@ -35,5 +35,5 @@ services:
 
     Maximosojo\ToolsBundle\Controller\ObjectManager\ExporterManagerController:
         public: true
-        calls:
-            - [ setContainer, ['@service_container']  ]
+        # calls:
+        #     - [ setContainer, ['@service_container']  ]
