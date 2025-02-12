@@ -20,6 +20,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Alias;
+use Maximosojo\ToolsBundle\Model\Paginator\Paginator;
 
 /**
  * MaximosojoToolsExtension
@@ -34,13 +35,15 @@ class MaximosojoToolsExtension extends Extension
         
         $loaderYml = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loaderYml->load('services.yml');
-        $loaderYml->load('commands.yml');
-        
         $config = $processor->processConfiguration($configuration, $configs);
-        if ($config['paginator']['format_array']) {
-            $container->setParameter('paginator_format_array', $config['paginator']['format_array']);
+        
+        if ($config['command']['enabled'] === true) {
+            $loaderYml->load('commands.yml');
         }
         
+        if ($config['paginator']['enabled'] === true) {
+            $container->setParameter('paginator_format_array', $config['paginator']['format_array']);
+        }        
 
         if($config['link_generator']['enabled'] === true) {
             $loaderYml->load('link_generator.yml');
@@ -136,10 +139,14 @@ class MaximosojoToolsExtension extends Extension
         }
         
         // Carga el manejador de objetos
-        $loaderYml->load('services/object_manager.yml');
-        $container->setAlias('maximosojo_tools.object_manager', new Alias($config['object_manager']['manager'], true));
-        unset($config['object_manager']["manager"]);
-        $container->setParameter('maximosojo_tools.object_manager.options',$config['object_manager']);
+        $container->setParameter('maximosojo_tools.object_manager.options',[]);
+        $container->setParameter('maximosojo_tools.object_manager.enabled',$config['object_manager']['enabled']);
+        if($config['object_manager']['enabled'] === true){
+            $loaderYml->load('services/object_manager.yml');
+            $container->setAlias('maximosojo_tools.object_manager', new Alias($config['object_manager']['manager'], true));
+            unset($config['object_manager']["manager"]);
+            $container->setParameter('maximosojo_tools.object_manager.options',$config['object_manager']);
+        }
 
         // Revisa los componentes
         if(($componentsConfig = $config['component']) !== null) {

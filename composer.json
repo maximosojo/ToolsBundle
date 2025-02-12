@@ -13,7 +13,8 @@
   ],
   "minimum-stability": "dev",
   "require": {
-      "php": ">=7.0"
+      "php": ">=7.0",
+      "pagerfanta/pagerfanta": "^4.7"
   },
   "autoload": {
       "psr-4": { "Maximosojo\\ToolsBundle\\": "" }

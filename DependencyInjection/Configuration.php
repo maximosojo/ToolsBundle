@@ -42,7 +42,9 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->arrayNode('command')
+                    ->addDefaultsIfNotSet()
                     ->children()
+                        ->booleanNode('enabled')->defaultFalse()->end()
                         ->arrayNode('database')
                             ->children()
                                 ->arrayNode('clear')
@@ -178,6 +180,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('object_manager')
                     ->addDefaultsIfNotSet()
                     ->children()
+                        ->booleanNode('enabled')->defaultFalse()->end()
                         ->scalarNode('manager')->defaultValue('maximosojo_tools.object_manager.default')->end()
                         ->arrayNode('document_manager')
                             ->addDefaultsIfNotSet()
