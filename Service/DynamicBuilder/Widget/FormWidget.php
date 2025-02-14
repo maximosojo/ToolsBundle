@@ -17,6 +17,7 @@ class FormWidget extends BaseWidget
 {
 	/**
      * @var Liform 
+     * @JMS\Exclude
      */
     private $liform;
 
@@ -35,6 +36,8 @@ class FormWidget extends BaseWidget
 
     public function transform()
     {
-    	$this->data = $this->liform->transform($this->data);
+        $liform = $this->liform;
+        $this->liform = null;
+    	$this->data = $liform->transform($this->data);
     }
 }
