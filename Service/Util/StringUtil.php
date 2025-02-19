@@ -311,7 +311,7 @@ class StringUtil
      * @param array $forbidden_chars_to_replace
      * @return type
      */
-    public static function clearSpecialChars($str, $newstr = ' ', array $forbidden_chars_to_replace)
+    public static function clearSpecialChars($str, $newstr = ' ', array $forbidden_chars_to_replace = [])
     {
         $forbidden_chars_to_remove = array();
         return str_replace($forbidden_chars_to_replace, $newstr, str_replace($forbidden_chars_to_remove, "", $str));
