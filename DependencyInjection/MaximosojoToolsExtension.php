@@ -144,6 +144,7 @@ class MaximosojoToolsExtension extends Extension
         if($config['object_manager']['enabled'] === true){
             $loaderYml->load('services/object_manager.yml');
             $container->setAlias('maximosojo_tools.object_manager', new Alias($config['object_manager']['manager'], true));
+            unset($config['object_manager']["enabled"]);
             unset($config['object_manager']["manager"]);
             $container->setParameter('maximosojo_tools.object_manager.options',$config['object_manager']);
         }
